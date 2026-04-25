@@ -50,6 +50,7 @@ def main():
         "A testemunha Carla Mendes declarou em tribunal.",
         "O relator João Costa decidiu o processo.",
         "O réu Manuel Ferreira apresentou contestação.",
+        "Maria Ferreira reside na Rua das Flores, Lisboa.",
     ]
 
     print("\nPredictions:")
