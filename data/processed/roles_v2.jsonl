@@ -1,0 +1,576 @@
+{"text": "O arguido Paulo Rocha reside na Rua das Flores, em Lisboa.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "O réu Paulo Rocha reside na Rua Nova, em Faro.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "A arguida Paulo Rocha apresentou a sua defesa.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "O arguido Luís Matos reside na Rua das Flores, em Lisboa.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A testemunha Tiago Fernandes prestou declarações.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "O relator Ana Silva proferiu o acórdão.", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "A testemunha Tiago Fernandes respondeu às perguntas do tribunal.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "A ré Carlos Mendes foi citada.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A ré Sofia Almeida mora na Rua Central, em Aveiro.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "A testemunha Luís Matos indicou residência no Porto.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos foi ouvida em audiência.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A ré Helena Cruz alegou desconhecer os factos.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "O relator Marta Ribeiro proferiu o acórdão.", "entity": "Marta Ribeiro", "label": "RELATOR"}
+{"text": "O relator Paulo Rocha assinou o acórdão em Lisboa.", "entity": "Paulo Rocha", "label": "RELATOR"}
+{"text": "O arguido Teresa Gomes foi ouvido em tribunal.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "A relatora Teresa Gomes proferiu decisão no Porto.", "entity": "Teresa Gomes", "label": "RELATOR"}
+{"text": "Maria Ferreira apresentou o cartão de cidadão.", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "A arguida Tiago Fernandes mora na Avenida Central, no Porto.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "Ana Silva reside na Rua das Flores, em Lisboa.", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A juíza relatora Pedro Costa elaborou o relatório.", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A ré Ana Silva foi citada.", "entity": "Ana Silva", "label": "REU"}
+{"text": "O réu Carla Sousa reside na Rua Nova, em Faro.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A arguida Paulo Rocha mora na Avenida Central, no Porto.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "O arguido Carlos Mendes reside na Rua das Flores, em Lisboa.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "Rui Lopes reside na Rua das Flores, em Lisboa.", "entity": "Rui Lopes", "label": "UNKNOWN"}
+{"text": "A ré Ana Silva mora na Rua Central, em Aveiro.", "entity": "Ana Silva", "label": "REU"}
+{"text": "Ana Silva assinou o contrato em 12/05/2021.", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha Manuel Ferreira respondeu às perguntas do tribunal.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}
+{"text": "A relatora Inês Costa apresentou o projeto de acórdão.", "entity": "Inês Costa", "label": "RELATOR"}
+{"text": "O relator Marta Ribeiro deu provimento ao recurso.", "entity": "Marta Ribeiro", "label": "RELATOR"}
+{"text": "A testemunha Teresa Gomes confirmou os factos.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Teresa Gomes mora na Avenida da Liberdade, em Lisboa.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Teresa Gomes prestou declarações.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "Luís Matos trabalha na empresa Alfa Lda.", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "Luís Matos assinou o contrato em 12/05/2021.", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O réu Marta Ribeiro contestou a ação.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "A ré Carla Sousa foi citada.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A testemunha Teresa Gomes foi ouvida em audiência.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "A ré Rui Lopes alegou desconhecer os factos.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "A juíza relatora Rui Lopes elaborou o relatório.", "entity": "Rui Lopes", "label": "RELATOR"}
+{"text": "O réu Tiago Fernandes contestou a ação.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "A arguida Marta Ribeiro apresentou a sua defesa.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "O arguido Maria Ferreira indicou residência em Coimbra.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "Marta Ribeiro assinou o contrato em 12/05/2021.", "entity": "Marta Ribeiro", "label": "UNKNOWN"}
+{"text": "A testemunha Teresa Gomes respondeu às perguntas do tribunal.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "Rui Lopes deslocou-se ao Porto.", "entity": "Rui Lopes", "label": "UNKNOWN"}
+{"text": "O réu João Martins apresentou contestação.", "entity": "João Martins", "label": "REU"}
+{"text": "A relatora Maria Ferreira proferiu decisão no Porto.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "A testemunha Sofia Almeida foi ouvida em audiência.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos indicou residência em Coimbra.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O relator Helena Cruz proferiu o acórdão.", "entity": "Helena Cruz", "label": "RELATOR"}
+{"text": "O relator Paulo Rocha deu provimento ao recurso.", "entity": "Paulo Rocha", "label": "RELATOR"}
+{"text": "A arguida Pedro Costa apresentou a sua defesa.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "Maria Ferreira assinou o contrato em 12/05/2021.", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "Luís Matos reside na Rua das Flores, em Lisboa.", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O arguido Helena Cruz foi ouvido em tribunal.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "O arguido Inês Costa indicou residência em Coimbra.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "A testemunha Maria Ferreira foi ouvida em audiência.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O relator João Martins deu provimento ao recurso.", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O juiz relator Sofia Almeida assinou a decisão.", "entity": "Sofia Almeida", "label": "RELATOR"}
+{"text": "O arguido Rui Lopes foi ouvido em tribunal.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "A ré Maria Ferreira mora na Rua Central, em Aveiro.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A testemunha Maria Ferreira indicou residência no Porto.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A juíza relatora Sofia Almeida elaborou o relatório.", "entity": "Sofia Almeida", "label": "RELATOR"}
+{"text": "A arguida João Martins foi absolvida.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O réu Pedro Costa reside na Rua Nova, em Faro.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "O arguido Maria Ferreira foi condenado.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O réu Sofia Almeida apresentou contestação.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "O relator Maria Ferreira assinou o acórdão em Lisboa.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "Rui Lopes apresentou o cartão de cidadão.", "entity": "Rui Lopes", "label": "UNKNOWN"}
+{"text": "O arguido Paulo Rocha foi condenado.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "O réu Teresa Gomes reside na Rua Nova, em Faro.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "A testemunha Paulo Rocha respondeu às perguntas do tribunal.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "A relatora Ana Silva apresentou o projeto de acórdão.", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "A testemunha Inês Costa mora na Avenida da Liberdade, em Lisboa.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "A ré Luís Matos mora na Rua Central, em Aveiro.", "entity": "Luís Matos", "label": "REU"}
+{"text": "A testemunha João Martins reside na Rua do Sol, em Braga.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "Carlos Mendes deslocou-se ao Porto.", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "Teresa Gomes reside na Rua das Flores, em Lisboa.", "entity": "Teresa Gomes", "label": "UNKNOWN"}
+{"text": "O relator Maria Ferreira deu provimento ao recurso.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O réu Paulo Rocha apresentou contestação.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "Manuel Ferreira deslocou-se ao Porto.", "entity": "Manuel Ferreira", "label": "UNKNOWN"}
+{"text": "A relatora Pedro Costa apresentou o projeto de acórdão.", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A arguida Marta Ribeiro mora na Avenida Central, no Porto.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "Helena Cruz reside na Rua das Flores, em Lisboa.", "entity": "Helena Cruz", "label": "UNKNOWN"}
+{"text": "A ré Tiago Fernandes foi citada.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "A testemunha João Martins declarou conhecer o arguido.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O réu Tiago Fernandes indicou residência em Setúbal.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "A juíza relatora Carla Sousa elaborou o relatório.", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "A arguida Rui Lopes mora na Avenida Central, no Porto.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "Paulo Rocha deslocou-se ao Porto.", "entity": "Paulo Rocha", "label": "UNKNOWN"}
+{"text": "O réu Luís Matos reside na Rua Nova, em Faro.", "entity": "Luís Matos", "label": "REU"}
+{"text": "A juíza relatora Paulo Rocha elaborou o relatório.", "entity": "Paulo Rocha", "label": "RELATOR"}
+{"text": "A relatora Carla Sousa proferiu decisão no Porto.", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O réu Rui Lopes reside na Rua Nova, em Faro.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "O arguido Luís Matos foi condenado.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A ré Sofia Almeida foi citada.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "A arguida Carla Sousa apresentou a sua defesa.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "Manuel Ferreira assinou o contrato em 12/05/2021.", "entity": "Manuel Ferreira", "label": "UNKNOWN"}
+{"text": "O arguido Ana Silva compareceu em audiência.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "A ré Pedro Costa alegou desconhecer os factos.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "A arguida Luís Matos mora na Avenida Central, no Porto.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A arguida Carla Sousa foi absolvida.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "Teresa Gomes trabalha na empresa Alfa Lda.", "entity": "Teresa Gomes", "label": "UNKNOWN"}
+{"text": "Marta Ribeiro deslocou-se ao Porto.", "entity": "Marta Ribeiro", "label": "UNKNOWN"}
+{"text": "A juíza relatora Marta Ribeiro elaborou o relatório.", "entity": "Marta Ribeiro", "label": "RELATOR"}
+{"text": "O réu Carlos Mendes apresentou contestação.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "O arguido Manuel Ferreira reside na Rua das Flores, em Lisboa.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "O arguido Sofia Almeida compareceu em audiência.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "O arguido Carla Sousa reside na Rua das Flores, em Lisboa.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O juiz relator Tiago Fernandes assinou a decisão.", "entity": "Tiago Fernandes", "label": "RELATOR"}
+{"text": "O relator Carlos Mendes assinou o acórdão em Lisboa.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A juíza relatora Teresa Gomes elaborou o relatório.", "entity": "Teresa Gomes", "label": "RELATOR"}
+{"text": "O réu Teresa Gomes indicou residência em Setúbal.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "O arguido Pedro Costa compareceu em audiência.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A ré Luís Matos alegou desconhecer os factos.", "entity": "Luís Matos", "label": "REU"}
+{"text": "O réu Luís Matos indicou residência em Setúbal.", "entity": "Luís Matos", "label": "REU"}
+{"text": "O arguido Sofia Almeida indicou residência em Coimbra.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "Tiago Fernandes apresentou o cartão de cidadão.", "entity": "Tiago Fernandes", "label": "UNKNOWN"}
+{"text": "O réu Manuel Ferreira reside na Rua Nova, em Faro.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "A relatora Carlos Mendes apresentou o projeto de acórdão.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A testemunha Manuel Ferreira foi ouvida em audiência.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}
+{"text": "A arguida Pedro Costa foi absolvida.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A juíza relatora Luís Matos elaborou o relatório.", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O réu Luís Matos contestou a ação.", "entity": "Luís Matos", "label": "REU"}
+{"text": "A ré Teresa Gomes alegou desconhecer os factos.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "O relator Tiago Fernandes proferiu o acórdão.", "entity": "Tiago Fernandes", "label": "RELATOR"}
+{"text": "O réu Helena Cruz reside na Rua Nova, em Faro.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "O relator Teresa Gomes deu provimento ao recurso.", "entity": "Teresa Gomes", "label": "RELATOR"}
+{"text": "A testemunha Manuel Ferreira declarou conhecer o arguido.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Manuel Ferreira foi condenado.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "O arguido Rui Lopes foi condenado.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "A testemunha Marta Ribeiro prestou declarações.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O réu Ana Silva reside na Rua Nova, em Faro.", "entity": "Ana Silva", "label": "REU"}
+{"text": "A relatora Inês Costa proferiu decisão no Porto.", "entity": "Inês Costa", "label": "RELATOR"}
+{"text": "O arguido Luís Matos foi ouvido em tribunal.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A testemunha Tiago Fernandes declarou conhecer o arguido.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira declarou conhecer o arguido.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A juíza relatora João Martins elaborou o relatório.", "entity": "João Martins", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa confirmou os factos.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A relatora Luís Matos apresentou o projeto de acórdão.", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A ré Inês Costa mora na Rua Central, em Aveiro.", "entity": "Inês Costa", "label": "REU"}
+{"text": "O relator Inês Costa proferiu o acórdão.", "entity": "Inês Costa", "label": "RELATOR"}
+{"text": "A juíza relatora Maria Ferreira elaborou o relatório.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "A testemunha Marta Ribeiro mora na Avenida da Liberdade, em Lisboa.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A juíza relatora Helena Cruz elaborou o relatório.", "entity": "Helena Cruz", "label": "RELATOR"}
+{"text": "O juiz relator Paulo Rocha assinou a decisão.", "entity": "Paulo Rocha", "label": "RELATOR"}
+{"text": "A arguida Luís Matos apresentou a sua defesa.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O juiz relator Rui Lopes assinou a decisão.", "entity": "Rui Lopes", "label": "RELATOR"}
+{"text": "A testemunha Paulo Rocha declarou conhecer o arguido.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes declarou conhecer o arguido.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos confirmou os factos.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O réu Maria Ferreira contestou a ação.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A relatora Marta Ribeiro proferiu decisão no Porto.", "entity": "Marta Ribeiro", "label": "RELATOR"}
+{"text": "Teresa Gomes assinou o contrato em 12/05/2021.", "entity": "Teresa Gomes", "label": "UNKNOWN"}
+{"text": "A arguida Inês Costa foi absolvida.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "O réu Carlos Mendes foi condenado no pagamento da quantia.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A arguida João Martins apresentou a sua defesa.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O réu Helena Cruz foi condenado no pagamento da quantia.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "O relator Ana Silva assinou o acórdão em Lisboa.", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O réu Rui Lopes foi condenado no pagamento da quantia.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "O arguido Carla Sousa foi ouvido em tribunal.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "A ré Maria Ferreira foi citada.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A relatora Sofia Almeida proferiu decisão no Porto.", "entity": "Sofia Almeida", "label": "RELATOR"}
+{"text": "Sofia Almeida apresentou o cartão de cidadão.", "entity": "Sofia Almeida", "label": "UNKNOWN"}
+{"text": "A juíza relatora Carlos Mendes elaborou o relatório.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "João Martins apresentou o cartão de cidadão.", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O relator Inês Costa deu provimento ao recurso.", "entity": "Inês Costa", "label": "RELATOR"}
+{"text": "A ré Carla Sousa alegou desconhecer os factos.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "O relator João Martins assinou o acórdão em Lisboa.", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O arguido Ana Silva reside na Rua das Flores, em Lisboa.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "A relatora Paulo Rocha proferiu decisão no Porto.", "entity": "Paulo Rocha", "label": "RELATOR"}
+{"text": "A testemunha Paulo Rocha indicou residência no Porto.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "O arguido Inês Costa compareceu em audiência.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "O arguido Helena Cruz compareceu em audiência.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "A ré Manuel Ferreira foi citada.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "O réu Helena Cruz indicou residência em Setúbal.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "O arguido Manuel Ferreira foi ouvido em tribunal.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "A testemunha João Martins respondeu às perguntas do tribunal.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A arguida Rui Lopes foi absolvida.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "O réu João Martins reside na Rua Nova, em Faro.", "entity": "João Martins", "label": "REU"}
+{"text": "Ana Silva deslocou-se ao Porto.", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "O réu Carla Sousa contestou a ação.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "O relator Sofia Almeida proferiu o acórdão.", "entity": "Sofia Almeida", "label": "RELATOR"}
+{"text": "O arguido Marta Ribeiro reside na Rua das Flores, em Lisboa.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "A testemunha Rui Lopes indicou residência no Porto.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "A arguida Maria Ferreira foi absolvida.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "A arguida Manuel Ferreira foi absolvida.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "O juiz relator Teresa Gomes assinou a decisão.", "entity": "Teresa Gomes", "label": "RELATOR"}
+{"text": "Carla Sousa reside na Rua das Flores, em Lisboa.", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A arguida Inês Costa mora na Avenida Central, no Porto.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "O réu Carla Sousa apresentou contestação.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "O relator Manuel Ferreira proferiu o acórdão.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "Manuel Ferreira trabalha na empresa Alfa Lda.", "entity": "Manuel Ferreira", "label": "UNKNOWN"}
+{"text": "A testemunha João Martins confirmou os factos.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Sofia Almeida indicou residência no Porto.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "O arguido Rui Lopes compareceu em audiência.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "O réu Paulo Rocha indicou residência em Setúbal.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "A ré Pedro Costa mora na Rua Central, em Aveiro.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "O réu Pedro Costa contestou a ação.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "O réu Paulo Rocha contestou a ação.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "O juiz relator Carla Sousa assinou a decisão.", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "Helena Cruz apresentou o cartão de cidadão.", "entity": "Helena Cruz", "label": "UNKNOWN"}
+{"text": "O relator João Martins proferiu o acórdão.", "entity": "João Martins", "label": "RELATOR"}
+{"text": "A testemunha Paulo Rocha foi ouvida em audiência.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "A juíza relatora Tiago Fernandes elaborou o relatório.", "entity": "Tiago Fernandes", "label": "RELATOR"}
+{"text": "A testemunha Paulo Rocha mora na Avenida da Liberdade, em Lisboa.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "O arguido Teresa Gomes compareceu em audiência.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "A arguida Helena Cruz foi absolvida.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "A testemunha Marta Ribeiro declarou conhecer o arguido.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A arguida Sofia Almeida apresentou a sua defesa.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "O arguido João Martins reside na Rua das Flores, em Lisboa.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A ré Paulo Rocha mora na Rua Central, em Aveiro.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "A arguida Rui Lopes apresentou a sua defesa.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "O relator Marta Ribeiro assinou o acórdão em Lisboa.", "entity": "Marta Ribeiro", "label": "RELATOR"}
+{"text": "A relatora Maria Ferreira apresentou o projeto de acórdão.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O réu Tiago Fernandes apresentou contestação.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "A testemunha João Martins mora na Avenida da Liberdade, em Lisboa.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Marta Ribeiro foi condenado.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "O réu Pedro Costa apresentou contestação.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "A testemunha Inês Costa respondeu às perguntas do tribunal.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "O réu Pedro Costa indicou residência em Setúbal.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "A testemunha Inês Costa foi ouvida em audiência.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Helena Cruz mora na Avenida da Liberdade, em Lisboa.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa respondeu às perguntas do tribunal.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A relatora Tiago Fernandes apresentou o projeto de acórdão.", "entity": "Tiago Fernandes", "label": "RELATOR"}
+{"text": "A testemunha Rui Lopes prestou declarações.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "A arguida Helena Cruz apresentou a sua defesa.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "A testemunha Marta Ribeiro reside na Rua do Sol, em Braga.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A relatora Pedro Costa proferiu decisão no Porto.", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "Helena Cruz trabalha na empresa Alfa Lda.", "entity": "Helena Cruz", "label": "UNKNOWN"}
+{"text": "A ré Carla Sousa mora na Rua Central, em Aveiro.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "O réu Tiago Fernandes foi condenado no pagamento da quantia.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "A testemunha Carla Sousa confirmou os factos.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "Manuel Ferreira reside na Rua das Flores, em Lisboa.", "entity": "Manuel Ferreira", "label": "UNKNOWN"}
+{"text": "A ré Carlos Mendes mora na Rua Central, em Aveiro.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A testemunha Carlos Mendes prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Inês Costa reside na Rua do Sol, em Braga.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "A relatora Helena Cruz proferiu decisão no Porto.", "entity": "Helena Cruz", "label": "RELATOR"}
+{"text": "O réu Teresa Gomes contestou a ação.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "A testemunha Helena Cruz respondeu às perguntas do tribunal.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva respondeu às perguntas do tribunal.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos declarou conhecer o arguido.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O réu Ana Silva foi condenado no pagamento da quantia.", "entity": "Ana Silva", "label": "REU"}
+{"text": "A testemunha Tiago Fernandes mora na Avenida da Liberdade, em Lisboa.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "Maria Ferreira trabalha na empresa Alfa Lda.", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "A testemunha Sofia Almeida respondeu às perguntas do tribunal.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "A arguida Carlos Mendes foi absolvida.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "A testemunha Maria Ferreira respondeu às perguntas do tribunal.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O relator Manuel Ferreira assinou o acórdão em Lisboa.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "O juiz relator Luís Matos assinou a decisão.", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha Manuel Ferreira reside na Rua do Sol, em Braga.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Paulo Rocha prestou declarações.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "O relator Helena Cruz deu provimento ao recurso.", "entity": "Helena Cruz", "label": "RELATOR"}
+{"text": "A testemunha Luís Matos mora na Avenida da Liberdade, em Lisboa.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A ré João Martins foi citada.", "entity": "João Martins", "label": "REU"}
+{"text": "O arguido Pedro Costa foi condenado.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "Maria Ferreira deslocou-se ao Porto.", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "A relatora Rui Lopes proferiu decisão no Porto.", "entity": "Rui Lopes", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa mora na Avenida da Liberdade, em Lisboa.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator Carlos Mendes deu provimento ao recurso.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "Marta Ribeiro apresentou o cartão de cidadão.", "entity": "Marta Ribeiro", "label": "UNKNOWN"}
+{"text": "A testemunha Helena Cruz prestou declarações.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "A relatora Carlos Mendes proferiu decisão no Porto.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "O réu Inês Costa indicou residência em Setúbal.", "entity": "Inês Costa", "label": "REU"}
+{"text": "Carlos Mendes reside na Rua das Flores, em Lisboa.", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "A relatora Marta Ribeiro apresentou o projeto de acórdão.", "entity": "Marta Ribeiro", "label": "RELATOR"}
+{"text": "A ré Marta Ribeiro foi citada.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "O arguido Pedro Costa reside na Rua das Flores, em Lisboa.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O réu Inês Costa contestou a ação.", "entity": "Inês Costa", "label": "REU"}
+{"text": "A testemunha Luís Matos reside na Rua do Sol, em Braga.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O réu João Martins contestou a ação.", "entity": "João Martins", "label": "REU"}
+{"text": "O arguido Sofia Almeida reside na Rua das Flores, em Lisboa.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "O juiz relator Maria Ferreira assinou a decisão.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O juiz relator Helena Cruz assinou a decisão.", "entity": "Helena Cruz", "label": "RELATOR"}
+{"text": "A ré Rui Lopes mora na Rua Central, em Aveiro.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "A testemunha Pedro Costa declarou conhecer o arguido.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O arguido Manuel Ferreira compareceu em audiência.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "O juiz relator Marta Ribeiro assinou a decisão.", "entity": "Marta Ribeiro", "label": "RELATOR"}
+{"text": "O réu Ana Silva indicou residência em Setúbal.", "entity": "Ana Silva", "label": "REU"}
+{"text": "O réu Marta Ribeiro reside na Rua Nova, em Faro.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "Teresa Gomes apresentou o cartão de cidadão.", "entity": "Teresa Gomes", "label": "UNKNOWN"}
+{"text": "A testemunha Paulo Rocha reside na Rua do Sol, em Braga.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "A ré Manuel Ferreira alegou desconhecer os factos.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "Pedro Costa assinou o contrato em 12/05/2021.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O arguido Carlos Mendes foi condenado.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O arguido Teresa Gomes indicou residência em Coimbra.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "A testemunha Helena Cruz declarou conhecer o arguido.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "O réu Carlos Mendes reside na Rua Nova, em Faro.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "Marta Ribeiro trabalha na empresa Alfa Lda.", "entity": "Marta Ribeiro", "label": "UNKNOWN"}
+{"text": "A relatora Carla Sousa apresentou o projeto de acórdão.", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "A juíza relatora Ana Silva elaborou o relatório.", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "A ré Maria Ferreira alegou desconhecer os factos.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A ré João Martins alegou desconhecer os factos.", "entity": "João Martins", "label": "REU"}
+{"text": "O arguido João Martins compareceu em audiência.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Luís Matos prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A arguida Carla Sousa mora na Avenida Central, no Porto.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O réu Maria Ferreira reside na Rua Nova, em Faro.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A arguida Ana Silva apresentou a sua defesa.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "Tiago Fernandes assinou o contrato em 12/05/2021.", "entity": "Tiago Fernandes", "label": "UNKNOWN"}
+{"text": "O réu Ana Silva apresentou contestação.", "entity": "Ana Silva", "label": "REU"}
+{"text": "A testemunha Ana Silva declarou conhecer o arguido.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A ré Inês Costa foi citada.", "entity": "Inês Costa", "label": "REU"}
+{"text": "A testemunha Tiago Fernandes indicou residência no Porto.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Rui Lopes respondeu às perguntas do tribunal.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira mora na Avenida da Liberdade, em Lisboa.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A arguida Manuel Ferreira mora na Avenida Central, no Porto.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "Tiago Fernandes reside na Rua das Flores, em Lisboa.", "entity": "Tiago Fernandes", "label": "UNKNOWN"}
+{"text": "O réu Rui Lopes apresentou contestação.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "A ré Manuel Ferreira mora na Rua Central, em Aveiro.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "O arguido Ana Silva foi condenado.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "Inês Costa reside na Rua das Flores, em Lisboa.", "entity": "Inês Costa", "label": "UNKNOWN"}
+{"text": "A testemunha Helena Cruz indicou residência no Porto.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "A arguida Carlos Mendes apresentou a sua defesa.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O relator Carla Sousa proferiu o acórdão.", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "A testemunha Marta Ribeiro respondeu às perguntas do tribunal.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A testemunha Inês Costa confirmou os factos.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes foi ouvida em audiência.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O réu Maria Ferreira foi condenado no pagamento da quantia.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A ré Pedro Costa foi citada.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "O arguido Tiago Fernandes foi condenado.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "O relator Tiago Fernandes deu provimento ao recurso.", "entity": "Tiago Fernandes", "label": "RELATOR"}
+{"text": "O réu Sofia Almeida indicou residência em Setúbal.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "Pedro Costa deslocou-se ao Porto.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O arguido Carla Sousa foi condenado.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O réu Carlos Mendes indicou residência em Setúbal.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A testemunha Ana Silva prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos compareceu em audiência.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "Carla Sousa deslocou-se ao Porto.", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O réu Maria Ferreira apresentou contestação.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "O arguido Carla Sousa compareceu em audiência.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O juiz relator Pedro Costa assinou a decisão.", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A testemunha Carla Sousa reside na Rua do Sol, em Braga.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O juiz relator Inês Costa assinou a decisão.", "entity": "Inês Costa", "label": "RELATOR"}
+{"text": "A testemunha Sofia Almeida reside na Rua do Sol, em Braga.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "A arguida Tiago Fernandes foi absolvida.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "A arguida Maria Ferreira apresentou a sua defesa.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "A ré Ana Silva alegou desconhecer os factos.", "entity": "Ana Silva", "label": "REU"}
+{"text": "O relator Rui Lopes assinou o acórdão em Lisboa.", "entity": "Rui Lopes", "label": "RELATOR"}
+{"text": "A testemunha Marta Ribeiro confirmou os factos.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A relatora Sofia Almeida apresentou o projeto de acórdão.", "entity": "Sofia Almeida", "label": "RELATOR"}
+{"text": "A testemunha Ana Silva foi ouvida em audiência.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O relator Teresa Gomes assinou o acórdão em Lisboa.", "entity": "Teresa Gomes", "label": "RELATOR"}
+{"text": "Inês Costa trabalha na empresa Alfa Lda.", "entity": "Inês Costa", "label": "UNKNOWN"}
+{"text": "A testemunha Ana Silva reside na Rua do Sol, em Braga.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha João Martins indicou residência no Porto.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "Carla Sousa apresentou o cartão de cidadão.", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O relator Carla Sousa assinou o acórdão em Lisboa.", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "A ré João Martins mora na Rua Central, em Aveiro.", "entity": "João Martins", "label": "REU"}
+{"text": "A testemunha Luís Matos respondeu às perguntas do tribunal.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido Carla Sousa indicou residência em Coimbra.", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O arguido Paulo Rocha foi ouvido em tribunal.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "A testemunha João Martins foi ouvida em audiência.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A arguida Inês Costa apresentou a sua defesa.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "O réu Ana Silva contestou a ação.", "entity": "Ana Silva", "label": "REU"}
+{"text": "O réu Manuel Ferreira indicou residência em Setúbal.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "A ré Helena Cruz foi citada.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "Rui Lopes trabalha na empresa Alfa Lda.", "entity": "Rui Lopes", "label": "UNKNOWN"}
+{"text": "Marta Ribeiro reside na Rua das Flores, em Lisboa.", "entity": "Marta Ribeiro", "label": "UNKNOWN"}
+{"text": "O réu Carla Sousa indicou residência em Setúbal.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A testemunha Teresa Gomes reside na Rua do Sol, em Braga.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Sousa respondeu às perguntas do tribunal.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O réu Inês Costa foi condenado no pagamento da quantia.", "entity": "Inês Costa", "label": "REU"}
+{"text": "Inês Costa assinou o contrato em 12/05/2021.", "entity": "Inês Costa", "label": "UNKNOWN"}
+{"text": "A testemunha Helena Cruz foi ouvida em audiência.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "A testemunha Teresa Gomes declarou conhecer o arguido.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "A arguida Pedro Costa mora na Avenida Central, no Porto.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A testemunha Paulo Rocha confirmou os factos.", "entity": "Paulo Rocha", "label": "TESTEMUNHA"}
+{"text": "A relatora Ana Silva proferiu decisão no Porto.", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O arguido Marta Ribeiro foi ouvido em tribunal.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "A testemunha Teresa Gomes indicou residência no Porto.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+{"text": "O réu Tiago Fernandes reside na Rua Nova, em Faro.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "A relatora Helena Cruz apresentou o projeto de acórdão.", "entity": "Helena Cruz", "label": "RELATOR"}
+{"text": "Helena Cruz assinou o contrato em 12/05/2021.", "entity": "Helena Cruz", "label": "UNKNOWN"}
+{"text": "O arguido João Martins foi condenado.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Carla Sousa declarou conhecer o arguido.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "João Martins reside na Rua das Flores, em Lisboa.", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O juiz relator Carlos Mendes assinou a decisão.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "O relator Inês Costa assinou o acórdão em Lisboa.", "entity": "Inês Costa", "label": "RELATOR"}
+{"text": "A testemunha Rui Lopes confirmou os factos.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "A testemunha João Martins prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A ré Marta Ribeiro mora na Rua Central, em Aveiro.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "A ré Rui Lopes foi citada.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "O juiz relator João Martins assinou a decisão.", "entity": "João Martins", "label": "RELATOR"}
+{"text": "Sofia Almeida trabalha na empresa Alfa Lda.", "entity": "Sofia Almeida", "label": "UNKNOWN"}
+{"text": "Paulo Rocha apresentou o cartão de cidadão.", "entity": "Paulo Rocha", "label": "UNKNOWN"}
+{"text": "O relator Tiago Fernandes assinou o acórdão em Lisboa.", "entity": "Tiago Fernandes", "label": "RELATOR"}
+{"text": "O réu Teresa Gomes apresentou contestação.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "O arguido Marta Ribeiro compareceu em audiência.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "O réu Teresa Gomes foi condenado no pagamento da quantia.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "Manuel Ferreira apresentou o cartão de cidadão.", "entity": "Manuel Ferreira", "label": "UNKNOWN"}
+{"text": "A arguida Sofia Almeida foi absolvida.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "O arguido Maria Ferreira foi ouvido em tribunal.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "A relatora Teresa Gomes apresentou o projeto de acórdão.", "entity": "Teresa Gomes", "label": "RELATOR"}
+{"text": "Carlos Mendes trabalha na empresa Alfa Lda.", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "Sofia Almeida deslocou-se ao Porto.", "entity": "Sofia Almeida", "label": "UNKNOWN"}
+{"text": "Helena Cruz deslocou-se ao Porto.", "entity": "Helena Cruz", "label": "UNKNOWN"}
+{"text": "O arguido Manuel Ferreira indicou residência em Coimbra.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "O arguido Paulo Rocha indicou residência em Coimbra.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "O relator Manuel Ferreira deu provimento ao recurso.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "A testemunha Carlos Mendes reside na Rua do Sol, em Braga.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Rui Lopes declarou conhecer o arguido.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Tiago Fernandes foi ouvida em audiência.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa reside na Rua do Sol, em Braga.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Sousa foi ouvida em audiência.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator Carlos Mendes proferiu o acórdão.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "O réu Inês Costa reside na Rua Nova, em Faro.", "entity": "Inês Costa", "label": "REU"}
+{"text": "O arguido Carlos Mendes foi ouvido em tribunal.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "A ré Helena Cruz mora na Rua Central, em Aveiro.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "O relator Maria Ferreira proferiu o acórdão.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "A testemunha Rui Lopes reside na Rua do Sol, em Braga.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa foi ouvida em audiência.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O réu Manuel Ferreira contestou a ação.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "A testemunha Carlos Mendes mora na Avenida da Liberdade, em Lisboa.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Rui Lopes foi ouvida em audiência.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "O réu Marta Ribeiro indicou residência em Setúbal.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "O relator Pedro Costa deu provimento ao recurso.", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A testemunha Helena Cruz confirmou os factos.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "O réu Luís Matos apresentou contestação.", "entity": "Luís Matos", "label": "REU"}
+{"text": "A testemunha Manuel Ferreira mora na Avenida da Liberdade, em Lisboa.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}
+{"text": "Luís Matos apresentou o cartão de cidadão.", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "A ré Tiago Fernandes mora na Rua Central, em Aveiro.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "O arguido Carlos Mendes indicou residência em Coimbra.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O réu Marta Ribeiro apresentou contestação.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "A arguida Teresa Gomes apresentou a sua defesa.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "A arguida Tiago Fernandes apresentou a sua defesa.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "O réu Paulo Rocha foi condenado no pagamento da quantia.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "O relator Carla Sousa deu provimento ao recurso.", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "A arguida Maria Ferreira mora na Avenida Central, no Porto.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "A juíza relatora Inês Costa elaborou o relatório.", "entity": "Inês Costa", "label": "RELATOR"}
+{"text": "O arguido Rui Lopes indicou residência em Coimbra.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "A arguida Carlos Mendes mora na Avenida Central, no Porto.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "A arguida Helena Cruz mora na Avenida Central, no Porto.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "O arguido João Martins indicou residência em Coimbra.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Pedro Costa prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A ré Teresa Gomes foi citada.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "O arguido Tiago Fernandes indicou residência em Coimbra.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "João Martins deslocou-se ao Porto.", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O relator Pedro Costa assinou o acórdão em Lisboa.", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "O arguido Inês Costa foi condenado.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "A ré Sofia Almeida alegou desconhecer os factos.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "O réu Helena Cruz contestou a ação.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "O réu Pedro Costa foi condenado no pagamento da quantia.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "Maria Ferreira reside na Rua das Flores, em Lisboa.", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "Pedro Costa apresentou o cartão de cidadão.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O arguido Sofia Almeida foi condenado.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "Carla Sousa trabalha na empresa Alfa Lda.", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A testemunha Sofia Almeida declarou conhecer o arguido.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "A testemunha Helena Cruz reside na Rua do Sol, em Braga.", "entity": "Helena Cruz", "label": "TESTEMUNHA"}
+{"text": "João Martins trabalha na empresa Alfa Lda.", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O relator Rui Lopes proferiu o acórdão.", "entity": "Rui Lopes", "label": "RELATOR"}
+{"text": "A testemunha Tiago Fernandes confirmou os factos.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira compareceu em audiência.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "A arguida Ana Silva foi absolvida.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "Paulo Rocha trabalha na empresa Alfa Lda.", "entity": "Paulo Rocha", "label": "UNKNOWN"}
+{"text": "O arguido Teresa Gomes foi condenado.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "O juiz relator Ana Silva assinou a decisão.", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "A testemunha Manuel Ferreira prestou declarações.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}
+{"text": "A ré Paulo Rocha alegou desconhecer os factos.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "O réu Rui Lopes indicou residência em Setúbal.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "A arguida Luís Matos foi absolvida.", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "Carlos Mendes apresentou o cartão de cidadão.", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O arguido João Martins foi ouvido em tribunal.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Manuel Ferreira indicou residência no Porto.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}
+{"text": "O réu Manuel Ferreira apresentou contestação.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "A testemunha Marta Ribeiro indicou residência no Porto.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O relator Teresa Gomes proferiu o acórdão.", "entity": "Teresa Gomes", "label": "RELATOR"}
+{"text": "Inês Costa deslocou-se ao Porto.", "entity": "Inês Costa", "label": "UNKNOWN"}
+{"text": "O arguido Teresa Gomes reside na Rua das Flores, em Lisboa.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "A testemunha Inês Costa indicou residência no Porto.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "O arguido Helena Cruz reside na Rua das Flores, em Lisboa.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "Ana Silva apresentou o cartão de cidadão.", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "O réu Carla Sousa foi condenado no pagamento da quantia.", "entity": "Carla Sousa", "label": "REU"}
+{"text": "O arguido Marta Ribeiro indicou residência em Coimbra.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "Rui Lopes assinou o contrato em 12/05/2021.", "entity": "Rui Lopes", "label": "UNKNOWN"}
+{"text": "A ré Marta Ribeiro alegou desconhecer os factos.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "A testemunha Maria Ferreira confirmou os factos.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A arguida Ana Silva mora na Avenida Central, no Porto.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "O réu Marta Ribeiro foi condenado no pagamento da quantia.", "entity": "Marta Ribeiro", "label": "REU"}
+{"text": "O relator Sofia Almeida assinou o acórdão em Lisboa.", "entity": "Sofia Almeida", "label": "RELATOR"}
+{"text": "O réu Luís Matos foi condenado no pagamento da quantia.", "entity": "Luís Matos", "label": "REU"}
+{"text": "A ré Teresa Gomes mora na Rua Central, em Aveiro.", "entity": "Teresa Gomes", "label": "REU"}
+{"text": "O arguido Tiago Fernandes compareceu em audiência.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "O relator Rui Lopes deu provimento ao recurso.", "entity": "Rui Lopes", "label": "RELATOR"}
+{"text": "A ré Inês Costa alegou desconhecer os factos.", "entity": "Inês Costa", "label": "REU"}
+{"text": "A relatora João Martins apresentou o projeto de acórdão.", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O réu João Martins foi condenado no pagamento da quantia.", "entity": "João Martins", "label": "REU"}
+{"text": "O arguido Tiago Fernandes foi ouvido em tribunal.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "Inês Costa apresentou o cartão de cidadão.", "entity": "Inês Costa", "label": "UNKNOWN"}
+{"text": "A testemunha Rui Lopes mora na Avenida da Liberdade, em Lisboa.", "entity": "Rui Lopes", "label": "TESTEMUNHA"}
+{"text": "O arguido Paulo Rocha compareceu em audiência.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "Sofia Almeida reside na Rua das Flores, em Lisboa.", "entity": "Sofia Almeida", "label": "UNKNOWN"}
+{"text": "O réu Helena Cruz apresentou contestação.", "entity": "Helena Cruz", "label": "REU"}
+{"text": "O réu Manuel Ferreira foi condenado no pagamento da quantia.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "A testemunha Ana Silva confirmou os factos.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "Ana Silva trabalha na empresa Alfa Lda.", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha Marta Ribeiro foi ouvida em audiência.", "entity": "Marta Ribeiro", "label": "TESTEMUNHA"}
+{"text": "João Martins assinou o contrato em 12/05/2021.", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "A testemunha Carla Sousa indicou residência no Porto.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "A ré Carlos Mendes alegou desconhecer os factos.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A testemunha Carlos Mendes indicou residência no Porto.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Sousa prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira reside na Rua das Flores, em Lisboa.", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O réu Sofia Almeida foi condenado no pagamento da quantia.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "Pedro Costa trabalha na empresa Alfa Lda.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "A arguida Paulo Rocha foi absolvida.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+{"text": "A testemunha Ana Silva indicou residência no Porto.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido Helena Cruz foi condenado.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "O réu João Martins indicou residência em Setúbal.", "entity": "João Martins", "label": "REU"}
+{"text": "O relator Pedro Costa proferiu o acórdão.", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "O arguido Tiago Fernandes reside na Rua das Flores, em Lisboa.", "entity": "Tiago Fernandes", "label": "ARGUIDO"}
+{"text": "Carla Sousa assinou o contrato em 12/05/2021.", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A arguida Marta Ribeiro foi absolvida.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "O arguido Sofia Almeida foi ouvido em tribunal.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "A relatora Manuel Ferreira proferiu decisão no Porto.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "A arguida Teresa Gomes foi absolvida.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "O relator Paulo Rocha proferiu o acórdão.", "entity": "Paulo Rocha", "label": "RELATOR"}
+{"text": "A testemunha Carlos Mendes respondeu às perguntas do tribunal.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A relatora João Martins proferiu decisão no Porto.", "entity": "João Martins", "label": "RELATOR"}
+{"text": "Tiago Fernandes deslocou-se ao Porto.", "entity": "Tiago Fernandes", "label": "UNKNOWN"}
+{"text": "A testemunha Ana Silva mora na Avenida da Liberdade, em Lisboa.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O réu Sofia Almeida contestou a ação.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "O relator Sofia Almeida deu provimento ao recurso.", "entity": "Sofia Almeida", "label": "RELATOR"}
+{"text": "A relatora Tiago Fernandes proferiu decisão no Porto.", "entity": "Tiago Fernandes", "label": "RELATOR"}
+{"text": "A ré Paulo Rocha foi citada.", "entity": "Paulo Rocha", "label": "REU"}
+{"text": "A arguida João Martins mora na Avenida Central, no Porto.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O réu Rui Lopes contestou a ação.", "entity": "Rui Lopes", "label": "REU"}
+{"text": "Pedro Costa reside na Rua das Flores, em Lisboa.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "A testemunha Sofia Almeida confirmou os factos.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "A testemunha Inês Costa declarou conhecer o arguido.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "O arguido Rui Lopes reside na Rua das Flores, em Lisboa.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "A testemunha Sofia Almeida mora na Avenida da Liberdade, em Lisboa.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "O arguido Inês Costa foi ouvido em tribunal.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "O réu Maria Ferreira indicou residência em Setúbal.", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "Teresa Gomes deslocou-se ao Porto.", "entity": "Teresa Gomes", "label": "UNKNOWN"}
+{"text": "O réu Sofia Almeida reside na Rua Nova, em Faro.", "entity": "Sofia Almeida", "label": "REU"}
+{"text": "Tiago Fernandes trabalha na empresa Alfa Lda.", "entity": "Tiago Fernandes", "label": "UNKNOWN"}
+{"text": "O arguido Carlos Mendes compareceu em audiência.", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O relator Helena Cruz assinou o acórdão em Lisboa.", "entity": "Helena Cruz", "label": "RELATOR"}
+{"text": "Carlos Mendes assinou o contrato em 12/05/2021.", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O arguido Inês Costa reside na Rua das Flores, em Lisboa.", "entity": "Inês Costa", "label": "ARGUIDO"}
+{"text": "A ré Tiago Fernandes alegou desconhecer os factos.", "entity": "Tiago Fernandes", "label": "REU"}
+{"text": "A ré Luís Matos foi citada.", "entity": "Luís Matos", "label": "REU"}
+{"text": "O arguido Pedro Costa foi ouvido em tribunal.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A testemunha Inês Costa prestou declarações.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes confirmou os factos.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa indicou residência no Porto.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Tiago Fernandes reside na Rua do Sol, em Braga.", "entity": "Tiago Fernandes", "label": "TESTEMUNHA"}
+{"text": "O réu Carlos Mendes contestou a ação.", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "O réu Inês Costa apresentou contestação.", "entity": "Inês Costa", "label": "REU"}
+{"text": "A arguida Teresa Gomes mora na Avenida Central, no Porto.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "O arguido Pedro Costa indicou residência em Coimbra.", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O arguido Ana Silva foi ouvido em tribunal.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "O relator Luís Matos deu provimento ao recurso.", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha Maria Ferreira reside na Rua do Sol, em Braga.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Helena Cruz indicou residência em Coimbra.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "A relatora Luís Matos proferiu decisão no Porto.", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O relator Ana Silva deu provimento ao recurso.", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O relator Luís Matos assinou o acórdão em Lisboa.", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A juíza relatora Manuel Ferreira elaborou o relatório.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "A relatora Paulo Rocha apresentou o projeto de acórdão.", "entity": "Paulo Rocha", "label": "RELATOR"}
+{"text": "Luís Matos deslocou-se ao Porto.", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "Sofia Almeida assinou o contrato em 12/05/2021.", "entity": "Sofia Almeida", "label": "UNKNOWN"}
+{"text": "O arguido Ana Silva indicou residência em Coimbra.", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "A arguida Manuel Ferreira apresentou a sua defesa.", "entity": "Manuel Ferreira", "label": "ARGUIDO"}
+{"text": "A relatora Manuel Ferreira apresentou o projeto de acórdão.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "A arguida Sofia Almeida mora na Avenida Central, no Porto.", "entity": "Sofia Almeida", "label": "ARGUIDO"}
+{"text": "A testemunha Carla Sousa mora na Avenida da Liberdade, em Lisboa.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "A relatora Rui Lopes apresentou o projeto de acórdão.", "entity": "Rui Lopes", "label": "RELATOR"}
+{"text": "O juiz relator Manuel Ferreira assinou a decisão.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "A testemunha Sofia Almeida prestou declarações.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "O relator Luís Matos proferiu o acórdão.", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "Paulo Rocha reside na Rua das Flores, em Lisboa.", "entity": "Paulo Rocha", "label": "UNKNOWN"}
+{"text": "Paulo Rocha assinou o contrato em 12/05/2021.", "entity": "Paulo Rocha", "label": "UNKNOWN"}
+{"text": "A testemunha Manuel Ferreira confirmou os factos.", "entity": "Manuel Ferreira", "label": "TESTEMUNHA"}

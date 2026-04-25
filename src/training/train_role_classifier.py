@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 
 
-DATASET_PATH = Path("data/processed/roles_v1.jsonl")
+DATASET_PATH = Path("data/processed/roles_v2.jsonl")
 
 
 def load_dataset(path):

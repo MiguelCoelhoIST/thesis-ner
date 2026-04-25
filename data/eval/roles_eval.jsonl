@@ -1,0 +1,29 @@
+{"text": "O arguido João Martins foi detido ontem.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A arguida Helena Cruz prestou declarações perante o juiz.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "O arguido Rui Lopes indicou residência em Faro.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "A arguida Marta Ribeiro foi absolvida pelo tribunal.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "O arguido Paulo Rocha apresentou recurso da decisão.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+
+{"text": "A testemunha Ana Silva confirmou os factos em tribunal.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Mendes disse conhecer o arguido.", "entity": "Carla Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Sofia Almeida foi ouvida durante a audiência.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "A testemunha Inês Costa relatou os acontecimentos.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Teresa Gomes indicou residência no Porto.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+
+{"text": "O relator Carlos Mendes apresentou o relatório final.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A relatora Maria Ferreira assinou o acórdão.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O juiz relator António Costa subscreveu a decisão.", "entity": "António Costa", "label": "RELATOR"}
+{"text": "A juíza relatora Helena Ribeiro elaborou o projeto de acórdão.", "entity": "Helena Ribeiro", "label": "RELATOR"}
+{"text": "O relator Luís Fernandes proferiu decisão no processo.", "entity": "Luís Fernandes", "label": "RELATOR"}
+
+{"text": "O réu Pedro Costa foi absolvido.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "A ré Ana Martins apresentou contestação.", "entity": "Ana Martins", "label": "REU"}
+{"text": "O réu Manuel Ferreira foi citado para contestar.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "A ré Patrícia Lopes alegou desconhecer os factos.", "entity": "Patrícia Lopes", "label": "REU"}
+{"text": "O réu Bruno Fernandes foi condenado no pagamento da quantia.", "entity": "Bruno Fernandes", "label": "REU"}
+
+{"text": "Maria Ferreira reside em Lisboa.", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "Pedro Costa assinou o contrato em 12/05/2021.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "João Ribeiro vive na Avenida da Liberdade.", "entity": "João Ribeiro", "label": "UNKNOWN"}
+{"text": "Ana Pereira trabalha na empresa Alfa Lda.", "entity": "Ana Pereira", "label": "UNKNOWN"}
+{"text": "Miguel Santos apresentou o cartão de cidadão.", "entity": "Miguel Santos", "label": "UNKNOWN"}
