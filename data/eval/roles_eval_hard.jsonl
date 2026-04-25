@@ -1,0 +1,29 @@
+{"text": "João Martins, na qualidade de arguido, foi ouvido em tribunal.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "Foi ouvido João Martins como arguido no âmbito do processo.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A defesa do arguido João Martins requereu nova perícia.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "Helena Cruz, arguida nos autos, apresentou recurso.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "O tribunal ouviu Rui Lopes, arguido no processo.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+
+{"text": "Ana Silva, indicada como testemunha, confirmou os factos.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "Foi inquirida Carla Mendes na qualidade de testemunha.", "entity": "Carla Mendes", "label": "TESTEMUNHA"}
+{"text": "A defesa arrolou Sofia Almeida como testemunha.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "Inês Costa, testemunha indicada pela autora, prestou declarações.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "O tribunal ouviu Teresa Gomes como testemunha presencial.", "entity": "Teresa Gomes", "label": "TESTEMUNHA"}
+
+{"text": "Carlos Mendes, relator do acórdão, votou a decisão.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "Coube a Maria Ferreira a função de relatora.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "A decisão foi elaborada pelo juiz relator António Costa.", "entity": "António Costa", "label": "RELATOR"}
+{"text": "Helena Ribeiro, juíza relatora, apresentou declaração de voto.", "entity": "Helena Ribeiro", "label": "RELATOR"}
+{"text": "Luís Fernandes foi designado relator do processo.", "entity": "Luís Fernandes", "label": "RELATOR"}
+
+{"text": "Pedro Costa, réu na presente ação, apresentou contestação.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "A ação foi proposta contra Ana Martins, ré nos autos.", "entity": "Ana Martins", "label": "REU"}
+{"text": "Manuel Ferreira foi citado na qualidade de réu.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "Patrícia Lopes, enquanto ré, alegou desconhecer os factos.", "entity": "Patrícia Lopes", "label": "REU"}
+{"text": "O tribunal condenou Bruno Fernandes, réu no processo.", "entity": "Bruno Fernandes", "label": "REU"}
+
+{"text": "João Martins reside na Rua do Sol.", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "Ana Silva trabalha na empresa Alfa Lda.", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "Carlos Mendes deslocou-se a Lisboa.", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "Pedro Costa assinou o contrato.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "Maria Ferreira nasceu em 12/03/1985.", "entity": "Maria Ferreira", "label": "UNKNOWN"}

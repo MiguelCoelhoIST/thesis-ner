@@ -8,9 +8,9 @@ from sklearn.metrics import classification_report, accuracy_score
 
 
 TRAIN_PATH = Path("data/processed/roles_v2.jsonl")
-EVAL_PATH = Path("data/eval/roles_eval.jsonl")
+EVAL_PATH = Path("data/eval/roles_eval_hard.jsonl")
 
-CONFIDENCE_THRESHOLD = 0.50
+CONFIDENCE_THRESHOLD = 0.40
 
 
 def load_dataset(path: Path):

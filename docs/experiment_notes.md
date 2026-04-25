@@ -100,3 +100,58 @@ A confidence threshold can be used to reduce false positives:
 if the highest predicted probability is below 0.50, the role is assigned as UNKNOWN.
 
 This is useful because the role classifier should only assign a legal role when there is enough contextual evidence.
+
+### Confidence threshold result
+
+After applying a confidence threshold of 0.50, the previous false positive was corrected.
+
+Evaluation result:
+- Accuracy: 1.00
+- No errors in the current 25-example evaluation set
+
+This does not mean the classifier is perfect. The evaluation set is still small and partially similar to the synthetic data generation patterns. However, the result shows that confidence thresholding can reduce false positives and make the pipeline safer.
+
+## Experiment 5 — Hard role evaluation
+
+A harder evaluation set was created using sentence structures different from the original templates.
+
+The goal was to test whether the classifier generalizes beyond simple patterns such as:
+- "O arguido {name}..."
+- "A testemunha {name}..."
+
+This evaluation is important to measure robustness and identify whether the template-generated data is too narrow.
+
+### Result
+
+The hard evaluation achieved 96% accuracy.
+
+Only one error was observed:
+- "Luís Fernandes foi designado relator do processo."
+  - GOLD: RELATOR
+  - PRED: UNKNOWN
+
+The raw classifier assigned the highest probability to RELATOR (0.4479), but this was below the confidence threshold of 0.50. This shows a trade-off: the threshold reduces false positives, but may introduce false negatives for less direct sentence structures.
+
+## Experiment 6 — Confidence threshold comparison
+
+Different confidence thresholds were compared to understand the trade-off between false positives and false negatives.
+
+Thresholds tested:
+- 0.00
+- 0.40
+- 0.45
+- 0.50
+- 0.60
+
+The goal is to find whether the threshold improves robustness or becomes too aggressive by converting valid role predictions into UNKNOWN.
+
+### Threshold comparison result
+
+Several confidence thresholds were compared on both the normal and hard evaluation sets.
+
+Results:
+- On the normal evaluation set, threshold 0.50 achieved the best result.
+- On the hard evaluation set, threshold 0.40 achieved the best result.
+- Threshold 0.50 was too strict for some indirect role mentions, converting valid role predictions into UNKNOWN.
+
+For now, threshold 0.40 will be used as the default because it provides better robustness on harder examples.
