@@ -155,3 +155,88 @@ Results:
 - Threshold 0.50 was too strict for some indirect role mentions, converting valid role predictions into UNKNOWN.
 
 For now, threshold 0.40 will be used as the default because it provides better robustness on harder examples.
+
+## Experiment 7 — Realistic paragraph evaluation
+
+The pipeline was tested on longer, more realistic legal-style paragraphs containing multiple person entities.
+
+### Observation
+
+The first version classified each PER entity using the full sentence/paragraph as input. This caused all person entities in the same text to receive the same role, even when they had different legal roles.
+
+Example:
+- "A testemunha Carla Mendes declarou que viu o arguido Rui Lopes..."
+  - Carla Mendes -> TESTEMUNHA
+  - Rui Lopes -> TESTEMUNHA
+
+### Next improvement
+
+Use a local context window around each PER entity instead of the full text. This should allow the classifier to assign different roles to different persons in the same sentence.
+
+## Experiment 8 — Entity-aware classification
+
+To improve role classification in sentences with multiple person entities, an entity marking strategy was introduced.
+
+Instead of classifying based on the full sentence, the input now highlights the target entity:
+
+Example:
+"A testemunha [ENTITY] Sofia Almeida [/ENTITY] e o arguido Paulo Rocha..."
+
+This allows the classifier to focus on the correct entity when multiple roles are present in the same context.
+
+### Observation
+
+Adding entity markers only at inference time did not significantly improve the classifier, because the model had not seen these markers during training.
+
+### Next improvement
+
+Generate a new training dataset (`roles_v3.jsonl`) where the target entity is explicitly marked with `[ENTITY] ... [/ENTITY]`.
+
+## Experiment 9 — Entity-aware training dataset
+
+A new template-generated dataset was created where the target entity is explicitly marked in the training examples.
+
+Dataset:
+- `data/processed/roles_v3.jsonl`
+
+Example:
+"O arguido [ENTITY] João Martins [/ENTITY] foi ouvido em tribunal."
+
+The goal is to align the training format with the inference format used in the pipeline.
+
+### Result
+
+Entity-aware training improved the pipeline in realistic paragraphs, especially in cases with multiple PER entities and different roles.
+
+Remaining issue:
+The classifier still struggles when the role appears after the entity, such as:
+"João Ribeiro como arguido"
+
+Next improvement:
+Add templates where legal roles appear after the entity, not only before it.
+
+### Observation
+
+Entity-aware training improved several multi-entity cases, but the classifier still struggles when multiple legal roles appear in the same local context.
+
+Example:
+"O tribunal ouviu Inês Costa como testemunha e João Ribeiro como arguido."
+
+The classifier predicted TESTEMUNHA for both entities because the context contains both role indicators.
+
+### Next improvement
+
+Add multi-entity training examples where the same sentence appears with different target entities marked. This teaches the classifier to associate the role with the marked entity rather than with the sentence globally.
+
+### Multi-entity training examples
+
+After adding multi-entity training examples where different target entities are marked in the same sentence, the classifier correctly handled cases with multiple legal roles.
+
+Example:
+"O tribunal ouviu Inês Costa como testemunha e João Ribeiro como arguido."
+
+Result:
+- Inês Costa -> TESTEMUNHA
+- João Ribeiro -> ARGUIDO
+
+This confirms that entity-aware training examples are important for role classification when multiple persons and roles appear in the same context.

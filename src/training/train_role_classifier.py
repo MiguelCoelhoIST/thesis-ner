@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 
 
-DATASET_PATH = Path("data/processed/roles_v2.jsonl")
+DATASET_PATH = Path("data/processed/roles_v3.jsonl")
 
 
 def load_dataset(path):
@@ -46,11 +46,11 @@ def main():
     print("Training complete!")
 
     test_sentences = [
-        "O arguido Rui Lopes foi condenado.",
-        "A testemunha Carla Mendes declarou em tribunal.",
-        "O relator João Costa decidiu o processo.",
-        "O réu Manuel Ferreira apresentou contestação.",
-        "Maria Ferreira reside na Rua das Flores, Lisboa.",
+        "O arguido [ENTITY] Rui Lopes [/ENTITY] foi condenado.",
+        "A testemunha [ENTITY] Carla Mendes [/ENTITY] declarou em tribunal.",
+        "O relator [ENTITY] João Costa [/ENTITY] decidiu o processo.",
+        "O réu [ENTITY] Manuel Ferreira [/ENTITY] apresentou contestação.",
+        "[ENTITY] Maria Ferreira [/ENTITY] reside na Rua das Flores, Lisboa.",
     ]
 
     print("\nPredictions:")
