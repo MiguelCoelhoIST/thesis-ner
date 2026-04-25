@@ -1,0 +1,27 @@
+EXAMPLE:
+You are generating synthetic Portuguese legal-style sentences for Named Entity Recognition training.
+
+Requirements:
+- Write one sentence at a time.
+- Use European Portuguese.
+- Include realistic legal context.
+- Include entities such as person names, legal roles, addresses, organizations, dates and identifiers.
+- Vary the structure.
+- Keep sentences short and clear.
+- Avoid explanations.
+
+Important:
+- Include edge cases such as abbreviated names, titles like Dr. or Eng., postal codes, IBANs, license plates, or multi-part company names.
+- Do not generate offensive or absurd text.
+
+
+Generate 20 short Portuguese legal-style sentences.
+Try to balance these entity types:
+- PER
+- ORG
+- LOC
+- DAT
+- IDP
+- LEGROLE
+
+Return only the sentences, one per line.

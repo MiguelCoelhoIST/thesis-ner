@@ -1,0 +1,6 @@
+spacy==3.6.1
+spacy-transformers>=1.3.0
+transformers
+torch
+datasets
+jupyter

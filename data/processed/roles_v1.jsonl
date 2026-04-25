@@ -1,0 +1,23 @@
+{"text": "O arguido João Martins foi ouvido em tribunal.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A arguida Helena Cruz apresentou defesa.", "entity": "Helena Cruz", "label": "ARGUIDO"}
+{"text": "O arguido Ricardo Alves compareceu em audiência.", "entity": "Ricardo Alves", "label": "ARGUIDO"}
+{"text": "A arguida Marta Ribeiro foi condenada.", "entity": "Marta Ribeiro", "label": "ARGUIDO"}
+{"text": "O arguido Paulo Rocha prestou declarações.", "entity": "Paulo Rocha", "label": "ARGUIDO"}
+
+{"text": "A testemunha Ana Silva prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha Sofia Almeida confirmou os factos.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Mendes declarou em tribunal.", "entity": "Carla Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Inês Costa foi ouvida.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Teresa Lopes relatou os acontecimentos.", "entity": "Teresa Lopes", "label": "TESTEMUNHA"}
+
+{"text": "O relator Carlos Mendes proferiu o acórdão.", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "O relator João Costa decidiu o processo.", "entity": "João Costa", "label": "RELATOR"}
+{"text": "A relatora Maria Ferreira assinou o acórdão.", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O relator Manuel Ferreira elaborou o relatório.", "entity": "Manuel Ferreira", "label": "RELATOR"}
+{"text": "A relatora Ana Pereira apresentou o projeto de acórdão.", "entity": "Ana Pereira", "label": "RELATOR"}
+
+{"text": "O réu Pedro Costa foi condenado.", "entity": "Pedro Costa", "label": "REU"}
+{"text": "A ré Ana Martins apresentou contestação.", "entity": "Ana Martins", "label": "REU"}
+{"text": "O réu Manuel Ferreira contestou a ação.", "entity": "Manuel Ferreira", "label": "REU"}
+{"text": "A ré Sofia Costa foi citada.", "entity": "Sofia Costa", "label": "REU"}
+{"text": "O réu Bruno Fernandes foi absolvido.", "entity": "Bruno Fernandes", "label": "REU"}
