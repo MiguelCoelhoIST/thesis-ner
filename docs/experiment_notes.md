@@ -240,3 +240,55 @@ Result:
 - João Ribeiro -> ARGUIDO
 
 This confirms that entity-aware training examples are important for role classification when multiple persons and roles appear in the same context.
+
+## Experiment 10 — Entity-aware realistic evaluation
+
+A new realistic evaluation set was created where each example contains:
+- the full text
+- the target entity
+- the expected legal role
+
+This allows evaluation of the role classifier at entity level, instead of sentence level.
+
+This is important because the same sentence may contain multiple PER entities with different roles.
+
+Dataset:
+- `data/eval/roles_eval_realistic.jsonl`
+
+Training data:
+- `data/processed/roles_v3.jsonl`
+
+The evaluation measures whether the classifier assigns the correct role to the marked target entity.
+
+## Experiment 11 — Rule-based local role classifier
+
+A rule-based role classifier was implemented as a stronger baseline for legal role detection.
+
+Instead of using bag-of-words over the whole context, this approach searches for legal role keywords near the target entity and assigns the closest matching role.
+
+This is useful because many legal roles are explicitly expressed through lexical cues such as:
+- arguido / arguida
+- testemunha
+- relator / relatora
+- réu / ré
+
+The goal is to compare this interpretable rule-based approach with the simple LogisticRegression classifier.
+
+### Result
+
+The rule-based local classifier achieved 94.12% accuracy on the realistic entity-level evaluation set, outperforming the simple LogisticRegression classifier.
+
+The only error occurred in a sentence where two roles appeared close to the target entity:
+"O tribunal ouviu Inês Costa como testemunha e João Ribeiro como arguido."
+
+This shows that proximity alone is not enough. The next improvement is to use entity-aware patterns, checking whether the role appears before or after the marked target entity.
+
+## Experiment 12 — Entity-aware rule-based role classifier
+
+### Result
+
+The entity-aware rule-based classifier achieved 100% accuracy on the current realistic entity-level evaluation set.
+
+This result shows that explicit local patterns around the marked entity can outperform the simple LogisticRegression classifier on this controlled evaluation set.
+
+However, the evaluation set is still small, so this should be treated as a strong baseline rather than a final solution.
