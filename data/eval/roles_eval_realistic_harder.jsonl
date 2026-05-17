@@ -1,0 +1,28 @@
+{"text": "O arguido João Martins interpôs recurso, sendo a testemunha Ana Silva ouvida posteriormente.", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O arguido João Martins interpôs recurso, sendo a testemunha Ana Silva ouvida posteriormente.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+
+{"text": "No acórdão relatado por Carlos Mendes, foi apreciado o recurso interposto.", "entity": "Carlos Mendes", "label": "RELATOR"}
+
+{"text": "O tribunal considerou improcedente o pedido apresentado pelo réu Pedro Costa.", "entity": "Pedro Costa", "label": "REU"}
+
+{"text": "Maria Ferreira deslocou-se ao tribunal para assistir à audiência.", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+
+{"text": "A testemunha Carla Mendes afirmou que João Ribeiro estava presente no local.", "entity": "Carla Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Mendes afirmou que João Ribeiro estava presente no local.", "entity": "João Ribeiro", "label": "UNKNOWN"}
+
+{"text": "O arguido Rui Lopes e a testemunha Sofia Almeida foram ouvidos em momentos distintos.", "entity": "Rui Lopes", "label": "ARGUIDO"}
+{"text": "O arguido Rui Lopes e a testemunha Sofia Almeida foram ouvidos em momentos distintos.", "entity": "Sofia Almeida", "label": "TESTEMUNHA"}
+
+{"text": "O processo foi distribuído ao juiz relator António Costa.", "entity": "António Costa", "label": "RELATOR"}
+
+{"text": "Pedro Costa assinou o contrato na qualidade de representante da empresa.", "entity": "Pedro Costa", "label": "UNKNOWN"}
+
+{"text": "Foi ouvida Inês Costa como testemunha e João Ribeiro como arguido.", "entity": "Inês Costa", "label": "TESTEMUNHA"}
+{"text": "Foi ouvida Inês Costa como testemunha e João Ribeiro como arguido.", "entity": "João Ribeiro", "label": "ARGUIDO"}
+
+{"text": "Carlos Mendes participou na reunião sem qualquer intervenção no processo.", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+
+{"text": "A decisão foi elaborada pelo relator Helena Ribeiro e posteriormente revista.", "entity": "Helena Ribeiro", "label": "RELATOR"}
+
+{"text": "A arguida Teresa Gomes foi absolvida, apesar do testemunho de Luís Matos.", "entity": "Teresa Gomes", "label": "ARGUIDO"}
+{"text": "A arguida Teresa Gomes foi absolvida, apesar do testemunho de Luís Matos.", "entity": "Luís Matos", "label": "TESTEMUNHA"}

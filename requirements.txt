@@ -5,3 +5,5 @@ torch
 datasets
 jupyter
 scikit-learn
+accelerate
+evaluate

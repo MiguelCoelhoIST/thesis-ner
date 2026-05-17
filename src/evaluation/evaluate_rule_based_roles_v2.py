@@ -5,8 +5,7 @@ from collections import Counter
 
 from sklearn.metrics import accuracy_score, classification_report
 
-
-EVAL_PATH = Path("data/eval/roles_eval_realistic.jsonl")
+EVAL_PATH = Path("data/eval/roles_eval_realistic_harder.jsonl")
 
 ENTITY_START = "[entity]"
 ENTITY_END = "[/entity]"

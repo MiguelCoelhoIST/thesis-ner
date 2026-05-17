@@ -1,0 +1,500 @@
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "RELATOR"}
+{"text": "O arguido Pedro Costa foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O réu Carla Sousa foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O réu Carla Sousa foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A testemunha Maria Ferreira declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O réu Carlos Mendes foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "A testemunha Carla Sousa identificou o réu [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "REU"}
+{"text": "A testemunha Carla Sousa identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator António Ribeiro proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O arguido Pedro Costa foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Sousa identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Maria Ferreira declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "RELATOR"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O relator António Ribeiro proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator António Ribeiro proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O arguido Pedro Costa foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O réu Carla Sousa foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A testemunha Carla Sousa identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "A testemunha Carla Sousa identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O arguido João Martins foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O arguido Pedro Costa foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "REU"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O relator António Ribeiro proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O relator António Ribeiro proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Sousa identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa identificou o réu [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "RELATOR"}
+{"text": "A testemunha Maria Ferreira declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "RELATOR"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O réu Carlos Mendes foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O réu Carlos Mendes foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O réu Carla Sousa foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O arguido João Martins foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "REU"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Carla Sousa foi identificado pelo relator [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "RELATOR"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "O relator António Ribeiro proferiu decisão após ouvir a testemunha [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "UNKNOWN"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O relator Luís Matos proferiu decisão após ouvir a testemunha [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "A testemunha Carlos Mendes declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "ARGUIDO"}
+{"text": "A testemunha Pedro Costa identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Maria Ferreira declarou em tribunal contra o arguido [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "ARGUIDO"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "RELATOR"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "ARGUIDO"}
+{"text": "A testemunha Pedro Costa declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O arguido Pedro Costa foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "A testemunha Carla Sousa identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "REU"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O arguido João Martins foi identificado pelo relator [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "RELATOR"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O réu Carlos Mendes foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O réu Ana Silva foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "RELATOR"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "REU"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O réu João Martins foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator Ana Silva proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O réu António Ribeiro foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O arguido Ana Silva foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "A testemunha Luís Matos declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "A testemunha António Ribeiro identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "RELATOR"}
+{"text": "A testemunha João Martins declarou em tribunal contra o arguido [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "ARGUIDO"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "ARGUIDO"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Pedro Costa [/ENTITY] prestou declarações.", "entity": "Pedro Costa", "label": "TESTEMUNHA"}
+{"text": "O arguido Carlos Mendes foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "A testemunha Ana Silva declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O relator Carla Sousa proferiu decisão após ouvir a testemunha [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "ARGUIDO"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "UNKNOWN"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "O relator João Martins proferiu decisão após ouvir a testemunha [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "REU"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carla Sousa declarou em tribunal contra o arguido [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "ARGUIDO"}
+{"text": "O réu Carlos Mendes foi representado pela mandatária [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "UNKNOWN"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "REU"}
+{"text": "O réu Pedro Costa foi representado pela mandatária [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "UNKNOWN"}
+{"text": "O réu Carlos Mendes foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "O arguido João Martins foi identificado pelo relator [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "RELATOR"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "REU"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] João Martins [/ENTITY] prestou declarações.", "entity": "João Martins", "label": "TESTEMUNHA"}
+{"text": "O arguido João Martins foi ouvido e a testemunha [ENTITY] Maria Ferreira [/ENTITY] prestou declarações.", "entity": "Maria Ferreira", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "O arguido Luís Matos foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
+{"text": "A testemunha João Martins identificou o réu [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "REU"}
+{"text": "O arguido António Ribeiro foi ouvido e a testemunha [ENTITY] Carlos Mendes [/ENTITY] prestou declarações.", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "O arguido António Ribeiro foi identificado pelo relator [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "RELATOR"}
+{"text": "A testemunha Luís Matos identificou o réu [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "REU"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] Luís Matos [/ENTITY].", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "O réu Carla Sousa foi representado pela mandatária [ENTITY] Ana Silva [/ENTITY].", "entity": "Ana Silva", "label": "UNKNOWN"}
+{"text": "O réu Luís Matos foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O arguido Carlos Mendes foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.", "entity": "Ana Silva", "label": "TESTEMUNHA"}
+{"text": "O relator Carlos Mendes proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Pedro Costa foi identificado pelo relator [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "RELATOR"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Maria Ferreira [/ENTITY].", "entity": "Maria Ferreira", "label": "REU"}
+{"text": "A testemunha Ana Silva identificou o réu [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "REU"}
+{"text": "O arguido Ana Silva foi ouvido e a testemunha [ENTITY] Luís Matos [/ENTITY] prestou declarações.", "entity": "Luís Matos", "label": "TESTEMUNHA"}
+{"text": "A testemunha António Ribeiro declarou em tribunal contra o arguido [ENTITY] Pedro Costa [/ENTITY].", "entity": "Pedro Costa", "label": "ARGUIDO"}
+{"text": "O réu Carla Sousa foi representado pela mandatária [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "UNKNOWN"}
+{"text": "O relator Pedro Costa proferiu decisão após ouvir a testemunha [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O arguido Luís Matos foi ouvido e a testemunha [ENTITY] Carla Sousa [/ENTITY] prestou declarações.", "entity": "Carla Sousa", "label": "TESTEMUNHA"}
+{"text": "A testemunha Carlos Mendes identificou o réu [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "REU"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] António Ribeiro [/ENTITY].", "entity": "António Ribeiro", "label": "UNKNOWN"}
+{"text": "O réu Maria Ferreira foi representado pela mandatária [ENTITY] Carla Sousa [/ENTITY].", "entity": "Carla Sousa", "label": "UNKNOWN"}
+{"text": "O arguido Carla Sousa foi ouvido e a testemunha [ENTITY] António Ribeiro [/ENTITY] prestou declarações.", "entity": "António Ribeiro", "label": "TESTEMUNHA"}
+{"text": "O relator Maria Ferreira proferiu decisão após ouvir a testemunha [ENTITY] Carlos Mendes [/ENTITY].", "entity": "Carlos Mendes", "label": "TESTEMUNHA"}
+{"text": "O arguido Maria Ferreira foi identificado pelo relator [ENTITY] João Martins [/ENTITY].", "entity": "João Martins", "label": "RELATOR"}
