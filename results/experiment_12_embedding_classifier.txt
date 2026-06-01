@@ -1,0 +1,21 @@
+Experiment 12 - Embedding encoder + classifier
+
+Model:
+sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+
+Classifier:
+LogisticRegression
+
+Dataset:
+train: data/processed/roles_v4.jsonl
+eval: data/eval/roles_eval_realistic.jsonl
+
+Results:
+accuracy: 0.5294
+macro_precision: 0.5800
+macro_recall: 0.5300
+macro_f1: 0.5400
+
+Conclusion:
+The embedding-based classifier outperformed the fine-tuned BERTimbau experiment on the current realistic evaluation set.
+This suggests that encoder embeddings may generalize better with the current small dataset.
