@@ -1,0 +1,97 @@
+Experiment 09 — Transformer role classifier
+
+Goal:
+Evaluate a transformer-based contextual classifier for legal role classification of PER entities.
+
+Model:
+neuralmind/bert-base-portuguese-cased
+
+Task:
+Text classification with entity markers:
+[ENTITY] name [/ENTITY] -> legal role label
+
+Labels:
+- ARGUIDO
+- TESTEMUNHA
+- RELATOR
+- REU
+- UNKNOWN
+
+Training dataset:
+data/processed/roles_v3.jsonl
+Train examples: 828
+
+Evaluation dataset:
+data/eval/roles_eval_realistic.jsonl
+Eval examples: 17
+
+Training configuration:
+- epochs: 5
+- batch size: 8
+- learning rate: 2e-5
+- max length: 128
+- weight decay: 0.01
+- best model selected by macro_f1
+
+Runtime:
+- train_runtime: 1617.51 seconds
+- approximately 26m57s
+- training was performed on CPU, no GPU/CUDA detected
+
+Final evaluation:
+- accuracy: 0.4706
+- macro_precision: 0.4889
+- macro_recall: 0.4100
+- macro_f1: 0.3952
+- eval_loss: 1.2997
+
+Observations:
+The training loss decreased strongly, reaching approximately 0.12 overall.
+However, evaluation macro F1 remained low at approximately 0.39.
+
+This suggests that the transformer overfitted the synthetic/template-based training data and did not generalize well to the realistic evaluation set.
+
+Interpretation:
+The experiment confirms that simply fine-tuning BERTimbau on the current synthetic dataset is not sufficient.
+The model appears to memorize training patterns instead of learning robust semantic relations between the marked entity and its legal role.
+
+Conclusion:
+Transformer fine-tuning is a valid direction, but requires:
+- more realistic training data
+- better entity-level examples
+- more diverse sentence structures
+- possibly real court rulings annotated with LLM assistance
+- comparison with encoder embedding approaches suggested by the supervisor
+
+Next steps:
+1. Inspect transformer predictions manually.
+2. Compare errors against LogisticRegression and rule-based baseline.
+3. Try sentence encoder embeddings + classifier.
+4. Discuss GPU/IST/INESC machines with supervisor.
+
+
+Manual prediction analysis:
+
+The transformer correctly handles simple explicit contexts:
+- "O arguido [ENTITY] João Ribeiro [/ENTITY]" -> ARGUIDO
+- "A testemunha [ENTITY] Carla Sousa [/ENTITY]" -> TESTEMUNHA
+- "O relator [ENTITY] António Silva [/ENTITY]" -> RELATOR
+- "[ENTITY] Maria Ferreira [/ENTITY] reside em Lisboa." -> UNKNOWN
+
+It also correctly handles an indirect semantic case:
+- "O testemunho de [ENTITY] Luís Matos [/ENTITY]" -> TESTEMUNHA
+
+This is an important improvement over the rule-based approach, which struggled with lexical variants such as "testemunho".
+
+However, the model still fails in multi-entity contexts:
+- "O arguido João Martins ... testemunha [ENTITY] Ana Silva [/ENTITY]" -> predicted ARGUIDO instead of TESTEMUNHA
+- "A testemunha Ana Silva ... arguido [ENTITY] João Martins [/ENTITY]" -> predicted TESTEMUNHA instead of ARGUIDO
+
+It also wrongly assigns the role of another entity in:
+- "O réu Pedro Costa foi representado pela mandatária [ENTITY] Sofia Almeida [/ENTITY]" -> predicted REU instead of UNKNOWN
+
+Interpretation:
+The model learned useful semantic patterns, but still struggles to bind the legal role to the marked entity in sentences with multiple persons and multiple legal-role terms.
+
+Conclusion:
+The transformer shows promising semantic generalization, but the current training dataset does not contain enough difficult multi-entity examples to teach robust entity-role association.

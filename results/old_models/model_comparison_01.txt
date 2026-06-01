@@ -1,0 +1,519 @@
+
+===== EXAMPLE 1 =====
+TEXT: O arguido João Martins foi ouvido em tribunal.
+
+BASELINE:
+João Martins -> PER
+
+EXTENDED:
+João Martins -> PER
+
+
+===== EXAMPLE 2 =====
+TEXT: A testemunha Ana Silva prestou declarações.
+
+BASELINE:
+Ana Silva -> PER
+
+EXTENDED:
+Ana Silva -> PER
+
+
+===== EXAMPLE 3 =====
+TEXT: Pedro Costa assinou o contrato em 12/05/2021.
+
+BASELINE:
+Pedro Costa -> PER
+12/05/2021 -> DAT
+
+EXTENDED:
+Pedro Costa -> PER
+12/05/2021 -> DAT
+
+
+===== EXAMPLE 4 =====
+TEXT: Maria Ferreira reside na Rua das Flores, Lisboa.
+
+BASELINE:
+Maria Ferreira -> PER
+Rua das Flores, Lisboa -> LOC
+
+EXTENDED:
+Maria Ferreira -> PER
+Rua das Flores -> MOR
+Lisboa -> LOC
+
+
+===== EXAMPLE 5 =====
+TEXT: A empresa AlfaTech Lda. tem sede no Porto.
+
+BASELINE:
+AlfaTech Lda. -> ORG
+Porto -> LOC
+
+EXTENDED:
+AlfaTech Lda. -> ORG
+Porto -> LOC
+
+
+===== EXAMPLE 6 =====
+TEXT: O arguido Luís Gomes foi condenado a pena suspensa.
+
+BASELINE:
+Luís Gomes -> PER
+
+EXTENDED:
+Luís Gomes -> PER
+
+
+===== EXAMPLE 7 =====
+TEXT: A testemunha Carla Mendes confirmou os factos.
+
+BASELINE:
+Carla Mendes -> PER
+
+EXTENDED:
+Carla Mendes -> PER
+
+
+===== EXAMPLE 8 =====
+TEXT: João Ribeiro vive na Avenida da Liberdade, Lisboa.
+
+BASELINE:
+João Ribeiro -> PER
+Avenida da Liberdade, Lisboa -> LOC
+
+EXTENDED:
+João Ribeiro -> PER
+Avenida da Liberdade -> MOR
+Lisboa -> LOC
+
+
+===== EXAMPLE 9 =====
+TEXT: O contrato n.º 54321 foi celebrado em 03/03/2020.
+
+BASELINE:
+03/03/2020 -> DAT
+
+EXTENDED:
+contrato n.º 54321 -> IDP
+03/03/2020 -> DAT
+
+
+===== EXAMPLE 10 =====
+TEXT: A empresa BetaCorp S.A. opera em Coimbra.
+
+BASELINE:
+BetaCorp S.A. -> ORG
+Coimbra -> LOC
+
+EXTENDED:
+BetaCorp S.A. -> ORG
+Coimbra -> LOC
+
+
+===== EXAMPLE 11 =====
+TEXT: O arguido Ricardo Alves compareceu em audiência.
+
+BASELINE:
+Ricardo Alves -> PER
+
+EXTENDED:
+Ricardo Alves -> PER
+
+
+===== EXAMPLE 12 =====
+TEXT: A testemunha Sofia Costa apresentou provas.
+
+BASELINE:
+Sofia Costa -> PER
+
+EXTENDED:
+Sofia Costa -> PER
+
+
+===== EXAMPLE 13 =====
+TEXT: Miguel Santos assinou o documento em 10/10/2019.
+
+BASELINE:
+Miguel Santos -> PER
+10/10/2019 -> DAT
+
+EXTENDED:
+Miguel Santos -> PER
+10/10/2019 -> DAT
+
+
+===== EXAMPLE 14 =====
+TEXT: Ana Pereira reside na Rua do Sol, Porto.
+
+BASELINE:
+Ana Pereira -> PER
+Rua do Sol, Porto -> LOC
+
+EXTENDED:
+Ana Pereira -> PER
+Rua do Sol -> MOR
+Porto -> LOC
+
+
+===== EXAMPLE 15 =====
+TEXT: A empresa Gamma Lda. foi constituída em 2018.
+
+BASELINE:
+Gamma Lda. -> ORG
+2018 -> DAT
+
+EXTENDED:
+Gamma Lda. -> ORG
+2018 -> DAT
+
+
+===== EXAMPLE 16 =====
+TEXT: O arguido Bruno Fernandes foi absolvido.
+
+BASELINE:
+Bruno Fernandes -> PER
+
+EXTENDED:
+Bruno Fernandes -> PER
+
+
+===== EXAMPLE 17 =====
+TEXT: A testemunha Teresa Lopes relatou os acontecimentos.
+
+BASELINE:
+Teresa Lopes -> PER
+
+EXTENDED:
+Teresa Lopes -> PER
+
+
+===== EXAMPLE 18 =====
+TEXT: Carlos Martins vive na Rua Central, Braga.
+
+BASELINE:
+Carlos Martins -> PER
+Rua Central, Braga -> LOC
+
+EXTENDED:
+Carlos Martins -> PER
+Rua Central, Braga -> MOR
+
+
+===== EXAMPLE 19 =====
+TEXT: O contrato n.º 98765 foi validado em 07/07/2022.
+
+BASELINE:
+07/07/2022 -> DAT
+
+EXTENDED:
+contrato n.º 98765 -> IDP
+07/07/2022 -> DAT
+
+
+===== EXAMPLE 20 =====
+TEXT: A empresa DeltaTech S.A. está localizada em Lisboa.
+
+BASELINE:
+DeltaTech S.A. -> ORG
+Lisboa -> LOC
+
+EXTENDED:
+DeltaTech S.A. -> ORG
+Lisboa -> LOC
+
+
+===== EXAMPLE 21 =====
+TEXT: A testemunha João Silva declarou em tribunal.
+
+BASELINE:
+João Silva -> PER
+
+EXTENDED:
+João Silva -> PER
+
+
+===== EXAMPLE 22 =====
+TEXT: O arguido Pedro Costa foi condenado.
+
+BASELINE:
+Pedro Costa -> PER
+
+EXTENDED:
+Pedro Costa -> PER
+
+
+===== EXAMPLE 23 =====
+TEXT: Maria Ferreira reside na Rua das Flores, n.º 12, Lisboa.
+
+BASELINE:
+Maria Ferreira -> PER
+Rua das Flores, n.º 12, Lisboa -> LOC
+
+EXTENDED:
+Maria Ferreira -> PER
+Rua das Flores, n.º 12 -> MOR
+Lisboa -> LOC
+
+
+===== EXAMPLE 24 =====
+TEXT: O contrato n.º 12345 foi assinado em 01/01/2020.
+
+BASELINE:
+01/01/2020 -> DAT
+
+EXTENDED:
+contrato n.º 12345 -> IDP
+01/01/2020 -> DAT
+
+
+===== EXAMPLE 25 =====
+TEXT: A empresa XPTO Lda. tem sede no Porto.
+
+BASELINE:
+XPTO Lda. -> ORG
+Porto -> LOC
+
+EXTENDED:
+XPTO Lda. -> ORG
+Porto -> LOC
+
+
+===== EXAMPLE 26 =====
+TEXT: A ré Ana Martins apresentou o NIF 123456789.
+
+BASELINE:
+Ana Martins -> PER
+
+EXTENDED:
+Ana Martins -> PER
+NIF 123456789 -> IDP
+
+
+===== EXAMPLE 27 =====
+TEXT: O relator Dr. Carlos Mendes proferiu o acórdão.
+
+BASELINE:
+Carlos Mendes -> PER
+
+EXTENDED:
+Dr. Carlos Mendes -> PER
+
+
+===== EXAMPLE 28 =====
+TEXT: A testemunha Sofia Almeida vive na Avenida da Liberdade, n.º 45, 2.º Esq., Lisboa.
+
+BASELINE:
+Sofia Almeida -> PER
+Avenida da Liberdade, n.º 45, 2.º Esq., Lisboa -> LOC
+
+EXTENDED:
+Sofia Almeida -> PER
+Avenida da Liberdade, n.º 45, 2.º Esq -> MOR
+Lisboa -> LOC
+
+
+===== EXAMPLE 29 =====
+TEXT: O arguido Rui Lopes indicou o CC 14567890 ZX5.
+
+BASELINE:
+Rui Lopes -> PER
+
+EXTENDED:
+Rui Lopes -> PER
+CC 14567890 ZX5 -> IDP
+
+
+===== EXAMPLE 30 =====
+TEXT: José Oliveira, residente na Travessa do Sol, n.º 8, Braga, foi ouvido.
+
+BASELINE:
+José Oliveira -> PER
+Travessa do Sol, n.º 8, Braga -> LOC
+
+EXTENDED:
+José Oliveira -> PER
+Travessa do Sol, n.º 8 -> MOR
+Braga -> LOC
+
+
+===== EXAMPLE 31 =====
+TEXT: A sociedade AlfaBeta S.A. registou o contribuinte n.º 509876543.
+
+BASELINE:
+AlfaBeta S.A. -> ORG
+
+EXTENDED:
+AlfaBeta S.A. -> ORG
+n.º 509876543 -> IDP
+
+
+===== EXAMPLE 32 =====
+TEXT: A ofendida Carla Sousa entregou o IBAN PT50000201231234567890154.
+
+BASELINE:
+Carla Sousa -> PER
+IBAN PT50000201231234567890154. -> ORG
+
+EXTENDED:
+Carla Sousa -> PER
+IBAN PT50000201231234567890154 -> IDP
+
+
+===== EXAMPLE 33 =====
+TEXT: O réu Manuel Ferreira nasceu em 12/03/1985.
+
+BASELINE:
+Manuel Ferreira -> PER
+12/03/1985 -> DAT
+
+EXTENDED:
+Manuel Ferreira -> PER
+12/03/1985 -> DAT
+
+
+===== EXAMPLE 34 =====
+TEXT: A testemunha Inês Costa mora na Rua do Pinhal, 1200-450 Lisboa.
+
+BASELINE:
+Inês Costa -> PER
+Rua do Pinhal, 1200-450 Lisboa -> LOC
+
+EXTENDED:
+Inês Costa -> PER
+Rua do Pinhal, 1200-450 Lisboa -> MOR
+
+
+===== EXAMPLE 35 =====
+TEXT: O processo refere a empresa Delta Consulting, Unipessoal Lda..
+
+BASELINE:
+Delta Consulting, Unipessoal Lda -> ORG
+
+EXTENDED:
+Delta Consulting, Unipessoal Lda.. -> ORG
+
+
+===== EXAMPLE 36 =====
+TEXT: A vítima Teresa Gomes apresentou o número de identificação 99887766.
+
+BASELINE:
+Teresa Gomes -> PER
+
+EXTENDED:
+Teresa Gomes -> PER
+número de identificação 99887766 -> IDP
+
+
+===== EXAMPLE 37 =====
+TEXT: O arguido Paulo Rocha reside na Praceta das Oliveiras, n.º 7, Faro.
+
+BASELINE:
+Paulo Rocha -> PER
+Praceta das Oliveiras, n.º 7, Faro -> LOC
+
+EXTENDED:
+Paulo Rocha -> PER
+Praceta das Oliveiras, n.º 7 -> MOR
+Faro -> LOC
+
+
+===== EXAMPLE 38 =====
+TEXT: A testemunha João P. Silva declarou que viu Pedro Costa em Coimbra.
+
+BASELINE:
+João P. Silva -> PER
+Pedro Costa -> PER
+Coimbra -> LOC
+
+EXTENDED:
+João P. Silva -> PER
+Pedro Costa -> PER
+Coimbra -> LOC
+
+
+===== EXAMPLE 39 =====
+TEXT: Foi identificado o veículo AA-12-BB junto da Rua de São Bento, Lisboa.
+
+BASELINE:
+Rua de São Bento, Lisboa -> LOC
+
+EXTENDED:
+Rua de São Bento -> MOR
+Lisboa -> LOC
+
+
+===== EXAMPLE 40 =====
+TEXT: A autora Maria dos Santos assinou o contrato em 7 de maio de 2021.
+
+BASELINE:
+Maria dos Santos -> PER
+7 de maio de 2021 -> DAT
+
+EXTENDED:
+Maria dos Santos -> PER
+7 de maio de 2021 -> DAT
+
+
+===== EXAMPLE 41 =====
+TEXT: A empresa Oficina Central, Lda., com sede na Rua Nova, Porto, foi notificada.
+
+BASELINE:
+Oficina Central, Lda. -> ORG
+Rua Nova, Porto -> LOC
+
+EXTENDED:
+Oficina Central, Lda. -> ORG
+Rua Nova, Porto -> MOR
+
+
+===== EXAMPLE 42 =====
+TEXT: O menor Tiago Fernandes reside com Ana Ferreira na Alameda Verde, n.º 3, Setúbal.
+
+BASELINE:
+Tiago Fernandes -> PER
+Ana Ferreira -> PER
+Alameda Verde, n.º 3, Setúbal -> LOC
+
+EXTENDED:
+Tiago Fernandes -> PER
+Ana Ferreira -> PER
+Alameda Verde, n.º 3 -> MOR
+Setúbal -> LOC
+
+
+===== EXAMPLE 43 =====
+TEXT: O denunciante Luís Matos indicou o passaporte X1234567.
+
+BASELINE:
+Luís Matos -> PER
+
+EXTENDED:
+Luís Matos -> PER
+passaporte X1234567 -> IDP
+
+
+===== EXAMPLE 44 =====
+TEXT: A testemunha Eng. Marta Ribeiro compareceu no Tribunal Judicial de Lisboa.
+
+BASELINE:
+Eng. Marta Ribeiro -> PER
+
+EXTENDED:
+Eng. Marta Ribeiro -> PER
+Lisboa -> LOC
+
+
+===== EXAMPLE 45 =====
+TEXT: A arguida Helena Cruz apresentou residência na Rua 5 de Outubro, n.º 101, Aveiro.
+
+BASELINE:
+Helena Cruz -> PER
+Rua 5 de Outubro, n.º 101, Aveiro -> LOC
+
+EXTENDED:
+Helena Cruz -> PER
+Rua 5 de Outubro, n.º 101 -> MOR
+Aveiro -> LOC
+

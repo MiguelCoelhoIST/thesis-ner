@@ -1,0 +1,73 @@
+Primeiro output:
+Loading training data...
+Loading evaluation data...
+Train examples: 576
+Eval examples: 25
+Train labels: ['ARGUIDO', 'RELATOR', 'REU', 'TESTEMUNHA', 'UNKNOWN']
+Eval labels: ['ARGUIDO', 'RELATOR', 'REU', 'TESTEMUNHA', 'UNKNOWN']
+
+Training classifier...
+Evaluating...
+
+Accuracy: 0.9600
+
+Classification report:
+              precision    recall  f1-score   support
+
+     ARGUIDO       1.00      1.00      1.00         5
+     RELATOR       1.00      1.00      1.00         5
+         REU       1.00      1.00      1.00         5
+  TESTEMUNHA       0.83      1.00      0.91         5
+     UNKNOWN       1.00      0.80      0.89         5
+
+    accuracy                           0.96        25
+   macro avg       0.97      0.96      0.96        25
+weighted avg       0.97      0.96      0.96        25
+
+
+Errors:
+- TEXT: João Ribeiro vive na Avenida da Liberdade.
+  GOLD: UNKNOWN
+  PRED: TESTEMUNHA
+  PROBABILITIES:
+    TESTEMUNHA: 0.4638
+    ARGUIDO: 0.1729
+    REU: 0.1647
+    UNKNOWN: 0.1165
+    RELATOR: 0.0821
+
+Prediction counts:
+Counter({np.str_('TESTEMUNHA'): 6, np.str_('ARGUIDO'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, np.str_('UNKNOWN'): 4})
+
+Depois de melhoria:
+Loading training data...
+Loading evaluation data...
+Train examples: 576
+Eval examples: 25
+Train labels: ['ARGUIDO', 'RELATOR', 'REU', 'TESTEMUNHA', 'UNKNOWN']
+Eval labels: ['ARGUIDO', 'RELATOR', 'REU', 'TESTEMUNHA', 'UNKNOWN']
+
+Training classifier...
+Evaluating...
+
+Accuracy: 1.0000
+
+Classification report:
+              precision    recall  f1-score   support
+
+     ARGUIDO       1.00      1.00      1.00         5
+     RELATOR       1.00      1.00      1.00         5
+         REU       1.00      1.00      1.00         5
+  TESTEMUNHA       1.00      1.00      1.00         5
+     UNKNOWN       1.00      1.00      1.00         5
+
+    accuracy                           1.00        25
+   macro avg       1.00      1.00      1.00        25
+weighted avg       1.00      1.00      1.00        25
+
+
+Errors:
+No errors found.
+
+Prediction counts:
+Counter({np.str_('ARGUIDO'): 5, np.str_('TESTEMUNHA'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, 'UNKNOWN': 5})

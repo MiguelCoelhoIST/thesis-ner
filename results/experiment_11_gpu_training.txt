@@ -1,0 +1,61 @@
+Experiment 11 - GPU Transformer Training
+
+Machine:
+- INESC g07
+- GPU: NVIDIA RTX A6000
+- CUDA available: True
+
+Model:
+- neuralmind/bert-base-portuguese-cased
+
+Dataset:
+- train: data/processed/roles_v4.jsonl
+- eval: data/eval/roles_eval_realistic.jsonl
+- train examples: 1328
+- eval examples: 17
+
+Training configuration:
+- epochs: 5
+- batch size: 8
+- learning rate: 2e-5
+- max_length: 128
+- weight_decay: 0.01
+
+Runtime:
+- GPU train_runtime: 94.48 seconds
+- local CPU previous runtime: approximately 2962.90 seconds
+- speedup: about 31.4x faster
+
+Training results:
+- train_loss: 0.0968
+- train_samples_per_second: 70.28
+- train_steps_per_second: 8.785
+
+Final evaluation:
+- eval_loss: 1.3974
+- eval_accuracy: 0.4706
+- eval_macro_precision: 0.5524
+- eval_macro_recall: 0.4700
+- eval_macro_f1: 0.4610
+- eval_runtime: 0.1105
+
+Manual predictions:
+- "O testemunho de [ENTITY] Luís Matos [/ENTITY] foi considerado credível." -> TESTEMUNHA (0.54)
+- "O arguido [ENTITY] João Ribeiro [/ENTITY] negou os factos." -> ARGUIDO (1.00)
+- "A testemunha [ENTITY] Carla Sousa [/ENTITY] confirmou a versão apresentada." -> TESTEMUNHA (1.00)
+- "O relator [ENTITY] António Silva [/ENTITY] proferiu decisão." -> RELATOR (1.00)
+- "[ENTITY] Maria Ferreira [/ENTITY] reside em Lisboa." -> UNKNOWN (1.00)
+- "O arguido João Martins foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações." -> TESTEMUNHA (1.00)
+- "A testemunha Ana Silva prestou declarações contra o arguido [ENTITY] João Martins [/ENTITY]." -> ARGUIDO (1.00)
+- "No acórdão relatado por [ENTITY] Carlos Mendes [/ENTITY], o recurso foi julgado improcedente." -> RELATOR (0.99)
+- "O réu Pedro Costa foi representado pela mandatária [ENTITY] Sofia Almeida [/ENTITY]." -> UNKNOWN (1.00)
+
+Observations:
+GPU training reduced runtime from approximately 49 minutes on local CPU to approximately 1.5 minutes on INESC GPU.
+
+The evaluation metrics are similar to Experiment 10, which is expected because the model, dataset and training configuration are the same. The main contribution of this experiment is infrastructure validation and reproducibility on GPU.
+
+The manual evaluation is strong: the model correctly handles multi-entity role-binding examples and also recovers the indirect "testemunho de" case, although with lower confidence (0.54).
+
+Conclusion:
+The GPU setup is working correctly and enables much faster experimentation. This makes it feasible to test multiple encoders, datasets, and hyperparameter configurations.

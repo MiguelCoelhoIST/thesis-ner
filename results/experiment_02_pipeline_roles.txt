@@ -1,0 +1,58 @@
+PRIMEIRO OUTPUT
+==============================
+TEXT: O arguido João Martins foi ouvido em tribunal.
+João Martins -> PER -> ARGUIDO
+
+==============================
+TEXT: A testemunha Ana Silva prestou declarações.
+Ana Silva -> PER -> TESTEMUNHA
+
+==============================
+TEXT: O relator Carlos Mendes proferiu o acórdão.
+Carlos Mendes -> PER -> RELATOR
+
+==============================
+TEXT: O réu Pedro Costa foi condenado.
+Pedro Costa -> PER -> REU
+
+==============================
+TEXT: Maria Ferreira reside na Rua das Flores, Lisboa.
+Maria Ferreira -> PER -> RELATOR
+Rua das Flores -> MOR
+Lisboa -> LOC
+
+==============================
+TEXT: O arguido Paulo Rocha reside na Praceta das Oliveiras, n.º 7, Faro.
+Paulo Rocha -> PER -> ARGUIDO
+Praceta das Oliveiras, n.º 7 -> MOR
+Faro -> LOC
+
+Depois de MELHORAMENTO:
+==============================
+TEXT: O arguido João Martins foi ouvido em tribunal.
+João Martins -> PER -> ARGUIDO
+
+==============================
+TEXT: A testemunha Ana Silva prestou declarações.
+Ana Silva -> PER -> TESTEMUNHA
+
+==============================
+TEXT: O relator Carlos Mendes proferiu o acórdão.
+Carlos Mendes -> PER -> RELATOR
+
+==============================
+TEXT: O réu Pedro Costa foi condenado.
+Pedro Costa -> PER -> REU
+
+==============================
+TEXT: Maria Ferreira reside na Rua das Flores, Lisboa.
+Maria Ferreira -> PER
+Rua das Flores -> MOR
+Lisboa -> LOC
+
+==============================
+TEXT: O arguido Paulo Rocha reside na Praceta das Oliveiras, n.º 7, Faro.
+Paulo Rocha -> PER -> ARGUIDO
+Praceta das Oliveiras, n.º 7 -> MOR
+Faro -> LOC
+

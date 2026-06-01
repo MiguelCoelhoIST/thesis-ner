@@ -1,0 +1,59 @@
+Loading training data...
+
+==============================
+EVALUATION SET: normal
+File: data\eval\roles_eval.jsonl
+
+Threshold: 0.00
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({np.str_('TESTEMUNHA'): 6, np.str_('ARGUIDO'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, np.str_('UNKNOWN'): 4})
+
+Threshold: 0.40
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({np.str_('TESTEMUNHA'): 6, np.str_('ARGUIDO'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, 'UNKNOWN': 4})
+
+Threshold: 0.45
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({np.str_('TESTEMUNHA'): 6, np.str_('ARGUIDO'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, 'UNKNOWN': 4})
+
+Threshold: 0.50
+Accuracy: 1.0000
+Macro F1: 1.0000
+Prediction counts: Counter({np.str_('ARGUIDO'): 5, np.str_('TESTEMUNHA'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, 'UNKNOWN': 5})
+
+Threshold: 0.60
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({'UNKNOWN': 6, np.str_('TESTEMUNHA'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, np.str_('ARGUIDO'): 4})
+
+==============================
+EVALUATION SET: hard
+File: data\eval\roles_eval_hard.jsonl
+
+Threshold: 0.00
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({np.str_('TESTEMUNHA'): 6, np.str_('ARGUIDO'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, np.str_('UNKNOWN'): 4})
+
+Threshold: 0.40
+Accuracy: 1.0000
+Macro F1: 1.0000
+Prediction counts: Counter({np.str_('ARGUIDO'): 5, np.str_('TESTEMUNHA'): 5, np.str_('RELATOR'): 5, np.str_('REU'): 5, 'UNKNOWN': 5})
+
+Threshold: 0.45
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({'UNKNOWN': 6, np.str_('ARGUIDO'): 5, np.str_('TESTEMUNHA'): 5, np.str_('REU'): 5, np.str_('RELATOR'): 4})
+
+Threshold: 0.50
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({'UNKNOWN': 6, np.str_('ARGUIDO'): 5, np.str_('TESTEMUNHA'): 5, np.str_('REU'): 5, np.str_('RELATOR'): 4})
+
+Threshold: 0.60
+Accuracy: 0.9600
+Macro F1: 0.9596
+Prediction counts: Counter({'UNKNOWN': 6, np.str_('ARGUIDO'): 5, np.str_('TESTEMUNHA'): 5, np.str_('REU'): 5, np.str_('RELATOR'): 4})

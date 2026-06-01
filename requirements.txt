@@ -7,3 +7,4 @@ jupyter
 scikit-learn
 accelerate
 evaluate
+sentence-transformers

@@ -1,0 +1,59 @@
+Loading training data...
+Loading evaluation data...
+Train examples: 828
+Eval examples: 17
+Labels: ['ARGUIDO', 'RELATOR', 'REU', 'TESTEMUNHA', 'UNKNOWN']
+
+Accuracy: 0.8235
+
+Classification report:
+              precision    recall  f1-score   support
+
+     ARGUIDO       0.80      0.80      0.80         5
+     RELATOR       1.00      0.33      0.50         3
+         REU       0.67      1.00      0.80         2
+  TESTEMUNHA       0.80      1.00      0.89         4
+     UNKNOWN       1.00      1.00      1.00         3
+
+    accuracy                           0.82        17
+   macro avg       0.85      0.83      0.80        17
+weighted avg       0.85      0.82      0.80        17
+
+
+Errors:
+- TEXT: O arguido João Martins interpôs recurso da decisão. A testemunha Ana Silva confirmou os factos.
+  ENTITY: João Martins
+  MARKED: O arguido [ENTITY] João Martins [/ENTITY] interpôs recurso da decisão. A testemunha Ana Silva confirmou os factos.
+  GOLD: ARGUIDO
+  PRED: TESTEMUNHA
+  PROBABILITIES:
+    TESTEMUNHA: 0.5299
+    ARGUIDO: 0.4486
+    RELATOR: 0.0129
+    REU: 0.0074
+    UNKNOWN: 0.0013
+- TEXT: No acórdão relatado por Carlos Mendes, foi negado provimento ao recurso apresentado pelo réu Pedro Costa.
+  ENTITY: Carlos Mendes
+  MARKED: No acórdão relatado por [ENTITY] Carlos Mendes [/ENTITY], foi negado provimento ao recurso apresentado pelo réu Pedro Costa.
+  GOLD: RELATOR
+  PRED: REU
+  PROBABILITIES:
+    REU: 0.6267
+    RELATOR: 0.2850
+    ARGUIDO: 0.0586
+    TESTEMUNHA: 0.0153
+    UNKNOWN: 0.0143
+- TEXT: A defesa do arguido Luís Fernandes apresentou novos elementos, sendo ouvido o relator Helena Ribeiro.
+  ENTITY: Helena Ribeiro
+  MARKED: A defesa do arguido Luís Fernandes apresentou novos elementos, sendo ouvido o relator [ENTITY] Helena Ribeiro [/ENTITY].
+  GOLD: RELATOR
+  PRED: ARGUIDO
+  PROBABILITIES:
+    ARGUIDO: 0.6435
+    RELATOR: 0.3373
+    REU: 0.0081
+    TESTEMUNHA: 0.0060
+    UNKNOWN: 0.0051
+
+Prediction counts:
+Counter({np.str_('TESTEMUNHA'): 5, np.str_('ARGUIDO'): 5, np.str_('REU'): 3, np.str_('UNKNOWN'): 3, np.str_('RELATOR'): 1})

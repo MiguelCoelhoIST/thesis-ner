@@ -1,0 +1,71 @@
+Training role classifier...
+
+Processing texts...
+
+============================================================
+TEXT 1: O arguido João Martins interpôs recurso da decisão proferida pelo tribunal de primeira instância. A testemunha Ana Silva confirmou em audiência que conhecia os factos descritos na acusação.
+
+João Martins -> PER -> ARGUIDO
+  context: O arguido [ENTITY] João Martins [/ENTITY] interpôs recurso da decisão proferida pelo tribun
+Ana Silva -> PER -> TESTEMUNHA
+  context: pelo tribunal de primeira instância. A testemunha [ENTITY] Ana Silva [/ENTITY] confirmou em audiência que conhecia os factos des
+============================================================
+TEXT 3: No acórdão relatado por Carlos Mendes, foi decidido negar provimento ao recurso apresentado pelo réu Pedro Costa.
+
+Carlos Mendes -> PER -> RELATOR
+  context: No acórdão relatado por [ENTITY] Carlos Mendes [/ENTITY], foi decidido negar provimento ao recurso apresen
+Pedro Costa -> PER -> REU
+  context:  negar provimento ao recurso apresentado pelo réu [ENTITY] Pedro Costa [/ENTITY].
+============================================================
+TEXT 5: A testemunha Carla Mendes declarou que viu o arguido Rui Lopes no local dos factos.
+
+Carla Mendes -> PER -> TESTEMUNHA
+  context: A testemunha [ENTITY] Carla Mendes [/ENTITY] declarou que viu o arguido Rui Lopes no local dos
+Rui Lopes -> PER -> ARGUIDO
+  context: estemunha Carla Mendes declarou que viu o arguido [ENTITY] Rui Lopes [/ENTITY] no local dos factos.
+============================================================
+TEXT 7: Maria Ferreira reside na Rua das Flores, Lisboa, não tendo qualquer ligação ao processo.
+
+Maria Ferreira -> PER -> UNKNOWN
+  context: [ENTITY] Maria Ferreira [/ENTITY] reside na Rua das Flores, Lisboa, não tendo qualq
+Rua das Flores -> MOR
+Lisboa -> LOC
+============================================================
+TEXT 9: O relator António Costa proferiu decisão em conferência, tendo o réu Manuel Ferreira sido condenado.
+
+António Costa -> PER -> RELATOR
+  context: O relator [ENTITY] António Costa [/ENTITY] proferiu decisão em conferência, tendo o réu Manu
+Manuel Ferreira -> PER -> REU
+  context: osta proferiu decisão em conferência, tendo o réu [ENTITY] Manuel Ferreira [/ENTITY] sido condenado.
+============================================================
+TEXT 11: A testemunha Sofia Almeida e o arguido Paulo Rocha estiveram presentes na audiência.
+
+Sofia Almeida -> PER -> TESTEMUNHA
+  context: A testemunha [ENTITY] Sofia Almeida [/ENTITY] e o arguido Paulo Rocha estiveram presentes na au
+Paulo Rocha -> PER -> ARGUIDO
+  context: A testemunha Sofia Almeida e o arguido [ENTITY] Paulo Rocha [/ENTITY] estiveram presentes na audiência.
+============================================================
+TEXT 13: O tribunal ouviu Inês Costa como testemunha e João Ribeiro como arguido.
+
+Inês Costa -> PER -> TESTEMUNHA
+  context: O tribunal ouviu [ENTITY] Inês Costa [/ENTITY] como testemunha e João Ribeiro como arguido.
+João Ribeiro -> PER -> ARGUIDO
+  context: O tribunal ouviu Inês Costa como testemunha e [ENTITY] João Ribeiro [/ENTITY] como arguido.
+============================================================
+TEXT 15: Carlos Mendes deslocou-se a Lisboa no âmbito das suas funções profissionais.
+
+Carlos Mendes -> PER -> UNKNOWN
+  context: [ENTITY] Carlos Mendes [/ENTITY] deslocou-se a Lisboa no âmbito das suas funções p
+Lisboa -> LOC
+============================================================
+TEXT 17: A defesa do arguido Luís Fernandes apresentou novos elementos de prova, sendo ouvido o relator Helena Ribeiro.
+
+Luís Fernandes -> PER -> ARGUIDO
+  context: A defesa do arguido [ENTITY] Luís Fernandes [/ENTITY] apresentou novos elementos de prova, sendo ouvido
+Helena Ribeiro -> PER -> RELATOR
+  context:  novos elementos de prova, sendo ouvido o relator [ENTITY] Helena Ribeiro [/ENTITY].
+============================================================
+TEXT 19: Pedro Costa assinou o contrato em representação da empresa, não sendo parte no processo.
+
+Pedro Costa -> PER -> UNKNOWN
+  context: [ENTITY] Pedro Costa [/ENTITY] assinou o contrato em representação da empresa, 

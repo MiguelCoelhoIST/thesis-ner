@@ -1,0 +1,17 @@
+Experiment 1 — Simple legal role classifier
+
+Goal:
+Classify PER entities into legal roles using sentence context.
+
+Labels:
+ARGUIDO, TESTEMUNHA, RELATOR, REU, UNKNOWN
+
+Approach:
+CountVectorizer with n-grams + LogisticRegression.
+
+Result:
+The classifier correctly predicts simple examples and UNKNOWN prevents forced role assignment.
+
+Conclusion:
+The two-step approach is feasible:
+Eduardo NER -> PER -> role classifier

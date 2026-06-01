@@ -1,0 +1,39 @@
+Loading training data...
+Loading evaluation data...
+Train examples: 576
+Eval examples: 25
+Train labels: ['ARGUIDO', 'RELATOR', 'REU', 'TESTEMUNHA', 'UNKNOWN']
+Eval labels: ['ARGUIDO', 'RELATOR', 'REU', 'TESTEMUNHA', 'UNKNOWN']
+
+Training classifier...
+Evaluating...
+
+Accuracy: 0.9600
+
+Classification report:
+              precision    recall  f1-score   support
+
+     ARGUIDO       1.00      1.00      1.00         5
+     RELATOR       1.00      0.80      0.89         5
+         REU       1.00      1.00      1.00         5
+  TESTEMUNHA       1.00      1.00      1.00         5
+     UNKNOWN       0.83      1.00      0.91         5
+
+    accuracy                           0.96        25
+   macro avg       0.97      0.96      0.96        25
+weighted avg       0.97      0.96      0.96        25
+
+
+Errors:
+- TEXT: Luís Fernandes foi designado relator do processo.
+  GOLD: RELATOR
+  PRED: UNKNOWN
+  PROBABILITIES:
+    RELATOR: 0.4479
+    ARGUIDO: 0.1973
+    REU: 0.1781
+    TESTEMUNHA: 0.1262
+    UNKNOWN: 0.0506
+
+Prediction counts:
+Counter({'UNKNOWN': 6, np.str_('ARGUIDO'): 5, np.str_('TESTEMUNHA'): 5, np.str_('REU'): 5, np.str_('RELATOR'): 4})

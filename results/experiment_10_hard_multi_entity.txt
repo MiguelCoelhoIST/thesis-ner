@@ -1,0 +1,109 @@
+Experiment 10 — Hard multi-entity augmentation
+
+Goal:
+Test whether adding difficult multi-entity synthetic examples improves the transformer's ability to associate the marked entity with the correct legal role.
+
+Previous problem:
+Experiment 09 showed that the transformer learned simple semantic patterns, but failed when multiple entities and multiple legal role terms appeared in the same sentence.
+
+Dataset:
+Base dataset:
+- data/processed/roles_v3.jsonl
+
+Augmented dataset:
+- data/processed/roles_hard_multi_entity.jsonl
+
+Final training dataset:
+- data/processed/roles_v4.jsonl
+
+Expected effect:
+The model should improve in cases where the role word closest or most relevant to the marked entity is not the only legal role present in the sentence.
+
+Examples targeted:
+- O arguido João Martins foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.
+- A testemunha Ana Silva prestou declarações contra o arguido [ENTITY] João Martins [/ENTITY].
+- O réu Pedro Costa foi representado pela mandatária [ENTITY] Sofia Almeida [/ENTITY].
+
+Hypothesis:
+Hard multi-entity augmentation should improve entity-role binding and reduce incorrect role transfer from another person in the same sentence.
+
+
+
+Results:
+
+Training dataset:
+- data/processed/roles_v4.jsonl
+- Train examples: 1328
+- Eval examples: 17
+
+Runtime:
+- train_runtime: 2962.90 seconds
+- approximately 49m22s
+- training performed on CPU
+
+Final evaluation:
+- eval_loss: 1.3878
+- accuracy: 0.4706
+- macro_precision: 0.5524
+- macro_recall: 0.4700
+- macro_f1: 0.4610
+
+Comparison with Experiment 09:
+- Experiment 09 macro_f1: 0.3952
+- Experiment 10 macro_f1: 0.4610
+
+The hard multi-entity augmentation improved macro F1, although the evaluation set is still very small.
+
+Manual prediction comparison:
+
+Improved cases:
+1.
+Text:
+O arguido João Martins foi ouvido e a testemunha [ENTITY] Ana Silva [/ENTITY] prestou declarações.
+Previous prediction:
+ARGUIDO
+New prediction:
+TESTEMUNHA
+Result:
+Correct
+
+2.
+Text:
+A testemunha Ana Silva prestou declarações contra o arguido [ENTITY] João Martins [/ENTITY].
+Previous prediction:
+TESTEMUNHA
+New prediction:
+ARGUIDO
+Result:
+Correct
+
+3.
+Text:
+O réu Pedro Costa foi representado pela mandatária [ENTITY] Sofia Almeida [/ENTITY].
+Previous prediction:
+REU
+New prediction:
+UNKNOWN
+Result:
+Correct
+
+Regression:
+1.
+Text:
+O testemunho de [ENTITY] Luís Matos [/ENTITY] foi considerado credível.
+Previous prediction:
+TESTEMUNHA
+New prediction:
+UNKNOWN
+Result:
+Incorrect
+
+Interpretation:
+The augmentation improved the model's ability to bind the correct legal role to the marked entity in multi-entity contexts. However, the model lost performance in an indirect semantic case involving "testemunho de", suggesting that the new augmented dataset shifted the model toward explicit role patterns and away from indirect lexical-semantic variants.
+
+Conclusion:
+Hard multi-entity augmentation is useful, but future training data should combine both:
+- multi-entity role-binding examples
+- indirect semantic role expressions
+
+This motivates a next dataset version with hard multi-entity + indirect role patterns.
