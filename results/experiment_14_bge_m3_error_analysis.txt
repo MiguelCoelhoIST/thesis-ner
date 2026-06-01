@@ -1,0 +1,702 @@
+Experiment 14 - BGE-M3 error analysis
+
+Model:
+BAAI/bge-m3
+
+Classifier:
+LogisticRegression over frozen sentence embeddings
+
+Datasets:
+train: data/processed/roles_v4.jsonl
+eval: data/eval/roles_eval_realistic_v2.jsonl
+train examples: 1328
+eval examples: 240
+
+Results:
+accuracy: 0.5417
+macro_f1: 0.5210
+
+Classification report:
+              precision    recall  f1-score   support
+
+     ARGUIDO       0.40      0.46      0.43        48
+     RELATOR       0.89      0.69      0.78        49
+         REU       0.49      0.67      0.57        48
+  TESTEMUNHA       0.49      0.73      0.59        48
+     UNKNOWN       0.64      0.15      0.24        47
+
+    accuracy                           0.54       240
+   macro avg       0.58      0.54      0.52       240
+weighted avg       0.58      0.54      0.52       240
+
+
+Confusion matrix:
+Rows = gold labels, columns = predicted labels
+            ARGUIDO RELATOR   REU TESTEMUNHA UNKNOWN
+ARGUIDO        22     2    11    12     1
+RELATOR         8    34     6     1     0
+REU            10     0    32     5     1
+TESTEMUNHA      7     0     4    35     2
+UNKNOWN         8     2    12    18     7
+
+Misclassified examples:
+
+1.
+Text: Compareceu na audiência de julgamento o cidadão [ENTITY]Rui Filipe Tavares[/ENTITY], cuja identidade não foi possível confirmar através dos meios documentais disponíveis.
+Target entity: Rui Filipe Tavares
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+2.
+Text: Foi visto nas imediações do local dos factos um indivíduo identificado apenas como [ENTITY]Tiago Nunes[/ENTITY], sem que se tenha apurado a sua relação com os autos.
+Target entity: Tiago Nunes
+Gold label: UNKNOWN
+Predicted label: REU
+
+3.
+Text: Refere-se ainda nos autos a presença de uma pessoa de nome [ENTITY]Ana Beatriz Costa[/ENTITY], cuja qualidade processual não resulta esclarecida.
+Target entity: Ana Beatriz Costa
+Gold label: UNKNOWN
+Predicted label: REU
+
+4.
+Text: Consta da informação policial uma referência a [ENTITY]Diogo Martins[/ENTITY], sem que se logre determinar se intervém nos autos a que título.
+Target entity: Diogo Martins
+Gold label: UNKNOWN
+Predicted label: REU
+
+5.
+Text: Compulsados os autos, verifica-se que [ENTITY]Eduardo Salgueiro Pinto[/ENTITY] foi sujeito a primeiro interrogatório judicial em 12.03.2024, ocasião em que lhe foram comunicados os factos indiciados e aplicada caução no valor de € 50.000,00.
+Target entity: Eduardo Salgueiro Pinto
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+6.
+Text: Da consulta ao apenso de transcrições resulta a menção a um tal [ENTITY]Octávio Belmiro Faria[/ENTITY], cuja intervenção nos factos não foi possível esclarecer face à fragmentariedade dos elementos probatórios coligidos.
+Target entity: Octávio Belmiro Faria
+Gold label: UNKNOWN
+Predicted label: REU
+
+7.
+Text: Tendo sido detido em flagrante delito e presente a juiz de instrução criminal nas 48 horas subsequentes, a [ENTITY]Cláudia Reis Monteiro[/ENTITY] foram impostas as medidas de apresentação periódica e proibição de contactos com a ofendida.
+Target entity: Cláudia Reis Monteiro
+Gold label: ARGUIDO
+Predicted label: REU
+
+8.
+Text: Veio [ENTITY]Indústrias Metalomecânicas do Cávado, S.A.[/ENTITY], na qualidade em que foi demandada nos presentes autos, deduzir oposição por exceção, invocando a prescrição do direito que a autora pretende fazer valer.
+Target entity: Indústrias Metalomecânicas do Cávado, S.A.
+Gold label: REU
+Predicted label: ARGUIDO
+
+9.
+Text: Refere-se nas escutas telefónicas de fls. 234 uma conversa em que é mencionado o nome [ENTITY]Bartolomeu Querubim[/ENTITY], sem que dos demais elementos probatórios se extraia o seu envolvimento nos factos investigados.
+Target entity: Bartolomeu Querubim
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+10.
+Text: Subscrito por [ENTITY]Maria do Carmo Albuquerque[/ENTITY], com declaração de voto do primeiro adjunto e vencimento do segundo, o douto aresto recorrido enferma, ressalvado o devido respeito, dos vícios que adiante se enunciam.
+Target entity: Maria do Carmo Albuquerque
+Gold label: RELATOR
+Predicted label: REU
+
+11.
+Text: Notificada para se pronunciar quanto à exceção dilatória suscitada, a sociedade [ENTITY]Construções Aliança do Norte, Lda.[/ENTITY] veio reiterar a sua legitimidade passiva, juntando aos autos os documentos que entendeu por convenientes.
+Target entity: Construções Aliança do Norte, Lda.
+Gold label: REU
+Predicted label: TESTEMUNHA
+
+12.
+Text: Verifica-se nos elementos juntos a fls. 412 a indicação de uma pessoa identificada como [ENTITY]Severino Quaresma[/ENTITY], sobre a qual não foram apurados elementos bastantes que permitam definir a sua posição no processo.
+Target entity: Severino Quaresma
+Gold label: UNKNOWN
+Predicted label: REU
+
+13.
+Text: Conforme exarado no segmento final do douto aresto fundamento, da lavra de [ENTITY]Adelino Faustino Ramos[/ENTITY], a interpretação normativa adotada mostra-se incompatível com a perfilhada no acórdão recorrido, justificando-se a uniformização de jurisprudência.
+Target entity: Adelino Faustino Ramos
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+14.
+Text: Vem [ENTITY]Banco Atlântico do Mondego, S.A.[/ENTITY], demandado nos presentes autos a título solidário com os demais subscritores da livrança dada à execução, deduzir os embargos que ora se apreciam.
+Target entity: Banco Atlântico do Mondego, S.A.
+Gold label: REU
+Predicted label: ARGUIDO
+
+15.
+Text: Da prova documental coligida resulta uma referência genérica a [ENTITY]Hermenegildo Pousa[/ENTITY], cuja intervenção, posição processual ou sequer ligação aos demais sujeitos não foi possível estabelecer com a mínima segurança exigível.
+Target entity: Hermenegildo Pousa
+Gold label: UNKNOWN
+Predicted label: REU
+
+16.
+Text: O Tribunal determinou a intimação de [ENTITY] Leonor Matos [/ENTITY] para, no prazo de dez dias, apresentar alegações sobre a matéria de facto constante dos autos.
+Target entity: Leonor Matos
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+17.
+Text: No acórdão proferido, foi referido que [ENTITY] Vasco Cunha [/ENTITY] divergiu da maioria quanto à aplicação do regime da suspensão da execução da pena.
+Target entity: Vasco Cunha
+Gold label: RELATOR
+Predicted label: REU
+
+18.
+Text: A decisão de pronúncia foi notificada a [ENTITY] Rodrigo Nascimento [/ENTITY], que passou a dispor do prazo legal para apresentação de alegações escritas antes da fase de discussão e julgamento.
+Target entity: Rodrigo Nascimento
+Gold label: ARGUIDO
+Predicted label: RELATOR
+
+19.
+Text: O mandado de detenção foi passado contra [ENTITY] Afonso Mendes [/ENTITY], que se encontrava foragido desde a notificação da acusação, tendo as autoridades policiais iniciado diligências para a sua localização.
+Target entity: Afonso Mendes
+Gold label: ARGUIDO
+Predicted label: REU
+
+20.
+Text: A petição inicial apresentada por [ENTITY] Inês Faria [/ENTITY] foi julgada inadmissível por falta de legitimidade processual ativa, nos termos do artigo 86.º do Código de Processo Civil.
+Target entity: Inês Faria
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+21.
+Text: No voto de vencido, [ENTITY] Guilherme Pires [/ENTITY] sustentou que a matéria de facto não estava suficientemente apurada para se poder proferir uma decisão de condenação, defendendo a anulação do ato instrutório.
+Target entity: Guilherme Pires
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+22.
+Text: A medida de coação de termo de identidade e residência foi aplicada a [ENTITY] Francisco Lima [/ENTITY], considerando-se existirem fortes indícios da prática do crime e risco de fuga.
+Target entity: Francisco Lima
+Gold label: ARGUIDO
+Predicted label: REU
+
+23.
+Text: A penhora de bens foi realizada sobre o património de [ENTITY] Luís Moreira [/ENTITY] para garantia do pagamento da indemnização civil a que foi condenado em sede de responsabilidade civil extracontratual.
+Target entity: Luís Moreira
+Gold label: REU
+Predicted label: ARGUIDO
+
+24.
+Text: As declarações para memória futura foram prestadas por [ENTITY] Catarina Reis [/ENTITY], antevendo-se a sua eventual impossibilidade de comparecimento em julgamento devido a deslocação para o estrangeiro.
+Target entity: Catarina Reis
+Gold label: TESTEMUNHA
+Predicted label: REU
+
+25.
+Text: O recurso para o Supremo Tribunal de Justiça foi interposto por [ENTITY] Tomás Batista [/ENTITY], com fundamento em violação de norma constitucional, nos termos do artigo 78.º da Lei da Organização do Sistema Judiciário.
+Target entity: Tomás Batista
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+26.
+Text: A proposta de absolvição foi apresentada por [ENTITY] Eduardo Campos [/ENTITY], que na sua fundamentação jurídica considerou não estarem preenchidos os elementos constitutivos do tipo legal de crime de burla.
+Target entity: Eduardo Campos
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+27.
+Text: Considerando o inconformismo apresentado contra a douta sentença que julgou integralmente procedente a ação de despejo, o demandado [ENTITY] Alberto Carlos Seixas [/ENTITY] veio requerer a junção de guia comprovativa do depósito da caução a que se refere o artigo 1041.º do Código Civil.
+Target entity: Alberto Carlos Seixas
+Gold label: REU
+Predicted label: ARGUIDO
+
+28.
+Text: Compulsados os autos criminais, verifica-se que foram validadas as declarações prestadas pelo visado [ENTITY] Henrique Manuel Guedes [/ENTITY] em sede de primeiro interrogatório judicial não judicializado, mantendo-se inalterada a obrigação de apresentações bissemanais na esquadra da área da sua residência.
+Target entity: Henrique Manuel Guedes
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+29.
+Text: Na qualidade de assistente e lesado civil, [ENTITY] Dr. Rui Pedro Taborda [/ENTITY] deduziu o correspondente pedido de indemnização civil por perdas e danos, peticionando o ressarcimento dos prejuízos patrimoniais resultantes da atuação ilícita sob investigação.
+Target entity: Dr. Rui Pedro Taborda
+Gold label: UNKNOWN
+Predicted label: REU
+
+30.
+Text: O inconformado deduziu oposição à execução mediante embargos, tendo o executado [ENTITY] Gabriel Vasconcelos de Melo [/ENTITY] alegado a prescrição do título de crédito que serviu de base à presente demanda executiva.
+Target entity: Gabriel Vasconcelos de Melo
+Gold label: REU
+Predicted label: ARGUIDO
+
+31.
+Text: Apurou-se que o mandado de detenção fora emitido em virtude de o suspeito [ENTITY] Ricardo Jorge Faísca [/ENTITY] ter violado reiteradamente a medida de coação de permanência na habitação com vigilância eletrónica anteriormente decretada.
+Target entity: Ricardo Jorge Faísca
+Gold label: ARGUIDO
+Predicted label: REU
+
+32.
+Text: Na qualidade de perito médico-legal designado pelo Instituto Nacional de Medicina Legal, [ENTITY] Dr. Fernando Aguiar da Silva [/ENTITY] procedeu à respetiva perícia e respondeu de forma exaustiva aos quesitos formulados pelas partes.
+Target entity: Dr. Fernando Aguiar da Silva
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+33.
+Text: Inconformado com o despacho de pronúncia que validou os indícios da prática do crime de burla informática, o recorrente [ENTITY] Tiago Rafael Castelo [/ENTITY] interpôs recurso pugnando pela não submissão a julgamento em tribunal coletivo.
+Target entity: Tiago Rafael Castelo
+Gold label: ARGUIDO
+Predicted label: REU
+
+34.
+Text: O Tribunal ordenou a emissão de mandados de condução sob custódia, uma vez que [ENTITY] Sandra Cristina Valente [/ENTITY], apesar de devidamente notificada para vir prestar esclarecimentos sobre o conhecimento direto que detinha dos factos da denúncia, faltou injustificadamente.
+Target entity: Sandra Cristina Valente
+Gold label: TESTEMUNHA
+Predicted label: ARGUIDO
+
+35.
+Text: Apreciados os pressupostos de admissibilidade do recurso de revista, o Conselheiro [ENTITY] Guilherme Jorge de Borba [/ENTITY] proferiu decisão sumária por entender que a questão decidenda já se encontrava uniformizada pela jurisprudência das secções cíveis.
+Target entity: Guilherme Jorge de Borba
+Gold label: RELATOR
+Predicted label: REU
+
+36.
+Text: O Magistrado do Ministério Público, [ENTITY] Dr. José Carlos Fontes [/ENTITY], deduziu a competente acusação pública em processo comum, imputando aos denunciados a prática, em coautoria material, de um crime de recetação.
+Target entity: Dr. José Carlos Fontes
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+37.
+Text: Após a leitura da acusação e advertido de que podia remeter-se ao silêncio, [ENTITY] Duarte Meireles [/ENTITY] prestou declarações apenas quanto às suas condições pessoais.
+Target entity: Duarte Meireles
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+38.
+Text: Na sequência do interrogatório judicial, foi validada a constituição de [ENTITY] Vasco Tavares [/ENTITY] e determinado que aguardasse os ulteriores termos sujeito a termo de identidade e residência.
+Target entity: Vasco Tavares
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+39.
+Text: O recurso interposto por [ENTITY] Renato Faria [/ENTITY] incidiu exclusivamente sobre a medida concreta da pena aplicada em primeira instância.
+Target entity: Renato Faria
+Gold label: ARGUIDO
+Predicted label: REU
+
+40.
+Text: O tribunal indeferiu a acareação requerida com [ENTITY] Laura Esteves [/ENTITY], por entender que as divergências do seu depoimento não eram essenciais para a decisão da causa.
+Target entity: Laura Esteves
+Gold label: TESTEMUNHA
+Predicted label: ARGUIDO
+
+41.
+Text: A instância de [ENTITY] Catarina Neves [/ENTITY] foi interrompida para que lhe fosse exibido o documento junto a fls. 214, cuja assinatura afirmou reconhecer.
+Target entity: Catarina Neves
+Gold label: TESTEMUNHA
+Predicted label: REU
+
+42.
+Text: [ENTITY] Leonor Baptista [/ENTITY] propôs a revogação parcial da sentença recorrida, delimitando previamente as questões a apreciar no recurso.
+Target entity: Leonor Baptista
+Gold label: RELATOR
+Predicted label: REU
+
+43.
+Text: A sentença julgou improcedente o pedido formulado contra [ENTITY] Sérgio Monteiro [/ENTITY], absolvendo-o integralmente das quantias reclamadas.
+Target entity: Sérgio Monteiro
+Gold label: REU
+Predicted label: ARGUIDO
+
+44.
+Text: Por falta de oposição tempestiva de [ENTITY] Eduardo Simões [/ENTITY], foram considerados confessados os factos articulados pela contraparte, salvo os dependentes de prova documental.
+Target entity: Eduardo Simões
+Gold label: REU
+Predicted label: TESTEMUNHA
+
+45.
+Text: [ENTITY] Patrícia Ramos [/ENTITY] subscreveu o relatório pericial junto aos autos, concluindo pela inexistência de nexo causal entre a intervenção e os danos alegados.
+Target entity: Patrícia Ramos
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+46.
+Text: [ENTITY] Isabel Rocha [/ENTITY] declarou pretender prosseguir com o pedido de indemnização civil, apesar do arquivamento parcial determinado pelo Ministério Público.
+Target entity: Isabel Rocha
+Gold label: UNKNOWN
+Predicted label: REU
+
+47.
+Text: Durante a diligência, [ENTITY] Nádia Correia [/ENTITY] assegurou a tradução integral das perguntas e respostas, depois de prestar compromisso legal perante o juiz.
+Target entity: Nádia Correia
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+48.
+Text: [ENTITY] Ana Pereira [/ENTITY] foi identificada como vítima no auto de notícia.
+Target entity: Ana Pereira
+Gold label: UNKNOWN
+Predicted label: REU
+
+49.
+Text: [ENTITY] Sofia Nunes [/ENTITY] foi notificada para prestar depoimento como perita.
+Target entity: Sofia Nunes
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+50.
+Text: [ENTITY] Diana Ramos [/ENTITY] foi designada como tradutora intérprete no ato processual.
+Target entity: Diana Ramos
+Gold label: UNKNOWN
+Predicted label: RELATOR
+
+51.
+Text: À hora designada para a audiência de discussão e julgamento, verificou-se a ausência do perito [ENTITY] Engenheiro Joaquim Sousa Rocha [/ENTITY], que justificou a falta por escrito.
+Target entity: Engenheiro Joaquim Sousa Rocha
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+52.
+Text: O assistente no processo, [ENTITY] Dr. Alberto Vieira Cunha [/ENTITY], requereu a abertura de instrução, discordando do despacho de arquivamento proferido pelo Ministério Público.
+Target entity: Dr. Alberto Vieira Cunha
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+53.
+Text: O mandatário do réu [ENTITY] Diogo Moreira [/ENTITY] requereu a junção de documentos aos autos.
+Target entity: Diogo Moreira
+Gold label: REU
+Predicted label: UNKNOWN
+
+54.
+Text: O perito [ENTITY] José Azevedo [/ENTITY] apresentou relatório técnico sobre os danos verificados no imóvel.
+Target entity: José Azevedo
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+55.
+Text: O ofendido [ENTITY] Francisco Gomes [/ENTITY] requereu a atribuição de indemnização civil no processo penal.
+Target entity: Francisco Gomes
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+56.
+Text: Apesar de o Ministério Público, representado pelo Sr. Procurador Dr. Vasco Beirão, ter sustentado a manutenção da prisão preventiva, o juiz de instrução Dr. Anselmo Quintela acabou por substituí-la, ordenando que [ENTITY]Raimundo Castelo Branco[/ENTITY] passasse a apresentar-se trissemanalmente no posto policial da área da sua residência.
+Target entity: Raimundo Castelo Branco
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+57.
+Text: Embora o assistente Cipriano Vilarinho e o arguido Telmo Albergaria tenham referido, em momentos distintos da audiência, a presença no local de um indivíduo conhecido por [ENTITY]Crispim Boaventura[/ENTITY], não foi possível ao tribunal apurar com a necessária segurança qual a real intervenção desta pessoa nos factos.
+Target entity: Crispim Boaventura
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+58.
+Text: Na sequência da ação executiva movida pela exequente Cooperativa Agrícola do Lima, C.R.L., representada pela Ilustre Advogada Dra. Walquíria Penedo, veio [ENTITY]Apolinário Beça Carrazedo[/ENTITY] deduzir embargos, invocando a inexigibilidade do título dado à execução.
+Target entity: Apolinário Beça Carrazedo
+Gold label: REU
+Predicted label: ARGUIDO
+
+59.
+Text: Tanto o arguido Aristides Marçal como a testemunha Dorinda Felgueiras aludiram, em momentos distintos das suas declarações, a uma alegada presença no local de [ENTITY]Liberato Quadros[/ENTITY], pessoa que, todavia, nunca chegou a ser identificada nem inquirida no decurso do inquérito.
+Target entity: Liberato Quadros
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+60.
+Text: Após o despacho de pronúncia proferido pelo Sr. Juiz de Instrução Dr. Custódio Avelar, e não obstante o parecer favorável à manutenção da medida emitido pelo Procurador Dr. Higino Salzedas, foi determinada a libertação imediata de [ENTITY]Sigmund Albuquerque Brentes[/ENTITY] mediante a prestação de termo de identidade e residência.
+Target entity: Sigmund Albuquerque Brentes
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+61.
+Text: Confrontada com as fotografias juntas a fls. 567 pelo mandatário do assistente Dr. Edmundo Carrasqueira, e perante as instâncias formuladas pela defensora oficiosa do arguido Bertolino Mesquita, [ENTITY]Felismina Caetano Velez[/ENTITY] reiterou, de forma serena e coerente, tudo quanto antes havia declarado.
+Target entity: Felismina Caetano Velez
+Gold label: TESTEMUNHA
+Predicted label: ARGUIDO
+
+62.
+Text: Não tendo logrado a autora Esmeralda Bocage, patrocinada pelo Ilustre Causídico Dr. Adriano Vilanova, demonstrar a verificação dos pressupostos da responsabilidade civil aquiliana, impõe-se a absolvição de [ENTITY]Clínica Médica Santo Estêvão, Lda.[/ENTITY] do pedido contra si formulado.
+Target entity: Clínica Médica Santo Estêvão, Lda.
+Gold label: REU
+Predicted label: ARGUIDO
+
+63.
+Text: Quer o assistente Belarmino Trigueiros, quer o arguido Jacinto Veiga, fizeram alusão à intervenção de uma pessoa identificada apenas como [ENTITY]Eustáquio Marrana[/ENTITY], sobre cuja efetiva participação nos factos o tribunal não logrou formar convicção segura.
+Target entity: Eustáquio Marrana
+Gold label: UNKNOWN
+Predicted label: REU
+
+64.
+Text: Após contraditados os meios de prova oferecidos pela assistente Berengária Salgueiral e ouvido o parecer do Ministério Público na pessoa do Dr. Reinaldo Pacheco, foi designado dia para julgamento de [ENTITY]Eleutério Bragança Pimentel[/ENTITY] em processo comum com intervenção do tribunal singular.
+Target entity: Eleutério Bragança Pimentel
+Gold label: ARGUIDO
+Predicted label: RELATOR
+
+65.
+Text: Atento o teor da petição inicial apresentada pelos autores Saturnino Borrego e Idalina Vinhais, representados pelo Sr. Dr. Vitalino Brejoeira, foi regularmente citada para os termos da causa [ENTITY]Seguradora União Ibérica, S.A.[/ENTITY], a qual veio tempestivamente apresentar a sua defesa.
+Target entity: Seguradora União Ibérica, S.A.
+Gold label: REU
+Predicted label: ARGUIDO
+
+66.
+Text: Tanto nas declarações prestadas pelo arguido Eleutério Pimpão como no depoimento da testemunha Romualda Caeiro foi mencionada uma pessoa apelidada de [ENTITY]Sebastião Lavandeira[/ENTITY], sobre cuja real identidade ou posição processual nada se logrou esclarecer ao longo do inquérito.
+Target entity: Sebastião Lavandeira
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+67.
+Text: Tendo o Ministério Público formulado acusação contra Carlos Mendes e solicitado a absolvição de Joana Lopes, coube a [ENTITY] António Ribeiro [/ENTITY] analisar os pressupostos processuais e propor a condenação apenas do primeiro.
+Target entity: António Ribeiro
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+68.
+Text: A testemunha de acusação, Sofia Nunes, identificou o autor material do ilícito, o que levou à detenção de Tiago Santos e, posteriormente, à aplicação de medida de coação a [ENTITY] Miguel Pinto [/ENTITY].
+Target entity: Miguel Pinto
+Gold label: ARGUIDO
+Predicted label: REU
+
+69.
+Text: O perito nomeado pelo tribunal, Dr. Luís Marques, e a vítima, D. Margarida, foram ouvidos, mas a petição para anulação da prova pericial foi apresentada por [ENTITY] Cláudia Matos [/ENTITY].
+Target entity: Cláudia Matos
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+70.
+Text: Enquanto o coarguido Duarte Neves optou pelo silêncio, a defesa de [ENTITY] Hugo Cardoso [/ENTITY] sustentou a tese da legítima defesa, invocando o depoimento da testemunha Inês Ferreira.
+Target entity: Hugo Cardoso
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+71.
+Text: O acórdão, que absolveu o recorrente Pedro Gomes, divergiu do parecer inicial do Procurador-Geral Adjunto, tendo a fundamentação da decisão final sido elaborada por [ENTITY] Marta Sousa [/ENTITY].
+Target entity: Marta Sousa
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+72.
+Text: O arguido principal, Nuno Costa, alegou coação moral, fundamento que não foi acolhido pelo tribunal, ao contrário das declarações prestadas por [ENTITY] Diana Ramos [/ENTITY], que descreveram com pormenor o ambiente intimidatório.
+Target entity: Diana Ramos
+Gold label: TESTEMUNHA
+Predicted label: ARGUIDO
+
+73.
+Text: O mandado de detenção foi passado contra Alexandre Costa, e o pedido de liberdade provisória foi indeferido, ao passo que a representação da empresa ofendida foi feita por [ENTITY] Ana Pereira [/ENTITY].
+Target entity: Ana Pereira
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+74.
+Text: A testemunha de defesa, Sérgio Oliveira, corroborou a alegação de ausência no local, mas foi a análise das imagens de videovigilância, juntada aos autos por [ENTITY] Bruno Silva [/ENTITY], que levantou fortes dúvidas sobre essa versão.
+Target entity: Bruno Silva
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+75.
+Text: Tendo o juiz de instrução, Dr. Vítor Santos, determinado a pronúncia de dois dos três indiciados, coube a [ENTITY] Isabel Monteiro [/ENTITY] no Tribunal Coletivo propor a absolvição de um deles por insuficiência de indícios.
+Target entity: Isabel Monteiro
+Gold label: RELATOR
+Predicted label: TESTEMUNHA
+
+76.
+Text: O recurso de apelação interposto pela defesa do condenado, André Costa, foi admitido, e os autos foram remetidos para o Tribunal da Relação, onde a distribuição recaiu sobre [ENTITY] Patrícia Nogueira [/ENTITY].
+Target entity: Patrícia Nogueira
+Gold label: UNKNOWN
+Predicted label: REU
+
+77.
+Text: A medida de coação de prisão preventiva foi aplicada ao indiciado principal, Marco Silva, enquanto a [ENTITY] Daniela Costa [/ENTITY] foi sujeita a termo de identidade e residência, aguardando-se o resultado da reconstituição dos factos.
+Target entity: Daniela Costa
+Gold label: ARGUIDO
+Predicted label: REU
+
+78.
+Text: No julgamento, o Ministério Público, representado pela Dra. Sara Pinto, pediu a condenação, e a defesa, pelo Dr. Luís Fernandes, a absolvição, cabendo a [ENTITY] Pedro Almeida [/ENTITY] relatar o processo e sintetizar as questões de direito em discussão.
+Target entity: Pedro Almeida
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+79.
+Text: O perito contabilístico, Eng.º Rui Lima, identificou desvios de fundos, e o sócio-gerente, António Barros, foi constituído arguido, mas foi [ENTITY] Filipa Costa [/ENTITY] quem forneceu os emails internos que comprovavam o conhecimento da operação irregular.
+Target entity: Filipa Costa
+Gold label: TESTEMUNHA
+Predicted label: ARGUIDO
+
+80.
+Text: O incidente de insanidade mental foi declarado relativamente a um dos arguidos, Rodrigo Santos, suspendendo-se o processo, enquanto a nomeação de curador especial para o mesmo foi requerida por [ENTITY] Mónica Fernandes [/ENTITY].
+Target entity: Mónica Fernandes
+Gold label: UNKNOWN
+Predicted label: ARGUIDO
+
+81.
+Text: Após o Ministério Público deduzir a acusação, o Juiz de Instrução ordenou a notificação do mandatário do assistente e do defensor de [ENTITY] Carlos Alberto Viegas [/ENTITY] para que este se apresente ao primeiro interrogatório judicial na qualidade de detido.
+Target entity: Carlos Alberto Viegas
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+82.
+Text: Enquanto o réu contestava a propriedade do imóvel reivindicado pelo autor, o perito [ENTITY] Engenheiro Fernando Aguiar [/ENTITY] procedia ao levantamento topográfico judicial para determinar a exata linha de demarcação dos prédios.
+Target entity: Engenheiro Fernando Aguiar
+Gold label: UNKNOWN
+Predicted label: RELATOR
+
+83.
+Text: O arguido refutou a autoria do furto qualificado, mas o depoimento isento de [ENTITY] Cláudia Sofia Antunes [/ENTITY], que se encontrava no interior do estabelecimento comercial naquela noite, revelou-se crucial para a convicção do tribunal.
+Target entity: Cláudia Sofia Antunes
+Gold label: TESTEMUNHA
+Predicted label: ARGUIDO
+
+84.
+Text: Inconformado com o despacho de pronúncia lavrado pelo Juiz de Instrução Criminal, o mandatário de [ENTITY] Ricardo Jorge Faísca [/ENTITY] interpôs recurso para o Tribunal da Relação, visando a revogação da medida de prisão preventiva.
+Target entity: Ricardo Jorge Faísca
+Gold label: ARGUIDO
+Predicted label: REU
+
+85.
+Text: Verificando-se um manifesto dissídio com o voto de vencido apresentado pelo juiz adjunto sobre a medida da pena do arguido, o Conselheiro [ENTITY] Guilherme Jorge de Borba [/ENTITY] procedeu à necessária retificação do texto do acórdão final.
+Target entity: Guilherme Jorge de Borba
+Gold label: RELATOR
+Predicted label: REU
+
+86.
+Text: Durante a inquirição da testemunha arrolada pelo autor, o Exmo. Magistrado do Ministério Público [ENTITY] Dr. José Carlos Fontes [/ENTITY] pediu a palavra para suscitar uma questão prévia relativa à intempestividade da junção do documento.
+Target entity: Dr. José Carlos Fontes
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+87.
+Text: O réu alegou a falsidade do documento apresentado pelo autor, mas a versão trazida ao processo por [ENTITY] Beatriz Maria Lourenço [/ENTITY], que lavrou a ata da assembleia de condóminos, pôs fim àquela dúvida factual.
+Target entity: Beatriz Maria Lourenço
+Gold label: TESTEMUNHA
+Predicted label: REU
+
+88.
+Text: O lesado civil deduziu um pedido de indemnização volumoso contra o suspeito do crime, sabendo que [ENTITY] Tiago Rafael Castelo [/ENTITY] responderia penal e civilmente pelos danos causados na esfera jurídica daquele assistente.
+Target entity: Tiago Rafael Castelo
+Gold label: ARGUIDO
+Predicted label: REU
+
+89.
+Text: Na audiência de discussão e julgamento cível, após a tomada de declarações de parte ao autor, o ilustre causídico [ENTITY] Dr. António Jorge Abreu [/ENTITY] iniciou o contra-interrogatório das testemunhas arroladas pela contraparte.
+Target entity: Dr. António Jorge Abreu
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+90.
+Text: O arguido alegou que agira em legítima defesa contra a vítima, versão que foi frontalmente contrariada pelo relato ocular de [ENTITY] Sandra Cristina Valente [/ENTITY] durante a audiência de discussão e julgamento criminal.
+Target entity: Sandra Cristina Valente
+Gold label: TESTEMUNHA
+Predicted label: ARGUIDO
+
+91.
+Text: Embora a testemunha de acusação tenha afirmado reconhecer o autor do crime, o mandatário constituído por [ENTITY] Vítor Manuel Salgado [/ENTITY] demonstrou que o seu representado se encontrava hospitalizado na data e hora dos factos.
+Target entity: Vítor Manuel Salgado
+Gold label: ARGUIDO
+Predicted label: UNKNOWN
+
+92.
+Text: O proprietário do veículo demandou a companhia de seguros e o condutor do jipe, vindo o litigante [ENTITY] Eduardo Nuno Pimentel [/ENTITY] invocar a culpa exclusiva do peão para afastar a sua responsabilidade civil pelo atropelamento.
+Target entity: Eduardo Nuno Pimentel
+Gold label: REU
+Predicted label: ARGUIDO
+
+93.
+Text: O assistente requereu a aclaração do aresto que absolvera o arguido, competindo ao Magistrado [ENTITY] Marcelo Ramos de Albuquerque [/ENTITY] proferir despacho sobre a inadmissibilidade legal do pedido de retificação deduzido.
+Target entity: Marcelo Ramos de Albuquerque
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+94.
+Text: Apurada a ausência da testemunha que fora regularmente notificada para depor, o Senhor Solicitador de Execução [ENTITY] Dr. Nuno Miguel Resende [/ENTITY] deu início à diligência de penhora de bens móveis na morada indicada pelo credor.
+Target entity: Dr. Nuno Miguel Resende
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+95.
+Text: Perante a versão apresentada pela testemunha Helena Pires e a promoção do Ministério Público subscrita por Ricardo Sá, [ENTITY] Afonso Leite [/ENTITY] optou por não prestar declarações, mantendo-se a obrigação de apresentações periódicas já fixada.
+Target entity: Afonso Leite
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+96.
+Text: Embora o ofendido Nuno Gama tenha requerido indemnização e a testemunha Clara Viegas tenha descrito a agressão, [ENTITY] Mateus Correia [/ENTITY] impugnou a qualificação jurídica dos factos e pediu a substituição da prisão efectiva por pena suspensa.
+Target entity: Mateus Correia
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+97.
+Text: Depois de a juíza Marta Lobo ter indeferido a nulidade invocada pelo assistente Paulo Enes, [ENTITY] Tiago Serrano [/ENTITY] recorreu apenas da medida de coacção aplicada no primeiro interrogatório judicial.
+Target entity: Tiago Serrano
+Gold label: ARGUIDO
+Predicted label: REU
+
+98.
+Text: A defesa de [ENTITY] Rafael Nogueira [/ENTITY] requereu a exclusão das escutas, enquanto a testemunha Joana Abreu confirmou em audiência que reconhecera a voz constante das gravações.
+Target entity: Rafael Nogueira
+Gold label: ARGUIDO
+Predicted label: TESTEMUNHA
+
+99.
+Text: O arguido Diogo Falcão negou qualquer contacto com o assistente Luís Prata, mas [ENTITY] Mafalda Reis [/ENTITY] situou ambos no mesmo estabelecimento poucos minutos antes da alegada entrega do envelope.
+Target entity: Mafalda Reis
+Gold label: TESTEMUNHA
+Predicted label: UNKNOWN
+
+100.
+Text: A instância conduzida pelo mandatário do réu Artur Lima foi interrompida quando [ENTITY] Sílvia Azevedo [/ENTITY] esclareceu que apenas conhecia os factos por ter acompanhado a reunião de 14 de Março.
+Target entity: Sílvia Azevedo
+Gold label: TESTEMUNHA
+Predicted label: UNKNOWN
+
+101.
+Text: Apesar de a relatora Teresa Coutinho ter considerado irrelevante a junção do documento, [ENTITY] Renato Vale [/ENTITY] foi confrontado com o seu conteúdo por ter subscrito a acta da assembleia controvertida.
+Target entity: Renato Vale
+Gold label: TESTEMUNHA
+Predicted label: REU
+
+102.
+Text: Depois de a recorrente Ana Seabra insistir na contradição entre fundamentos e decisão, [ENTITY] Leonor Guedes [/ENTITY] elaborou o projecto que viria a confirmar a absolvição do réu Miguel Faria.
+Target entity: Leonor Guedes
+Gold label: RELATOR
+Predicted label: REU
+
+103.
+Text: O arguido César Antunes invocou erro notório na apreciação da prova, mas [ENTITY] Tomás Barata [/ENTITY] entendeu no acórdão que a decisão recorrida explicitara de forma suficiente o percurso lógico do tribunal.
+Target entity: Tomás Barata
+Gold label: RELATOR
+Predicted label: ARGUIDO
+
+104.
+Text: A autora Carolina Bastos reclamou o pagamento das rendas vencidas e a testemunha Pedro Alvim confirmou a entrega das chaves, tendo [ENTITY] Gustavo Melo [/ENTITY] excepcionado a compensação por obras urgentes realizadas no imóvel.
+Target entity: Gustavo Melo
+Gold label: REU
+Predicted label: TESTEMUNHA
+
+105.
+Text: Citado na morada indicada pela autora Filipa Rangel, [ENTITY] Bernardo Chaves [/ENTITY] contestou a acção, negando a celebração verbal do contrato que a testemunha Vera Monteiro afirmou ter presenciado.
+Target entity: Bernardo Chaves
+Gold label: REU
+Predicted label: TESTEMUNHA
+
+106.
+Text: O tribunal admitiu o depoimento de Sara Mota e indeferiu a perícia requerida por Daniel Neves, mas [ENTITY] Frederico Amaral [/ENTITY] manteve a reconvenção relativa às benfeitorias introduzidas no prédio arrendado.
+Target entity: Frederico Amaral
+Gold label: REU
+Predicted label: TESTEMUNHA
+
+107.
+Text: Enquanto o arguido Luís Esteves se recusou a responder às perguntas do Ministério Público, [ENTITY] Catarina Melo [/ENTITY] verteu para português as declarações prestadas pelo cidadão estrangeiro durante o interrogatório judicial.
+Target entity: Catarina Melo
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+108.
+Text: O réu André Pacheco impugnou a extensão dos prejuízos e a autora Joana Tavares requereu esclarecimentos, tendo [ENTITY] Helena Furtado [/ENTITY] assinado o relatório técnico sobre a origem da infiltração.
+Target entity: Helena Furtado
+Gold label: UNKNOWN
+Predicted label: REU
+
+109.
+Text: A testemunha Raquel Simões foi dispensada após o seu depoimento, e [ENTITY] Marco Peixoto [/ENTITY] juntou procuração forense em representação da sociedade demandada, requerendo a notificação electrónica dos actos subsequentes.
+Target entity: Marco Peixoto
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
+
+110.
+Text: Embora o arguido Samuel Rocha tenha aceite os factos essenciais e a testemunha Ana Milheiro tenha confirmado a entrega do cheque, [ENTITY] Patrícia Seixas [/ENTITY] manteve o pedido de reparação civil apresentado nos autos.
+Target entity: Patrícia Seixas
+Gold label: UNKNOWN
+Predicted label: TESTEMUNHA
