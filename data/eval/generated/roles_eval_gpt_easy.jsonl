@@ -1,0 +1,20 @@
+{"text":"O arguido [ENTITY] João Ferreira [/ENTITY] foi notificado para comparecer à audiência de julgamento designada nos autos.","label":"ARGUIDO"}
+{"text":"A defesa requereu a audição do arguido [ENTITY] Miguel Santos [/ENTITY] quanto aos factos constantes da acusação.","label":"ARGUIDO"}
+{"text":"Consta do despacho que o arguido [ENTITY] Tiago Almeida [/ENTITY] prestou termo de identidade e residência.","label":"ARGUIDO"}
+{"text":"O Ministério Público promoveu que o arguido [ENTITY] Rui Carvalho [/ENTITY] fosse sujeito a nova medida de coação.","label":"ARGUIDO"}
+{"text":"A testemunha [ENTITY] Ana Martins [/ENTITY] foi advertida do dever de responder com verdade perante o tribunal.","label":"TESTEMUNHA"}
+{"text":"Foi determinada a inquirição da testemunha [ENTITY] Sofia Lopes [/ENTITY] na próxima sessão de julgamento.","label":"TESTEMUNHA"}
+{"text":"A testemunha [ENTITY] Carlos Pereira [/ENTITY] confirmou em audiência o teor das declarações anteriormente prestadas.","label":"TESTEMUNHA"}
+{"text":"O tribunal dispensou a comparência da testemunha [ENTITY] Marta Costa [/ENTITY] por acordo das partes.","label":"TESTEMUNHA"}
+{"text":"O relator [ENTITY] Manuel Rodrigues [/ENTITY] elaborou o projeto de acórdão submetido à conferência.","label":"RELATOR"}
+{"text":"Nos termos do acórdão, o relator [ENTITY] Pedro Nunes [/ENTITY] apreciou a matéria de facto impugnada.","label":"RELATOR"}
+{"text":"A decisão foi assinada pelo relator [ENTITY] Luís Barros [/ENTITY] e pelos demais juízes adjuntos.","label":"RELATOR"}
+{"text":"O relator [ENTITY] Henrique Matos [/ENTITY] propôs a improcedência do recurso interposto pelo recorrente.","label":"RELATOR"}
+{"text":"O réu [ENTITY] António Silva [/ENTITY] contestou a ação, impugnando os factos alegados pela autora.","label":"REU"}
+{"text":"Foi o réu [ENTITY] Nuno Teixeira [/ENTITY] condenado no pagamento da quantia peticionada.","label":"REU"}
+{"text":"O mandatário do réu [ENTITY] Diogo Moreira [/ENTITY] requereu a junção de documentos aos autos.","label":"REU"}
+{"text":"Na sentença, considerou-se que o réu [ENTITY] Bruno Fernandes [/ENTITY] incumpriu culposamente o contrato celebrado.","label":"REU"}
+{"text":"O perito [ENTITY] José Azevedo [/ENTITY] apresentou relatório técnico sobre os danos verificados no imóvel.","label":"UNKNOWN"}
+{"text":"A mandatária [ENTITY] Inês Ribeiro [/ENTITY] juntou procuração forense e substabelecimento aos autos.","label":"UNKNOWN"}
+{"text":"O ofendido [ENTITY] Francisco Gomes [/ENTITY] requereu a atribuição de indemnização civil no processo penal.","label":"UNKNOWN"}
+{"text":"A intérprete [ENTITY] Helena Correia [/ENTITY] prestou compromisso legal antes do início da diligência.","label":"UNKNOWN"}

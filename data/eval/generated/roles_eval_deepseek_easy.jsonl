@@ -1,0 +1,20 @@
+{"text":"O arguido [ENTITY] João Silva [/ENTITY] foi notificado para comparecer em tribunal na próxima semana.","label":"ARGUIDO"}
+{"text":"A testemunha [ENTITY] Maria Santos [/ENTITY] prestou declarações perante o juiz de instrução.","label":"TESTEMUNHA"}
+{"text":"O relator [ENTITY] Carlos Mendes [/ENTITY] apresentou o seu parecer sobre o recurso interposto.","label":"RELATOR"}
+{"text":"O réu [ENTITY] António Fernandes [/ENTITY] foi condenado a pena de prisão efetiva.","label":"REU"}
+{"text":"[ENTITY] Ana Pereira [/ENTITY] foi identificada como vítima no auto de notícia.","label":"UNKNOWN"}
+{"text":"O arguido [ENTITY] Pedro Costa [/ENTITY] apresentou recurso da decisão condenatória.","label":"ARGUIDO"}
+{"text":"A testemunha [ENTITY] Isabel Martins [/ENTITY] foi inquirida sobre os factos ocorridos.","label":"TESTEMUNHA"}
+{"text":"O relator [ENTITY] Rui Alves [/ENTITY] fundamentou a sua proposta de acórdão.","label":"RELATOR"}
+{"text":"O réu [ENTITY] Manuel Rodrigues [/ENTITY] cumpriu a totalidade da pena aplicada.","label":"REU"}
+{"text":"[ENTITY] Sofia Nunes [/ENTITY] foi notificada para prestar depoimento como perita.","label":"UNKNOWN"}
+{"text":"O arguido [ENTITY] Francisco Lima [/ENTITY] foi constituído assistente no processo.","label":"ARGUIDO"}
+{"text":"A testemunha [ENTITY] Beatriz Sousa [/ENTITY] foi dispensada de novo depoimento.","label":"TESTEMUNHA"}
+{"text":"O relator [ENTITY] Duarte Gomes [/ENTITY] votou vencido na questão da prescrição.","label":"RELATOR"}
+{"text":"O réu [ENTITY] José Marques [/ENTITY] interpôs recurso para o Tribunal da Relação.","label":"REU"}
+{"text":"[ENTITY] Catarina Ferreira [/ENTITY] foi nomeada curadora provisória do menor.","label":"UNKNOWN"}
+{"text":"O arguido [ENTITY] Luís Teixeira [/ENTITY] foi sujeito a medidas de coação.","label":"ARGUIDO"}
+{"text":"A testemunha [ENTITY] Inês Correia [/ENTITY] foi confrontada com as provas documentais.","label":"TESTEMUNHA"}
+{"text":"O relator [ENTITY] Miguel Pinto [/ENTITY] propôs a absolvição do arguido.","label":"RELATOR"}
+{"text":"O réu [ENTITY] Ricardo Neves [/ENTITY] foi condenado ao pagamento de indemnização.","label":"REU"}
+{"text":"[ENTITY] Diana Ramos [/ENTITY] foi designada como tradutora intérprete no ato processual.","label":"UNKNOWN"}
