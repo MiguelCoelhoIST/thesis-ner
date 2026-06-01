@@ -11,7 +11,7 @@ from sklearn.metrics import (
 )
 
 TRAIN_PATH = Path("data/processed/roles_v4.jsonl")
-EVAL_PATH = Path("data/eval/roles_eval_realistic.jsonl")
+EVAL_PATH = Path("data/eval/roles_eval_realistic_v2.jsonl")
 RESULTS_PATH = Path("results/experiment_13_encoder_comparison.txt")
 
 MODELS = [
