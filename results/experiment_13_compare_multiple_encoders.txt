@@ -1,0 +1,20 @@
+Experiment 13 - Encoder comparison
+
+Results:
+1. sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+   accuracy: 0.5294
+   macro_f1: 0.5400
+   runtime: 12.48s
+
+2. intfloat/multilingual-e5-base
+   accuracy: 0.5294
+   macro_f1: 0.3993
+   runtime: 18.38s
+
+3. BAAI/bge-m3
+   accuracy: 0.4118
+   macro_f1: 0.3543
+   runtime: 57.72s
+
+Conclusion:
+The paraphrase-multilingual-mpnet-base-v2 encoder performed best on the current realistic evaluation set.
