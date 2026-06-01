@@ -1,0 +1,50 @@
+Experiment 13 - Encoder comparison on realistic_v2 benchmark
+
+Goal:
+Compare multiple sentence embedding encoders for legal role classification using the larger realistic_v2 evaluation benchmark.
+
+Training dataset:
+data/processed/roles_v4.jsonl
+
+Evaluation dataset:
+data/eval/roles_eval_realistic_v2.jsonl
+
+Evaluation benchmark:
+- 240 examples
+- generated using GPT, Claude, Gemini and DeepSeek
+- includes easy, contextual and multi-entity examples
+- validated with JSONL validation script
+- approximately balanced across labels
+
+Models compared:
+1. sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+2. intfloat/multilingual-e5-base
+3. BAAI/bge-m3
+
+Classifier:
+LogisticRegression over frozen sentence embeddings
+
+Results:
+1. BAAI/bge-m3
+   accuracy: 0.5417
+   macro_f1: 0.5210
+   runtime: 9.44s
+
+2. intfloat/multilingual-e5-base
+   accuracy: 0.4917
+   macro_f1: 0.4596
+   runtime: 7.03s
+
+3. sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+   accuracy: 0.4042
+   macro_f1: 0.3755
+   runtime: 7.51s
+
+Observation:
+The model ranking changed significantly compared with the previous 17-example evaluation set. In the smaller benchmark, paraphrase-multilingual-mpnet-base-v2 appeared to be the best model. However, on the larger and harder realistic_v2 benchmark, BAAI/bge-m3 achieved the best macro F1.
+
+Interpretation:
+This suggests that the original evaluation set was too small and unstable for reliable model comparison. The larger benchmark provides a more robust estimate of model behaviour, especially in contextual and multi-entity cases.
+
+Conclusion:
+BAAI/bge-m3 is currently the strongest encoder among the tested models for this legal role classification setup. Future experiments should use roles_eval_realistic_v2.jsonl as the primary evaluation benchmark.
