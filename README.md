@@ -1,146 +1,294 @@
 # thesis-ner
 
-Repository for my MSc thesis work on Named Entity Recognition (NER) for Portuguese legal documents, continuing the work developed in the IRIS anonymizer project.
+MSc thesis repository for Portuguese legal anonymization, Named Entity Recognition
+(NER), and legal role classification.
 
-## Current focus
+The current work extends a legal anonymization pipeline by assigning legal roles to
+person entities detected by a NER model.
 
-The current work is based on:
+```text
+Text -> NER model -> PER entities -> legal role classifier
+```
 
-* an inherited NER pipeline using spaCy + transformers
-* a silver annotated dataset in `.spacy` format
-* a baseline model and an extended model trained previously
+The role classifier is intended to refine `PER` entities with legal context while
+keeping `UNKNOWN` as an internal class for people without an explicit legal role.
 
-The goal is to:
+`UNKNOWN` is used as an internal fallback class for person entities
+without sufficient contextual evidence for legal role attribution.
 
-* understand and reproduce the current system
-* analyze the existing dataset and models
-* explore improvements to the NER/classifier
-* investigate synthetic data generation
-* potentially test other transformer-based approaches
+## Legal Role Labels
 
-## Project structure
+Current target labels:
+
+```text
+ARGUIDO
+TESTEMUNHA
+RELATOR
+REU
+UNKNOWN
+```
+
+## Current Experiments
+
+The project currently evaluates several approaches for legal role classification:
+
+- `LogisticRegression` + `CountVectorizer` lexical baseline
+- rule-based and entity-aware rule-based classifiers
+- transformer fine-tuning with BERTimbau
+- sentence embedding encoder + `LogisticRegression`
+- multi-encoder comparison using selected multilingual embedding models
+
+The current best embedding encoder is:
+
+```text
+sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+```
+
+On the current realistic evaluation set, this encoder outperformed the other
+tested embedding models in the multi-encoder comparison.
+
+## Current Best Results
+
+| Approach | Macro F1 | Notes |
+|---|---|---|
+| Rule-based entity-aware classifier | ~0.94-1.00 | Strong lexical patterns, limited semantic generalization |
+| BERTimbau fine-tuning | ~0.46 | Contextual transformer baseline |
+| Embedding encoder + LogisticRegression | ~0.54 | Current best learned model |
+
+## Project Structure
 
 ```text
 thesis-ner/
   data/
-    raw/
-    processed/
-    eval/
-  docs/
-    thesis_objectives.md
-    model_notes.md
-  models/
-    baseline_model/
-    eduardo_extended_model/
-    experiments/
-  notebooks/
-  results/
+    raw/                  # raw or sensitive data; ignored by Git
+    processed/            # generated training datasets
+    eval/                 # evaluation datasets
+
+  docs/                   # thesis notes, objectives, labels, project guidance
+
+  models/                 # trained models and checkpoints; ignored by Git
+
+  notebooks/              # exploratory notebooks
+
+  results/                # lightweight experiment summaries
+    old_models/           # inherited model notes/results
+
   src/
-    data/
-    evaluation/
-    training/
-    utils/
+    data/                 # dataset generation scripts and old model inspectors
+    data_generation/      # role dataset generation and merge scripts
+    evaluation/           # evaluation scripts and role pipeline scripts
+    training/             # model training and encoder comparison scripts
+    utils/                # conversion, inspection, and helper scripts
+
   README.md
   requirements.txt
+  requirements_LEGACY.txt
 ```
 
-## Setup
+No files have been moved yet; the structure above reflects the current repository
+layout.
 
-Create and activate a virtual environment:
+## Installation
 
-**Windows PowerShell**
+### Local Environment
+
+Windows PowerShell:
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
-```
-
-Install dependencies:
-
-```bash
 pip install -r requirements.txt
 ```
 
-## Current data
-
-The main dataset currently being explored is:
-
-```
-data/raw/silver.spacy
-```
-
-# Dataset description
-
-The `silver.spacy` dataset is:
-- automatically annotated (silver standard)
-- generated using previous NER models / heuristics / LLM-assisted annotation
-- stored using spaCy's `DocBin` format
-
-Note: This dataset may contain noise and is not manually verified.
-
-This dataset contains annotated legal examples with the following labels identified so far:
-
-* PER
-* ORG
-* LOC
-* DAT
-* IDP
-* ADDR / MOR (depending on dataset/model naming)
-
-# Labels
-
-- PER: Person names
-- ORG: Organizations / companies
-- LOC: Locations / addresses
-- DAT: Dates (non-legal)
-- IDP: Identification numbers (e.g. NIF, IBAN)
-- ADDR / MOR: Addresses / residence
-
-## Current models
-
-The project currently includes:
-
-* `models/baseline_model/`
-  Baseline model previously used
-
-* `models/eduardo_extended_model/`
-  Extended model trained with additional improvements
-
-## Current scripts
-
-**Inspect dataset examples**
+Linux/macOS:
 
 ```bash
-python .\src\data\inspect_spacy_dataset.py
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-**Count labels in dataset**
+### INESC GPU Environment
+
+On the INESC GPU machines, first update the repository and activate the
+environment:
 
 ```bash
-python .\src\data\count_entity_labels.py
+git pull
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-**Compare saved models on sample text**
+Before running GPU experiments, inspect GPU usage:
 
 ```bash
-python .\src\data\test_saved_models.py
+nvidia-smi
 ```
 
-## Notes
+Choose an available GPU:
 
-The inherited models were trained with older versions of spaCy / transformers, so compatibility warnings may appear when loading them. If needed, a legacy-compatible environment may be created later.
+```bash
+export CUDA_VISIBLE_DEVICES=5
+```
 
-## Thesis direction
+Then run the desired training or evaluation script.
 
-Possible next steps include:
+## Running Experiments
 
-* deeper comparison of baseline vs extended model
-* creation of a proper evaluation setup
-* generation of synthetic data for new entities
-* extension to more specific legal-role labels such as:
+Run commands from the repository root.
 
-  * Arguido
-  * Réu
-  * Testemunha
-  * Relator
-* testing alternative transformer models or training workflows
+### Transformer Fine-Tuning
+
+Fine-tune BERTimbau for legal role classification:
+
+```bash
+python src/training/train_transformer_role_classifier.py
+```
+
+This uses:
+
+```text
+train: data/processed/roles_v4.jsonl
+eval:  data/eval/roles_eval_realistic.jsonl
+```
+
+Trained models are written under `models/`, which is ignored by Git.
+
+### Embedding Classifier
+
+Train and evaluate an embedding encoder with a logistic regression classifier:
+
+```bash
+python src/training/train_embedding_role_classifier.py
+```
+
+Current main encoder:
+
+```text
+sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+```
+
+### Multi-Encoder Comparison
+
+Compare multiple multilingual embedding encoders:
+
+```bash
+python src/training/compare_embedding_models.py
+```
+
+The comparison currently includes:
+
+```text
+sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+intfloat/multilingual-e5-base
+BAAI/bge-m3
+```
+
+### Evaluation Scripts
+
+Evaluate the lexical role classifier:
+
+```bash
+python src/evaluation/evaluate_role_classifier.py
+```
+
+Evaluate threshold behavior:
+
+```bash
+python src/evaluation/evaluate_thresholds.py
+```
+
+Evaluate the entity-aware role classifier:
+
+```bash
+python src/evaluation/evaluate_entity_aware_roles.py
+```
+
+Evaluate rule-based baselines:
+
+```bash
+python src/evaluation/evaluate_rule_based_roles.py
+python src/evaluation/evaluate_rule_based_roles_v2.py
+```
+
+Evaluate transformer predictions:
+
+```bash
+python src/evaluation/evaluate_transformer_predictions.py
+```
+
+## Data
+
+The project uses generated role-classification datasets and evaluation files:
+
+```text
+data/processed/
+data/eval/
+```
+
+Raw legal data and inherited sensitive datasets should remain under:
+
+```text
+data/raw/
+```
+
+Raw data must not be committed unless it is explicitly verified as safe to share.
+
+## Dataset Generation
+
+The project uses synthetic and semi-synthetic legal-role examples generated
+through templates and entity-aware contextual patterns.
+
+Additional experiments explore LLM-generated examples and realistic
+multi-entity legal contexts.
+
+## Dependency Management
+
+All Python dependencies used by scripts should be listed in:
+
+```text
+requirements.txt
+```
+
+The legacy dependency file is kept only for inherited model compatibility:
+
+```text
+requirements_LEGACY.txt
+```
+
+The Git ignore rules exclude virtual environments, trained models, checkpoints,
+logs, caches, and raw data directories. Lightweight documentation and experiment
+summaries under `results/` should be committed.
+
+## Experiment Tracking
+
+Each experiment should have a corresponding result file:
+
+```text
+results/experiment_NN_short_name.txt
+```
+
+Each result file should briefly document:
+
+- goal
+- model or method
+- dataset
+- training/evaluation setup
+- metrics
+- qualitative observations
+- conclusion
+- next step
+
+This keeps the thesis work reproducible and makes it easier to connect code,
+results, and written analysis.
+
+## Future Work
+
+Planned directions:
+
+- build larger and more realistic evaluation datasets
+- generate legal-role examples with LLMs
+- explore LLM-as-judge qualitative evaluation
+- compare more multilingual encoders from the MTEB leaderboard
+- improve robustness on indirect and multi-entity legal role mentions
