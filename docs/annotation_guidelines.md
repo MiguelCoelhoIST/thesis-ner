@@ -4,6 +4,8 @@
 
 This dataset evaluates the legal-role classifier on real candidate examples from Portuguese legal decisions. Each JSONL record represents one person entity in a text passage. Annotate the role of the person named in `entity`, using the passage in `text` as evidence.
 
+The `text` value must be a continuous, verbatim excerpt from the source judgment. Store it without inserting `[ENTITY]` or `[/ENTITY]` markers or otherwise changing the source text. The exact target occurrence is identified by `entity_start` and `entity_end`; model-specific marked input is derived from these offsets at evaluation time.
+
 Annotate only the target entity. Other people and role words in the passage are context or distractors and must not determine the target label.
 
 ## Labels
@@ -22,7 +24,7 @@ Do not use `UNKNOWN` to resolve genuine ambiguity between two or more in-scope l
 
 ## Annotation procedure
 
-1. Locate the exact target named by `entity` in `text`.
+1. Locate the exact target named by `entity` in `text` and record its character offsets.
 2. Read the complete passage, including references, pronouns, and grammatical links to the target.
 3. Identify whether the passage supports one of the four legal roles.
 4. Check that any role expression applies to the target rather than another person.
@@ -42,8 +44,10 @@ Each line must be one JSON object containing all of these fields:
 | `process_number` | Process or case number from the source decision. |
 | `decision_date` | Date of the decision. Preserve one consistent dataset-wide date format. |
 | `source_url` | URL of the source decision. |
-| `text` | Self-contained passage used to classify the target. It must not be empty. |
-| `entity` | Target person expression as it appears in the passage. It must not be empty. |
+| `text` | Continuous, verbatim source excerpt used to classify the target. It must not be empty or contain inserted entity markers. |
+| `entity` | Target person expression exactly as it appears in the passage. It must not be empty. |
+| `entity_start` | Zero-based integer offset where the target occurrence begins in `text`. |
+| `entity_end` | Exclusive integer offset where the target occurrence ends in `text`. |
 | `label` | One of the five labels defined above. |
 | `evidence_type` | `explicit` or `contextual`, as defined below. |
 | `difficulty` | `easy`, `medium`, or `hard`, as defined below. |
@@ -52,6 +56,15 @@ Each line must be one JSON object containing all of these fields:
 | `human_validated` | Boolean indicating whether a human annotator has reviewed the complete record. |
 
 Additional metadata may be retained, but it must not replace any required field.
+
+Offsets use Python slicing semantics and must satisfy:
+
+```python
+0 <= entity_start < entity_end <= len(text)
+text[entity_start:entity_end] == entity
+```
+
+Offsets identify one exact occurrence when the same entity string appears more than once. The stored source excerpt remains unmarked. At evaluation time, code may derive model input in the training format `[ENTITY] entity [/ENTITY]` without changing the dataset record.
 
 ## Evidence type
 
@@ -79,7 +92,8 @@ Set `human_validated` to `true` only after a person has checked the source metad
 Before accepting a record, confirm that:
 
 - the `id` is unique;
-- `text` and `entity` are non-empty and the target can be identified in the passage;
+- `text` is a continuous, unmodified source excerpt with no inserted `[ENTITY]` markers;
+- `text` and `entity` are non-empty, the offsets are valid, and the selected slice equals `entity` exactly;
 - the role evidence applies to the target entity;
 - the label, evidence type, and difficulty use the permitted values;
 - all three flags contain JSON booleans (`true` or `false`), not strings or integers;
@@ -89,5 +103,5 @@ Before accepting a record, confirm that:
 Example record structure:
 
 ```json
-{"id":"candidate-0001","process_number":"123/24.0TEST","decision_date":"2026-01-15","source_url":"https://example.invalid/decision/123","text":"Foi ouvida como testemunha a pessoa AA.","entity":"AA","label":"TESTEMUNHA","evidence_type":"explicit","difficulty":"easy","contains_distractor_role":false,"original_anonymized":true,"human_validated":true}
+{"id":"candidate-0001","process_number":"123/24.0TEST","decision_date":"2026-01-15","source_url":"https://example.invalid/decision/123","text":"Foi ouvida como testemunha a pessoa AA.","entity":"AA","entity_start":36,"entity_end":38,"label":"TESTEMUNHA","evidence_type":"explicit","difficulty":"easy","contains_distractor_role":false,"original_anonymized":true,"human_validated":true}
 ```

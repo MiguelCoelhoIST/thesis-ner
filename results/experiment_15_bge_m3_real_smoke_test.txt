@@ -1,0 +1,101 @@
+Experiment 15 - BGE-M3 real STJ candidate smoke test
+
+PRELIMINARY SMOKE TEST ON ONLY 10 REAL EXAMPLES - NOT A FINAL EVALUATION
+
+Model:
+BAAI/bge-m3
+
+Classifier:
+LogisticRegression(max_iter=2000) over frozen BGE-M3 embeddings
+
+Datasets:
+train: data/processed/roles_v4.jsonl
+eval: data/eval/roles_eval_real_candidates_v1.jsonl
+train examples: 1328
+eval examples: 10
+
+Predictions:
+
+1. id: stj_2394_24_3PBPDL_S1_001
+entity: AA
+gold: ARGUIDO
+predicted: ARGUIDO
+marked text: figurando como arguido [ENTITY] AA [/ENTITY], solteiro
+
+2. id: stj_43_24_9GAOBR_B_S1_001
+entity: AA
+gold: ARGUIDO
+predicted: ARGUIDO
+marked text: Nos presentes autos veio [ENTITY] AA [/ENTITY] condenado por Acórdão transitado em julgado
+
+3. id: stj_1760_19_0T8PVZ_P1_S1_001
+entity: BB
+gold: TESTEMUNHA
+predicted: TESTEMUNHA
+marked text: A testemunha [ENTITY] BB [/ENTITY], negou ser sua a assinatura e o manuscrito no mencionado documento
+
+4. id: stj_1760_19_0T8PVZ_P1_S1_002
+entity: DD
+gold: TESTEMUNHA
+predicted: TESTEMUNHA
+marked text: o que foi confirmado pela testemunha [ENTITY] DD [/ENTITY].
+
+5. id: stj_11103_17_2T8PRT_C_P1_S1_001
+entity: Maria da Graça Trigo
+gold: RELATOR
+predicted: REU
+marked text: [ENTITY] Maria da Graça Trigo [/ENTITY] (relatora por vencimento)
+
+6. id: stj_315_26_8PCCSC_A_S1_001
+entity: José A. Vaz Carreto
+gold: RELATOR
+predicted: REU
+marked text: [ENTITY] José A. Vaz Carreto [/ENTITY] - Relator
+
+7. id: stj_1632_22_1T8BRG_G2_S1_001
+entity: AA
+gold: REU
+predicted: REU
+marked text: Inconformado, vem agora o réu, [ENTITY] AA [/ENTITY], interpor recurso de revista
+
+8. id: stj_6566_20_1T8STB_E1_S1_001
+entity: AA
+gold: REU
+predicted: REU
+marked text: contra [ENTITY] AA [/ENTITY] e BB, alegando, em síntese, ser proprietária de um prédio urbano, estando o 1.º réu, sócio da autora
+
+9. id: stj_77_18_2T8CLD_E_C1_S1_001
+entity: AA
+gold: UNKNOWN
+predicted: ARGUIDO
+marked text: O autor, [ENTITY] AA [/ENTITY] instaurou contra Jardinscópio Unipessoal, LDA., e Exclusiproeza – Gestão e Investimentos, S.A., ação comum.
+
+10. id: stj_11103_17_2T8PRT_C_P1_S1_002
+entity: AA
+gold: UNKNOWN
+predicted: REU
+marked text: veio a recorrente, [ENTITY] AA [/ENTITY], reclamar para a conferência
+
+Metrics:
+accuracy: 0.6000
+macro_precision: 0.4133
+macro_recall: 0.6000
+macro_f1: 0.4743
+runtime_seconds: 95.14
+
+Classification report:
+              precision    recall  f1-score   support
+
+     ARGUIDO       0.67      1.00      0.80         2
+     RELATOR       0.00      0.00      0.00         2
+         REU       0.40      1.00      0.57         2
+  TESTEMUNHA       1.00      1.00      1.00         2
+     UNKNOWN       0.00      0.00      0.00         2
+
+    accuracy                           0.60        10
+   macro avg       0.41      0.60      0.47        10
+weighted avg       0.41      0.60      0.47        10
+
+
+Interpretation:
+These results are a preliminary pipeline smoke test on only 10 real STJ examples. They are not a final or statistically reliable model evaluation.
