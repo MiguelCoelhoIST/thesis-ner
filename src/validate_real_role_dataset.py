@@ -13,6 +13,8 @@ REQUIRED_FIELDS = {
     "source_url",
     "text",
     "entity",
+    "entity_start",
+    "entity_end",
     "label",
     "evidence_type",
     "difficulty",
@@ -54,6 +56,26 @@ def validate_record(record):
         errors.append("entity must be a non-empty string")
     elif isinstance(text, str) and entity not in text:
         errors.append("entity must occur exactly in text")
+
+    entity_start = record.get("entity_start")
+    entity_end = record.get("entity_end")
+    if type(entity_start) is not int:
+        errors.append("entity_start must be an integer")
+    if type(entity_end) is not int:
+        errors.append("entity_end must be an integer")
+
+    if (
+        type(entity_start) is int
+        and type(entity_end) is int
+        and isinstance(text, str)
+    ):
+        if not 0 <= entity_start < entity_end <= len(text):
+            errors.append(
+                "entity offsets must satisfy "
+                "0 <= entity_start < entity_end <= len(text)"
+            )
+        elif isinstance(entity, str) and text[entity_start:entity_end] != entity:
+            errors.append("text[entity_start:entity_end] must equal entity")
 
     decision_date = record.get("decision_date")
     if isinstance(decision_date, str) and decision_date.strip():
