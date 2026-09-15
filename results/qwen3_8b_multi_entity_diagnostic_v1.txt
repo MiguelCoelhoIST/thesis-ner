@@ -1,0 +1,103 @@
+Qwen3-8B multi-entity diagnostic v1
+
+QUALITATIVE FIVE-EXAMPLE DIAGNOSTIC - NOT A STATISTICAL EVALUATION
+
+These examples are separate from the frozen 50-example Experiment 17 evaluation set and are not included in its headline metrics.
+
+Configuration:
+model: Qwen/Qwen3-8B
+prompt and definitions: imported unchanged from evaluate_qwen3_8b_real_stj.py
+entity marking: canonical offset-derived [ENTITY] entity [/ENTITY]
+decoding: do_sample=False, temperature=0, max_new_tokens=16
+output parsing: exact allowed-label match; invalid outputs are not remapped
+challenge SHA-256: 439a2afd4a4b3a474a4b439a86e3e0510ac48dda88092043fb81a7d9da82cb0a
+
+Device information:
+model: Qwen/Qwen3-8B
+model_load_seconds: 109.51462369097862
+platform: Linux-7.0.1-1-default-x86_64-with-glibc2.42
+python: 3.11.15
+torch: 2.12.0+cu130
+transformers: 5.9.0
+cuda_available: True
+cuda_device_count: 1
+cuda_devices: ['Quadro RTX 6000']
+input_device: cuda:0
+model_dtype: torch.bfloat16
+device_map: {}
+
+Zero-shot
+---------
+accuracy: 0.6000
+invalid outputs: 0
+runtime seconds: 5.20
+
+Individual predictions:
+1. id: multi_1355_1S_8T8AVR_P1_S1_001
+   target entity: AA
+   gold label: UNKNOWN
+   predicted label: UNKNOWN
+   raw output: 'UNKNOWN'
+   valid output: true
+2. id: multi_1355_1S_8T8AVR_P1_S1_002
+   target entity: BB
+   gold label: UNKNOWN
+   predicted label: REU
+   raw output: 'REU'
+   valid output: true
+3. id: multi_1355_1S_8T8AVR_P1_S1_003
+   target entity: CC
+   gold label: REU
+   predicted label: REU
+   raw output: 'REU'
+   valid output: true
+4. id: multi_1355_1S_8T8AVR_P1_S1_004
+   target entity: DD
+   gold label: REU
+   predicted label: REU
+   raw output: 'REU'
+   valid output: true
+5. id: multi_1355_1S_8T8AVR_P1_S1_005
+   target entity: EE
+   gold label: REU
+   predicted label: UNKNOWN
+   raw output: 'UNKNOWN'
+   valid output: true
+
+Few-shot
+--------
+accuracy: 0.4000
+invalid outputs: 0
+runtime seconds: 4.85
+
+Individual predictions:
+1. id: multi_1355_1S_8T8AVR_P1_S1_001
+   target entity: AA
+   gold label: UNKNOWN
+   predicted label: UNKNOWN
+   raw output: 'UNKNOWN'
+   valid output: true
+2. id: multi_1355_1S_8T8AVR_P1_S1_002
+   target entity: BB
+   gold label: UNKNOWN
+   predicted label: UNKNOWN
+   raw output: 'UNKNOWN'
+   valid output: true
+3. id: multi_1355_1S_8T8AVR_P1_S1_003
+   target entity: CC
+   gold label: REU
+   predicted label: UNKNOWN
+   raw output: 'UNKNOWN'
+   valid output: true
+4. id: multi_1355_1S_8T8AVR_P1_S1_004
+   target entity: DD
+   gold label: REU
+   predicted label: UNKNOWN
+   raw output: 'UNKNOWN'
+   valid output: true
+5. id: multi_1355_1S_8T8AVR_P1_S1_005
+   target entity: EE
+   gold label: REU
+   predicted label: UNKNOWN
+   raw output: 'UNKNOWN'
+   valid output: true

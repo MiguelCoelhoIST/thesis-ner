@@ -1,0 +1,946 @@
+{
+  "title": "Qwen3-8B multi-entity diagnostic v1",
+  "type": "qualitative diagnostic, not a statistical evaluation",
+  "included_in_experiment_17_headline_metrics": false,
+  "model": "Qwen/Qwen3-8B",
+  "dataset": "data/eval/roles_eval_multi_entity_challenge_v1.jsonl",
+  "dataset_sha256": "439a2afd4a4b3a474a4b439a86e3e0510ac48dda88092043fb81a7d9da82cb0a",
+  "examples": 5,
+  "device": {
+    "model": "Qwen/Qwen3-8B",
+    "model_load_seconds": 109.51462369097862,
+    "platform": "Linux-7.0.1-1-default-x86_64-with-glibc2.42",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "transformers": "5.9.0",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_devices": [
+      "Quadro RTX 6000"
+    ],
+    "input_device": "cuda:0",
+    "model_dtype": "torch.bfloat16",
+    "device_map": {}
+  },
+  "generation": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "max_new_tokens": 16,
+    "batch_size": 1,
+    "enable_thinking": false
+  },
+  "settings": {
+    "zero_shot": {
+      "runtime_seconds": 5.19580001605209,
+      "overall": {
+        "count": 5,
+        "accuracy": 0.6,
+        "macro_precision": 0.2333333333333333,
+        "macro_recall": 0.2333333333333333,
+        "macro_f1": 0.2333333333333333,
+        "invalid_output_count": 0,
+        "per_class": {
+          "ARGUIDO": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "TESTEMUNHA": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "RELATOR": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "REU": {
+            "precision": 0.6666666666666666,
+            "recall": 0.6666666666666666,
+            "f1": 0.6666666666666666,
+            "support": 3
+          },
+          "UNKNOWN": {
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5,
+            "support": 2
+          }
+        },
+        "confusion_matrix_labels": [
+          "ARGUIDO",
+          "TESTEMUNHA",
+          "RELATOR",
+          "REU",
+          "UNKNOWN",
+          "INVALID"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "by_evidence_type": {
+        "contextual": {
+          "count": 5,
+          "accuracy": 0.6,
+          "macro_precision": 0.2333333333333333,
+          "macro_recall": 0.2333333333333333,
+          "macro_f1": 0.2333333333333333,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.6666666666666666,
+              "recall": 0.6666666666666666,
+              "f1": 0.6666666666666666,
+              "support": 3
+            },
+            "UNKNOWN": {
+              "precision": 0.5,
+              "recall": 0.5,
+              "f1": 0.5,
+              "support": 2
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "by_difficulty": {
+        "hard": {
+          "count": 5,
+          "accuracy": 0.6,
+          "macro_precision": 0.2333333333333333,
+          "macro_recall": 0.2333333333333333,
+          "macro_f1": 0.2333333333333333,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.6666666666666666,
+              "recall": 0.6666666666666666,
+              "f1": 0.6666666666666666,
+              "support": 3
+            },
+            "UNKNOWN": {
+              "precision": 0.5,
+              "recall": 0.5,
+              "f1": 0.5,
+              "support": 2
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "distractor_examples": {
+        "count": 5,
+        "accuracy": 0.6,
+        "macro_precision": 0.2333333333333333,
+        "macro_recall": 0.2333333333333333,
+        "macro_f1": 0.2333333333333333,
+        "invalid_output_count": 0,
+        "per_class": {
+          "ARGUIDO": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "TESTEMUNHA": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "RELATOR": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "REU": {
+            "precision": 0.6666666666666666,
+            "recall": 0.6666666666666666,
+            "f1": 0.6666666666666666,
+            "support": 3
+          },
+          "UNKNOWN": {
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5,
+            "support": 2
+          }
+        },
+        "confusion_matrix_labels": [
+          "ARGUIDO",
+          "TESTEMUNHA",
+          "RELATOR",
+          "REU",
+          "UNKNOWN",
+          "INVALID"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "predictions": [
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_001",
+          "entity": "AA",
+          "gold": "UNKNOWN",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_002",
+          "entity": "BB",
+          "gold": "UNKNOWN",
+          "predicted": "REU",
+          "valid_output": true,
+          "raw_output": "REU",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_003",
+          "entity": "CC",
+          "gold": "REU",
+          "predicted": "REU",
+          "valid_output": true,
+          "raw_output": "REU",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_004",
+          "entity": "DD",
+          "gold": "REU",
+          "predicted": "REU",
+          "valid_output": true,
+          "raw_output": "REU",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_005",
+          "entity": "EE",
+          "gold": "REU",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        }
+      ]
+    },
+    "few_shot": {
+      "runtime_seconds": 4.853802583063953,
+      "overall": {
+        "count": 5,
+        "accuracy": 0.4,
+        "macro_precision": 0.08,
+        "macro_recall": 0.2,
+        "macro_f1": 0.11428571428571428,
+        "invalid_output_count": 0,
+        "per_class": {
+          "ARGUIDO": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "TESTEMUNHA": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "RELATOR": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "REU": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3
+          },
+          "UNKNOWN": {
+            "precision": 0.4,
+            "recall": 1.0,
+            "f1": 0.5714285714285714,
+            "support": 2
+          }
+        },
+        "confusion_matrix_labels": [
+          "ARGUIDO",
+          "TESTEMUNHA",
+          "RELATOR",
+          "REU",
+          "UNKNOWN",
+          "INVALID"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "by_evidence_type": {
+        "contextual": {
+          "count": 5,
+          "accuracy": 0.4,
+          "macro_precision": 0.08,
+          "macro_recall": 0.2,
+          "macro_f1": 0.11428571428571428,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 3
+            },
+            "UNKNOWN": {
+              "precision": 0.4,
+              "recall": 1.0,
+              "f1": 0.5714285714285714,
+              "support": 2
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "by_difficulty": {
+        "hard": {
+          "count": 5,
+          "accuracy": 0.4,
+          "macro_precision": 0.08,
+          "macro_recall": 0.2,
+          "macro_f1": 0.11428571428571428,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 3
+            },
+            "UNKNOWN": {
+              "precision": 0.4,
+              "recall": 1.0,
+              "f1": 0.5714285714285714,
+              "support": 2
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "distractor_examples": {
+        "count": 5,
+        "accuracy": 0.4,
+        "macro_precision": 0.08,
+        "macro_recall": 0.2,
+        "macro_f1": 0.11428571428571428,
+        "invalid_output_count": 0,
+        "per_class": {
+          "ARGUIDO": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "TESTEMUNHA": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "RELATOR": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "REU": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3
+          },
+          "UNKNOWN": {
+            "precision": 0.4,
+            "recall": 1.0,
+            "f1": 0.5714285714285714,
+            "support": 2
+          }
+        },
+        "confusion_matrix_labels": [
+          "ARGUIDO",
+          "TESTEMUNHA",
+          "RELATOR",
+          "REU",
+          "UNKNOWN",
+          "INVALID"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "predictions": [
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_001",
+          "entity": "AA",
+          "gold": "UNKNOWN",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_002",
+          "entity": "BB",
+          "gold": "UNKNOWN",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_003",
+          "entity": "CC",
+          "gold": "REU",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_004",
+          "entity": "DD",
+          "gold": "REU",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        },
+        {
+          "id": "multi_1355_1S_8T8AVR_P1_S1_005",
+          "entity": "EE",
+          "gold": "REU",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "hard",
+          "contains_distractor_role": true
+        }
+      ]
+    }
+  }
+}
