@@ -1,0 +1,1090 @@
+{
+  "experiment": 17,
+  "model": "Qwen/Qwen3-8B",
+  "status": "passed",
+  "examples": 3,
+  "device": {
+    "model": "Qwen/Qwen3-8B",
+    "model_load_seconds": 13.672270804992877,
+    "platform": "Linux-7.0.1-1-default-x86_64-with-glibc2.42",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "transformers": "5.9.0",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_devices": [
+      "Quadro RTX 6000"
+    ],
+    "input_device": "cuda:0",
+    "model_dtype": "torch.bfloat16",
+    "device_map": {}
+  },
+  "settings": {
+    "zero_shot": {
+      "runtime_seconds": 1.87743384600617,
+      "overall": {
+        "count": 3,
+        "accuracy": 0.6666666666666666,
+        "macro_precision": 0.4,
+        "macro_recall": 0.3,
+        "macro_f1": 0.3333333333333333,
+        "invalid_output_count": 0,
+        "per_class": {
+          "ARGUIDO": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "support": 2
+          },
+          "TESTEMUNHA": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "RELATOR": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "REU": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "UNKNOWN": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          }
+        },
+        "confusion_matrix_labels": [
+          "ARGUIDO",
+          "TESTEMUNHA",
+          "RELATOR",
+          "REU",
+          "UNKNOWN",
+          "INVALID"
+        ],
+        "confusion_matrix": [
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "by_evidence_type": {
+        "contextual": {
+          "count": 1,
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "explicit": {
+          "count": 2,
+          "accuracy": 1.0,
+          "macro_precision": 0.4,
+          "macro_recall": 0.4,
+          "macro_f1": 0.4,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 2,
+          "accuracy": 1.0,
+          "macro_precision": 0.4,
+          "macro_recall": 0.4,
+          "macro_f1": 0.4,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "medium": {
+          "count": 1,
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "distractor_examples": null,
+      "predictions": [
+        {
+          "id": "stj_2394_24_3PBPDL_S1_001",
+          "entity": "AA",
+          "gold": "ARGUIDO",
+          "predicted": "ARGUIDO",
+          "valid_output": true,
+          "raw_output": "ARGUIDO",
+          "evidence_type": "explicit",
+          "difficulty": "easy",
+          "contains_distractor_role": false
+        },
+        {
+          "id": "stj_43_24_9GAOBR_B_S1_001",
+          "entity": "AA",
+          "gold": "ARGUIDO",
+          "predicted": "REU",
+          "valid_output": true,
+          "raw_output": "REU",
+          "evidence_type": "contextual",
+          "difficulty": "medium",
+          "contains_distractor_role": false
+        },
+        {
+          "id": "stj_1760_19_0T8PVZ_P1_S1_001",
+          "entity": "BB",
+          "gold": "TESTEMUNHA",
+          "predicted": "TESTEMUNHA",
+          "valid_output": true,
+          "raw_output": "TESTEMUNHA",
+          "evidence_type": "explicit",
+          "difficulty": "easy",
+          "contains_distractor_role": false
+        }
+      ]
+    },
+    "few_shot": {
+      "runtime_seconds": 2.79745129798539,
+      "overall": {
+        "count": 3,
+        "accuracy": 0.6666666666666666,
+        "macro_precision": 0.4,
+        "macro_recall": 0.3,
+        "macro_f1": 0.3333333333333333,
+        "invalid_output_count": 0,
+        "per_class": {
+          "ARGUIDO": {
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "support": 2
+          },
+          "TESTEMUNHA": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "RELATOR": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "REU": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          },
+          "UNKNOWN": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 0
+          }
+        },
+        "confusion_matrix_labels": [
+          "ARGUIDO",
+          "TESTEMUNHA",
+          "RELATOR",
+          "REU",
+          "UNKNOWN",
+          "INVALID"
+        ],
+        "confusion_matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "by_evidence_type": {
+        "contextual": {
+          "count": 1,
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "explicit": {
+          "count": 2,
+          "accuracy": 1.0,
+          "macro_precision": 0.4,
+          "macro_recall": 0.4,
+          "macro_f1": 0.4,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "count": 2,
+          "accuracy": 1.0,
+          "macro_precision": 0.4,
+          "macro_recall": 0.4,
+          "macro_f1": 0.4,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "support": 1
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "medium": {
+          "count": 1,
+          "accuracy": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "macro_f1": 0.0,
+          "invalid_output_count": 0,
+          "per_class": {
+            "ARGUIDO": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 1
+            },
+            "TESTEMUNHA": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "RELATOR": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "REU": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            },
+            "UNKNOWN": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 0
+            }
+          },
+          "confusion_matrix_labels": [
+            "ARGUIDO",
+            "TESTEMUNHA",
+            "RELATOR",
+            "REU",
+            "UNKNOWN",
+            "INVALID"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "distractor_examples": null,
+      "predictions": [
+        {
+          "id": "stj_2394_24_3PBPDL_S1_001",
+          "entity": "AA",
+          "gold": "ARGUIDO",
+          "predicted": "ARGUIDO",
+          "valid_output": true,
+          "raw_output": "ARGUIDO",
+          "evidence_type": "explicit",
+          "difficulty": "easy",
+          "contains_distractor_role": false
+        },
+        {
+          "id": "stj_43_24_9GAOBR_B_S1_001",
+          "entity": "AA",
+          "gold": "ARGUIDO",
+          "predicted": "UNKNOWN",
+          "valid_output": true,
+          "raw_output": "UNKNOWN",
+          "evidence_type": "contextual",
+          "difficulty": "medium",
+          "contains_distractor_role": false
+        },
+        {
+          "id": "stj_1760_19_0T8PVZ_P1_S1_001",
+          "entity": "BB",
+          "gold": "TESTEMUNHA",
+          "predicted": "TESTEMUNHA",
+          "valid_output": true,
+          "raw_output": "TESTEMUNHA",
+          "evidence_type": "explicit",
+          "difficulty": "easy",
+          "contains_distractor_role": false
+        }
+      ]
+    }
+  }
+}
