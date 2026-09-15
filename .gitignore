@@ -16,3 +16,6 @@ cache/
 .ruff_cache/
 wandb/
 runs/
+# Slurm runtime logs
+results/qwen3_*_*.out
+results/qwen3_*_*.err
