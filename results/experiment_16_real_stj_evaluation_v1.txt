@@ -1,0 +1,294 @@
+Experiment 16 - Final real-STJ evaluation v1
+
+FIRST EVALUATION ON THE FROZEN 50-EXAMPLE REAL STJ EVALUATION SET
+
+The 50 examples are human validated and balanced with 10 examples per class.
+The real STJ evaluation set was used only for evaluation and was not modified.
+Multi-entity challenge examples, when available, are reported separately and never included in headline metrics.
+
+Configuration:
+rule based: current entity-aware classifier from evaluate_rule_based_roles_v2.py
+embedding encoder: BAAI/bge-m3 (frozen)
+embedding classifier: LogisticRegression(max_iter=2000)
+embedding training data only: data/processed/roles_v4.jsonl
+training examples: 1328
+evaluation data: data/eval/roles_eval_real_candidates_v1.jsonl
+evaluation SHA-256: f687174287e7aeb50283a42e510897eb4bd9daa663749b3f3a4507c77a3bd6c8
+macro averages use all five target labels for headline metrics; subgroup macro averages use labels present in that subgroup's gold or predictions.
+
+========================================================================================
+Approach 1 - Entity-aware rule-based classifier
+========================================================================================
+runtime seconds: 0.0181
+runtime scope: approach setup/training (if applicable) plus prediction on the 50 examples
+
+Headline metrics:
+count: 50
+accuracy: 0.5000
+macro precision: 0.6571
+macro recall: 0.5000
+macro F1: 0.4547
+
+Per-class metrics:
+label        precision  recall  F1      support
+-----------  ---------  ------  ------  -------
+ARGUIDO      1.0000     0.7000  0.8235  10
+TESTEMUNHA   1.0000     0.7000  0.8235  10
+RELATOR      0.0000     0.0000  0.0000  10
+REU          1.0000     0.1000  0.1818  10
+UNKNOWN      0.2857     1.0000  0.4444  10
+
+Confusion matrix:
+Rows = gold labels; columns = predicted labels
+               ARGUIDO TESTEMUNHA    RELATOR        REU    UNKNOWN
+ARGUIDO              7          0          0          0          3
+TESTEMUNHA           0          7          0          0          3
+RELATOR              0          0          0          0         10
+REU                  0          0          0          1          9
+UNKNOWN              0          0          0          0         10
+
+Results by evidence_type:
+  contextual:
+    count: 13
+    accuracy: 0.3077
+    macro precision: 0.0769
+    macro recall: 0.2500
+    macro F1: 0.1176
+  explicit:
+    count: 37
+    accuracy: 0.5676
+    macro precision: 0.6545
+    macro recall: 0.5778
+    macro F1: 0.5357
+
+Results by difficulty:
+  easy:
+    count: 30
+    accuracy: 0.5667
+    macro precision: 0.6471
+    macro recall: 0.6381
+    macro F1: 0.5608
+  hard:
+    count: 6
+    accuracy: 0.3333
+    macro precision: 0.1667
+    macro recall: 0.5000
+    macro F1: 0.2500
+  medium:
+    count: 14
+    accuracy: 0.4286
+    macro precision: 0.5833
+    macro recall: 0.3958
+    macro F1: 0.3500
+
+Performance where contains_distractor_role=true:
+count: 3
+accuracy: 0.3333
+macro precision: 0.2500
+macro recall: 0.2500
+macro F1: 0.2500
+
+Individual predictions:
+01. id=stj_2394_24_3PBPDL_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+02. id=stj_43_24_9GAOBR_B_S1_001 | entity=AA | gold=ARGUIDO | predicted=UNKNOWN
+03. id=stj_1760_19_0T8PVZ_P1_S1_001 | entity=BB | gold=TESTEMUNHA | predicted=TESTEMUNHA
+04. id=stj_1760_19_0T8PVZ_P1_S1_002 | entity=DD | gold=TESTEMUNHA | predicted=TESTEMUNHA
+05. id=stj_11103_17_2T8PRT_C_P1_S1_001 | entity=Maria da Graça Trigo | gold=RELATOR | predicted=UNKNOWN
+06. id=stj_315_26_8PCCSC_A_S1_001 | entity=José A. Vaz Carreto | gold=RELATOR | predicted=UNKNOWN
+07. id=stj_1632_22_1T8BRG_G2_S1_001 | entity=AA | gold=REU | predicted=UNKNOWN
+08. id=stj_6566_20_1T8STB_E1_S1_001 | entity=AA | gold=REU | predicted=UNKNOWN
+09. id=stj_77_18_2T8CLD_E_C1_S1_001 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+10. id=stj_11103_17_2T8PRT_C_P1_S1_002 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+11. id=stj_178_14_6TAVLC_P1_A_S1_001 | entity=BB | gold=ARGUIDO | predicted=ARGUIDO
+12. id=stj_2077_25_7YRLSB_B_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+13. id=stj_84_22_0PFEVR_E1_S1_001 | entity=BB | gold=TESTEMUNHA | predicted=TESTEMUNHA
+14. id=stj_84_22_0PFEVR_E1_S1_002 | entity=CC | gold=TESTEMUNHA | predicted=TESTEMUNHA
+15. id=stj_25119_17_5T8LSB_L1_S1_A_001 | entity=GRAÇA AMARAL | gold=RELATOR | predicted=UNKNOWN
+16. id=stj_1424_22_8T8GMR_C_G1_S1_001 | entity=Nelson Borges Carneiro | gold=RELATOR | predicted=UNKNOWN
+17. id=stj_15506_18_7T8LSB_L2_S1_001 | entity=AA | gold=REU | predicted=UNKNOWN
+18. id=stj_1337_22_3T8LRA_C1_S1_001 | entity=AA | gold=REU | predicted=UNKNOWN
+19. id=stj_2_25_4YREVR_S1_001 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+20. id=stj_1424_22_8T8GMR_C_G1_S1_002 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+21. id=stj_279_19_4T8EVR_E1_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+22. id=stj_158_25_6PAGDM_C_S1_001 | entity=AA1 | gold=ARGUIDO | predicted=ARGUIDO
+23. id=stj_178_14_6TAVLC_P1_A_S1_002 | entity=FF | gold=TESTEMUNHA | predicted=UNKNOWN
+24. id=stj_100_18_0TRCBR_S1_001 | entity=DD | gold=TESTEMUNHA | predicted=TESTEMUNHA
+25. id=stj_1399_22_3T8BJA_E1_S1_001 | entity=Cristina Soares | gold=RELATOR | predicted=UNKNOWN
+26. id=stj_2837_24_6T8GMR_G1_S1_001 | entity=Carlos Portela | gold=RELATOR | predicted=UNKNOWN
+27. id=stj_675_23_2T8BRG_G1_S1_001 | entity=AA | gold=REU | predicted=REU
+28. id=stj_4284_22_ST8GDM_P1_S1_001 | entity=BB | gold=REU | predicted=UNKNOWN
+29. id=stj_4284_22_ST8GDM_P1_S1_002 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+30. id=stj_10850_22_1T9PRT_P1_S1_001 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+31. id=stj_3363_24_9JAPRT_P1_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+32. id=stj_851_18_0T9BRG_S1_001 | entity=AA | gold=ARGUIDO | predicted=UNKNOWN
+33. id=stj_2100_23_0PIPRT_S1_001 | entity=FF | gold=TESTEMUNHA | predicted=UNKNOWN
+34. id=stj_2100_23_0PIPRT_S1_002 | entity=HH | gold=TESTEMUNHA | predicted=TESTEMUNHA
+35. id=stj_2139_25_0YRLSB_S1_001 | entity=CATARINA SERRA | gold=RELATOR | predicted=UNKNOWN
+36. id=stj_11359_20_3T8SNT_L2_S1_001 | entity=ANA PAULA LOBO | gold=RELATOR | predicted=UNKNOWN
+37. id=stj_1355_1S_8T8AVR_P1_S1_001 | entity=CC | gold=REU | predicted=UNKNOWN
+38. id=stj_1859_20_0T8STR_J_E1_S2_001 | entity=AA | gold=REU | predicted=UNKNOWN
+39. id=stj_151_25_9YRLSB_S1_001 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+40. id=stj_1921_24_0T8CSC_A_L1_S1_001 | entity=AA1 | gold=UNKNOWN | predicted=UNKNOWN
+41. id=stj_323_21_5T9VFR_P1_A_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+42. id=stj_1399_18_8T9PBL_A_S1_001 | entity=DD | gold=ARGUIDO | predicted=UNKNOWN
+43. id=stj_1142_22_7JACBR_C1_S1_001 | entity=FF | gold=TESTEMUNHA | predicted=TESTEMUNHA
+44. id=stj_1760_19_0T8PVZ_P1_S1_003 | entity=CC | gold=TESTEMUNHA | predicted=UNKNOWN
+45. id=stj_323_21_5T9VFR_P1_A_S1_002 | entity=CELSO MANATA | gold=RELATOR | predicted=UNKNOWN
+46. id=stj_529_21_7T8GMR_A_G1_S1_001 | entity=MARIA JOÃO VAZ TOMÉ | gold=RELATOR | predicted=UNKNOWN
+47. id=stj_599_20_5T8PVZ_P1_S1_001 | entity=AA | gold=REU | predicted=UNKNOWN
+48. id=stj_5431_23_5T8VIS_A_C1_S1_001 | entity=AA | gold=REU | predicted=UNKNOWN
+49. id=stj_529_21_7T8GMR_A_G1_S1_002 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+50. id=stj_103_06_8TBMNC_G_S1_A_001 | entity=AA | gold=UNKNOWN | predicted=UNKNOWN
+
+========================================================================================
+Approach 2 - Frozen BGE-M3 embeddings + LogisticRegression
+========================================================================================
+runtime seconds: 1093.8550
+runtime scope: approach setup/training (if applicable) plus prediction on the 50 examples
+
+Headline metrics:
+count: 50
+accuracy: 0.4800
+macro precision: 0.3440
+macro recall: 0.4800
+macro F1: 0.3960
+
+Per-class metrics:
+label        precision  recall  F1      support
+-----------  ---------  ------  ------  -------
+ARGUIDO      0.5333     0.8000  0.6400  10
+TESTEMUNHA   0.8182     0.9000  0.8571  10
+RELATOR      0.0000     0.0000  0.0000  10
+REU          0.3684     0.7000  0.4828  10
+UNKNOWN      0.0000     0.0000  0.0000  10
+
+Confusion matrix:
+Rows = gold labels; columns = predicted labels
+               ARGUIDO TESTEMUNHA    RELATOR        REU    UNKNOWN
+ARGUIDO              8          1          0          1          0
+TESTEMUNHA           1          9          0          0          0
+RELATOR              0          1          0          4          5
+REU                  3          0          0          7          0
+UNKNOWN              3          0          0          7          0
+
+Results by evidence_type:
+  contextual:
+    count: 13
+    accuracy: 0.3846
+    macro precision: 0.2024
+    macro recall: 0.3929
+    macro F1: 0.2163
+  explicit:
+    count: 37
+    accuracy: 0.5135
+    macro precision: 0.3848
+    macro recall: 0.5556
+    macro F1: 0.4197
+
+Results by difficulty:
+  easy:
+    count: 30
+    accuracy: 0.5000
+    macro precision: 0.3974
+    macro recall: 0.5714
+    macro F1: 0.4418
+  hard:
+    count: 6
+    accuracy: 0.3333
+    macro precision: 0.3333
+    macro recall: 0.1667
+    macro F1: 0.2222
+  medium:
+    count: 14
+    accuracy: 0.5000
+    macro precision: 0.3958
+    macro recall: 0.5208
+    macro F1: 0.4415
+
+Performance where contains_distractor_role=true:
+count: 3
+accuracy: 0.6667
+macro precision: 0.5000
+macro recall: 0.6667
+macro F1: 0.5556
+
+Individual predictions:
+01. id=stj_2394_24_3PBPDL_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+02. id=stj_43_24_9GAOBR_B_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+03. id=stj_1760_19_0T8PVZ_P1_S1_001 | entity=BB | gold=TESTEMUNHA | predicted=TESTEMUNHA
+04. id=stj_1760_19_0T8PVZ_P1_S1_002 | entity=DD | gold=TESTEMUNHA | predicted=TESTEMUNHA
+05. id=stj_11103_17_2T8PRT_C_P1_S1_001 | entity=Maria da Graça Trigo | gold=RELATOR | predicted=REU
+06. id=stj_315_26_8PCCSC_A_S1_001 | entity=José A. Vaz Carreto | gold=RELATOR | predicted=REU
+07. id=stj_1632_22_1T8BRG_G2_S1_001 | entity=AA | gold=REU | predicted=REU
+08. id=stj_6566_20_1T8STB_E1_S1_001 | entity=AA | gold=REU | predicted=REU
+09. id=stj_77_18_2T8CLD_E_C1_S1_001 | entity=AA | gold=UNKNOWN | predicted=ARGUIDO
+10. id=stj_11103_17_2T8PRT_C_P1_S1_002 | entity=AA | gold=UNKNOWN | predicted=REU
+11. id=stj_178_14_6TAVLC_P1_A_S1_001 | entity=BB | gold=ARGUIDO | predicted=TESTEMUNHA
+12. id=stj_2077_25_7YRLSB_B_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+13. id=stj_84_22_0PFEVR_E1_S1_001 | entity=BB | gold=TESTEMUNHA | predicted=TESTEMUNHA
+14. id=stj_84_22_0PFEVR_E1_S1_002 | entity=CC | gold=TESTEMUNHA | predicted=TESTEMUNHA
+15. id=stj_25119_17_5T8LSB_L1_S1_A_001 | entity=GRAÇA AMARAL | gold=RELATOR | predicted=UNKNOWN
+16. id=stj_1424_22_8T8GMR_C_G1_S1_001 | entity=Nelson Borges Carneiro | gold=RELATOR | predicted=REU
+17. id=stj_15506_18_7T8LSB_L2_S1_001 | entity=AA | gold=REU | predicted=REU
+18. id=stj_1337_22_3T8LRA_C1_S1_001 | entity=AA | gold=REU | predicted=REU
+19. id=stj_2_25_4YREVR_S1_001 | entity=AA | gold=UNKNOWN | predicted=REU
+20. id=stj_1424_22_8T8GMR_C_G1_S1_002 | entity=AA | gold=UNKNOWN | predicted=REU
+21. id=stj_279_19_4T8EVR_E1_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+22. id=stj_158_25_6PAGDM_C_S1_001 | entity=AA1 | gold=ARGUIDO | predicted=ARGUIDO
+23. id=stj_178_14_6TAVLC_P1_A_S1_002 | entity=FF | gold=TESTEMUNHA | predicted=TESTEMUNHA
+24. id=stj_100_18_0TRCBR_S1_001 | entity=DD | gold=TESTEMUNHA | predicted=TESTEMUNHA
+25. id=stj_1399_22_3T8BJA_E1_S1_001 | entity=Cristina Soares | gold=RELATOR | predicted=UNKNOWN
+26. id=stj_2837_24_6T8GMR_G1_S1_001 | entity=Carlos Portela | gold=RELATOR | predicted=TESTEMUNHA
+27. id=stj_675_23_2T8BRG_G1_S1_001 | entity=AA | gold=REU | predicted=REU
+28. id=stj_4284_22_ST8GDM_P1_S1_001 | entity=BB | gold=REU | predicted=ARGUIDO
+29. id=stj_4284_22_ST8GDM_P1_S1_002 | entity=AA | gold=UNKNOWN | predicted=ARGUIDO
+30. id=stj_10850_22_1T9PRT_P1_S1_001 | entity=AA | gold=UNKNOWN | predicted=REU
+31. id=stj_3363_24_9JAPRT_P1_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+32. id=stj_851_18_0T9BRG_S1_001 | entity=AA | gold=ARGUIDO | predicted=REU
+33. id=stj_2100_23_0PIPRT_S1_001 | entity=FF | gold=TESTEMUNHA | predicted=ARGUIDO
+34. id=stj_2100_23_0PIPRT_S1_002 | entity=HH | gold=TESTEMUNHA | predicted=TESTEMUNHA
+35. id=stj_2139_25_0YRLSB_S1_001 | entity=CATARINA SERRA | gold=RELATOR | predicted=UNKNOWN
+36. id=stj_11359_20_3T8SNT_L2_S1_001 | entity=ANA PAULA LOBO | gold=RELATOR | predicted=UNKNOWN
+37. id=stj_1355_1S_8T8AVR_P1_S1_001 | entity=CC | gold=REU | predicted=ARGUIDO
+38. id=stj_1859_20_0T8STR_J_E1_S2_001 | entity=AA | gold=REU | predicted=ARGUIDO
+39. id=stj_151_25_9YRLSB_S1_001 | entity=AA | gold=UNKNOWN | predicted=REU
+40. id=stj_1921_24_0T8CSC_A_L1_S1_001 | entity=AA1 | gold=UNKNOWN | predicted=REU
+41. id=stj_323_21_5T9VFR_P1_A_S1_001 | entity=AA | gold=ARGUIDO | predicted=ARGUIDO
+42. id=stj_1399_18_8T9PBL_A_S1_001 | entity=DD | gold=ARGUIDO | predicted=ARGUIDO
+43. id=stj_1142_22_7JACBR_C1_S1_001 | entity=FF | gold=TESTEMUNHA | predicted=TESTEMUNHA
+44. id=stj_1760_19_0T8PVZ_P1_S1_003 | entity=CC | gold=TESTEMUNHA | predicted=TESTEMUNHA
+45. id=stj_323_21_5T9VFR_P1_A_S1_002 | entity=CELSO MANATA | gold=RELATOR | predicted=REU
+46. id=stj_529_21_7T8GMR_A_G1_S1_001 | entity=MARIA JOÃO VAZ TOMÉ | gold=RELATOR | predicted=UNKNOWN
+47. id=stj_599_20_5T8PVZ_P1_S1_001 | entity=AA | gold=REU | predicted=REU
+48. id=stj_5431_23_5T8VIS_A_C1_S1_001 | entity=AA | gold=REU | predicted=REU
+49. id=stj_529_21_7T8GMR_A_G1_S1_002 | entity=AA | gold=UNKNOWN | predicted=ARGUIDO
+50. id=stj_103_06_8TBMNC_G_S1_A_001 | entity=AA | gold=UNKNOWN | predicted=REU
+
+========================================================================================
+Separate qualitative multi-entity diagnostic
+========================================================================================
+Qualitative multi-entity diagnostic; excluded from all 50-example headline metrics.
+examples: 5
+
+entity_aware_rule_based
+runtime seconds: 0.0021
+count: 5
+accuracy: 0.4000
+macro precision: 0.0800
+macro recall: 0.2000
+macro F1: 0.1143
+
+bge_m3_logistic_regression
+runtime seconds: 11.5704
+count: 5
+accuracy: 0.0000
+macro precision: 0.0000
+macro recall: 0.0000
+macro F1: 0.0000
+
+Individual diagnostic predictions:
+01. id=multi_1355_1S_8T8AVR_P1_S1_001 | entity=AA | gold=UNKNOWN | rule=UNKNOWN | bge_m3=ARGUIDO
+02. id=multi_1355_1S_8T8AVR_P1_S1_002 | entity=BB | gold=UNKNOWN | rule=UNKNOWN | bge_m3=ARGUIDO
+03. id=multi_1355_1S_8T8AVR_P1_S1_003 | entity=CC | gold=REU | rule=UNKNOWN | bge_m3=ARGUIDO
+04. id=multi_1355_1S_8T8AVR_P1_S1_004 | entity=DD | gold=REU | rule=UNKNOWN | bge_m3=ARGUIDO
+05. id=multi_1355_1S_8T8AVR_P1_S1_005 | entity=EE | gold=REU | rule=UNKNOWN | bge_m3=ARGUIDO
