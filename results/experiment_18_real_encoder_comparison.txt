@@ -1,0 +1,29 @@
+Experiment 18 - Real STJ encoder comparison
+
+Train dataset: data/processed/roles_v4.jsonl
+Eval dataset: data/eval/roles_eval_real_candidates_v1.jsonl
+Train examples: 1328
+Eval examples: 50
+
+================================================================================
+Model: BAAI/bge-m3
+Accuracy: 0.4800
+Macro Precision: 0.3440
+Macro Recall: 0.4800
+Macro F1: 0.3960
+Runtime seconds: 354.00
+
+Classification report:
+              precision    recall  f1-score   support
+
+     ARGUIDO       0.53      0.80      0.64        10
+  TESTEMUNHA       0.82      0.90      0.86        10
+     RELATOR       0.00      0.00      0.00        10
+         REU       0.37      0.70      0.48        10
+     UNKNOWN       0.00      0.00      0.00        10
+
+    accuracy                           0.48        50
+   macro avg       0.34      0.48      0.40        50
+weighted avg       0.34      0.48      0.40        50
+
+
