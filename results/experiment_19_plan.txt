@@ -1,0 +1,43 @@
+Experiment 19 - Fine-grained versus aggregated legal-role taxonomy
+
+Goal
+Compare two classification settings:
+1. prediction of specific fine-grained legal roles;
+2. prediction of automatically aggregated role classes.
+
+The fine-grained annotation is the source of truth. Aggregated labels must always be derived automatically from the fine labels through config/role_taxonomy.json and must never be annotated independently.
+
+Fine taxonomy
+- ARGUIDO
+- REU
+- AUTOR
+- REQUERENTE
+- RECORRENTE
+- RECORRIDO
+- TESTEMUNHA
+- RELATOR
+- UNKNOWN
+
+Aggregated taxonomy
+- PASSIVE_PARTY: derived from ARGUIDO or REU
+- ACTIVE_PARTY: derived from AUTOR or REQUERENTE
+- APPELLANT: derived from RECORRENTE
+- APPELLEE: derived from RECORRIDO
+- WITNESS: derived from TESTEMUNHA
+- RAPPORTEUR: derived from RELATOR
+- UNKNOWN: derived from UNKNOWN
+
+Rationale
+The experiment will test whether retaining legally specific roles or combining related roles produces a more useful and reliable classifier. Keeping the fine annotation authoritative preserves legal detail, prevents divergence between parallel annotations, and allows alternative aggregation schemes to be tested reproducibly.
+
+Dataset status
+The Experiment 19 datasets are still to be created. No sensitive judgment text is included in this plan.
+
+Results status
+No models have been trained and there are no model results yet.
+
+Comparison protocol
+The fine and aggregated experiments must use exactly the same underlying examples and exactly the same train, validation, and test splits. Only the target taxonomy may differ, with aggregated targets generated automatically from fine labels.
+
+Later work
+Martim's document segmenter will be evaluated separately after the taxonomy baseline has been established.
