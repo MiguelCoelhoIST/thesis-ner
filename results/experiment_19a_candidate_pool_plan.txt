@@ -1,0 +1,89 @@
+Experiment 19a - Real-STJ candidate pool for human validation
+
+Objective
+Create a new pool of candidate passages from real Portuguese Supreme Court of Justice (STJ) judgments for later human annotation under the Experiment 19 fine-grained taxonomy.
+
+Why a new benchmark is needed
+The expanded taxonomy introduces roles that are not represented in the earlier benchmark. A new independently collected pool is required to evaluate those roles without adapting or contaminating the existing evaluation material.
+
+Frozen previous benchmark
+The existing 50-example real-STJ evaluation set remains frozen. It will not be modified, reused as extraction seeds, or included automatically in the new candidate pool.
+
+Candidate discovery
+Lexical role anchors are used only to discover passages that may be useful for annotation. A suggested label records which lexical anchor triggered extraction; it is not a gold label and must not be treated as one.
+
+Human validation target
+The intended final benchmark contains around 10-12 human-validated examples per fine role. Candidate counts may be larger because ambiguous, duplicate, unsuitable, or incorrectly suggested examples will be rejected during review.
+
+Annotation requirement
+Every final label requires manual validation. Candidate extraction must leave label and annotation metadata unset and human_validated=false.
+
+Provenance and privacy
+Candidates must come from real STJ judgments. Raw non-anonymized judgments must not be committed. Candidate material must be reviewed for anonymization and suitability before any dataset is committed.
+
+Future splitting
+When train, validation, or evaluation splits are later created, examples from the same process must remain in a single split to avoid process-level leakage.
+
+Later stages
+This stage performs candidate extraction only. No model is trained and no candidate is accepted as ground truth automatically.
+
+Document-reader review and current support
+No existing Word/RTF document-reading or conversion utility was found in src/ or scripts/.
+- DOCX: standard-library ZIP/XML reader extracts body paragraphs, text split across runs, table-cell paragraphs, tabs and line breaks in document order. No extra dependency is required. Headers, footers, footnotes, comments, tracked revisions and embedded objects are outside the reader's scope. Images/scans require separate OCR. Inspect representative converted documents before annotation.
+- RTF: striprtf decodes RTF control words, Unicode escapes, and ANSI byte escapes using the declared code page (Windows-1252 when absent). Install requirements.txt. Malformed RTF, missing dependencies and decoding failures are reported explicitly.
+- DOC: binary legacy Word is not directly supported. Every .doc file is counted and listed as skipped with a pre-conversion reason. Do not rename .doc to .docx. Convert with LibreOffice as described below; encrypted, damaged or image-only documents still require separate attention.
+- TXT, TEXT, MD, HTML, HTM: UTF-8/UTF-8-BOM text; HTML is converted to readable text. Other encodings must be converted explicitly to UTF-8. No replacement-character decoding is used.
+- JSON/JSONL: existing text/content/body/judgment/document_text fields; JSON process_number metadata is retained when available. Unrecognized containers, empty text and invalid JSON are counted as failures.
+- Other formats, including PDF: counted and reported as unsupported. No document is silently dropped from file accounting.
+
+Offsets and source fidelity
+Contexts are continuous slices of the extracted document text. Entity offsets always refer to that extracted context and no entity markers are inserted. Word/RTF layout is not preserved as a binary-file character stream; offsets do not refer to bytes or Word character positions. Candidate schema and unvalidated annotation defaults remain unchanged.
+
+Audit and failure behavior
+--audit-only reads documents and discovers candidates to measure coverage, without writing candidate text. --audit-json optionally writes counts, relative filenames, reasons and process IDs under the Git-ignored data/raw/ directory; it includes no judgment text. Existing pool and audit paths are never overwritten. Exit status is non-zero when no supported documents can be read or no candidates are found. Partial failures remain visible in the report so coverage can be assessed before extraction.
+The audit includes all file extensions, successful file/document counts, failed/skipped reasons, contributing documents, discovered/selected candidate counts by role, distinct normalized process IDs and missing-ID records.
+
+Process diversity and evidence selection
+Process IDs are taken from JSON metadata, then text, then recognizable filenames. Stable root IDs group appellate versions and incident suffixes (for example 123/22.1T8ABC-A.P1.S1 under 123/22.1T8ABC). This is deliberately conservative for later split isolation. Original process_number values remain in candidates. When IDs are missing, filenames without extensions are fallback groups and the audit records the uncertainty; identity across unrelated filenames cannot be inferred reliably.
+Sampling uses fixed seed 42, gives distinct processes a first turn per role, then applies --max-per-process-role (default 2), with at most 12 selected candidates per process across roles. Duplicate versions are compared within process/role/target groups. Local discovery retains at most 3 candidates per role and 12 overall per document, preferring adjacent anchor/target links.
+--hard-share (default 0.25) targets a share of contexts containing multiple person-like mentions or multiple role types. This is a heuristic, not manually assigned difficulty. Process diversity and caps take precedence; the attainable share depends on available candidates. The audit records the actual hard-context count. All role suggestions and evidence preferences require human review.
+UNKNOWN has no lexical anchor in this discovery stage; out-of-scope or unsupported target roles can become UNKNOWN only through manual annotation. Additional targeted discovery may be needed to reach its final quota.
+
+Commands (run manually after supplying the local corpus)
+Install the RTF dependency in the project environment:
+  .\venv\Scripts\python.exe -m pip install -r requirements.txt
+
+Audit the local corpus before extraction (the input path is an example):
+  .\venv\Scripts\python.exe src/data/extract_role_candidates_v2.py --input-dir data/raw/iris --audit-only --max-per-role 30 --context-chars 240 --hard-share 0.25 --max-per-process-role 2 --audit-json data/raw/experiment_19a_audit_before.json
+
+Legacy DOC pre-conversion on Windows with LibreOffice installed
+Convert each .doc to DOCX in a separate output tree inside the input directory. The original file is retained; the recursive audit will still report it as requiring conversion and will additionally read its DOCX counterpart. Check conversion exit status and existence of each expected output. Preserve directory structure to avoid filename collisions. Do not run this against real data during tooling development.
+
+PowerShell batch procedure:
+  $irisRoot = (Resolve-Path 'data/raw/iris').Path
+  $officeExe = 'C:\Program Files\LibreOffice\program\soffice.com'
+  if (-not (Test-Path -LiteralPath $officeExe)) { throw 'Install LibreOffice or supply its soffice executable path.' }
+  $legacyFiles = @(Get-ChildItem -LiteralPath $irisRoot -Recurse -File -Filter '*.doc')
+  foreach ($legacyFile in $legacyFiles) {
+      $relativeFile = $legacyFile.FullName.Substring($irisRoot.Length).TrimStart([char[]]'\/')
+      $relativeFolder = Split-Path -Parent $relativeFile
+      $convertedRoot = Join-Path $irisRoot 'converted-docx'
+      $convertedFolder = if ($relativeFolder) { Join-Path $convertedRoot $relativeFolder } else { $convertedRoot }
+      $expectedDocx = Join-Path $convertedFolder ($legacyFile.BaseName + '.docx')
+      if (Test-Path -LiteralPath $expectedDocx) { throw "Conversion output already exists: $expectedDocx" }
+      New-Item -ItemType Directory -Path $convertedFolder -Force | Out-Null
+      & $officeExe --headless --convert-to docx --outdir $convertedFolder $legacyFile.FullName
+      if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $expectedDocx)) { throw "Conversion failed: $relativeFile" }
+  }
+
+If LibreOffice is unavailable, use an approved local Word conversion workflow to Save As DOCX and preserve directory/process metadata. Do not upload judgments to online conversion services. Review text extraction quality and reconcile .doc counts with converted outputs before building the candidate pool.
+LibreOffice command-line reference: https://help.libreoffice.org/latest/en-GB/text/shared/guide/start_parameters.html?DbPAR=BASIC&System=WIN
+
+Audit again after conversion using a new summary filename, then extract:
+  .\venv\Scripts\python.exe src/data/extract_role_candidates_v2.py --input-dir data/raw/iris --audit-only --max-per-role 30 --context-chars 240 --hard-share 0.25 --max-per-process-role 2 --audit-json data/raw/experiment_19a_audit_after.json
+  .\venv\Scripts\python.exe src/data/extract_role_candidates_v2.py --input-dir data/raw/iris --output data/raw/experiment_19a_candidates_v2.jsonl --max-per-role 30 --context-chars 240 --hard-share 0.25 --max-per-process-role 2 --audit-json data/raw/experiment_19a_extraction_audit.json
+  .\venv\Scripts\python.exe src/evaluation/validate_role_candidates_v2.py data/raw/experiment_19a_candidates_v2.jsonl
+
+Synthetic verification
+  .\venv\Scripts\python.exe -m unittest discover -s tests -v
+Tests use only fabricated text and temporary document packages. No real IRIS/STJ corpus is processed as part of implementation or testing.

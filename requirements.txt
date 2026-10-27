@@ -10,3 +10,4 @@ evaluate
 sentence-transformers
 numpy
 openai
+striprtf
