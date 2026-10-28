@@ -151,7 +151,7 @@ def validate_review_fields(record):
     if not isinstance(record.get("human_confirmed"), bool):
         errors.append("human_confirmed must be a boolean")
     evidence = record.get("annotation_evidence")
-    if evidence not in (None, "explicit", "implicit", "uncertain"):
+    if evidence not in (None, "explicit", "implicit", "uncertain", "not_applicable"):
         errors.append("invalid annotation_evidence")
 
     if status in ("accepted", "uncertain"):
@@ -172,7 +172,7 @@ def validate_review_fields(record):
     if status == "accepted":
         if record.get("human_validated") is not True or record.get("human_confirmed") is not True:
             errors.append("accepted reviews require explicit human confirmation and validation")
-        if evidence not in ("explicit", "implicit"):
+        if evidence not in ("explicit", "implicit", "not_applicable"):
             errors.append("uncertain evidence cannot be accepted")
         start, end, text = record.get("entity_start"), record.get("entity_end"), record.get("text")
         if type(start) is not int or type(end) is not int or not isinstance(text, str):
@@ -189,6 +189,26 @@ def validate_review_fields(record):
             "annotation_evidence", "evidence_type", "difficulty", "contains_distractor_role"
         )):
             errors.append("rejected/skipped reviews must leave annotation metadata unset")
+    if evidence == "not_applicable" and labels != ["UNKNOWN"]:
+        errors.append("not_applicable evidence requires UNKNOWN only")
+    if record.get("review_schema_version") == 2 and status == "accepted" and labels == ["UNKNOWN"] and evidence != "not_applicable":
+        errors.append("schema-v2 accepted UNKNOWN requires not_applicable evidence")
+    if "role_scope_by_label" in record:
+        scopes = record["role_scope_by_label"]
+        if (not isinstance(scopes, dict) or not isinstance(labels, list)
+                or not all(isinstance(label, str) for label in labels) or set(scopes) != set(labels)):
+            errors.append("role_scope_by_label must match the selected labels")
+        else:
+            for label, scope in scopes.items():
+                if scope not in ("current_proceeding", "cited_proceeding", "current_and_cited", "unclear", "not_applicable"):
+                    errors.append("invalid role proceeding scope")
+                if (label == "UNKNOWN") != (scope == "not_applicable"):
+                    errors.append("not_applicable proceeding scope is reserved for UNKNOWN")
+            cited = any(scope in ("cited_proceeding", "current_and_cited") for scope in scopes.values())
+            if record.get("has_cited_proceeding_roles") is not cited:
+                errors.append("has_cited_proceeding_roles disagrees with role scope")
+        if record.get("annotation_task") != "mention_level":
+            errors.append("scoped reviews must declare annotation_task=mention_level")
     return errors
 
 

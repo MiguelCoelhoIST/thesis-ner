@@ -1,0 +1,28 @@
+Experiment 19a - Provenance and annotation-methodology review
+
+Pilot metadata confirmed locally
+The v4 pool contains 61 candidates from the 10-document smoke extraction. Ten human reviews are accepted, none rejected; two records are multi-label. Twelve label assignments comprise ARGUIDO 4, RECORRENTE 4, TESTEMUNHA 1, RELATOR 2 and UNKNOWN 1. These counts describe this pilot only.
+
+Observed decision-ID discrepancy
+Two text files whose names differ in whitespace both encode a decision identifier ending in .S2. Both have an early process heading ending in .S1; no .S2 identifier was detected in either document body. One version is substantially longer, and both contain additional process references. The existing extractor selected the first text match and did not record the contradictory filename evidence.
+This establishes a provenance conflict, not which exact decision the files represent. They must not be assumed to identify the same decision merely because their base process is shared. They should share a conservative base-process split group. Source adjudication is pending; the original candidates and human annotations are unchanged.
+
+New tooling
+src/data/role_provenance.py records exact header/filename identifier evidence, text-reference locations and source-text fingerprints without copying judgment prose into its audit. It separates decision_id from process_group_id, leaves conflicting decisions unresolved and supports a metadata-only audit without loading NER. New extraction candidates carry this provenance while retaining legacy process_number evidence. Related .S1/.S2 decisions and incidents share the same normalized base group; different-root conflicts require manual resolution before splitting.
+
+AUTOR vocabulary and REU coverage
+The saved 10-document audit contains 74 AUTOR anchors, 9 discovered candidates and 6 selected candidates. Two of those six passages contain offense-related vocabulary; this is a lexical cue, not an adjudicated interpretation. The reviewed AUTOR-suggested example received UNKNOWN. The protocol reserves AUTOR for a civil claimant and distinguishes authors of offenses/publications; criminal accusation must itself be supported before ARGUIDO is assigned.
+The audit contains 8 REU anchors but 0 discovered/selected REU candidates. Thus the coverage gap arises before final sampling; the saved audit does not establish whether the cause is absent nearby people, NER recall, filtering, or criminal/quoted vocabulary. New audits report anchors with and without nearby accepted PER spans. Inspect those coverage counts and perform targeted human review before claiming REU coverage. No examples or labels are fabricated to fill the gap.
+
+Annotation policy
+docs/experiment_19a_annotation_protocol.md specifies a nine-role mention-level task, multi-label assignments, UNKNOWN versus REJECT, explicit/implicit/not-applicable evidence, uncertainty and distracting role mentions. A supported role in a cited proceeding is eligible at mention level but is explicitly flagged per label. It does not establish a current-case role. Current-case experiments require a separate scope-filtering/adjudication rule.
+The terminal reviewer supports not-applicable evidence for new UNKNOWN annotations and per-label proceeding scope, while preserving legacy records and source metadata. Existing v4 reviews are not migrated; scope/evidence questions require a separate human provenance review if those records are used under the revised protocol.
+
+Before full extraction
+1. Run the metadata-only provenance audit into a new ignored data/raw/ JSON file.
+2. Review exact-decision conflicts, unresolved grouping and repeated source versions; preserve each source's evidence.
+3. Read the new annotation protocol and use a new review-output filename for the revised pilot.
+4. Run a new limited combined extraction/audit, inspect REU/AUTOR coverage and entity quality, and only then consider a full extraction into fresh output paths.
+
+Preservation and limits
+No full-corpus NER or classifier training was performed for this review. Existing v4 candidates, ten human reviews and frozen 50-example evaluation data were not edited. No private judgment prose is included in this report or the synthetic tests. Metadata inference is provisional and does not replace source adjudication.

@@ -87,3 +87,103 @@ Audit again after conversion using a new summary filename, then extract:
 Synthetic verification
   .\venv\Scripts\python.exe -m unittest discover -s tests -v
 Tests use only fabricated text and temporary document packages. No real IRIS/STJ corpus is processed as part of implementation or testing.
+
+NER-based revision v3 (after the first human pilot)
+The v2 capitalized-phrase/placeholder heuristics produced organizations, legal codes, road abbreviations and coordinated person names as targets. Those heuristics have been removed from production person detection. All new candidate targets must originate from exact PER spans emitted by the pretrained spaCy model. Role anchors remain discovery hints only.
+
+Local model inspection
+- Preferred local path: models/eduardo_extended_model.
+- Existing pipeline scripts already use this model and read doc.ents with label_ == 'PER'.
+- Stored pipeline: transformer followed by ner; transformer backbone neuralmind/bert-base-portuguese-cased, strided token windows 128/96.
+- Actual loaded NER labels: DAT, IDP, LOC, MOR, ORG, PER.
+- Available files include config.cfg, meta.json, tokenizer, ner/model, transformer/model and vocab files.
+- The installed spaCy 3.8.13 / spacy-transformers 1.4.0 / transformers 4.53.2 environment loads the model. Its saved spaCy compatibility range is >=3.6.1,<3.7.0 and loading emits compatibility/state-dict warnings. Successful loading does not prove unchanged accuracy under the newer libraries. The audit records those warnings, model configuration hash, runtime version and model labels; synthetic integration checks supplement controlled regression tests.
+- No new Python dependency is introduced by the NER revision. spaCy and spacy-transformers are already listed in requirements.txt.
+- If unavailable or unusable, extraction stops with setup instructions. Restore Eduardo's iris-lfs-storage/model-extended bundle to the local path, or supply --ner-model with a valid local pipeline containing a PER recognizer. No baseline or regex fallback is selected automatically and no model is trained.
+
+Span safeguards and provenance
+Only NER-predicted PER spans enter target selection. Conservative rejection rules remove apparent organizations/legal codes, road abbreviations, coordinated/merged spans, invalid offsets and conflicting overlap predictions. These rules can reject valid edge cases, including compound surnames with conjunctions; manual review remains required. They never synthesize a person span or split a merged prediction. Separate people are retained only when NER supplies separate spans. Anonymized placeholders are eligible only if NER recognizes them as PER; this may reduce placeholder recall and must be measured in the audit/pilot.
+All former candidate fields are retained. Additional provenance records source_document_id, entity_document_start/end, entity_detection='spacy:PER', and context_per_count. Context offsets select exactly the NER target in an unmodified extracted-text slice; document offsets select it in the extracted full document. Existing source filenames and process identifiers are preserved.
+
+Audit interpretation and coverage
+Every one of ARGUIDO, REU, AUTOR, REQUERENTE, RECORRENTE, RECORRIDO, TESTEMUNHA and RELATOR is reported with lexical-anchor occurrences, discovered candidates and selected candidates, including zero counts. No UNKNOWN examples are fabricated.
+ner_span_counts reports accepted_per_spans, dropped_false_entities, merged_spans, non_per_predictions, reason-specific drops and window/character counts. 'Accepted' here means passed the automatic span filters, not human-validated. 'Dropped false entities' is a filter counter, not an independently measured NER error rate. Non-PER model predictions are excluded and counted separately. Counts refer to the anchor-window search region, not a census of every entity in every judgment.
+Process-root grouping and version deduplication are retained. Role selection now proceeds round-robin so an earlier role cannot consume the entire per-process budget before later roles are considered. Distinct processes are preferred within each role, then globally lower-use processes; caps and deterministic seed 42 remain in force.
+
+Performance for the 388-document corpus
+The model is loaded once. Role anchors define local NER search windows, overlapping windows are merged up to 6000 characters, and nlp.pipe batches these windows (default --ner-batch-size 4, n_process=1). No full-document transformer graph is retained and long source documents are not silently truncated to the spaCy maximum length. Window-edge or conflicting entity boundaries are discarded, rather than converted into invented offsets. Use --ner-batch-size 1 if memory is limited. There is no full-corpus timing claim; the new audit records document versus NER input character counts and number of windows to support that measurement.
+
+Outstanding methodological decision: cited proceedings
+The thesis must choose and document which task is intended:
+1. Mention-level labeling: a role explicitly supported for this person in a cited proceeding may be annotated even when it belongs to another case.
+2. Current-case classification: only a role in the judgment's current proceeding is eligible; cited-case-only mentions need a separately agreed exclusion/annotation rule.
+The current extraction code does not decide between these definitions. It retains locally discovered PER candidates without assigning gold labels or classifying the proceeding reference. Reviewers should flag citation-dependent cases in their review notes for policy discussion. Do not silently equate a cited-case role with the current-case role, or automatically map such cases to UNKNOWN. Record the supervisors' eventual decision and apply it consistently before a gold benchmark is finalized.
+
+New audit/extraction commands (supersede v2 output paths above)
+These commands are provided for manual execution on the local text corpus; development and tests do not execute them on real judgments. Every output path is new and remains under ignored data/raw/.
+  .\venv\Scripts\python.exe src/data/extract_role_candidates_v2.py --input-dir data/raw/iris/naoanomimizados_txt --ner-model models/eduardo_extended_model --ner-batch-size 4 --audit-only --max-per-role 30 --context-chars 240 --hard-share 0.25 --max-per-process-role 2 --audit-json data/raw/experiment_19a_ner_audit_v3.json
+  .\venv\Scripts\python.exe src/data/extract_role_candidates_v2.py --input-dir data/raw/iris/naoanomimizados_txt --ner-model models/eduardo_extended_model --ner-batch-size 4 --output data/raw/experiment_19a_candidates_v3.jsonl --max-per-role 30 --context-chars 240 --hard-share 0.25 --max-per-process-role 2 --audit-json data/raw/experiment_19a_ner_extraction_audit_v3.json
+  .\venv\Scripts\python.exe src/evaluation/validate_role_candidates_v2.py data/raw/experiment_19a_candidates_v3.jsonl
+
+Preservation
+The existing v2 candidate pool, human reviews and frozen 50-example evaluation set remain unchanged. No confidential judgment text is added to code, tests, documentation or result files.
+
+Windows performance revision (smoke-test before a full rerun)
+The implementation already used bounded windows and nlp.pipe; it did not perform an extra full-document NER pass. The local pipeline contains only transformer and ner, both required. With dense role anchors, however, the union of bounded windows may cover nearly all document text and overlapping portions are still processed. Transformer inference on CPU remains potentially expensive. The previous CLI printed only after the entire corpus finished and buffered output, making progress invisible. Task-manager CPU time is accumulated across threads and does not by itself identify wall time or which stage dominated the interrupted run.
+
+Confirmed avoidable costs and changes
+- Anchor regexes were scanned over each full text independently for coverage, window generation and candidate discovery. A single per-document anchor index now serves all three.
+- Candidate discovery compared every anchor to all PER spans and repeatedly recounted all context entities. Sorted offset indexes now restrict those searches to relevant ranges without changing eligibility or offsets.
+- Conflicting PER detection used all-pairs comparisons. An interval sweep preserves its rejection behavior with lower complexity.
+- Process/evidence/hard-context scores were recomputed throughout sampling. They are cached once per candidate; the sampling order and caps are retained.
+- Identical NER window strings could be inferred repeatedly across windows or duplicate versions. A bounded in-memory cache (default 128 entries, --window-cache-size 0 to disable across-batch reuse) reuses only exact inputs to the same loaded model. Identical windows within a batch are also inferred once. Every prediction is projected through the requesting document's original window offset. Different overlapping contexts are retained rather than discarded, since changing context may change NER predictions. No cache containing judgment text is written to disk.
+- The cache retains all original source IDs and offset provenance; the audit records each document's ner_window_ranges, actual inference count and cache hits. Rejected entities, gold-label policy and human_validated defaults are unchanged.
+- Inference remains batched through nlp.pipe with one worker. --cpu-threads defaults to 4; use 0 to retain the environment default. The inspected local default was 6 threads, so extreme thread oversubscription was not established as the cause. A tiny sequential synthetic check measured about 0.12s at 6 threads versus 0.09s at 4; this includes warm-up/order effects and is not a corpus speed benchmark.
+
+Measurements and observability
+--progress-seconds defaults to 10. Flushed heartbeat output continues during model loading or a slow NER batch and reports completed documents/total, wall elapsed time, inferred windows, accumulated candidates, and current document size/window count. Frequent internal updates are throttled to avoid flooding the Windows terminal.
+--max-documents 5 or 10 selects the first N readable documents in sorted source-file/container order. It does not randomly change with each run. Deferred files/documents are explicitly reported. Container files count by document, not by file. Parsing first plans the limited set, enabling an exact progress denominator; selected text is released after its processing finishes.
+The audit stores aggregate phase timings for file parsing, anchor discovery/window planning, NER inference, span filtering, candidate discovery/deduplication/sampling, and model loading. Per-document profiles expose source IDs, sizes, anchor/window counts, cache hits and stage times. File parsing is timed globally because one container can supply multiple documents. total_elapsed_seconds covers processing through final selection; PowerShell timing below includes output writing too.
+
+Synthetic checks on this local environment
+- Candidate discovery only, 500 repeated anchors: approximately 0.221s before versus 0.097s after indexing.
+- Candidate discovery only, 1000 repeated anchors: approximately 0.682s before versus 0.194s after indexing; both returned 3 capped candidates. These exclude NER and are not estimates for the real corpus.
+- An actual-model check on ten identical fabricated short documents passed offset and annotation-default assertions, making one inference and nine exact-window cache hits. This verifies reuse and provenance, not realistic corpus throughput; actual hit rates depend on corpus repetition.
+No real judgment contents were processed to obtain these development measurements. The interrupted real-corpus run had no phase profile; its dominant stage must be established from the limited local smoke run rather than asserted retrospectively.
+
+Run a combined 10-document smoke extraction and audit in PowerShell
+This supersedes the earlier recommendation to do an expensive audit-only run followed by extraction over the same corpus. Both outputs can be produced by one NER pass. All filenames below are new; the script refuses existing outputs.
+
+  Measure-Command {
+      & .\venv\Scripts\python.exe -u src/data/extract_role_candidates_v2.py `
+          --input-dir data/raw/iris/naoanomimizados_txt `
+          --ner-model models/eduardo_extended_model `
+          --ner-batch-size 4 --cpu-threads 4 `
+          --max-documents 10 --progress-seconds 5 `
+          --max-per-role 30 --context-chars 240 `
+          --hard-share 0.25 --max-per-process-role 2 `
+          --output data/raw/experiment_19a_candidates_v4_smoke10.jsonl `
+          --audit-json data/raw/experiment_19a_audit_v4_smoke10.json | Out-Host
+      if ($LASTEXITCODE -ne 0) { throw 'Smoke extraction failed; inspect progress and audit.' }
+  } | Select-Object TotalSeconds
+
+  .\venv\Scripts\python.exe src/evaluation/validate_role_candidates_v2.py data/raw/experiment_19a_candidates_v4_smoke10.jsonl
+  $smokeAudit = Get-Content data/raw/experiment_19a_audit_v4_smoke10.json -Raw -Encoding UTF8 | ConvertFrom-Json
+  $smokeAudit.phase_timings_seconds | Format-List
+  $smokeAudit.ner_span_counts | Format-List
+  $smokeAudit.document_profiles | Sort-Object elapsed_seconds -Descending | Select-Object source_file, characters, anchor_occurrences, elapsed_seconds
+
+Inspect the smoke timings, largest documents, inferred character/window counts and cache hits before selecting a full-corpus run. A later full run should remove --max-documents and use fresh full-run output/audit filenames in the same combined invocation; do not overwrite the smoke outputs or reuse v1/v2/v3 pools or human reviews. No full-corpus speedup or completion time is claimed before this measurement.
+
+Post-v4 provenance and annotation protocol
+The 61-record / 10-reviewed-example pilot is retained as-is. Its results motivate the new protocol in docs/experiment_19a_annotation_protocol.md and the investigation in results/experiment_19a_provenance_report.txt. The earlier unresolved cited-proceeding discussion above is superseded for Experiment 19a by an explicitly mention-level task: supported roles in cited proceedings are eligible, but each role's proceeding scope is recorded. Current-case classification remains a separate task requiring explicit filtering/adjudication.
+New candidates distinguish exact decision_id from normalized process_group_id. Header, filename and body-reference evidence remain separate; conflicting exact IDs are not silently reconciled. The legacy process_number field is retained as evidence, while process-level sampling uses the new grouping when available. Unknown/conflicting root groups must be adjudicated before dataset splitting. Related .S1/.S2 decisions belong to the same split group but are not assumed to be the same exact decision.
+Run the metadata-only audit before further NER. It writes identifier evidence, offsets and source-text fingerprints, without loading a model or exporting judgment passages:
+  .\venv\Scripts\python.exe src/data/role_provenance.py --input-dir data/raw/iris/naoanomimizados_txt --output data/raw/experiment_19a_process_provenance_v1.json
+Inspect source identity conflicts in that report. Keep any adjudication separately, then test the new fields and coverage counters on a fresh limited extraction:
+  .\venv\Scripts\python.exe -u src/data/extract_role_candidates_v2.py --input-dir data/raw/iris/naoanomimizados_txt --ner-model models/eduardo_extended_model --max-documents 10 --ner-batch-size 4 --cpu-threads 4 --progress-seconds 5 --max-per-role 30 --context-chars 240 --hard-share 0.25 --max-per-process-role 2 --output data/raw/experiment_19a_candidates_v5_smoke10.jsonl --audit-json data/raw/experiment_19a_audit_v5_smoke10.json
+  .\venv\Scripts\python.exe src/evaluation/validate_role_candidates_v2.py data/raw/experiment_19a_candidates_v5_smoke10.jsonl
+Use a new human-review output with the revised mention-level proceeding-scope prompts:
+  .\venv\Scripts\python.exe src/annotation/review_role_candidates.py --input data/raw/experiment_19a_candidates_v5_smoke10.jsonl --output data/raw/experiment_19a_v5_scope_pilot10_reviews.jsonl --pilot-size 10 --seed 42
+The revised reviewer uses not_applicable evidence for accepted UNKNOWN annotations, explicit/implicit evidence for supported roles and uncertain evidence for pending decisions. It preserves source provenance, flags cited-case roles per label, and continues accepting historical review formats without migrating their labels or evidence. Existing reviews lacking scope need a separate manual provenance pass before their use in a scoped benchmark.
+Check the new per-role anchor-to-PER coverage counts before claiming coverage of REU or treating ambiguous AUTOR vocabulary as a gold label. Do not fill missing classes by assigning roles automatically.

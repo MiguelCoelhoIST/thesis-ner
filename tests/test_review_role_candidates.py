@@ -24,7 +24,8 @@ def synthetic_candidate(record_id="synthetic-1", role="ARGUIDO", process="123/22
 
 def accepted(candidate, labels=None):
     return reviewer.build_review(
-        candidate, "accepted", labels or ["ARGUIDO"], "explicit", "easy",
+        candidate, "accepted", labels or ["ARGUIDO"],
+        "not_applicable" if labels == ["UNKNOWN"] else "explicit", "easy",
         False, "Synthetic review.", confirmed=True,
     )
 
@@ -183,7 +184,7 @@ class HumanRoleReviewTests(unittest.TestCase):
             with (
                 patch.object(reviewer, "RAW_DATA_DIR", root / "raw"),
                 patch("sys.argv", argv),
-                patch("builtins.input", side_effect=["9", "e", "e", "n", "Synthetic note", "yes", "q"]),
+                patch("builtins.input", side_effect=["9", "n", "e", "n", "Synthetic note", "yes", "q"]),
                 contextlib.redirect_stdout(io.StringIO()),
             ):
                 reviewer.main()
@@ -201,6 +202,53 @@ class HumanRoleReviewTests(unittest.TestCase):
             self.assertEqual(len(rows), 3)
             self.assertEqual(len({row["id"] for row in rows}), 3)
             self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), source_hash)
+
+    def test_cited_roles_are_explicitly_mention_level(self):
+        row = reviewer.build_review(
+            synthetic_candidate(), "accepted", ["ARGUIDO", "RECORRENTE"],
+            "explicit", "medium", True, confirmed=True,
+            scope_by_label={"ARGUIDO": "cited_proceeding", "RECORRENTE": "current_proceeding"},
+        )
+        self.assertEqual(row["annotation_task"], "mention_level")
+        self.assertTrue(row["has_cited_proceeding_roles"])
+        self.assertTrue(row["human_validated"])
+        self.assertEqual(validate_candidate_record(row, reviewer.LABELS), [])
+        row["has_cited_proceeding_roles"] = False
+        self.assertTrue(validate_candidate_record(row, reviewer.LABELS))
+
+    def test_not_applicable_is_only_for_unknown_and_legacy_rows_remain_valid(self):
+        unknown = accepted(synthetic_candidate(), ["UNKNOWN"])
+        self.assertEqual(unknown["annotation_evidence"], "not_applicable")
+        self.assertIsNone(unknown["evidence_type"])
+        self.assertEqual(unknown["role_scope_by_label"], {"UNKNOWN": "not_applicable"})
+        with self.assertRaises(ValueError):
+            reviewer.build_review(synthetic_candidate(), "accepted", ["AUTOR"], "not_applicable", "easy", False, confirmed=True)
+        legacy = dict(unknown)
+        for field in ("review_schema_version", "role_scope_by_label", "has_cited_proceeding_roles", "annotation_task"):
+            legacy.pop(field)
+        legacy.update(annotation_evidence="explicit", evidence_type="explicit")
+        self.assertEqual(validate_candidate_record(legacy, reviewer.LABELS), [])
+
+    def test_review_preserves_new_provenance_fields(self):
+        candidate = synthetic_candidate()
+        candidate.update(decision_id=None, process_group_id="123/22.1T8ABC", process_provenance={"status": "conflict", "requires_review": True})
+        row = accepted(candidate)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "reviews.jsonl"
+            with reviewer.ReviewStore(path, [candidate], {}, [candidate["id"]]) as store:
+                store.save(row)
+            stored = reviewer.load_jsonl(path)[0]
+            self.assertEqual(stored["process_provenance"], candidate["process_provenance"])
+            self.assertIsNone(stored["decision_id"])
+
+    def test_terminal_records_cited_scope(self):
+        with (
+            patch("builtins.input", side_effect=["8", "e", "p", "m", "n", "Cited proceeding in synthetic test", "yes"]),
+            contextlib.redirect_stdout(io.StringIO()),
+        ):
+            row = reviewer.review_candidate(synthetic_candidate(), 1, 1)
+        self.assertEqual(row["role_scope_by_label"], {"RELATOR": "cited_proceeding"})
+        self.assertTrue(row["has_cited_proceeding_roles"])
 
 
 if __name__ == "__main__":

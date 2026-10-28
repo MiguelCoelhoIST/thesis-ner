@@ -33,6 +33,13 @@ PRESERVED_FIELDS = (
     "id", "source_file", "process_number", "text", "entity",
     "entity_start", "entity_end", "suggested_label",
 )
+PROVENANCE_FIELDS = (
+    "decision_id", "decision_id_candidates", "process_group_id",
+    "process_group_id_candidates", "process_provenance", "source_document_id",
+    "entity_document_start", "entity_document_end",
+    "source_text_sha256",
+)
+ROLE_SCOPES = ("current_proceeding", "cited_proceeding", "current_and_cited", "unclear", "not_applicable")
 
 
 def load_candidates(path):
@@ -93,6 +100,12 @@ def span_issue(record):
 def display_candidate(record, position, total):
     print(f"\n{'=' * 72}\nCandidate {position}/{total} | ID: {record['id']}")
     print(f"Process: {record['process_number'] or '(not available)'}")
+    if "process_provenance" in record:
+        print(f"Decision ID: {record.get('decision_id') or '(unresolved)'}")
+        print(f"Process group: {record.get('process_group_id') or '(unresolved)'}")
+        print(f"Identity evidence: {record['process_provenance']['status']}")
+        if record["process_provenance"]["requires_review"]:
+            print("Source identity requires review; legacy process_number is not a verified decision ID.")
     print(f"Target entity: {record['entity']}")
     issue = span_issue(record)
     if issue:
@@ -126,6 +139,7 @@ def parse_labels(value):
 def build_review(
     candidate, status, labels=None, evidence=None, difficulty=None,
     distractor=None, note="", confirmed=False,
+    scope_by_label=None,
 ):
     if status in ("accepted", "uncertain"):
         issue = span_issue(candidate)
@@ -134,6 +148,8 @@ def build_review(
     row = copy.deepcopy(candidate)
     row.pop("label", None)
     row.update({
+        "annotation_task": "mention_level",
+        "review_schema_version": 2,
         "labels": list(labels or []),
         "annotation_evidence": evidence,
         "evidence_type": {"explicit": "explicit", "implicit": "contextual"}.get(evidence),
@@ -143,13 +159,21 @@ def build_review(
         "review_note": note,
         "human_confirmed": confirmed,
         "human_validated": status == "accepted" and confirmed and evidence != "uncertain",
+        "role_scope_by_label": scope_by_label if scope_by_label is not None else {
+            label: "not_applicable" if label == "UNKNOWN" else "unclear" for label in (labels or [])
+        },
     })
     if status in ("rejected", "skipped"):
         row.update({
             "labels": [], "annotation_evidence": None, "evidence_type": None,
             "difficulty": None, "contains_distractor_role": None,
             "human_confirmed": False, "human_validated": False,
+            "role_scope_by_label": {},
         })
+    row["has_cited_proceeding_roles"] = any(
+        scope in ("cited_proceeding", "current_and_cited")
+        for scope in row["role_scope_by_label"].values()
+    )
     errors = validate_candidate_record(row, LABELS)
     if errors:
         raise ValueError("Inconsistent review: " + "; ".join(errors))
@@ -206,6 +230,9 @@ class ReviewStore:
         for field in PRESERVED_FIELDS:
             if row.get(field) != self.by_id[record_id].get(field):
                 raise ValueError(f"Review {record_id}: original field changed: {field}")
+        for field in PROVENANCE_FIELDS:
+            if field in self.by_id[record_id] and row.get(field) != self.by_id[record_id][field]:
+                raise ValueError(f"Review {record_id}: original provenance field changed: {field}")
         errors = validate_candidate_record(row, LABELS)
         if errors:
             raise ValueError(f"Review {record_id}: " + "; ".join(errors))
@@ -279,11 +306,28 @@ def review_candidate(candidate, position, total):
         if span_issue(candidate):
             print("This span requires REJECT or skip; offsets are preserved.")
             continue
-        evidence = choose("Evidence: e=explicit, i=implicit, u=uncertain: ", {
+        evidence = choose("Evidence: e=explicit, i=implicit, n=not applicable (UNKNOWN), u=uncertain: ", {
             "e": "explicit", "explicit": "explicit",
             "i": "implicit", "implicit": "implicit",
             "u": "uncertain", "uncertain": "uncertain",
+            "n": "not_applicable", "not_applicable": "not_applicable",
         })
+        if evidence == "not_applicable" and labels != ["UNKNOWN"]:
+            print("Not-applicable evidence is reserved for UNKNOWN. Re-enter the annotation.")
+            continue
+        if labels == ["UNKNOWN"] and evidence not in ("not_applicable", "uncertain"):
+            print("UNKNOWN uses not-applicable evidence; use uncertain when the decision is unresolved.")
+            continue
+        scope_by_label = {}
+        for label in labels:
+            if label == "UNKNOWN":
+                scope_by_label[label] = "not_applicable"
+            else:
+                scope_by_label[label] = choose(
+                    f"Proceeding for {label}: c=current, p=cited, b=both, u=unclear: ",
+                    {"c": "current_proceeding", "p": "cited_proceeding",
+                     "b": "current_and_cited", "u": "unclear"},
+                )
         difficulty = choose("Difficulty: e=easy, m=medium, h=hard: ", {
             "e": "easy", "easy": "easy", "m": "medium", "medium": "medium",
             "h": "hard", "hard": "hard",
@@ -294,6 +338,7 @@ def review_candidate(candidate, position, total):
         note = input("Review note (optional): ").strip()
         print(f"\nYour labels: {', '.join(labels)} | evidence={evidence} | "
               f"difficulty={difficulty} | distractors={distractor}")
+        print(f"Role proceeding scope: {scope_by_label}")
         print("Uncertain evidence remains unvalidated.")
         confirmation = choose(
             "Type yes to confirm/save; u=save uncertain, e=edit, s=skip, q=quit: ",
@@ -306,7 +351,8 @@ def review_candidate(candidate, position, total):
         confirmed = confirmation == "confirm"
         status = "accepted" if confirmed and evidence != "uncertain" else "uncertain"
         return build_review(
-            candidate, status, labels, evidence, difficulty, distractor, note, confirmed
+            candidate, status, labels, evidence, difficulty, distractor, note, confirmed,
+            scope_by_label=scope_by_label,
         )
 
 

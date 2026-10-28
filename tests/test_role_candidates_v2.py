@@ -1,32 +1,70 @@
 import contextlib
 import io
 import json
+import re
 import subprocess
 import sys
 import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from src.data import extract_role_candidates_v2 as extractor
 
 from src.data.extract_role_candidates_v2 import (
     DocumentReadError,
-    audit_corpus,
+    audit_corpus as audit_with_ner,
     deterministic_sample,
     deduplicate_candidates,
-    discover_candidates,
+    discover_candidates as discover_with_ner,
+    detect_person_spans,
     is_hard_context,
     read_documents,
     require_extracted_candidates,
     stable_process_id,
+    load_person_ner,
+    ner_windows,
 )
 from src.data.map_role_taxonomy import load_taxonomy
 from src.evaluation.validate_role_candidates_v2 import (
     validate_candidate_file,
     validate_candidate_record,
 )
+
+
+class SyntheticNER:
+    """Controlled NER outputs for fabricated fixtures, never a production fallback."""
+
+    meta = {}
+
+    def __init__(self, predictions=None):
+        self.predictions = predictions
+
+    def pipe(self, texts, batch_size=4, n_process=1):
+        for text in texts:
+            predictions = self.predictions
+            if predictions is None:
+                predictions = [(match.group(), "PER") for match in re.finditer(r"\b(?:AA|BB)\b", text)]
+            entities = []
+            for entity, label in predictions:
+                start = text.find(entity)
+                if start >= 0:
+                    entities.append(SimpleNamespace(
+                        start_char=start, end_char=start + len(entity), text=entity, label_=label
+                    ))
+            yield SimpleNamespace(ents=entities)
+
+
+def discover_candidates(text, *args, **kwargs):
+    kwargs.setdefault("nlp", SyntheticNER())
+    return discover_with_ner(text, *args, **kwargs)
+
+
+def audit_corpus(path, *args, **kwargs):
+    kwargs.setdefault("nlp", SyntheticNER())
+    return audit_with_ner(path, *args, **kwargs)
 
 
 class RoleCandidateExtractionTests(unittest.TestCase):
@@ -158,7 +196,8 @@ class RoleCandidateExtractionTests(unittest.TestCase):
             output = root / "pool.jsonl"
             result = subprocess.run(
                 [sys.executable, "src/data/extract_role_candidates_v2.py",
-                 "--input-dir", str(root), "--output", str(output)],
+                 "--input-dir", str(root), "--output", str(output),
+                 "--ner-model", str(root / "missing-model")],
                 capture_output=True, text=True,
                 cwd=Path(__file__).resolve().parents[1],
             )
@@ -226,6 +265,7 @@ class RoleCandidateExtractionTests(unittest.TestCase):
                 "--audit-json", str(audit_path),
             ]
             with (
+                patch.object(extractor, "load_person_ner", return_value=SyntheticNER()),
                 patch.object(extractor, "RAW_DATA_DIR", root / "raw"),
                 patch.object(sys, "argv", command),
                 contextlib.redirect_stdout(io.StringIO()),
@@ -239,6 +279,7 @@ class RoleCandidateExtractionTests(unittest.TestCase):
             failed_path = root / "raw" / "failure.json"
             command[-1] = str(failed_path)
             with (
+                patch.object(extractor, "load_person_ner", return_value=SyntheticNER()),
                 patch.object(extractor, "RAW_DATA_DIR", root / "raw"),
                 patch.object(sys, "argv", command),
                 contextlib.redirect_stdout(io.StringIO()),
@@ -246,6 +287,114 @@ class RoleCandidateExtractionTests(unittest.TestCase):
             ):
                 self.assertEqual(extractor.main(), 1)
             self.assertIn("No role candidates", json.loads(failed_path.read_text())["error"])
+
+    def test_pilot_organization_code_and_road_are_never_person_targets(self):
+        # Fabricated sentences, not excerpts from the pilot judgments. Even
+        # incorrect PER predictions are rejected by the conservative filters.
+        fixtures = (
+            ("Tribunal da Relação", "O relator referiu o Tribunal da Relação no teste."),
+            ("Código de Processo Penal", "O arguido citou o Código de Processo Penal no teste."),
+            ("EN", "O autor referiu a EN no teste."),
+        )
+        from collections import Counter
+        for entity, text in fixtures:
+            with self.subTest(entity=entity):
+                stats = Counter()
+                spans = detect_person_spans(text, SyntheticNER([(entity, "PER")]), stats=stats)
+                self.assertEqual(spans, [])
+                self.assertEqual(stats["dropped_false_entities"], 1)
+                self.assertEqual(discover_with_ner(text, person_spans=spans), [])
+
+    def test_merged_pilot_names_are_dropped_without_inventing_splits(self):
+        from collections import Counter
+        name = "Rui Domingues e Tiago Ferreira"
+        text = f"As testemunhas {name} participaram num teste fictício."
+        stats = Counter()
+        spans = detect_person_spans(text, SyntheticNER([(name, "PER")]), stats=stats)
+        self.assertEqual(spans, [])
+        self.assertEqual(stats["merged_spans"], 1)
+        self.assertEqual(discover_with_ner(text, person_spans=spans), [])
+
+    def test_separate_ner_spans_produce_exact_individual_targets(self):
+        text = "As testemunhas Rui Domingues e Tiago Ferreira participaram num teste."
+        spans = detect_person_spans(text, SyntheticNER([
+            ("Rui Domingues", "PER"), ("Tiago Ferreira", "PER")
+        ]))
+        rows = discover_with_ner(text, person_spans=spans)
+        self.assertEqual({row["entity"] for row in rows}, {"Rui Domingues", "Tiago Ferreira"})
+        for row in rows:
+            self.assertEqual(text[row["entity_document_start"]:row["entity_document_end"]], row["entity"])
+            self.assertEqual(row["text"][row["entity_start"]:row["entity_end"]], row["entity"])
+
+    def test_valid_pilot_surname_stays_unvalidated_in_cited_case_context(self):
+        text = "Num processo citado no teste, o relator Pires da Graça proferiu uma decisão fictícia."
+        rows = discover_with_ner(text, nlp=SyntheticNER([("Pires da Graça", "PER")]))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["entity"], "Pires da Graça")
+        self.assertIsNone(rows[0]["label"])
+        self.assertFalse(rows[0]["human_validated"])
+
+    def test_non_per_entities_and_unrecognized_placeholders_are_excluded(self):
+        text = "O autor AA referiu o Tribunal da Relação."
+        rows = discover_with_ner(text, nlp=SyntheticNER([("Tribunal da Relação", "ORG")]))
+        self.assertEqual(rows, [])
+
+    def test_missing_model_fails_with_setup_instructions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "restore Eduardo"):
+                load_person_ner(Path(directory) / "missing-model")
+
+    def test_long_documents_use_bounded_windows_and_batching(self):
+        text = ("Texto de teste. " * 1000 + "O arguido AA respondeu. ") * 3
+        windows = ner_windows(text)
+        self.assertTrue(windows)
+        self.assertTrue(all(end - start <= 6000 for start, end in windows))
+        from collections import Counter
+        stats = Counter()
+        detect_person_spans(text, SyntheticNER(), batch_size=2, stats=stats)
+        self.assertLess(stats["ner_input_characters"], len(text))
+        self.assertEqual(stats["ner_windows"], len(windows))
+
+    def test_role_round_robin_preserves_later_roles_under_process_cap(self):
+        candidates = []
+        for role, anchors in extractor.ROLE_ANCHORS.items():
+            for version in range(3):
+                candidates.extend(discover_candidates(
+                    f"O {anchors[0]} AA respondeu.",
+                    source_file=f"synthetic-{role}-{version}.txt",
+                    process_number="123/22.1T8ABC.P1.S1",
+                ))
+        selected = deterministic_sample(candidates, 20)
+        self.assertEqual({row["suggested_label"] for row in selected}, set(extractor.ROLE_ANCHORS))
+        self.assertLessEqual(len(selected), extractor.MAX_PER_DOCUMENT)
+        for role in extractor.ROLE_ANCHORS:
+            self.assertLessEqual(sum(row["suggested_label"] == role for row in selected), 2)
+
+    def test_invalid_ner_offsets_are_dropped_without_repair(self):
+        from collections import Counter
+
+        class InvalidSpanNER:
+            def pipe(self, texts, **kwargs):
+                for _ in texts:
+                    yield SimpleNamespace(ents=[SimpleNamespace(
+                        start_char=0, end_char=2, text="AA", label_="PER"
+                    )])
+
+        stats = Counter()
+        self.assertEqual(detect_person_spans("O arguido AA respondeu.", InvalidSpanNER(), stats=stats), [])
+        self.assertEqual(stats["dropped_invalid_ner_offsets"], 1)
+
+    def test_ner_audit_exposes_all_role_coverage_and_span_counts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "synthetic.txt").write_text("O arguido AA respondeu.", encoding="utf-8")
+            _, audit = audit_corpus(root)
+        self.assertEqual(set(audit["role_anchor_occurrences"]), set(extractor.ROLE_ANCHORS))
+        self.assertEqual(audit["role_anchor_occurrences"]["ARGUIDO"], 1)
+        self.assertEqual(audit["role_anchor_occurrences"]["RELATOR"], 0)
+        self.assertEqual(audit["ner_span_counts"]["accepted_per_spans"], 1)
+        self.assertIn("merged_spans", audit["ner_span_counts"])
+        self.assertIn("dropped_false_entities", audit["ner_span_counts"])
 
 
 if __name__ == "__main__":
