@@ -140,7 +140,7 @@ def find_role_anchors(text):
     }
 
 
-def load_person_ner(model_path=DEFAULT_NER_MODEL, cpu_threads=4):
+def load_person_ner(model_path=DEFAULT_NER_MODEL, cpu_threads=4, gpu_id=None):
     """Load the existing pretrained PER recognizer; never fall back to regex."""
     model_path = Path(model_path)
     setup = (
@@ -154,6 +154,22 @@ def load_person_ner(model_path=DEFAULT_NER_MODEL, cpu_threads=4):
     try:
         import spacy
         import torch
+    except ImportError as exc:
+        raise ValueError(f"Cannot import pretrained PER model dependencies. {setup}") from exc
+    if gpu_id is None:
+        spacy.require_cpu()
+        device = "CPU"
+    else:
+        try:
+            spacy.require_gpu(gpu_id)
+        except (ImportError, ValueError, RuntimeError) as exc:
+            raise ValueError(
+                f"Requested GPU {gpu_id} is unavailable for spaCy: {exc}. "
+                "Check the CUDA/CuPy environment or omit --gpu-id to use CPU."
+            ) from exc
+        device = f"GPU {gpu_id}"
+    print(f"NER device: {device}", flush=True)
+    try:
         if cpu_threads:
             torch.set_num_threads(cpu_threads)
         with warnings.catch_warnings(record=True) as caught:
@@ -946,6 +962,7 @@ def main():
     parser.add_argument("--context-chars", type=int, default=240)
     parser.add_argument("--ner-model", type=Path, default=DEFAULT_NER_MODEL, help="Local pretrained spaCy pipeline with an enabled PER recognizer")
     parser.add_argument("--ner-batch-size", type=int, default=4, help="NER windows per nlp.pipe batch (default: 4; one worker)")
+    parser.add_argument("--gpu-id", type=int, help="Require this spaCy GPU device; omitted means CPU")
     parser.add_argument("--max-documents", type=int, help="Process only the first N readable documents in sorted source order")
     parser.add_argument("--progress-seconds", type=float, default=10, help="Heartbeat interval, including during a long NER batch (default: 10)")
     parser.add_argument("--window-cache-size", type=int, default=128, help="In-memory exact NER-window cache entries; 0 disables reuse")
@@ -968,6 +985,8 @@ def main():
         parser.error("--context-chars must be at least 1")
     if args.ner_batch_size < 1:
         parser.error("--ner-batch-size must be at least 1")
+    if args.gpu_id is not None and args.gpu_id < 0:
+        parser.error("--gpu-id must be non-negative")
     if args.max_documents is not None and args.max_documents < 1:
         parser.error("--max-documents must be at least 1")
     if args.progress_seconds <= 0:
@@ -991,7 +1010,7 @@ def main():
         with ProgressReporter(args.progress_seconds) as progress:
             progress(stage="model_loading")
             started = time.perf_counter()
-            nlp = load_person_ner(args.ner_model, cpu_threads=args.cpu_threads)
+            nlp = load_person_ner(args.ner_model, cpu_threads=args.cpu_threads, gpu_id=args.gpu_id)
             model_loading_seconds = time.perf_counter() - started
             all_candidates, audit = audit_corpus(
                 args.input_dir, args.context_chars, nlp=nlp, batch_size=args.ner_batch_size,
