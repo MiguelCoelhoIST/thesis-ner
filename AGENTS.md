@@ -23,7 +23,7 @@ O modelo NER preferido é o pipeline spaCy local `models/eduardo_extended_model`
 
 - Preservar datasets, anotações humanas e resultados anteriores. Escrever novas versões; não fazer migrações destrutivas.
 - O conjunto `data/eval/roles_eval_real_candidates_v1.jsonl` está congelado: 50 exemplos humanos, 10 por classe histórica. Não alterar, usar como treino, demonstrações few-shot ou seeds de extração.
-- A Experiência 19 usa nove papéis finos provisórios definidos em `config/role_taxonomy.json`; a taxonomia agregada deriva automaticamente da fina. Usar os mesmos exemplos e splits na comparação.
+- A Experiência 19 histórica usa nove papéis em `config/role_taxonomy.json`. A execução 19b revista em 11-11-2026 usa dez classes principais, incluindo REFERENCE, em `config/role_taxonomy_v2.json`; preservar a configuração histórica. Labels finas/multi-label são conservadas, agregação automática e mesmos exemplos/splits na comparação. Papéis fora da lista podem ser preservados em `other_roles`, não inventados como labels principais.
 - Sugestões lexicais descobrem candidatos; não são gold labels. Só confirmação humana explícita pode validar uma anotação. UNKNOWN, REJECT e uncertain têm significados distintos.
 - Ler [o protocolo da Experiência 19a](docs/experiment_19a_annotation_protocol.md) antes de alterar anotação. É uma tarefa mention-level, multi-label, com âmbito processual por label; papéis de processos citados não estabelecem papéis no processo atual.
 - Preservar texto e offsets exatos. Não inserir entity markers no texto real armazenado. Derivar `[ENTITY] entity [/ENTITY]` no momento de inferência através de `src/utils/entity_marking.py`.
@@ -53,3 +53,5 @@ O modelo NER preferido é o pipeline spaCy local `models/eduardo_extended_model`
 ## Requisito pendente de 30-10-2026
 
 `CITATION_AUTHOR` é uma designação provisória para distinguir autores de obras/artigos citados. Ainda não está implementada, não pertence à configuração atual e não deve ser adicionada a datasets, prompts ou mapeamentos sem uma decisão metodológica explícita. Não confundir com AUTOR processual nem usar UNKNOWN como substituto conceptual. Qualquer sugestão futura de exclusão da anonimização exige validação com os orientadores e o STJ; não preservar identidades automaticamente.
+
+Atualização de 11-11-2026: o utilizador autorizou REFERENCE como classe principal da taxonomia v2 para autoria bibliográfica. CITATION_AUTHOR não é um nome de label adotado. Esta atualização da classificação não autoriza preservar identidades nem resolve a política institucional de anonimização.

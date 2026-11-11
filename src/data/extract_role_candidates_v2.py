@@ -222,7 +222,7 @@ def rejected_per_reason(entity):
 def detect_person_spans(
     text, nlp, context_chars=240, batch_size=4, stats=None,
     anchors=None, prediction_cache=None, progress=None, timings=None,
-    windows=None,
+    windows=None, prediction_sink=None,
 ):
     stats = stats if stats is not None else Counter()
     timings = timings if timings is not None else Counter()
@@ -269,6 +269,15 @@ def detect_person_spans(
         timings["ner_inference_seconds"] += time.perf_counter() - started
         for window_start, window_end in batch:
             for local_start, local_end, entity_text, label in predictions[text[window_start:window_end]]:
+                if prediction_sink is not None:
+                    # Optional durable inventory consumer; default extraction
+                    # and filtering are unchanged. Include non-PER entities for
+                    # subsequent local privacy checks, not just role candidates.
+                    prediction_sink({
+                        "start": window_start + local_start, "end": window_start + local_end,
+                        "text": entity_text, "label": label,
+                        "window_start": window_start, "window_end": window_end,
+                    })
                 if label != "PER":
                     stats["non_per_predictions"] += 1
                     continue

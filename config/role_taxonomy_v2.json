@@ -1,0 +1,18 @@
+{
+  "fine_labels": [
+    "ARGUIDO", "REU", "AUTOR", "REQUERENTE", "RECORRENTE",
+    "RECORRIDO", "TESTEMUNHA", "RELATOR", "REFERENCE", "UNKNOWN"
+  ],
+  "aggregated_mapping": {
+    "ARGUIDO": "PASSIVE_PARTY",
+    "REU": "PASSIVE_PARTY",
+    "AUTOR": "ACTIVE_PARTY",
+    "REQUERENTE": "ACTIVE_PARTY",
+    "RECORRENTE": "APPELLANT",
+    "RECORRIDO": "APPELLEE",
+    "TESTEMUNHA": "WITNESS",
+    "RELATOR": "RAPPORTEUR",
+    "REFERENCE": "REFERENCE",
+    "UNKNOWN": "UNKNOWN"
+  }
+}
