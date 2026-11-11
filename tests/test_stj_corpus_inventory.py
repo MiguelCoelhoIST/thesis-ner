@@ -36,6 +36,80 @@ def fixture():
 
 
 class CorpusInventoryTests(unittest.TestCase):
+    def exercise_clean_source_cli(self, smoke):
+        """Real source-reader path: no audit, candidates, pilot or gold exists."""
+        class FakeNLP:
+            def pipe(self,items,batch_size,n_process):
+                for text in items:
+                    yield SimpleNamespace(ents=[SimpleNamespace(start_char=a,end_char=a+2,text='AA',label_='PER')for a in(0,11)])
+        with tempfile.TemporaryDirectory()as directory:
+            root=Path(directory);source=root/'source';source.mkdir();(root/'results').mkdir()
+            (root/'src/data').mkdir(parents=True)
+            (root/'src/data/extract_role_candidates_v2.py').write_text('# Synthetic source fixture.\n',encoding='utf-8')
+            for i in range(191):
+                text=f'AA chegou. AA saiu. Documento inventado {i}.'
+                for suffix in('a','b'):
+                    (source/f'invented-{i:03}-{suffix}.txt').write_text(text,encoding='utf-8')
+                if i<6:(source/f'invented-{i:03}-c.txt').write_text(text,encoding='utf-8')
+            (source/'non-document.json').write_text('{}',encoding='utf-8')
+            (source/'editor.swp').write_text('not a judgment',encoding='utf-8')
+            prefix=root/'execution'
+            argv=['inventory','--input-dir',str(source),'--prefix',str(prefix),
+                  '--report',str(root/'results/run.md'),'--run-ner','--expected-unique-documents','191']
+            if smoke:argv+=['--max-documents','3']
+            with patch.object(inventory,'ROOT',root),patch.object(inventory,'private_new_output',side_effect=lambda p:p),patch.object(inventory,'load_person_ner',return_value=FakeNLP())as loader,patch('sys.argv',argv),patch('builtins.print'):
+                inventory.main()
+            self.assertEqual(loader.call_count,1)
+            manifest=json.loads(Path(str(prefix)+'_manifest.json').read_text(encoding='utf-8'))
+            summary=manifest['summary']
+            self.assertEqual(summary['audited_documents'],388)
+            self.assertEqual(summary['unique_texts'],191)
+            self.assertEqual(summary['NER_documents_processed'],3 if smoke else 191)
+            self.assertEqual(summary['accepted_mentions_this_run'],6 if smoke else 382)
+            self.assertEqual(summary['inventory_complete'],not smoke)
+            self.assertEqual(summary['source_mode'],'original_documents')
+            self.assertEqual(summary['source_files_skipped_by_reason'],{'no_extractable_document_text':1,'unsupported_extension':1})
+            self.assertEqual(summary['reference_checks'],{'pilot':'not_requested','gold':'not_requested'})
+            self.assertIsNone(summary['gold_known_process_overlap_documents'])
+            self.assertFalse({'audit','candidates','pilot','gold'} & manifest['input_files'].keys())
+            self.assertEqual(len(manifest['input_files']),390) # taxonomy + 388 texts + explicit non-document JSON
+            docs=[json.loads(l)for l in Path(str(prefix)+'_documents.jsonl').read_text().splitlines()]
+            self.assertEqual(sum(len(d['aliases'])for d in docs),388)
+            self.assertTrue(all(d['pilot_related_block']is None and d['gold_known_process_overlap']is None for d in docs))
+            self.assertFalse(Path(str(prefix)+'_known_mentions_PARTIAL.jsonl').exists())
+            for line in Path(str(prefix)+'_mentions.jsonl').read_text().splitlines():
+                row=json.loads(line)
+                self.assertEqual(row['text'][row['entity_start']:row['entity_end']],row['entity'])
+                self.assertNotIn('suggested_label',row)
+                self.assertFalse(row['human_validated'])
+            self.assertFalse((root/'data/raw/experiment_19a_candidates_v4_smoke10.jsonl').exists())
+
+    def test_clean_checkout_smoke_needs_only_original_sources_and_config(self):
+        self.exercise_clean_source_cli(True)
+
+    def test_clean_checkout_full_needs_only_original_sources_and_config(self):
+        self.exercise_clean_source_cli(False)
+
+    def test_explicit_missing_optional_references_are_errors_not_ignored(self):
+        with tempfile.TemporaryDirectory()as directory:
+            root=Path(directory);(root/'results').mkdir();source=root/'source';source.mkdir()
+            (source/'invented.txt').write_text('AA chegou.',encoding='utf-8')
+            for option in('--audit','--candidates','--pilot','--gold','--reuse-privacy-map','--taxonomy-config'):
+                with self.subTest(option=option):
+                    argv=['inventory','--input-dir',str(source),'--prefix',str(root/'outputs'),
+                          '--report',str(root/'results/run.md'),'--run-ner',option,str(root/'missing.json')]
+                    with patch.object(inventory,'ROOT',root),patch.object(inventory,'private_new_output',side_effect=lambda p:p),patch.object(inventory,'load_person_ner')as loader,patch('sys.argv',argv):
+                        with self.assertRaises(FileNotFoundError):inventory.main()
+                        loader.assert_not_called()
+            with self.assertRaises(FileNotFoundError):inventory.load_source_corpus(root/'missing-corpus')
+
+    def test_unreadable_or_empty_source_documents_fail_instead_of_being_skipped(self):
+        with tempfile.TemporaryDirectory()as directory:
+            root=Path(directory);path=root/'invented.txt';path.write_bytes(b'\xff\xfe')
+            with self.assertRaises(UnicodeError):inventory.load_source_corpus(root)
+            path.write_text('',encoding='utf-8')
+            with self.assertRaises(ValueError):inventory.load_source_corpus(root)
+
     def test_reuses_saved_ner_without_anchors_or_duplicate_occurrences(self):
         text,audit,texts=fixture();docs=build_documents(audit,texts);doc=docs[0];sha=digest(text)
         known=[make_mention(doc,text,0,2,'AA')]

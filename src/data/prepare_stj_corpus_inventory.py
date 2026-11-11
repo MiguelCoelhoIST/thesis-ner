@@ -20,11 +20,11 @@ if str(ROOT) not in sys.path:
 
 from src.annotation.prepare_role_annotation_batch import Components, document_key, identity_roots, private_new_output
 from src.annotation.export_external_annotation import TASK_INSTRUCTIONS, response_schema
-from src.data.extract_role_candidates_v2 import detect_person_spans, load_person_ner, read_documents, rejected_per_reason, ProgressReporter
+from src.data.extract_role_candidates_v2 import detect_person_spans, load_person_ner, read_documents, rejected_per_reason, ProgressReporter, SUPPORTED_SUFFIXES, process_number_from_filename
 from src.data.map_role_taxonomy import load_jsonl, load_taxonomy
-from src.data.role_provenance import normalize_process_group_id
+from src.data.role_provenance import normalize_process_group_id, extract_process_provenance
 
-VERSION = "19b-corpus-inventory-v1"
+VERSION = "19b-corpus-inventory-v2-source-inputs"
 TAXONOMY_V2 = ROOT/'config/role_taxonomy_v2.json'
 
 
@@ -63,6 +63,11 @@ def validate_smoke_manifest(path, expected_unique=191):
         if hashlib.sha256(Path(source['path']).read_bytes()).hexdigest()!=source['sha256']:
             raise ValueError('input_changed_since_smoke')
     if not manifest.get('input_files'):raise ValueError('smoke_missing_input_fingerprints')
+    inventory=manifest.get('source_inventory')
+    if inventory is not None:
+        current=sorted(p.relative_to(Path(inventory['directory'])).as_posix()
+                       for p in Path(inventory['directory']).rglob('*')if p.is_file())
+        if current!=inventory['files']:raise ValueError('source_directory_changed_since_smoke')
     return summary
 
 
@@ -89,6 +94,55 @@ def full_windows(text, width=6000, overlap=600):
             break
         start = end - overlap
     return windows
+
+
+def load_source_corpus(input_dir, legacy_audit=None):
+    """Build the existing metadata shape from original documents by default.
+
+    An explicit old audit is an optional hash-checked reference, never a required
+    corpus index. Unreadable documents fail; non-document/unsupported files are
+    accounted for explicitly rather than silently swallowed.
+    """
+    input_dir=input_dir.resolve()
+    if not input_dir.is_dir():raise FileNotFoundError('input_directory_missing')
+    files=sorted(p for p in input_dir.rglob('*')if p.is_file())
+    inventory={'directory':str(input_dir),'files':[p.relative_to(input_dir).as_posix()for p in files]}
+    texts,source_paths={},{}
+    if legacy_audit is not None:
+        audit=json.loads(legacy_audit.read_text(encoding='utf-8'));loaded={}
+        for row in audit['document_provenance']:
+            source=row['source_file'];path=(input_dir/source).resolve()
+            if not path.is_relative_to(input_dir):raise ValueError('source_outside_input_directory')
+            source_paths[source]=path
+            if source not in loaded:loaded[source]={key:text for key,text,_ in read_documents(path)}
+            texts[document_key(row)]=loaded[source][row['source_document_id']]
+        return audit,texts,source_paths,inventory
+    audit={'document_provenance':[],'document_profiles':[],'source_mode':'original_documents',
+           'skipped_files':[],'ner_span_counts':{}}
+    for original in files:
+        path=original.resolve();relative=original.relative_to(input_dir).as_posix()
+        if not path.is_relative_to(input_dir):raise ValueError('source_outside_input_directory')
+        if path.suffix.lower()=='.doc':raise ValueError('legacy_DOC_requires_preconversion')
+        if path.suffix.lower()not in SUPPORTED_SUFFIXES:
+            audit['skipped_files'].append({'source_file':relative,'reason':'unsupported_extension'})
+            continue
+        # Missing, unreadable, malformed and empty text sources are NOT ignored.
+        source_paths[relative]=path
+        extracted=read_documents(path)
+        if not extracted:
+            audit['skipped_files'].append({'source_file':relative,'reason':'no_extractable_document_text'})
+        for key,text,legacy in extracted:
+            if not text.strip():raise ValueError('empty_source_document')
+            doc_key=(relative,key)
+            if doc_key in texts:raise ValueError('duplicate_source_document_key')
+            texts[doc_key]=text
+            legacy=legacy or process_number_from_filename(path)
+            provenance=extract_process_provenance(text,relative,legacy)
+            audit['document_provenance'].append({'source_file':relative,'source_document_id':key,**provenance})
+            audit['document_profiles'].append({'source_file':relative,'source_document_id':key,
+                'process_number':legacy,'characters':len(text),'ner_window_ranges':[]})
+    if not texts:raise ValueError('no_source_documents')
+    return audit,texts,source_paths,inventory
 
 
 def build_documents(audit, texts, pilot=None, gold=None):
@@ -132,10 +186,12 @@ def build_documents(audit, texts, pilot=None, gold=None):
             "aliases": aliases, "characters": len(text), "words_whitespace": len(text.split()),
             "split_block_id": "block_" + block, "potential_process_group_ids": root_values,
             "requires_identity_review": len(root_values) != 1 or any(row["process_provenance"]["status"] == "conflict" for row in aliases),
-            "old_window_covered_characters": union_length(old_ranges),
-            "pilot_related_block": component in pilot_blocks,
-            "gold_known_process_overlap": bool(set(root_values) & gold_groups),
-            "gold_context_containment_flag": any(passage in normalized for passage in gold_passages),
+            "old_window_covered_characters": union_length(old_ranges) if audit.get('source_mode')!='original_documents' else None,
+            "pilot_related_block": component in pilot_blocks if pilot is not None else None,
+            "gold_known_process_overlap": bool(set(root_values) & gold_groups) if gold is not None else None,
+            "gold_context_containment_flag": any(passage in normalized for passage in gold_passages) if gold is not None else None,
+            "reference_checks": {'pilot':'checked'if pilot is not None else 'not_requested',
+                                 'gold':'checked'if gold is not None else 'not_requested'},
         })
     return documents
 
@@ -154,6 +210,7 @@ def make_mention(document, text, start, end, entity, context_chars=800):
             "pilot_related_block": document["pilot_related_block"],
             "gold_known_process_overlap": document["gold_known_process_overlap"],
             "gold_context_containment_flag": document["gold_context_containment_flag"],
+            "reference_checks": document.get('reference_checks',{}),
             "entity": entity, "entity_document_start": start, "entity_document_end": end,
             "context_document_start": a, "context_document_end": b,
             "context_id": "ctx_" + digest(f"{mention_id}:{a}:{b}"),
@@ -240,10 +297,10 @@ def write_jsonl(path, rows):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-dir", type=Path, required=True)
-    parser.add_argument("--audit", type=Path, default=ROOT/'data/raw/experiment_19a_audit_v5_gpu_full.json')
-    parser.add_argument("--candidates", type=Path, default=ROOT/'data/raw/experiment_19a_candidates_v5_gpu_full.jsonl')
-    parser.add_argument("--pilot", type=Path, default=ROOT/'data/raw/experiment_19a_candidates_v4_smoke10.jsonl')
-    parser.add_argument("--gold", type=Path, default=ROOT/'data/eval/roles_eval_real_candidates_v1.jsonl')
+    parser.add_argument("--audit", type=Path, help="Optional explicit legacy audit for source-hash comparison")
+    parser.add_argument("--candidates", type=Path, help="Optional explicit old candidates for mention recovery only")
+    parser.add_argument("--pilot", type=Path, help="Optional explicit pilot for overlap checks, not required by NER")
+    parser.add_argument("--gold", type=Path, help="Optional explicit gold for overlap checks, not required by NER")
     parser.add_argument("--prefix", type=Path, default=ROOT/'data/raw/experiment_19b_corpus_plan02')
     parser.add_argument("--report", type=Path, default=ROOT/'results/experiment_19b_corpus_plan02.md')
     parser.add_argument("--context-chars", type=int, default=800)
@@ -270,25 +327,21 @@ def main():
         parser.error("Report must be a NEW file under results/")
     for path in list(paths.values()) + [args.report]:
         path.parent.mkdir(parents=True, exist_ok=True)
-    inputs = {name: path for name, path in [('audit', args.audit), ('candidates', args.candidates), ('pilot', args.pilot), ('gold', args.gold)]}
+    inputs = {name: path for name, path in [('audit', args.audit), ('candidates', args.candidates), ('pilot', args.pilot), ('gold', args.gold)] if path is not None}
     inputs['taxonomy']=args.taxonomy_config
     inputs.update({f'privacy_map_{i}':path for i,path in enumerate(args.reuse_privacy_map)})
     hashes = {name: hashlib.sha256(path.read_bytes()).hexdigest() for name, path in inputs.items()}
-    audit = json.loads(args.audit.read_text(encoding='utf-8'))
-    texts, loaded = {}, {}
-    for row in audit['document_provenance']:
-        source = row['source_file']
-        path = (args.input_dir/source).resolve()
-        if not path.is_relative_to(args.input_dir.resolve()):
-            raise ValueError('source_outside_input_directory')
-        if source not in loaded:
-            loaded[source] = {key: text for key, text, _ in read_documents(path)}
-        texts[document_key(row)] = loaded[source][row['source_document_id']]
-    documents = build_documents(audit, texts, load_jsonl(args.pilot), load_jsonl(args.gold))
+    audit,texts,source_paths,source_inventory=load_source_corpus(args.input_dir,args.audit)
+    for i,(source,path)in enumerate(sorted(source_paths.items())):
+        name=f'source_{i}';inputs[name]=path;hashes[name]=hashlib.sha256(path.read_bytes()).hexdigest()
+    pilot=load_jsonl(args.pilot) if args.pilot is not None else None
+    gold=load_jsonl(args.gold) if args.gold is not None else None
+    candidates=load_jsonl(args.candidates) if args.candidates is not None else []
+    documents = build_documents(audit, texts, pilot, gold)
     if args.expected_unique_documents is not None and len(documents)!=args.expected_unique_documents:
         raise ValueError('unexpected_unique_document_count_before_NER')
     by_hash = {row['source_text_sha256']: texts[document_key(row['canonical_source'])] for row in documents}
-    recovered = known_mentions(documents, by_hash, load_jsonl(args.candidates), args.context_chars)
+    recovered = known_mentions(documents, by_hash, candidates, args.context_chars)
     legacy_recovered_count=len(recovered)
     cache_log,cache_summaries=[],[]
     for path in args.reuse_privacy_map:
@@ -305,20 +358,24 @@ def main():
         'documents_requiring_identity_review': sum(row['requires_identity_review'] for row in documents),
         'documents_in_multi_root_blocks': sum(len(row['potential_process_group_ids'])>1 for row in documents),
         'documents_without_component_root': sum(not row['potential_process_group_ids'] for row in documents),
-        'old_covered_unique_characters': sum(row['old_window_covered_characters'] for row in documents),
-        'old_accepted_PER_across_duplicate_versions_NOT_unique': audit['ner_span_counts']['accepted_per_spans'],
+        'old_covered_unique_characters': sum(row['old_window_covered_characters']or 0 for row in documents) if args.audit is not None else None,
+        'old_accepted_PER_across_duplicate_versions_NOT_unique': audit.get('ner_span_counts',{}).get('accepted_per_spans'),
         'recovered_known_occurrences_lower_bound': len(recovered),
         'recovered_from_19a_only': legacy_recovered_count,
         'reused_privacy_cache_summary':cache_summaries,
-        'legacy_duplicate_occurrence_records': len(load_jsonl(args.candidates))-legacy_recovered_count,
+        'legacy_duplicate_occurrence_records': len(candidates)-legacy_recovered_count if args.candidates is not None else None,
         'known_occurrences_with_multiple_contexts': sum(len(row.get('legacy_context_variants',[]))>1 for row in recovered),
         'total_PER_mentions_complete': None,
         'planned_full_coverage_windows_6000_overlap_600': proposed_windows,
         'planned_NER_input_characters_including_overlap': full_input_chars,
-        'pilot_related_unique_documents': sum(row['pilot_related_block'] for row in documents),
-        'gold_known_process_overlap_documents': sum(row['gold_known_process_overlap'] for row in documents),
-        'gold_context_containment_documents': sum(row['gold_context_containment_flag'] for row in documents),
-        'gold_process_ids_not_normalized': sum(normalize_process_group_id(row.get('process_number')) is None for row in load_jsonl(args.gold)),
+        'pilot_related_unique_documents': sum(row['pilot_related_block'] for row in documents) if pilot is not None else None,
+        'gold_known_process_overlap_documents': sum(row['gold_known_process_overlap'] for row in documents) if gold is not None else None,
+        'gold_context_containment_documents': sum(row['gold_context_containment_flag'] for row in documents) if gold is not None else None,
+        'gold_process_ids_not_normalized': sum(normalize_process_group_id(row.get('process_number')) is None for row in gold) if gold is not None else None,
+        'reference_checks':{'pilot':'checked'if pilot is not None else 'not_requested',
+                            'gold':'checked'if gold is not None else 'not_requested'},
+        'source_mode':'explicit_legacy_audit'if args.audit is not None else 'original_documents',
+        'source_files_skipped_by_reason':dict(Counter(row['reason']for row in audit.get('skipped_files',[]))),
         'NER_executed': args.run_ner, 'LLM_calls': 0, 'inventory_complete': False,
     }
     ner_metadata=None
@@ -331,7 +388,7 @@ def main():
         selected_docs = documents[:args.max_documents] if args.max_documents else documents
         stats = Counter(); count = 0; raw_per_count = 0; valid_per_count = 0
         with ProgressReporter(args.progress_seconds) as progress, paths['mentions.jsonl'].open('x', encoding='utf-8') as mentions_file, paths['ner_predictions.jsonl'].open('x', encoding='utf-8') as predictions_file:
-            progress(stage='full_coverage_NER',total=len(selected_docs),files=len(loaded))
+            progress(stage='full_coverage_NER',total=len(selected_docs),files=len(source_paths))
             for ordinal, doc in enumerate(selected_docs, 1):
                 text = by_hash[doc['source_text_sha256']]
                 progress(stage='NER_inference',documents=ordinal-1,document_characters=len(text),planned_windows=len(full_windows(text)))
@@ -379,6 +436,7 @@ def main():
     task=annotation_task(args.taxonomy_config)
     for name,value in [('task.json',task),('manifest.json',{'version':VERSION,'inputs_sha256':hashes,'summary':summary,
                        'input_files':{name:{'path':str(path.resolve()),'sha256':hashes[name]}for name,path in inputs.items()},
+                       'source_inventory':source_inventory,'source_files_skipped':audit.get('skipped_files',[]),
                        'ner_model':ner_metadata,'window_characters':6000,'window_overlap_characters':600,
                        'context_chars_each_side':args.context_chars,'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                        'extractor_sha256':hashlib.sha256((ROOT/'src/data/extract_role_candidates_v2.py').read_bytes()).hexdigest()})]:
