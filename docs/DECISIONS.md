@@ -1,6 +1,6 @@
 # Decisões metodológicas e operacionais
 
-Atualizado em **16-11-2026**. Este registo consolida decisões já presentes no código/protocolos e requisitos posteriores. Não atribui datas históricas que não estejam comprovadas e não substitui a validação pelos orientadores e pelo STJ. D15–D24 conservam a evolução histórica; D25 e o topo de [THESIS_STATE.md](THESIS_STATE.md) indicam a etapa mais recente.
+Atualizado em **16-11-2026**. Este registo consolida decisões já presentes no código/protocolos e requisitos posteriores. Não atribui datas históricas que não estejam comprovadas e não substitui a validação pelos orientadores e pelo STJ. D15–D25 conservam a evolução histórica; D26 e o topo de [THESIS_STATE.md](THESIS_STATE.md) indicam a etapa mais recente.
 
 | ID | Decisão | Estado / fundamento |
 | --- | --- | --- |
@@ -123,3 +123,11 @@ O utilizador comunicou seleção bloqueada no g09: 111 referências, 108 resolvi
 Reservar positivamente todos os documentos correspondentes após reconciliação de formatação/documento/processo verificável, com método e hashes na auditoria. Não declarar ausência por pesquisa sem resultado, não promover similaridade a identidade e não escolher silenciosamente uma só versão. Mantêm-se a gate de zero pendências, os grupos/aliases e a exclusão de identidade incerta. Não alterar selection_complete manualmente nem remover referências.
 
 Adjudicações novas devem estar vinculadas à referência/inventário atuais e a evidência privada local conferida por hash. Uma reserva documental exige pacote de julgamento humano ligado aos hashes das fontes; integridade não prova semanticamente identidade e o revisor deve verificar o vínculo. Alegar fonte externa exige documento com excerto correspondente, cabeçalho inequívoco e nenhuma raiz/hash/match conhecido no corpus; fontes desconhecidas do corpus continuam fora da seleção. Declarações sem evidência, stale ou conflitantes são erro. Não alterar NER/GOLD/revisões nem inferir labels jurídicas. Ver [protocolo de diagnóstico e comandos](experiment_19c_protection_diagnostic.md).
+
+## D26 — Identidade DGSI confirmada sem correções de caracteres presumidas
+
+O utilizador confirmou três contextos GOLD presentes em dois originais DGSI; os textos/decisões continuam privados no INESC. A rejeição do parser é explicada pela gramática numérica estrita e pela limitação de cabeçalho numa linha. Aceitar layout multilinha sem relaxar a gramática; preservar valores não-canónicos e offsets. Não substituir letras por dígitos, inventar IDs ou alterar fontes para obter raízes.
+
+Uma captura oficial local com identidade canónica inequívoca e URL vinculado pode sustentar um recibo privado adicional, após confirmação humana. URL, bytes/texto, referências, cabeçalhos originais e confirmados ficam ligados por hashes. HTML/MHTML são lidos offline, sem executar scripts ou rede. Se a captura também não confirmar o ID, manter o bloqueio e obter evidência adicional. Hashes não autenticam o servidor por si só.
+
+O recibo é verificado dentro de validate_decision. Sobreposições conhecidas tornam-se reservas de todos os documentos/famílias correspondentes; não se declaram externas nem se escolhe uma só versão. Continuam contexto e disjunção obrigatórios para fontes externas. [Wizard, evidência e comandos finais](experiment_19c_dgsi_evidence.md). Não se alteraram NER/GOLD/revisões, nem se executou Qwen ou confirmou sucesso real no g09 nesta sessão.

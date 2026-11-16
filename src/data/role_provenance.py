@@ -15,8 +15,10 @@ ID_PATTERN = (
 )
 ID_RE = re.compile(r"(?<![\w/])" + ID_PATTERN + r"(?!\w)", re.IGNORECASE)
 HEADER_RE = re.compile(
-    r"^[ \t]*(?:processo|proc\.?)[ \t]*(?:n[.º°o]*[ \t]*)?[:=-]?[ \t]*"
-    r"(?P<identifier>" + ID_PATTERN + r")(?!\w)",
+    r"^\ufeff?[^\S\r\n]*(?:(?:processo|proc\.?)(?:[^\S\r\n]+n[.º°o]*)?|"
+    r"n[.º°o]*[^\S\r\n]+(?:do[^\S\r\n]+)?processo)"
+    r"(?:[^\S\r\n]*[:=-][^\S\r\n]*|[^\S\r\n]+|(?=\d{1,7}/))"
+    r"(?:\r?\n[^\S\r\n]*){0,2}(?P<identifier>\d{1,7}/[^\s<>]+)",
     re.IGNORECASE | re.MULTILINE,
 )
 
@@ -54,18 +56,33 @@ def filename_identifier_evidence(source_file):
     return evidence
 
 
-def extract_process_provenance(text, source_file, legacy_process_number=None):
+def extract_process_provenance(text, source_file, legacy_process_number=None, *, header_chars=3000, header_lines=40):
     """Never promote an arbitrary body reference to the source decision ID."""
-    header_end = min(len(text), 3000)
+    header_end = min(len(text), header_chars)
     lines = text.splitlines(keepends=True)
-    header_end = min(header_end, sum(map(len, lines[:40])))
-    headers = []
+    header_end = min(header_end, sum(map(len, lines[:header_lines])))
+    # DGSI metadata ends before the abstract/full decision. Body citations must
+    # not become source identity even in a wider, explicitly requested window.
+    boundary = re.search(r"^[^\S\r\n]*(?:sum[aá]rio|texto[^\S\r\n]+integral)[^\S\r\n]*:",
+                         text[:header_end], re.I | re.M)
+    if boundary:header_end = boundary.start()
+    headers, displayed, unparsed = [], [], []
     for match in HEADER_RE.finditer(text[:header_end]):
         start, end = match.span("identifier")
-        headers.append({
-            "raw": text[start:end], "decision_id": normalize_decision_id(text[start:end]),
+        raw = text[start:end]
+        canonical = normalize_decision_id(raw)
+        entry = {
+            "raw": raw, "decision_id": canonical,
             "start": start, "end": end, "line": text.count("\n", 0, start) + 1,
-        })
+        }
+        displayed.append(entry)
+        if canonical is None:
+            year, _, tail = raw.split('/',1)[1].partition('.')
+            codes = []
+            if not re.fullmatch(r'\d{2,4}',year):codes.append('NON_CANONICAL_YEAR')
+            if not tail or not tail[0].isdigit():codes.append('NON_NUMERIC_SEGMENT_START')
+            unparsed.append({**entry,'cause_codes':codes or ['NON_CANONICAL_IDENTIFIER']})
+        else:headers.append(entry)
     filenames = filename_identifier_evidence(source_file)
     header_offsets = {item["start"] for item in headers}
     references = [
@@ -97,6 +114,7 @@ def extract_process_provenance(text, source_file, legacy_process_number=None):
         "process_provenance": {
             "status": status, "requires_review": status != "header_filename_agree",
             "header_evidence": headers, "filename_evidence": filenames,
+            "display_header_evidence": displayed, "unparsed_header_evidence": unparsed,
             "detected_references": references,
             "legacy_process_number": legacy_process_number,
             "legacy_value_is_verified_decision_id": False,

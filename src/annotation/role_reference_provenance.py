@@ -105,6 +105,23 @@ def validate_decision(decision, ref, documents, texts, match):
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
         if actual != item.get('sha256'):raise ValueError('protection_evidence_hash_mismatch')
         verified.append((item, path))
+    dgsi_identities = {}
+    receipts = [(value,p) for value,p in verified if value.get('kind')=='dgsi_identity_receipt']
+    if receipts:
+        from src.annotation.dgsi_source_evidence import verify_receipt
+        candidates = [json.loads(p.read_text(encoding='utf-8')) for _,p in receipts]
+        artifacts = {(p,meta.get('kind'),meta['sha256']) for meta,p in verified}
+        for item,path in verified:
+            if item.get('kind')!='external_source':continue
+            extracted=read_documents(path)
+            entries=[entry for entry in extracted if entry[0]==item.get('source_document_id')]
+            if not entries and len(extracted)==1 and item.get('source_document_id') is None:entries=extracted
+            if len(entries)!=1:raise ValueError('external_source_document_ambiguous')
+            linked=[r for r in candidates if r.get('source_sha256')==item['sha256']
+                    and r.get('source_document_id') in (None,entries[0][0])]
+            if len(linked)!=1:raise ValueError('dgsi_receipt_source_binding_ambiguous')
+            dgsi_identities[path]=verify_receipt(linked[0],path,entries[0][1],ref,artifacts)
+        if not dgsi_identities:raise ValueError('dgsi_receipt_without_copied_source')
     if decision.get('excluded_from_corpus') is True:
         if match['methods'] or decision.get('document_ids'):
             raise ValueError('manual_exclusion_conflicts_with_detected_overlap')
@@ -120,6 +137,7 @@ def validate_decision(decision, ref, documents, texts, match):
             if len(entries) != 1:raise ValueError('external_source_document_ambiguous')
             _,text,_ = entries[0]
             provenance = extract_process_provenance(text, path.name)
+            if path in dgsi_identities:provenance = dgsi_identities[path]
             external_roots = identity_roots(provenance)
             if (provenance['process_provenance']['status'] not in ('header_only','header_filename_agree')
                     or not provenance['process_provenance']['header_evidence'] or len(external_roots) != 1
@@ -127,13 +145,20 @@ def validate_decision(decision, ref, documents, texts, match):
                 raise ValueError('external_source_identity_not_verified')
             if (target not in formatting_text(text) or
                     any(root in index['roots'] for root in external_roots) or
-                    provenance['source_text_sha256'] in {d['source_text_sha256'] for d in documents}):
+                    {provenance['source_text_sha256'],hashlib.sha256(text.encode('utf-8')).hexdigest()}
+                    & {d['source_text_sha256'] for d in documents}):
                 raise ValueError('external_source_not_disjoint_or_context_not_verified')
         return set(), {'kind':'verified_external_source', 'evidence':evidence}
     targets = decision.get('document_ids')
     docs = {doc['document_id']:doc for doc in documents}
     if not isinstance(targets, list) or not targets or any(d not in docs for d in targets):
         raise ValueError('invalid_protection_resolution_document')
+    if dgsi_identities:
+        index=reference_index(documents,texts)
+        required=set(match['methods'])
+        for identity in dgsi_identities.values():
+            for root in identity_roots(identity):required.update(index['roots'].get(root,set()))
+        if not required <= set(targets):raise ValueError('dgsi_known_overlaps_not_fully_reserved')
     packets = [path for item,path in verified if item.get('kind') == 'reservation_packet']
     if not packets:raise ValueError('private_reservation_packet_required')
     for path in packets:
