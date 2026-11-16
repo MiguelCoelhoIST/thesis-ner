@@ -1,0 +1,130 @@
+# Experiência 19c — piloto local Qwen de 30 ocorrências
+
+Estado: implementação e testes sintéticos preparados; **sem amostra real gerada, modelo carregado ou job submetido nesta sessão**. A tentativa SSH não interativa respondeu `Permission denied`; portanto não se confirmou o esquema real no g09, os recursos atuais, os pesos ou versões remotas. Os resultados da 19b continuam os confirmados pelo utilizador (job 15216); este piloto ainda não tem resultados de anotação.
+
+## Protocolo e reutilização
+
+O produtor 19b e `load_bound_inventory()` foram inspecionados: cada menção tem ID por hash/offsets, `document_id`, contexto contínuo, offsets locais/documentais, `source_text_sha256`, `context_id`, bloco processual, proveniência e flags de reservas possivelmente null. A preparação valida o **bundle real**, não assume que o contrato observado no código basta: manifesto, documentos, previsões aceites, fontes e hashes, slices e metadados precisam de corresponder. Falhas não são ignoradas. Não executar novamente NER.
+
+[prepare_stj_pilot_19c.py](../src/annotation/prepare_stj_pilot_19c.py) reutiliza a validação do planeador, o leitor documental, normalização, componentes de processos, marking e guards de conteúdo. Seleciona exatamente 30, com seed 42, por hash determinístico e rotação de pistas de descoberta: vocabulário criminal, civil, recurso, testemunho, relatoria, bibliografia, requerimentos, recorrido, placeholders, várias menções e ausência das pistas-alvo. São indicadores de variedade, **não labels gold**. Uma ocorrência por grupo relacionado, sem repetir contexto normalizado ou contextos muito semelhantes. Não há garantia de cobrir todos os papéis ou UNKNOWN/REFERENCE antes da anotação. Menos de 30 grupos elegíveis bloqueia a seleção; não relaxar quotas/proteções silenciosamente.
+
+O gold congelado é verificado pelo hash conhecido e usado apenas para exclusão. O argumento `--pilot-sources` exige o pool v4 de 61, hash `b64857723d32375f8f461fc26fd7c1d3ffd675676980ba0663a2a20dc2200a6e`, para reservar todas as fontes do piloto humano, não usar as suas labels. Não é dependência do NER, mas uma referência obrigatória de proteção nesta nova seleção. Fontes/hash/aliases/processos, contexto contido no documento e similaridade ao candidato produzem exclusões conservadoras. Identidades conflitantes/não resolvidas são excluídas e as reservas propagam-se aos grupos relacionados, inclusive documentos sem menções aceites.
+
+Flags antigas `null/not_requested` permanecem intactas. Só uma **nova verificação explícita** com referências protegidas completas permite a coorte exploratória. Referência protegida sem raiz processual normalizável nem associação documental bloqueia todo o piloto; não é declarada ausente. O relatório anterior referia três IDs gold não normalizáveis; ainda não se verificou se se resolvem no bundle remoto. Se necessário, uma adjudicação **de proveniência**, não anotação de papéis, fica num JSON privado passado a `--protection-decisions`:
+
+```json
+{
+  "gold:ID_INTERNO_DA_REFERENCIA": {
+    "human_confirmed": true,
+    "document_ids": ["doc_HASH_VERIFICADO_PRIVADAMENTE"],
+    "reason": "Fundamento da verificação local, mantido privado"
+  }
+}
+```
+
+Alternativa só após confirmação independente: `excluded_from_corpus:true` em vez de `document_ids`. Não preencher automaticamente, inventar uma resolução ou marcar todas as referências como ausentes para fazer passar a gate. Excluir do corpus não pode contradizer uma correspondência já detetada. O manifesto privado identifica pendências e exclusões. Uma preparação bloqueada não escreve um JSONL parcialmente utilizável; conserva a auditoria e exige novo diretório para repetir.
+
+Os registos originais não são alterados. A amostra acrescenta apenas `cohort=EXPLORATORY_SILVER_PILOT_NOT_GOLD` e metadados de seleção/verificação, preservando inclusive as flags antigas. Pistas de amostragem ficam apenas na auditoria, nunca no prompt. Não define splits ou elegibilidade de treino.
+
+## Prompt e resposta
+
+O prompt integral usado está em [role_annotation_19c_v1.txt](../config/prompts/role_annotation_19c_v1.txt), versão **19c-v1**, com hash gravado em cada configuração. Zero-shot, sem demonstrações, sem IDs processuais, sugestões lexicais ou labels fornecidas ao modelo. Só instruções fixas e contexto com o alvo marcado por `mark_entity()`.
+
+Taxonomia [v2](../config/role_taxonomy_v2.json): ARGUIDO, REU, AUTOR, REQUERENTE, RECORRENTE, RECORRIDO, TESTEMUNHA, RELATOR, REFERENCE, UNKNOWN. REFERENCE é classe principal; AUTOR é processual civil, REU civil, ARGUIDO criminal. Condenação não estabelece automaticamente ARGUIDO atual; autoria de obra não estabelece AUTOR. Papéis citados ficam assinalados por atribuição e não são transferidos para o processo atual.
+
+Resposta JSON estrita: `status`, `assignments`, `other_roles`, `uncertain`, `uncertainty_reason`. Cada atribuição tem label, tipo de evidência, quote literal contínua <=240 caracteres e âmbito. Outros papéis conservam designação literal, evidência e âmbito, sem criar novas classes principais. UNKNOWN é exclusivo entre labels principais e não substitui insuficiência, ambiguidade ou entidade inválida. Um papel só fora da taxonomia pode coexistir com UNKNOWN em `other_roles`. Invalid JSON, chaves duplicadas, labels inválidas, quotes ausentes, incoerências e limite de geração ficam registados; sem reparar JSON ou mapear erros para UNKNOWN.
+
+[annotate_stj_silver_19c.py](../src/annotation/annotate_stj_silver_19c.py) reutiliza o loader offline extraído do protótipo 19b e o chat template/device da Experiência 17. O modo histórico de 40 permanece suspenso e com o seu protocolo. A 19c não usa `suggested_label` nem o validador dos 40. O wrapper novo é [run_qwen3_19c_pilot.sbatch](../scripts/slurm/run_qwen3_19c_pilot.sbatch).
+
+Configuração fixa: Qwen/Qwen3-8B, revision imutável de 40 hexadecimais já em cache, **FP16 explícito**, batch 1, seed 42, `do_sample=False`, temperatura 0, `enable_thinking=False`, 1024 tokens novos, no máximo 4096 tokens de entrada e limite de posições do modelo respeitado, sem truncagem. FP16 é explícito para não presumir BF16 nativo na Quadro RTX 6000 histórica. Versões/hardware podem afetar determinismo; isto não promete equivalência bit a bit com a Experiência 17.
+
+Preflight GPU carrega os pesos locais, aplica o chat template e valida o orçamento de **todos os 30**; não gera labels. O job piloto exige o seu `run.json`, com dados/prompt/código/checkpoint/configuração iguais, e confere versões/template novamente. Inferência gera e grava um registo de cada vez. Todos os outputs são SILVER, com original/raw/estrutura/erros/configuração e `human_validated=false`. Outputs inválidos são conservados nos 30 e produzem `completed_with_invalid_outputs`/exit 1; uma falha de runtime conserva o parcial, não finge conclusão. Não há resume/sobrescrita: usar novos diretórios/jobs.
+
+## Comandos no INESC
+
+Executar manualmente em SSH autorizado, definindo `INESC_USER` localmente; não incluir passwords em comandos/scripts:
+
+```bash
+ssh g09.hlt.inesc-id.pt -l "$INESC_USER"
+cd ~/thesis-ner
+git status --short
+# Só fazer pull se o checkout remoto estiver limpo; não sobrescrever alterações.
+git switch develop
+git pull --ff-only origin develop
+source venv-ner/bin/activate
+mkdir -p data/raw
+sinfo -N -o '%N %P %t %G'
+scontrol show partition hlt_msc
+scontrol show node g06
+python -m pip show torch transformers accelerate
+bash -n scripts/slurm/run_qwen3_19c_pilot.sbatch
+```
+
+Confirmar disponibilidade/permissão atual antes de submeter; g06/hlt_msc são os recursos históricos, não verificados agora. Verificar cache **sem downloads, carregamento do modelo ou inferência no login**:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+from huggingface_hub.constants import HF_HUB_CACHE
+folder = Path(HF_HUB_CACHE) / 'models--Qwen--Qwen3-8B' / 'snapshots'
+for snapshot in sorted(folder.iterdir()) if folder.is_dir() else []:
+    index = snapshot / 'model.safetensors.index.json'
+    shards = set(json.loads(index.read_text())['weight_map'].values()) if index.is_file() else {'model.safetensors'}
+    print(snapshot.name, 'weights_complete=', all((snapshot / s).is_file() and (snapshot / s).stat().st_size > 0 for s in shards),
+          'tokenizer_config=', (snapshot / 'tokenizer_config.json').is_file())
+PY
+```
+
+Ausência de snapshot completo bloqueia a execução; não instalar/descarregar por iniciativa deste script. Selecionar manualmente a revision verificada: `export QWEN_REVISION=HASH_DE_40_HEXADECIMAIS`. Inventário de shards não substitui o preflight de carregamento.
+
+Confirmar bundle/fonte e referência privada do piloto, sem imprimir conteúdos:
+
+```bash
+for suffix in mentions.jsonl manifest.json documents.jsonl ner_predictions.jsonl; do
+  test -f "data/raw/experiment_19b_ner_full_15216_${suffix}" || exit 1
+done
+test -f data/raw/experiment_19a_candidates_v4_smoke10.jsonl
+sha256sum data/raw/experiment_19a_candidates_v4_smoke10.jsonl
+```
+
+Se faltar o pool privado de proteção, transferi-lo apenas pelo procedimento institucional autorizado para `data/raw/` no INESC; não o obter pelo Git nem omitir a proteção. O comando seguinte não carrega Qwen nem NER e pode preparar a amostra no login, sujeito às políticas locais:
+
+```bash
+python -u src/annotation/prepare_stj_pilot_19c.py \
+  --input data/raw/experiment_19b_ner_full_15216_mentions.jsonl \
+  --inventory-manifest data/raw/experiment_19b_ner_full_15216_manifest.json \
+  --gold data/eval/roles_eval_real_candidates_v1.jsonl \
+  --pilot-sources data/raw/experiment_19a_candidates_v4_smoke10.jsonl \
+  --output-dir data/raw/experiment_19c_pilot01 --seed 42
+```
+
+Só continuar com `selection_complete=true`, 30 IDs/grupos distintos e zero referências não resolvidas. Inspecionar privadamente `selection_manifest.json`; não mostrar nomes ou contextos em relatórios públicos. Se houver bloqueio, rever a auditoria/resoluções e repetir para `pilot02` com `--protection-decisions` quando aplicável. Não relaxar os filtros para obter 30. Definir `PILOT_DIR` para o diretório efetivamente aprovado:
+
+```bash
+PILOT_DIR=data/raw/experiment_19c_pilot01
+PRE_JOB=$(sbatch --parsable --partition=hlt_msc --nodelist=g06 --gres=gpu:1 \
+  scripts/slurm/run_qwen3_19c_pilot.sbatch preflight "$PILOT_DIR")
+PRE_JOB=${PRE_JOB%%;*}
+sacct -j "$PRE_JOB" --format=JobID,State,ExitCode,Elapsed
+```
+
+**Esperar e inspecionar** COMPLETED/0:0 e `status=preflight_passed` em `data/raw/experiment_19c_preflight_${PRE_JOB}/run.json`. Verificar modelo/revision, template, 30 contagens de tokens, GPU/distribuição de dispositivos, memória/tempos e configuração. Não submeter se houver falhas, alterações de dados/código ou recursos não autorizados. Depois:
+
+```bash
+sbatch --partition=hlt_msc --nodelist=g06 --gres=gpu:1 \
+  scripts/slurm/run_qwen3_19c_pilot.sbatch pilot "$PILOT_DIR" \
+  "data/raw/experiment_19c_preflight_${PRE_JOB}/run.json"
+```
+
+Cada job pede 1 GPU por CLI, 4 CPUs, 32 GB de RAM e até 2 horas; verificar limites do INESC. Nunca fixar GPU física nem executar Qwen diretamente no login. A inspeção/submissão manual é necessária nesta sessão sem autenticação SSH do agente.
+
+Saídas privadas por job: `data/raw/experiment_19c_pilot_JOBID/silver_predictions.jsonl`, `run.json`, `aggregate.json`; logs `data/raw/stj_19c_JOBID.{out,err}`. A amostra e `selection_manifest.json` também são privados. Não publicar `other_roles`, quotes, raw outputs, identidades ou mapas. Apenas agregados poderão ser revistos posteriormente para `results/`; não foi criado um resultado fictício nesta implementação.
+
+## Limitações e validação
+
+Os testes usam apenas corpus e respostas inventados, incluindo uma execução simulada preflight→30 previsões; não validam GPU/modelo/cache real. A amostra é exploratória e enviesada por critérios de variedade/proveniência, não representativa nem gold; não calcular accuracy/F1 sem referência independente. Literalidade da evidência não prova atribuição jurídica correta. NER pode omitir pessoas, confundir entidades e omitir autores citados. Similaridade e normalização de processos não certificam independência absoluta nem ausência de exposição no pré-treino. Anotações Qwen não são gold independente para avaliar o próprio Qwen.
+
+Suite local: **152 testes**, sucesso, **1 integração opcional omitida**; **18 específicos da 19c**. Loader e geração testados com mocks, não com pesos reais. Scripts usam `umask 077` para novos outputs privados no Linux e recusam sobrescrita; isto não anonimiza os dados nem substitui políticas institucionais de acesso/retenção.
+
+Sem APIs externas, chamadas pagas, treino, downloads, NER repetido ou alterações no corpus, benchmarks, revisões ou `silver.spacy`. A execução massiva continua fora do âmbito. Depois do piloto real, rever parsing, abstenções, múltiplos papéis, REFERENCE/UNKNOWN, âmbito e exemplos difíceis antes de decidir qualquer ampliação.

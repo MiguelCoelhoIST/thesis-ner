@@ -2,6 +2,8 @@
 
 **Estado em 16-11-2026: protótipo histórico SUSPENSO, NÃO pronto para a Experiência 19c.** Preserva-se o trabalho, sem execução ou adaptação para anotador final. A prioridade atual é preparar anotação assistida GPT/Claude, separada das futuras experiências de classificação Qwen. Ver [estado atual](THESIS_STATE.md) e [decisões](DECISIONS.md).
 
+Atualização posterior: o utilizador autorizou um [piloto 19c separado de 30](experiment_19c_qwen_pilot.md). Apenas o loader offline foi extraído para reutilização; o modo histórico de 40 e o seu prompt continuam suspensos. A prioridade GPT/Claude acima é histórica e foi precedida por este novo piloto local, sem autorização para execução massiva ou APIs.
+
 Limitações do contrato preservado: exatamente 40 candidatos; `suggested_label` necessário para comparação agregada (nunca enviado ao modelo); taxonomia histórica de nove labels com REFERENCE em campo separado; sem suporte completo a `other_roles` nem resume. A configuração v2 atual inclui REFERENCE como classe principal. Os comandos abaixo são históricos e não constituem autorização de execução. As falhas CUDA/DNS descritas pertencem à tentativa local antiga, não ao NER integral concluído no INESC.
 
 ## Orientação posterior do utilizador: separar anotação e avaliação

@@ -2,7 +2,19 @@
 
 Atualizado em **16-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
-## Estado atual: NER integral concluído; preparação da Experiência 19c
+## Atualização mais recente: Experiência 19c — piloto Qwen autorizado
+
+O utilizador reviu a prioridade anterior GPT/Claude e autorizou **primeiro um piloto local Qwen3-8B de 30 ocorrências**, sem APIs, anotação massiva ou treino. Implementados [preparação](../src/annotation/prepare_stj_pilot_19c.py), [anotador](../src/annotation/annotate_stj_silver_19c.py), [prompt 19c-v1](../config/prompts/role_annotation_19c_v1.txt), [wrapper Slurm](../scripts/slurm/run_qwen3_19c_pilot.sbatch) e testes sintéticos. O loader offline é partilhado com o protótipo antigo; o modo histórico de 40 continua suspenso.
+
+**Não executado no corpus real nesta sessão.** SSH não interativo recusou autenticação; não se confirmou o esquema efetivo no servidor, pesos/cache, ambiente ou recursos atuais, não se prepararam 30 registos reais nem se submeteram jobs. O contrato foi confirmado no produtor/validador existente e será obrigatoriamente validado no bundle remoto. [Comandos e limites](experiment_19c_qwen_pilot.md).
+
+A preparação exige NER completo e referências protegidas verificadas por hash, conserva campos originais e faz nova verificação explícita de exclusões. Uma ocorrência por grupo relacionado, seleção determinística por variedade com seed 42, coorte exploratória nunca gold. Flags antigas desconhecidas não são apagadas; identidades conflitantes ou referências protegidas não resolvidas bloqueiam/excluem conforme o caso. Não garante UNKNOWN/REFERENCE ou equilíbrio por classe antes da anotação.
+
+Taxonomia v2 de dez classes, multi-label, `other_roles`, evidência literal e âmbito. Zero-shot greedy FP16, checkpoint local imutável, input máximo 4096 tokens e 1024 novos, sem truncagem. Preflight GPU dos 30 é obrigatório antes da geração. Propostas sempre SILVER e `human_validated=false`; JSON inválido é conservado separadamente, nunca UNKNOWN. Preservar benchmarks, revisões, corpus e `silver.spacy`. Não inferir resultados de modelo a partir de testes com mocks. A implementação será versionada após validação; não autoriza envio externo.
+
+Validação local 19c: **152 testes**, sucesso, **1 integração opcional omitida**; **18 testes novos** da 19c, incluindo loader offline mockado, reservas/IDs/offsets, parsing e preflight→30 gerações simuladas. Não substituem uma execução GPU real.
+
+## Estado da consolidação anterior: NER integral concluído
 
 **Confirmado pelo utilizador em 16-11-2026:** o job Slurm **15216**, no INESC, terminou **COMPLETED, ExitCode 0:0**, com NER de **191/191 textos distintos**, correspondentes a **388 documentos auditados**, **24.467 ocorrências PER aceites** e **24.977 previsões PER brutas**. `inventory_complete=True`, `NER_executed=True`, `LLM_calls=0`. São ocorrências previstas, não pessoas distintas nem labels jurídicas validadas. A diferença de 510 não deve ser atribuída a motivos de filtragem sem consultar os artefactos.
 

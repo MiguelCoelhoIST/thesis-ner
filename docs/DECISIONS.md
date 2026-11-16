@@ -1,6 +1,6 @@
 # Decisões metodológicas e operacionais
 
-Atualizado em **16-11-2026**. Este registo consolida decisões já presentes no código/protocolos e requisitos posteriores. Não atribui datas históricas que não estejam comprovadas e não substitui a validação pelos orientadores e pelo STJ. D15–D20 conservam a evolução histórica; D21–D23 e o topo de [THESIS_STATE.md](THESIS_STATE.md) indicam o estado atual.
+Atualizado em **16-11-2026**. Este registo consolida decisões já presentes no código/protocolos e requisitos posteriores. Não atribui datas históricas que não estejam comprovadas e não substitui a validação pelos orientadores e pelo STJ. D15–D23 conservam a evolução histórica; D24 e o topo de [THESIS_STATE.md](THESIS_STATE.md) indicam a prioridade mais recente.
 
 | ID | Decisão | Estado / fundamento |
 | --- | --- | --- |
@@ -103,3 +103,13 @@ Preservar os relatórios agregados de preparação, exportação e recuperação
 No planeador corrigido, `null`/`not_requested`/indeterminado nos checks gold/piloto produzem revisão explícita; reservas e motivos propagam-se por documento/hash/bloco/processo e aliases. Todas as menções continuam nos planos, sem splits ou elegibilidade de treino automáticos. Labels/propostas pré-preenchidas não são aceites como inventário independente não anotado.
 
 Vincular inputs por IDs e hashes derivados, documentos e previsões aceites do mesmo bundle, contexto e fontes originais pelos hashes do manifesto; persistir fingerprints no novo plano. A contagem não basta. Fontes/companheiros em falta ou alterados são erro, não motivo para repetir NER ou confiar silenciosamente. Isto verifica consistência/rastreabilidade, não autenticidade criptográfica contra substituição fraudulenta de todo o bundle. Antes dos splits definitivos, rever reservas por conteúdo e processos relacionados, com aliases/conflitos; conservar gold50 e as dez revisões piloto. A consolidação não executou o planeador nos dados reais.
+
+## D24 — Primeiro piloto 19c com Qwen local, antes de ampliar (16-11-2026)
+
+Nova direção explícita do utilizador: implementar e preparar 30 ocorrências do inventário integral 19b para Qwen3-8B local no INESC, usando taxonomia v2 e respostas JSON, antes da anotação massiva e de GPT/Claude. Isto sucede à suspensão geral para anotação; o executável histórico 19b de 40 continua suspenso. Reutilizar o loader e helpers de inferência, sem alterar o NER ou benchmarks. Código/testes/documentação podem ser committed e enviados para origin/develop após validação.
+
+Seleção seed 42 por variedade de pistas, nunca gold lexical; um contexto por grupo processual relacionado, preservando IDs/offsets/proveniência originais. Verificar o bundle real, hashes das referências protegidas e exclusões novas explícitas. Não converter `null/not_requested` em resultado negativo. Referências sem raiz/associação verificável exigem resolução privada explícita de proveniência; não descartar a pendência nem presumir ausência. Nenhuma ocorrência automaticamente validada para treino ou convertida em gold.
+
+Prompt versionado 19c-v1: dez classes incluindo REFERENCE principal, multi-label apenas sustentado, `other_roles` literal, evidência e âmbito por atribuição, ambiguidade/insuficiência/entidade inválida separados de UNKNOWN. Checkpoint imutável local, FP16 explícito, greedy/temperatura 0/thinking desativado, limites sem truncagem. Todos os resultados são SILVER, com raw output, parsing e configuração; qualquer output inválido permanece registado, sem reparação ou coerção para UNKNOWN.
+
+GPU apenas em Slurm autorizado. Verificar plano, referências, recursos/cache e preflight de carregamento/template/comprimento dos 30 antes de submeter a geração. Nesta sessão a autenticação SSH não interativa foi recusada; não houve inspeção remota dos dados/recursos, amostragem real, carregamento, downloads ou submissão. [Protocolo e comandos](experiment_19c_qwen_pilot.md). Testes sintéticos/mocks não demonstram inferência real nem qualidade jurídica. Não enviar dados a APIs nem começar treino/anotação massiva nesta fase.

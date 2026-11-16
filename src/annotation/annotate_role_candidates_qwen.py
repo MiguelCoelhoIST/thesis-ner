@@ -200,6 +200,39 @@ def write_new_json(path, value):
         handle.write("\n")
 
 
+def load_local_qwen(revision, device="cuda", seed=42, inference_dtype="auto"):
+    """Shared offline loader for the historical prototype and the 19c pilot."""
+    os.environ.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1")
+    from src.evaluation import evaluate_qwen3_8b_real_stj as exp17
+    torch = exp17.torch
+    if inference_dtype not in ("auto", "float16", "bfloat16"):
+        raise ValueError("unsupported_inference_dtype")
+    if device == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("cuda_unavailable")
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.benchmark = False
+    started = time.perf_counter()
+    tokenizer = exp17.AutoTokenizer.from_pretrained(MODEL, revision=revision, local_files_only=True)
+    tokenizer.padding_side = "left"
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token_id = tokenizer.eos_token_id
+    model = exp17.AutoModelForCausalLM.from_pretrained(
+        MODEL, revision=revision, local_files_only=True,
+        torch_dtype="auto" if inference_dtype == "auto" else getattr(torch, inference_dtype),
+        device_map="auto" if device == "cuda" else {"": "cpu"}, low_cpu_mem_usage=True)
+    model.eval()
+    environment = {"python": platform.python_version(), "torch": torch.__version__,
+                   "transformers": exp17.transformers.__version__,
+                   "resolved_model_revision": getattr(model.config, "_commit_hash", None),
+                   "tokenizer_commit": tokenizer.init_kwargs.get("_commit_hash"),
+                   "requested_dtype": inference_dtype,
+                   "chat_template_sha256": hashlib.sha256(str(tokenizer.chat_template).encode()).hexdigest(),
+                   "device": exp17.device_information(model, time.perf_counter()-started)}
+    return model, tokenizer, exp17, environment
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, default=ROOT / "data/raw/experiment_19a_annotation_batch01_v1.jsonl")
@@ -243,29 +276,12 @@ def main():
     try:
         # Reuse Experiment 17's model classes, chat template and device helpers;
         # its main() and gold/few-shot data loaders are never called.
-        from src.evaluation import evaluate_qwen3_8b_real_stj as exp17
+        model, tokenizer, exp17, environment = load_local_qwen(args.revision, args.device, args.seed)
         torch = exp17.torch
-        run["environment"] = {"torch": torch.__version__, "transformers": exp17.transformers.__version__,
-                              "python": platform.python_version(), "cuda_available": torch.cuda.is_available()}
-        if args.device == "cuda" and not torch.cuda.is_available():
-            raise RuntimeError("cuda_unavailable")
-        torch.manual_seed(args.seed)
-        if torch.cuda.is_available():
-            torch.cuda.manual_seed_all(args.seed)
-            torch.backends.cudnn.benchmark = False
-        load_start = time.perf_counter()
-        tokenizer = exp17.AutoTokenizer.from_pretrained(MODEL, revision=args.revision, local_files_only=True)
-        tokenizer.padding_side = "left"
-        if tokenizer.pad_token_id is None:
-            tokenizer.pad_token_id = tokenizer.eos_token_id
-        model = exp17.AutoModelForCausalLM.from_pretrained(
-            MODEL, revision=args.revision, local_files_only=True, torch_dtype="auto",
-            device_map="auto" if args.device == "cuda" else {"": "cpu"}, low_cpu_mem_usage=True)
-        model.eval()
-        config["resolved_model_revision"] = getattr(model.config, "_commit_hash", None)
-        config["tokenizer_commit"] = tokenizer.init_kwargs.get("_commit_hash")
-        config["chat_template_sha256"] = hashlib.sha256(str(tokenizer.chat_template).encode()).hexdigest()
-        run["device"] = exp17.device_information(model, time.perf_counter() - load_start)
+        run["environment"] = environment
+        for key in ("resolved_model_revision", "tokenizer_commit", "chat_template_sha256"):
+            config[key] = environment[key]
+        run["device"] = environment["device"]
         # Smoke is mandatory before full inference in the SAME model/configuration.
         smoke_ids = {row["id"] for row in records[:5]}
         for index, row in enumerate(target):
