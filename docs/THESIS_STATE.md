@@ -1,6 +1,28 @@
 # Estado persistente da tese
 
-Atualizado em **30-10-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
+Atualizado em **16-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
+
+## Estado atual: NER integral concluído; preparação da Experiência 19c
+
+**Confirmado pelo utilizador em 16-11-2026:** o job Slurm **15216**, no INESC, terminou **COMPLETED, ExitCode 0:0**, com NER de **191/191 textos distintos**, correspondentes a **388 documentos auditados**, **24.467 ocorrências PER aceites** e **24.977 previsões PER brutas**. `inventory_complete=True`, `NER_executed=True`, `LLM_calls=0`. São ocorrências previstas, não pessoas distintas nem labels jurídicas validadas. A diferença de 510 não deve ser atribuída a motivos de filtragem sem consultar os artefactos.
+
+A correção do Transformer está no commit `fc069e15bac5d1638848efa3e2d782de23b86f56`: valida o limite efetivo de WordPieces, incluindo tokens especiais, e subdivide janelas excessivas com sobreposição, sem truncar o texto. Preserva os offsets e a persistência das previsões. Não alterar nem voltar a executar esta pipeline apenas para consolidar documentação ou preparar lotes.
+
+**Fonte e limite:** as contagens acima foram fornecidas pelo utilizador; os relatórios dos jobs **15209, 15215 e 15216 estão apenas no g09** e serão tratados separadamente. Não foram consultados nesta revisão. Não se inferem duração, versões, VRAM utilizada, distribuição de papéis, causas de rejeição ou correção dos spans a partir dessas contagens. Os inventários recuperados de 384/412 e a extrapolação de ~27 mil permanecem históricos, não a dimensão atual.
+
+Prioridades acordadas com o utilizador, em continuidade com a orientação atribuída ao professor Borbinha:
+
+1. Preservar os outputs completos do job 15216; verificar manifestos, offsets, proveniência e reservas gold/piloto antes de preparar os lotes. Não reconstruir o inventário nem pressupor que os checks opcionais gold/piloto foram executados.
+2. Preparar anotação assistida por **GPT/Claude**, sobre o universo completo de menções elegíveis, sem quotas de 40/430 e sem `suggested_label`. O procedimento concreto usado pelo professor ainda não foi fornecido; não inventar prompts, modelos ou acordos de tratamento de dados.
+3. Separar planeamento privado, desidentificação, inspeção de privacidade e autorização de transmissão. A pseudonimização reversível não certifica anonimização. Nenhum envio externo é autorizado por esta consolidação.
+4. Guardar propostas como **SILVER**, multi-label, com evidência, âmbito, incerteza e `other_roles`; nunca `human_validated=true` automaticamente. UNKNOWN e REFERENCE precisam de cobertura observada após anotação, não de labels fabricadas pelo NER.
+5. Conservar as labels específicas e derivar agrupadas sobre os mesmos exemplos/splits, isolando documentos duplicados, aliases e processos relacionados. O benchmark gold50 e as dez revisões piloto permanecem protegidos.
+
+Qwen permanece suspenso como anotador: o protótipo histórico exige 40 candidatos, usa REFERENCE separada e não suporta `other_roles`; não é o executável da 19c. O planeador privado foi corrigido: checks ausentes/indeterminados ficam em revisão, reservas propagam-se por documento/hash/bloco/processo/aliases, e labels pré-preenchidas escalares/múltiplas ou propostas SILVER são recusadas. Não cria splits nem estabelece elegibilidade de treino. Ver [revisão de consolidação](experiment_19c_consolidation_review.md).
+
+O planeador valida o bundle do mesmo prefixo (manifesto, documentos, menções e previsões no caso NER), IDs derivados de hash/offsets, contextos e fontes originais pelos fingerprints do manifesto. Regista hashes de todos os inputs verificados no novo plano privado. Precisa das fontes nos caminhos registados; falha explicitamente se faltarem/mudarem. Não basta copiar só o JSONL/manifesto nem reconhecer `--allow-partial` para dispensar proveniência. Esta validação não executa NER nem autentica um bundle integralmente falsificado.
+
+Verificação local da consolidação autorizada: **134 testes**, com **1 integração opcional omitida**; testes Qwen **9/9**, lotes **18/18**, CLIs `--help` e sintaxe Bash dos wrappers aprovados. Foram autorizados commits separados e push após validação, ao contrário da primeira revisão. Sem inferência, treino, downloads, submissões Slurm, acesso aos relatórios remotos ou início da 19c. `data/raw/silver.spacy`, datasets e revisões preservados. Os blocos seguintes conservam o percurso histórico; não usar os seus próximos passos como backlog atual.
 
 ## Objetivo e arquitetura
 
@@ -18,7 +40,7 @@ Fontes: [notas do modelo](old_models/model_notes.md), [pipeline](../src/evaluati
 
 **Histórica, experiências até 18:** ARGUIDO, TESTEMUNHA, RELATOR, REU, UNKNOWN. Classificação de uma pessoa marcada por exemplo. ARGUIDO corresponde ao acusado criminal e REU ao réu civil. Esta taxonomia continua a reger o conjunto congelado de 50 exemplos.
 
-**Atual, provisória para a Experiência 19:** ARGUIDO, REU, AUTOR, REQUERENTE, RECORRENTE, RECORRIDO, TESTEMUNHA, RELATOR, UNKNOWN. A fonte operacional é [config/role_taxonomy.json](../config/role_taxonomy.json).
+**Histórica da Experiência 19:** nove classes em [config/role_taxonomy.json](../config/role_taxonomy.json), preservadas para reprodução. **Operacional desde 11-11-2026, para 19b/19c:** ARGUIDO, REU, AUTOR, REQUERENTE, RECORRENTE, RECORRIDO, TESTEMUNHA, RELATOR, REFERENCE, UNKNOWN, em [config/role_taxonomy_v2.json](../config/role_taxonomy_v2.json).
 
 | Papéis finos | Classe agregada derivada |
 | --- | --- |
@@ -28,6 +50,7 @@ Fontes: [notas do modelo](old_models/model_notes.md), [pipeline](../src/evaluati
 | RECORRIDO | APPELLEE |
 | TESTEMUNHA | WITNESS |
 | RELATOR | RAPPORTEUR |
+| REFERENCE | REFERENCE |
 | UNKNOWN | UNKNOWN |
 
 A anotação fina é a fonte de verdade. A agregação é automática, incluindo remoção determinística de duplicados em multi-label. Comparações fina/agregada exigem os mesmos exemplos e splits. A taxonomia final continua sujeita a validação científica e institucional.
@@ -105,9 +128,11 @@ O ambiente dedicado de trabalho para NER/GPU é **`venv-ner/`**, ignorado pelo G
 
 **Teste funcional GPU concluído:** confirmação do utilizador nesta sessão, em 30-10-2026. O código exige `spacy.require_gpu(gpu_id)` antes de `spacy.load()` quando recebe `--gpu-id`; sem argumento, exige CPU. O stdout identifica o dispositivo. Os [testes de seleção de dispositivo](../tests/test_role_candidate_device.py) usam mocks; não são a prova da execução GPU real.
 
-Limite da evidência desta atualização: `venv-ner/pyvenv.cfg` não estava presente neste checkout e não foi localizado um relatório autónomo com versões/tempos desse teste funcional. Não se registam versões, VRAM ou aceleração inventadas. Confirmar a localização do ambiente usado e guardar o inventário das versões e o stdout no próximo benchmark. `requirements.txt` é uma lista de dependências do projeto, não um lockfile comprovado do ambiente GPU. A política de GPU está implementada; o novo benchmark comparável ainda está pendente.
+Limite da evidência de 30-10-2026: `venv-ner/pyvenv.cfg` não estava presente neste checkout e não foi localizado um relatório autónomo com versões/tempos desse teste funcional. Em 16-11-2026, este checkout dispõe apenas do Python `venv/Scripts/python.exe` usado nos testes; o NER integral remoto foi entretanto confirmado pelo utilizador. Não se registam versões ou aceleração inventadas. `requirements.txt` não é um lockfile comprovado do ambiente GPU; os detalhes do job 15216 aguardam os artefactos remotos.
 
-## Próximos passos, pela ordem atual
+## Backlog histórico de 30-10-2026 — superado pelo estado atual acima
+
+Preservado para rastreabilidade. Não repetir o benchmark ou a extração integral como pré-condição da 19c; o job 15216 já concluiu essa etapa.
 
 1. Confirmar o Python do ambiente `venv-ner` usado no teste funcional e registar versões de spaCy, spacy-transformers, PyTorch e suporte CUDA/CuPy; não reinstalar automaticamente dependências numa tarefa documental.
 2. Rever a auditoria de IDs sem NER e os conflitos de proveniência, preservando a evidência original.
@@ -140,6 +165,8 @@ O exemplo não foi executado nesta sessão. Escolher também um nome novo para o
 
 ## Novo requisito: autores de citações — 30-10-2026
 
+**Nota atual:** o texto seguinte regista o requisito inicial. Desde 11-11-2026, REFERENCE é a classe principal adotada na taxonomia v2; CITATION_AUTHOR não foi adotado como nome de label. A autorização de classificar não resolve a política de preservação de identidades.
+
 **Pendente, ainda não implementado:** distinguir pessoas que são autoras de obras/artigos citados no texto. A designação de trabalho é **CITATION_AUTHOR**. Não é AUTOR processual e não deve ser confundida conceptualmente com UNKNOWN.
 
 Não foi acrescentada a `config/role_taxonomy.json`, aos mapeamentos, aos modelos, aos prompts ou aos datasets. É necessário definir se será label, atributo ou outra camada e como se relacionará com os papéis processuais, incluindo pessoas que acumulam funções. Os códigos atuais e as anotações históricas permanecem preservados; não recodificar UNKNOWN automaticamente.
@@ -163,3 +190,49 @@ Fontes principais: configuração de taxonomia; scripts 13–18 e extração/ano
 Verificação de 30-10-2026: `venv/Scripts/python.exe -m unittest discover -s tests` executou 66 testes com sucesso. As referências Markdown locais foram verificadas e o hash do conjunto congelado foi confirmado. Não houve nova inferência, treino ou execução GPU nesta sessão.
 
 Alterações desta sessão são documentais. Ver [DECISIONS.md](DECISIONS.md) para os compromissos metodológicos e [AGENTS.md](../AGENTS.md) para instruções operacionais. Atualizar estado com fonte, data e distinção entre planeado, implementado e medido; nunca preencher lacunas com resultados presumidos.
+
+## Atualização posterior: lote 19a e preparação 19b — 30-10-2026
+
+Esta atualização sucede ao backlog histórico acima: o pool v5 completo foi auditado e foi preparado um lote de 40 candidatos, cinco por sugestão, 40 grupos/hashes distintos. Ver [auditoria v5](../results/experiment_19a_v5_gpu_full_annotation_audit.md) e [relatório do lote](../results/experiment_19a_annotation_batch01_v1_report.md). O lote privado permanece por anotar; sugestões não são gold.
+
+A Experiência 19b implementa propostas SILVER Qwen3-8B zero-shot com evidência/âmbito, multi-label e abstenção, sem enviar suggested_label. REFERENCE é categoria experimental separada, não alteração da taxonomia fina nem política de preservação de identidades. Nenhuma saída é human-validated. O [protocolo 19b](experiment_19b_silver_annotation.md) contém implementação, comandos Slurm e limitações.
+
+Verificação atual: 81 testes sintéticos passaram. Tentativa de smoke com cinco candidatos bloqueada no pré-flight por `cuda_unavailable`: PyTorch 2.11.0+cpu, Transformers 4.53.2; cache local com metadados/tokenizer mas sem ficheiros de pesos Qwen. Zero inferências e nenhum dataset SILVER produzido. [Resultado agregado](../results/experiment_19b_smoke01_aggregate.md). Não foi confirmado acesso INESC nem submetido job; o próximo passo é smoke real num ambiente autorizado com GPU/pesos, depois os 40 se a gate de parsing passar. Não existem resultados de qualidade/accuracy/F1 da Experiência 19b. Dados originais, revisões piloto e gold50 preservados.
+
+### Orientação posterior: decidir a anotação antes de executar Qwen
+
+O utilizador confirmou acesso INESC anteriormente usado e ambiente remoto `venv-ner` CUDA; não usar o `venv` Windows para essa inferência. Porém, SSH e DNS desta sessão não resolveram o hostname fornecido, pelo que ambiente remoto, Slurm, GPUs e pesos continuam **não verificados nesta sessão**. Não se submeteu job nem descarregou modelo. O template foi corrigido para `venv-ner`, exige Slurm e respeita `CUDA_VISIBLE_DEVICES` do scheduler.
+
+Próximo passo revisto: documentar o procedimento de anotação GPT/Claude referido pelo utilizador e decidir ferramenta, privacidade, prompt e validação, separadamente das experiências locais Qwen. Qwen/19b fica preparado, sem instalação ou inferência enquanto essa estratégia não for decidida e a execução não for confirmada. Estão preparados [comandos de inspeção apenas de leitura](experiment_19b_silver_annotation.md); não assumir acesso SSH como autorização para usar GPUs diretamente.
+
+### Piloto de exportação externa — Qwen temporariamente suspenso
+
+Por orientação posterior, priorizar ChatGPT/Claude; suspender temporariamente a execução Qwen. O exportador local preparou os cinco primeiros registos do lote, em CPU com Eduardo NER, sem inferência de papéis ou envio externo. Há JSONL transformado, tarefa/schema e mapa reversível privado em `data/raw/experiment_19b_external_pilot01_*`; apenas [validação agregada](../results/experiment_19b_external_pilot01_export_validation.md) é versionável.
+
+Foram confirmados 5/5 offsets e 5/5 reconstruções exatas, input intacto e contagens de âncoras preservadas. A saída é pseudonimizada e requer inspeção humana de privacidade/contexto, não anonimização certificada. IDs internos/proveniência ficam no mapa; nenhum suggested_label é exportado. Nada foi partilhado nem anotado; não existe novo gold. Ver [comandos e limites](external_annotation_export.md).
+
+### Exportação integral posterior: 40 candidatos
+
+O exportador foi ampliado para 40 por omissão e gerou `data/raw/experiment_19b_external_full01_input.jsonl`, acompanhado de manifesto privado reversível e tarefa/schema. Os 40 IDs, offsets e reconstruções foram verificados, com âncoras preservadas e 92 testes aprovados. Piloto anterior, datasets e revisões intactos. [Validação integral](../results/experiment_19b_external_full01_export_validation.md).
+
+Os padrões diretos de identificadores não encontraram correspondências residuais. Um alerta de capitalização é concatenação de pseudónimos gerados em EXEMPLO_018, a rever por legibilidade; riscos contextuais/omissões NER continuam a exigir inspeção antes de partilhar. Saída sem suggested_label, não certificada como anónima. Qwen permanece suspenso; sem envio externo, anotação ou treino.
+
+### Estratégia posterior: corpus completo, não amostra 40/430
+
+O universo passa a ser os 191 textos distintos dos 388 ficheiros. Planeamento local confirmou 15.102.124 caracteres, 2.411.871 palavras por whitespace e 187 blocos conservadores de split; 47 textos têm conflitos/cardinalidade de raízes a rever. O NER antigo cobria 63,81% do texto único e não persistia todos os spans. Recuperaram-se 384 ocorrências do pool, preservando nove variantes de contexto múltiplo; **não é inventário completo**.
+
+Artefactos privados canónicos: `data/raw/experiment_19b_corpus_plan02_*`. [Relatório agregado](../results/experiment_19b_corpus_plan02.md) contém estimativa operacional condicional (~27 mil menções, não medição), cenários de volume, comandos e limites. Total real de PER continua null até execução integral. O novo preparador usa cobertura sem âncoras/quotas com `--run-ner` explícito e persiste previsões através de um callback opcional no detetor existente. Não foi feita essa execução, anotação, transmissão ou treino. 100 testes passaram; Qwen continua suspenso e os lotes anteriores são apenas artefactos históricos, não limites do universo.
+
+## Retoma TESE V2 — 11-11-2026
+
+Reverificados os 388 ficheiros/191 textos e metadados sem nova inferência. Além das 384 ocorrências recuperadas do pool, reutilizaram-se 28 PER adicionais do cache privado dos 40 contextos; 40 previsões já existiam e uma variante sobreposta ficou em revisão. Inventário recuperado **412 ocorrências, ainda parcial**, com offsets/documento/contexto e sem suggested_label. Não há cache NER completo recuperável; um DocBin adicional tem zero correspondências exatas por hash com o corpus. Total completo continua desconhecido.
+
+Novos artefactos privados: `data/raw/experiment_19b_corpus_recovered_20261111_v1_*`; seis planos parciais de lotes em `data/raw/experiment_19b_batches_RECOVERED_PARTIAL_20261111_v1/`. Os planos incluem todos os 412 IDs, sem texto partilhável; coortes de reserva/proveniência não são splits. O planeador recusa um inventário parcial por omissão. [Relatório atual e comandos](../results/experiment_19b_corpus_inventory_20261111.md).
+
+106 testes passaram. UNKNOWN/REFERENCE continuam sem cobertura demonstrada no inventário recuperado enviesado por âncoras; a passagem integral já preparada é necessária para incluir ocorrências fora dessas regiões. Não houve API, SSH, download, treino, nova inferência NER, transmissão ou anotação LLM. Próximo passo: teste técnico limitado em alocação Slurm autorizada e, depois, NER integral sem quotas, seguido de desidentificação/inspeção antes da eventual anotação externa. Qwen permanece suspenso, gold50 e revisões preservados.
+
+### Preparação da execução Slurm — registo histórico de 11-11-2026
+
+O utilizador quer executar smoke de três documentos e depois os 191 textos no g09. Foram revistos o preparador e criado um wrapper Slurm, com gate de smoke, heartbeat, metadados e sem novo ficheiro known_mentions_PARTIAL na inferência. Todas as previsões PER ficam guardadas, inclusive filtradas; as válidas incluem contexto e ID, além da saída de menções aceites. [Instruções SSH/Slurm](experiment_19b_ner_execution.md).
+
+Taxonomia principal solicitada: dez classes, incluindo REFERENCE, em `config/role_taxonomy_v2.json`, preservando o ficheiro histórico. A tarefa suporta labels multi-label específicas e other_roles com evidência/âmbito. A agregação será derivada sem reanotação nem perda da anotação fina. 108 testes e bash -n passaram. Nenhum novo inventário, NER ou treino foi executado nesta revisão; a tentativa SSH de leitura falhou no DNS, logo recursos/partição remotos não foram confirmados e nenhum job foi submetido. Prioridade restante: NER integral → inspeção/desidentificação → anotação GPT/Claude SILVER → comparação específica/agrupada; Qwen continua suspenso.
