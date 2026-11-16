@@ -2,6 +2,8 @@
 
 Estado: implementação e testes sintéticos preparados; **sem amostra real gerada, modelo carregado ou job submetido nesta sessão**. A tentativa SSH não interativa respondeu `Permission denied`; portanto não se confirmou o esquema real no g09, os recursos atuais, os pesos ou versões remotas. Os resultados da 19b continuam os confirmados pelo utilizador (job 15216); este piloto ainda não tem resultados de anotação.
 
+O commit preexistente **4b339d3** disponibilizou entretanto o [agregado local do job 15216](../results/experiment_19b_ner_full_15216.md), consultado nesta revisão: confirma os 191/191 textos, 24.467 aceites, 24.977 previsões brutas e **checks gold/piloto `not_requested`**. Confirma também preflight WordPiece dos 191, máximo original 703, máximo seguro 486 e uma subdivisão. Estes agregados não são os registos JSONL nem prova de elegibilidade. As notas históricas de consolidação que diziam relatórios apenas no g09 antecedem esse commit.
+
 ## Protocolo e reutilização
 
 O produtor 19b e `load_bound_inventory()` foram inspecionados: cada menção tem ID por hash/offsets, `document_id`, contexto contínuo, offsets locais/documentais, `source_text_sha256`, `context_id`, bloco processual, proveniência e flags de reservas possivelmente null. A preparação valida o **bundle real**, não assume que o contrato observado no código basta: manifesto, documentos, previsões aceites, fontes e hashes, slices e metadados precisam de corresponder. Falhas não são ignoradas. Não executar novamente NER.
