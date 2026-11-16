@@ -79,8 +79,9 @@ class SelectionTests(unittest.TestCase):
         chosen,audit=preparation.select_pilot(rows,docs,texts,refs)
         self.assertEqual(chosen,[]);self.assertEqual(audit['unresolved_references'],['gold:invented-gold'])
         decision={'gold:invented-gold':{'excluded_from_corpus':True,'human_confirmed':True,'reason':'Invented independent source verification.'}}
-        chosen,_=preparation.select_pilot(rows,docs,texts,refs,decisions=decision)
-        self.assertEqual(len(chosen),30)
+        # A checkbox/reason alone is no longer sufficient provenance evidence.
+        with self.assertRaises(ValueError):
+            preparation.select_pilot(rows,docs,texts,refs,decisions=decision)
 
     def test_manual_resolution_cannot_erase_detected_overlap(self):
         rows,docs,texts=corpus(2);refs=protected();refs['gold'][0]['text']=rows[0]['text']

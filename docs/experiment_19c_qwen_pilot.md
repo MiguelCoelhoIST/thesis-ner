@@ -2,6 +2,8 @@
 
 Estado: implementação e testes sintéticos preparados; **sem amostra real gerada, modelo carregado ou job submetido nesta sessão**. A tentativa SSH não interativa respondeu `Permission denied`; portanto não se confirmou o esquema real no g09, os recursos atuais, os pesos ou versões remotas. Os resultados da 19b continuam os confirmados pelo utilizador (job 15216); este piloto ainda não tem resultados de anotação.
 
+**Atualização posterior:** o utilizador executou a preparação no g09 e comunicou 111 checks, 108 resolvidos, três pendências, 15 grupos bloqueados e zero selecionados/LLM calls. A gate funcionou; não há ainda piloto Qwen concluído. O [diagnóstico privado/público e mecanismo de adjudicação v2](experiment_19c_protection_diagnostic.md) substituem o formato declarativo simples de decisões descrito na primeira versão abaixo. O manifesto privado continua apenas no INESC e não foi lido neste workspace.
+
 O commit preexistente **4b339d3** disponibilizou entretanto o [agregado local do job 15216](../results/experiment_19b_ner_full_15216.md), consultado nesta revisão: confirma os 191/191 textos, 24.467 aceites, 24.977 previsões brutas e **checks gold/piloto `not_requested`**. Confirma também preflight WordPiece dos 191, máximo original 703, máximo seguro 486 e uma subdivisão. Estes agregados não são os registos JSONL nem prova de elegibilidade. As notas históricas de consolidação que diziam relatórios apenas no g09 antecedem esse commit.
 
 ## Protocolo e reutilização
@@ -24,7 +26,7 @@ Flags antigas `null/not_requested` permanecem intactas. Só uma **nova verifica�
 }
 ```
 
-Alternativa só após confirmação independente: `excluded_from_corpus:true` em vez de `document_ids`. Não preencher automaticamente, inventar uma resolução ou marcar todas as referências como ausentes para fazer passar a gate. Excluir do corpus não pode contradizer uma correspondência já detetada. O manifesto privado identifica pendências e exclusões. Uma preparação bloqueada não escreve um JSONL parcialmente utilizável; conserva a auditoria e exige novo diretório para repetir.
+O exemplo acima é o **formato histórico v1 e já não basta**: v2 exige reviewer, fingerprints gerados pelo diagnóstico e evidence local verificada por hash. Uma exclusão exige ainda uma fonte externa com contexto e cabeçalho verificáveis, não apenas `excluded_from_corpus:true`. Usar o [formato atual e comandos](experiment_19c_protection_diagnostic.md). Não preencher automaticamente, inventar uma resolução ou marcar referências como ausentes para fazer passar a gate. Excluir não pode contradizer uma correspondência detetada. Uma preparação bloqueada conserva a auditoria e exige novo diretório para repetir.
 
 Os registos originais não são alterados. A amostra acrescenta apenas `cohort=EXPLORATORY_SILVER_PILOT_NOT_GOLD` e metadados de seleção/verificação, preservando inclusive as flags antigas. Pistas de amostragem ficam apenas na auditoria, nunca no prompt. Não define splits ou elegibilidade de treino.
 

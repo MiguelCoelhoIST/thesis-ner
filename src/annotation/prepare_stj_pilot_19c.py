@@ -19,8 +19,9 @@ from src.annotation.plan_inventory_batches import (
 from src.annotation.prepare_role_annotation_batch import Components, content_related, identity_roots, private_new_output
 from src.data.map_role_taxonomy import load_jsonl
 from src.utils.entity_marking import mark_entity
+from src.annotation.role_reference_provenance import reference_index, match_reference, validate_decision
 
-VERSION = '19c-exploratory-pilot-v1'
+VERSION = '19c-exploratory-pilot-v2-provenance'
 COHORT = 'EXPLORATORY_SILVER_PILOT_NOT_GOLD'
 GOLD_SHA = 'f687174287e7aeb50283a42e510897eb4bd9daa663749b3f3a4507c77a3bd6c8'
 PILOT_SOURCES_SHA = 'b64857723d32375f8f461fc26fd7c1d3ffd675676980ba0663a2a20dc2200a6e'
@@ -66,16 +67,8 @@ def assess_protection(rows, documents, texts, protected_sets, decisions=None):
     members = defaultdict(set)
     for doc_id, (group, _) in groups.items():
         members[group].add(doc_id)
-    doc_index = {doc['document_id']: doc for doc in documents}
-    roots = defaultdict(set)
-    for doc in documents:
-        for root in doc['potential_process_group_ids']:
-            roots[root].add(doc['document_id'])
-        for alias in doc.get('aliases', []):
-            for root in identity_roots(alias):
-                roots[root].add(doc['document_id'])
+    index = reference_index(documents, texts)
     blocked, unresolved, reference_log = set(), [], []
-    normalized = {key: ' '.join(text.casefold().split()) for key, text in texts.items()}
     decisions = decisions or {}
     used = set()
     for source_set, references in protected_sets.items():
@@ -86,39 +79,19 @@ def assess_protection(rows, documents, texts, protected_sets, decisions=None):
             if ref['text'][ref['entity_start']:ref['entity_end']] != ref['entity']:
                 raise ValueError('invalid_protected_reference_target')
             key = source_set + ':' + ref['id']
-            ref_roots = identity_roots(ref)
-            matches = set()
-            for root in ref_roots:
-                matches.update(roots.get(root, set()))
-            passage = ' '.join(ref['text'].casefold().split())
-            for doc in documents:
-                aliases = doc.get('aliases', [])
-                same_source = any(
-                    ref.get('source_file') == a.get('source_file') and
-                    ref.get('source_document_id') == a.get('source_document_id')
-                    for a in aliases if ref.get('source_file') and ref.get('source_document_id'))
-                if (doc['source_text_sha256'] == ref.get('source_text_sha256') or same_source
-                        or (len(passage.split()) >= 5 and passage in normalized[doc['document_id']])):
-                    matches.add(doc['document_id'])
-            resolved = bool(ref_roots or matches)
+            proof = match_reference(ref, index)
+            matches = set(proof['methods'])
+            resolved = bool(proof['roots'] or matches)
+            adjudication = None
             if key in decisions:
                 decision = decisions[key];used.add(key)
-                if (decision.get('human_confirmed') is not True or not isinstance(decision.get('reason'), str)
-                        or not decision['reason'].strip()):
-                    raise ValueError('protection_decision_needs_explicit_human_evidence')
-                if decision.get('excluded_from_corpus') is True:
-                    if matches:
-                        raise ValueError('manual_exclusion_conflicts_with_detected_overlap')
-                    resolved = True
-                else:
-                    targets = decision.get('document_ids', [])
-                    if not targets or any(d not in doc_index for d in targets):
-                        raise ValueError('invalid_protection_resolution_document')
-                    matches.update(targets);resolved = True
+                targets, adjudication = validate_decision(decision, ref, documents, texts, proof)
+                matches.update(targets);resolved = True
             if not resolved:
                 unresolved.append(key)
             blocked.update(groups[d][0] for d in matches if d in groups)
-            reference_log.append({'reference': key, 'resolved': resolved, 'matched_documents': sorted(matches)})
+            reference_log.append({'reference': key, 'resolved': resolved, 'matched_documents': sorted(matches),
+                                  'matching_evidence':proof, 'adjudication':adjudication})
     if used != set(decisions):
         raise ValueError('unknown_protection_resolution_id')
     # Keep established reservations even if the newly supplied checks find none.
@@ -223,6 +196,8 @@ def main():
         if args.protection_decisions:
             binding['protection_decisions'] = {'path': str(args.protection_decisions.resolve()), 'sha256': file_hash(args.protection_decisions)}
         selected, audit = select_pilot(rows, docs, texts, protected, args.seed, decisions=decisions)
+        for i, evidence in enumerate(item for decision in decisions.values() for item in decision.get('evidence', [])):
+            binding[f'adjudication_evidence_{i}'] = {'path':str(Path(evidence['path']).resolve()), 'sha256':evidence['sha256']}
         if any(file_hash(Path(item['path'])) != item['sha256'] for item in binding.values()):
             raise ValueError('inputs_changed_during_selection')
         output.mkdir(parents=True)

@@ -1,6 +1,6 @@
 # Decisões metodológicas e operacionais
 
-Atualizado em **16-11-2026**. Este registo consolida decisões já presentes no código/protocolos e requisitos posteriores. Não atribui datas históricas que não estejam comprovadas e não substitui a validação pelos orientadores e pelo STJ. D15–D23 conservam a evolução histórica; D24 e o topo de [THESIS_STATE.md](THESIS_STATE.md) indicam a prioridade mais recente.
+Atualizado em **16-11-2026**. Este registo consolida decisões já presentes no código/protocolos e requisitos posteriores. Não atribui datas históricas que não estejam comprovadas e não substitui a validação pelos orientadores e pelo STJ. D15–D24 conservam a evolução histórica; D25 e o topo de [THESIS_STATE.md](THESIS_STATE.md) indicam a etapa mais recente.
 
 | ID | Decisão | Estado / fundamento |
 | --- | --- | --- |
@@ -115,3 +115,11 @@ Prompt versionado 19c-v1: dez classes incluindo REFERENCE principal, multi-label
 GPU apenas em Slurm autorizado. Verificar plano, referências, recursos/cache e preflight de carregamento/template/comprimento dos 30 antes de submeter a geração. Nesta sessão a autenticação SSH não interativa foi recusada; não houve inspeção remota dos dados/recursos, amostragem real, carregamento, downloads ou submissão. [Protocolo e comandos](experiment_19c_qwen_pilot.md). Testes sintéticos/mocks não demonstram inferência real nem qualidade jurídica. Não enviar dados a APIs nem começar treino/anotação massiva nesta fase.
 
 O agregado do job 15216 já está disponível localmente desde o commit preexistente 4b339d3 e foi consultado: `reference_checks.gold=not_requested` e `reference_checks.pilot=not_requested`. Esta evidência reforça a nova verificação explícita da 19c; não converter os null da extração em exclusões verificadas. A inspeção deste agregado não substitui o bundle privado remoto nem inventa um resultado de anotação.
+
+## D25 — Diagnosticar três pendências sem remover proteções
+
+O utilizador comunicou seleção bloqueada no g09: 111 referências, 108 resolvidas, três pendentes, 15 grupos bloqueados, zero selecionados e zero chamadas LLM. O manifesto privado não está neste workspace; não inferir a origem/causa das três. Criar diagnóstico reproduzível a partir do manifesto e fingerprints originais. Só códigos, contagens e tokens HMAC com chave privada aleatória podem aparecer no JSON partilhável; mapa/evidência/chave ficam ignorados no INESC. Não usar SHA simples de IDs adivinháveis nem imprimir nomes/excertos/processos.
+
+Reservar positivamente todos os documentos correspondentes após reconciliação de formatação/documento/processo verificável, com método e hashes na auditoria. Não declarar ausência por pesquisa sem resultado, não promover similaridade a identidade e não escolher silenciosamente uma só versão. Mantêm-se a gate de zero pendências, os grupos/aliases e a exclusão de identidade incerta. Não alterar selection_complete manualmente nem remover referências.
+
+Adjudicações novas devem estar vinculadas à referência/inventário atuais e a evidência privada local conferida por hash. Uma reserva documental exige pacote de julgamento humano ligado aos hashes das fontes; integridade não prova semanticamente identidade e o revisor deve verificar o vínculo. Alegar fonte externa exige documento com excerto correspondente, cabeçalho inequívoco e nenhuma raiz/hash/match conhecido no corpus; fontes desconhecidas do corpus continuam fora da seleção. Declarações sem evidência, stale ou conflitantes são erro. Não alterar NER/GOLD/revisões nem inferir labels jurídicas. Ver [protocolo de diagnóstico e comandos](experiment_19c_protection_diagnostic.md).
