@@ -36,6 +36,7 @@ class NERDeviceTests(unittest.TestCase):
         output = io.StringIO()
         with (
             patch.dict(sys.modules, {"spacy": self.spacy, "torch": self.torch}),
+            patch.object(extractor, 'install_length_guard', return_value=None),
             contextlib.redirect_stdout(output),
         ):
             model = extractor.load_person_ner(self.model_path, **kwargs)

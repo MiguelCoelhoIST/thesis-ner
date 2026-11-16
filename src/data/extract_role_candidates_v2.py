@@ -22,6 +22,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.data.role_provenance import extract_process_provenance
+from src.utils.transformer_length_guard import install_length_guard, refine_transformer_windows
 
 
 SEED = 42
@@ -188,6 +189,7 @@ def load_person_ner(model_path=DEFAULT_NER_MODEL, cpu_threads=4, gpu_id=None):
         "torch_cpu_threads": torch.get_num_threads(),
         "torch_interop_threads": torch.get_num_interop_threads(),
     }
+    nlp.meta["candidate_extraction_audit"]["transformer_input_safety"] = install_length_guard(nlp)
     return nlp
 
 
@@ -222,12 +224,15 @@ def rejected_per_reason(entity):
 def detect_person_spans(
     text, nlp, context_chars=240, batch_size=4, stats=None,
     anchors=None, prediction_cache=None, progress=None, timings=None,
-    windows=None, prediction_sink=None,
+    windows=None, prediction_sink=None, windows_prevalidated=False,
 ):
     stats = stats if stats is not None else Counter()
     timings = timings if timings is not None else Counter()
     started = time.perf_counter()
     windows = ner_windows(text, context_chars, anchors=anchors) if windows is None else windows
+    if not windows_prevalidated:
+        windows, validation = refine_transformer_windows(text, nlp, windows)
+        stats['transformer_window_subdivisions'] += validation['subdivisions']
     timings["anchor_discovery_seconds"] += time.perf_counter() - started
     prediction_cache = prediction_cache if prediction_cache is not None else WindowPredictionCache()
     stats["ner_windows"] += len(windows)

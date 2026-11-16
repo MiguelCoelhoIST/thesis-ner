@@ -57,9 +57,13 @@ class CorpusInventoryTests(unittest.TestCase):
             argv=['inventory','--input-dir',str(source),'--prefix',str(prefix),
                   '--report',str(root/'results/run.md'),'--run-ner','--expected-unique-documents','191']
             if smoke:argv+=['--max-documents','3']
-            with patch.object(inventory,'ROOT',root),patch.object(inventory,'private_new_output',side_effect=lambda p:p),patch.object(inventory,'load_person_ner',return_value=FakeNLP())as loader,patch('sys.argv',argv),patch('builtins.print'):
+            with patch.object(inventory,'ROOT',root),patch.object(inventory,'private_new_output',side_effect=lambda p:p),patch.object(inventory,'load_person_ner',return_value=FakeNLP())as loader,patch.object(inventory,'refine_transformer_windows',wraps=inventory.refine_transformer_windows)as preflight,patch('sys.argv',argv),patch('builtins.print'):
                 inventory.main()
             self.assertEqual(loader.call_count,1)
+            # Even smoke inference of three documents checks every source text,
+            # including difficult inputs outside the selected smoke subset.
+            self.assertEqual(preflight.call_count,191)
+            self.assertEqual(len({call.args[0]for call in preflight.call_args_list}),191)
             manifest=json.loads(Path(str(prefix)+'_manifest.json').read_text(encoding='utf-8'))
             summary=manifest['summary']
             self.assertEqual(summary['audited_documents'],388)
@@ -203,12 +207,25 @@ class CorpusInventoryTests(unittest.TestCase):
     def test_full_run_gate_checks_smoke_and_current_input_hashes(self):
         with tempfile.TemporaryDirectory()as directory:
             root=Path(directory);source=root/'synthetic.txt';source.write_text('invented',encoding='utf-8')
-            manifest={'summary':{'unique_texts':191,'NER_documents_processed':3,'NER_executed':True,'accepted_mentions_this_run':2},
+            manifest={'summary':{'unique_texts':191,'NER_documents_processed':3,'NER_executed':True,'accepted_mentions_this_run':2,
+                                'transformer_length_validation':{'validated':True,'documents':191,'effective_limit':512,'maximum_safe_wordpieces':512}},
                       'script_sha256':hashlib.sha256(Path(inventory.__file__).read_bytes()).hexdigest(),
+                      'length_guard_sha256':hashlib.sha256(Path(inventory.length_guard_module.__file__).read_bytes()).hexdigest(),
                       'extractor_sha256':hashlib.sha256((inventory.ROOT/'src/data/extract_role_candidates_v2.py').read_bytes()).hexdigest(),
                       'input_files':{'source':{'path':str(source),'sha256':hashlib.sha256(source.read_bytes()).hexdigest()}}}
             path=root/'smoke.json';path.write_text(json.dumps(manifest),encoding='utf-8')
             inventory.validate_smoke_manifest(path)
+            for field,value in [('validated',False),('documents',3),('maximum_safe_wordpieces',513)]:
+                invalid=copy.deepcopy(manifest)
+                invalid['summary']['transformer_length_validation'][field]=value
+                path.write_text(json.dumps(invalid),encoding='utf-8')
+                with self.subTest(field=field),self.assertRaises(ValueError):
+                    inventory.validate_smoke_manifest(path)
+            missing=copy.deepcopy(manifest)
+            del missing['summary']['transformer_length_validation']
+            path.write_text(json.dumps(missing),encoding='utf-8')
+            with self.assertRaises(ValueError):inventory.validate_smoke_manifest(path)
+            path.write_text(json.dumps(manifest),encoding='utf-8')
             source.write_text('changed synthetic input',encoding='utf-8')
             with self.assertRaises(ValueError):inventory.validate_smoke_manifest(path)
 

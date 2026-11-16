@@ -23,6 +23,8 @@ from src.annotation.export_external_annotation import TASK_INSTRUCTIONS, respons
 from src.data.extract_role_candidates_v2 import detect_person_spans, load_person_ner, read_documents, rejected_per_reason, ProgressReporter, SUPPORTED_SUFFIXES, process_number_from_filename
 from src.data.map_role_taxonomy import load_jsonl, load_taxonomy
 from src.data.role_provenance import normalize_process_group_id, extract_process_provenance
+from src.utils.transformer_length_guard import refine_transformer_windows
+import src.utils.transformer_length_guard as length_guard_module
 
 VERSION = "19b-corpus-inventory-v2-source-inputs"
 TAXONOMY_V2 = ROOT/'config/role_taxonomy_v2.json'
@@ -59,6 +61,13 @@ def validate_smoke_manifest(path, expected_unique=191):
         raise ValueError('script_changed_since_smoke')
     if manifest['extractor_sha256']!=hashlib.sha256((ROOT/'src/data/extract_role_candidates_v2.py').read_bytes()).hexdigest():
         raise ValueError('extractor_changed_since_smoke')
+    if manifest.get('length_guard_sha256')!=hashlib.sha256(Path(length_guard_module.__file__).read_bytes()).hexdigest():
+        raise ValueError('length_guard_changed_since_smoke')
+    validation=summary.get('transformer_length_validation',{})
+    if (not validation.get('validated') or validation.get('documents')!=expected_unique
+            or validation.get('effective_limit',0)<1
+            or validation.get('maximum_safe_wordpieces',float('inf'))>validation['effective_limit']):
+        raise ValueError('smoke_missing_complete_corpus_wordpiece_validation')
     for source in manifest.get('input_files',{}).values():
         if hashlib.sha256(Path(source['path']).read_bytes()).hexdigest()!=source['sha256']:
             raise ValueError('input_changed_since_smoke')
@@ -385,16 +394,37 @@ def main():
         ner_started=time.perf_counter()
         nlp = load_person_ner(args.ner_model, gpu_id=args.gpu_id)
         ner_metadata=getattr(nlp,'meta',{}).get('candidate_extraction_audit',{})
+        # Tokenization-only preflight covers ALL documents even in a 3-document
+        # smoke. Do not wait for an unlucky long sequence during BERT inference.
+        prepared_windows={}; validations=[]
+        with ProgressReporter(args.progress_seconds) as progress:
+            progress(stage='wordpiece_preflight',total=len(documents),files=len(source_paths))
+            for ordinal,doc in enumerate(documents,1):
+                text=by_hash[doc['source_text_sha256']]
+                safe,validation=refine_transformer_windows(text,nlp,full_windows(text))
+                prepared_windows[doc['document_id']]=safe
+                doc['transformer_window_validation']=validation
+                validations.append(validation)
+                progress(documents=ordinal,document_characters=len(text),planned_windows=len(safe))
+        summary['transformer_length_validation']={
+            'validated':all(v['validated']for v in validations), 'documents':len(documents),
+            'effective_limit':validations[0]['effective_limit']if validations else None,
+            'maximum_original_wordpieces':max((v['maximum_original_wordpieces']for v in validations),default=0),
+            'maximum_safe_wordpieces':max((v['maximum_safe_wordpieces']for v in validations),default=0),
+            'outer_window_subdivisions':sum(v['subdivisions']for v in validations),
+            'safe_outer_windows':sum(len(w)for w in prepared_windows.values()),
+            'includes_special_tokens':True, 'truncation':False}
         selected_docs = documents[:args.max_documents] if args.max_documents else documents
         stats = Counter(); count = 0; raw_per_count = 0; valid_per_count = 0
         with ProgressReporter(args.progress_seconds) as progress, paths['mentions.jsonl'].open('x', encoding='utf-8') as mentions_file, paths['ner_predictions.jsonl'].open('x', encoding='utf-8') as predictions_file:
             progress(stage='full_coverage_NER',total=len(selected_docs),files=len(source_paths))
             for ordinal, doc in enumerate(selected_docs, 1):
                 text = by_hash[doc['source_text_sha256']]
-                progress(stage='NER_inference',documents=ordinal-1,document_characters=len(text),planned_windows=len(full_windows(text)))
+                windows=prepared_windows[doc['document_id']]
+                progress(stage='NER_inference',documents=ordinal-1,document_characters=len(text),planned_windows=len(windows))
                 predictions = []
                 accepted = detect_person_spans(text, nlp, batch_size=args.batch_size, stats=stats,
-                                              windows=full_windows(text), prediction_sink=predictions.append,progress=progress)
+                                              windows=windows, prediction_sink=predictions.append,progress=progress,windows_prevalidated=True)
                 accepted_keys = {(a,b) for a,b,_ in accepted}
                 # One raw prediction per exact span/label; retain all window
                 # provenance and raw PER not accepted by conservative filters.
@@ -439,6 +469,7 @@ def main():
                        'source_inventory':source_inventory,'source_files_skipped':audit.get('skipped_files',[]),
                        'ner_model':ner_metadata,'window_characters':6000,'window_overlap_characters':600,
                        'context_chars_each_side':args.context_chars,'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                       'length_guard_sha256':hashlib.sha256(Path(length_guard_module.__file__).read_bytes()).hexdigest(),
                        'extractor_sha256':hashlib.sha256((ROOT/'src/data/extract_role_candidates_v2.py').read_bytes()).hexdigest()})]:
         with paths[name].open('x',encoding='utf-8') as handle:json.dump(value,handle,ensure_ascii=False,indent=2)
     with args.report.open('x',encoding='utf-8') as handle:
