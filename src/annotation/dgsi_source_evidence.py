@@ -23,13 +23,15 @@ FAMILY_POLICY = 'literal_serial_all_years_courts_and_unverified_sources_v1'
 def sha(data):return hashlib.sha256(data).hexdigest()
 
 
-def official_document_key(url):
+def official_document_key(url, *, allow_queryless=False):
+    """Keep reviewer URLs strict; saved/reference decision URLs may omit query."""
     try:
         parsed = urlsplit(url)
         if (parsed.scheme.lower() not in ('http','https') or parsed.hostname not in ('dgsi.pt','www.dgsi.pt')
                 or parsed.username or parsed.password or parsed.port is not None
                 or not re.fullmatch(r'/jstj\.nsf/(?:(?:[0-9a-f]{32}|0|-)/)?[0-9a-f]{32}/?',parsed.path,re.I)
-                or 'opendocument' not in parsed.query.lower().split('&')):
+                or not ('opendocument' in parsed.query.lower().split('&')
+                        or (allow_queryless and not parsed.query))):
             raise ValueError('dgsi_official_document_url_required')
         # The optional preceding GUID is a view, not the decision UNID.
         return 'dgsi.pt/jstj.nsf/'+parsed.path.rstrip('/').split('/')[-1].lower()
@@ -161,9 +163,8 @@ def verify_receipt(receipt,source_path,source_text,ref,verified_artifacts):
         raise ValueError('dgsi_official_url_conflict')
     ref_key=None
     if ref.get('source_url'):
-        try:ref_key=official_document_key(ref['source_url'])
-        except ValueError:pass
-    origin_keys={official_document_key(url) for url in origins}
+        ref_key=official_document_key(ref['source_url'],allow_queryless=True)
+    origin_keys={official_document_key(url,allow_queryless=True) for url in origins}
     if (ref_key and ref_key!=source_key) or (origin_keys and origin_keys!={source_key}):
         raise ValueError('dgsi_official_url_conflict')
     if source_key not in origin_keys and ref_key!=source_key:

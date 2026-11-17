@@ -115,6 +115,44 @@ class ReceiptTests(unittest.TestCase):
                     'https://www.dgsi.pt/jstj.nsf?SearchView'):
             with self.assertRaises(ValueError):dgsi.official_document_key(url)
 
+    def test_queryless_decision_urls_only_accepted_for_reference_and_capture_metadata(self):
+        queryless=URL.split('?')[0]
+        self.assertEqual(dgsi.official_document_key(queryless,allow_queryless=True),dgsi.official_document_key(URL))
+        with self.assertRaisesRegex(ValueError,'official_document_url_required'):
+            dgsi.official_document_key(queryless)
+        with self.assertRaisesRegex(ValueError,'official_document_url_required'):
+            dgsi.make_receipt(self.source,self.text,self.capture,queryless,'synthetic','Checked.',[self.ref])
+        for metadata in ('<link rel="canonical" href="'+queryless+'">',
+                         '<meta property="og:url" content="'+queryless+'">',
+                         '<link rel="canonical" href="'+queryless+'"><meta property="og:url" content="'+URL+'">'):
+            for ref_url in (URL,queryless):
+                with self.subTest(metadata=metadata,ref_url=ref_url):
+                    self.ref['source_url']=ref_url
+                    self.capture.write_text(html_capture('901/23.5T8XYZ.P1.S1').replace(
+                        '<meta property="og:url" content="'+URL+'">',metadata),encoding='utf-8')
+                    self.assertEqual(self.verify()['official_document_key'],dgsi.official_document_key(URL))
+
+    def test_queryless_gold_url_binds_plain_capture_and_never_ignores_conflicts(self):
+        self.ref['source_url']=URL.split('?')[0]
+        self.capture=self.root/'capture.txt'
+        self.capture.write_text('Processo: 901/23.5T8XYZ.P1.S1\nTexto Integral:\n'+PASSAGE,encoding='utf-8')
+        self.assertEqual(self.verify()['official_document_key'],dgsi.official_document_key(URL))
+        self.ref['source_url']=URL2.split('?')[0]
+        with self.assertRaisesRegex(ValueError,'official_url_conflict'):self.verify()
+
+    def test_different_unid_or_invalid_gold_and_metadata_urls_fail_even_with_other_valid_binding(self):
+        invalid='https://dgsi.pt.evil/jstj.nsf/0/'+('b'*32)
+        for ref_url in (URL2.split('?')[0],invalid):
+            self.ref['source_url']=ref_url
+            with self.assertRaises(ValueError):self.verify()
+        self.ref['source_url']=URL
+        for origin in (URL2.split('?')[0],invalid):
+            self.capture.write_text(html_capture('901/23.5T8XYZ.P1.S1',url=origin),encoding='utf-8')
+            with self.assertRaises(ValueError):self.verify()
+        for url in (invalid,URL.split('?')[0]+'?SearchView',
+                    'https://www.dgsi.pt/jstj.nsf/not-a-unid'):
+            with self.assertRaises(ValueError):dgsi.official_document_key(url,allow_queryless=True)
+
     def test_plain_copy_without_origin_needs_matching_frozen_reference_url(self):
         self.capture=self.root/'capture.txt'
         self.capture.write_text('Processo:\n901/23.5T8XYZ.P1.S1\nTexto Integral:\n'+PASSAGE,encoding='utf-8')

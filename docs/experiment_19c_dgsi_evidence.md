@@ -2,6 +2,8 @@
 
 Atualização de 17-11-2026: o utilizador confirmou que o campo Processo da página oficial da primeira fonte é literalmente não canónico. O cabeçalho oficial da segunda fonte ainda não foi confirmado nesta sessão. Não há fundamento para corrigir caracteres. A implementação anterior confundia identidade documental com família processual e exigia um ID canónico que pode não existir. Esta atualização substitui esse requisito; não confirma que o piloto real esteja desbloqueado.
 
+Correção de URLs após 90c0e8d: o URL introduzido pelo revisor continua a exigir `?OpenDocument`. Apenas a comparação dos metadados da captura e do `source_url` congelado aceita também URLs de decisão DGSI sem query, mantendo host/caminho/UNID validados. Um URL GOLD inválido já não é ignorado; um UNID diferente ou metadata inválida bloqueia mesmo quando a outra evidência tem um URL válido. As duas capturas fornecidas foram lidas localmente apenas para verificar URLs: ambas aceites, uma com URL sem query, bytes intactos. Isto não executou `verify_receipt` sobre os originais privados nem demonstrou seleção protegida no g09. Suite desta correção: **195 testes**, sucesso, **1 integração opcional omitida**. Reexecutar o comando abaixo num novo diretório de saída, por exemplo `data/raw/experiment_19c_dgsi_evidence03`, indicando as capturas já existentes; não as editar.
+
 O utilizador confirmou que as três pendências GOLD vêm de dois acórdãos e que os contextos aparecem integralmente nos dois textos obtidos. No g09, a validação parou em `external_source_identity_not_verified`. Não se leram os documentos privados neste workspace; as identidades reais não são reproduzidas aqui.
 
 ## Causa e correção
