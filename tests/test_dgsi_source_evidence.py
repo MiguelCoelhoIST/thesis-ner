@@ -76,7 +76,30 @@ class ReceiptTests(unittest.TestCase):
 
     def test_capture_with_same_ambiguity_cannot_confirm_a_numeric_correction(self):
         self.capture.write_text(html_capture('901/23.ST8XYZ.P1.S1'),encoding='utf-8')
-        with self.assertRaisesRegex(ValueError,'capture_identity_not_verified'):self.receipt()
+        result=self.verify()
+        self.assertIsNone(result['decision_id'])
+        self.assertEqual(result['official_process_identifier'],'901/23.ST8XYZ.P1.S1')
+        self.assertEqual(result['document_identity_status'],'confirmed_official_document')
+        self.assertEqual(result['family_identity_status'],'unconfirmed')
+        self.assertEqual(result['process_group_id_candidates'],[])
+
+    def test_document_without_process_field_is_not_a_verified_family(self):
+        self.capture.write_text(html_capture('',body=PASSAGE),encoding='utf-8')
+        result=self.verify()
+        self.assertEqual(result['family_identity_status'],'unconfirmed')
+        with self.assertRaisesRegex(ValueError,'unambiguous_base_serial_or_bound_family_evidence_required'):
+            dgsi.family_guard(result,[],{},self.ref,self.text,self.source)
+
+    def test_old_receipts_only_confirm_canonical_capture_identities(self):
+        receipt=self.receipt();receipt['version']='dgsi-source-receipt-v1'
+        self.assertEqual(self.verify(receipt)['decision_id'],'901/23.5T8XYZ.P1.S1')
+        self.capture.write_text(html_capture('901/23.ST8XYZ.P1.S1'),encoding='utf-8')
+        receipt=self.receipt();receipt['version']='dgsi-source-receipt-v1'
+        with self.assertRaisesRegex(ValueError,'v1_receipt_cannot_confirm_noncanonical'):self.verify(receipt)
+
+    def test_person_placeholder_alone_does_not_bind_document_identity(self):
+        self.ref['text']='AA'
+        with self.assertRaisesRegex(ValueError,'reference_context_insufficient'):self.verify()
 
     def test_changed_snapshot_reference_url_and_unconfirmed_discrepancy_fail(self):
         receipt=self.receipt();receipt['identity_discrepancy_reviewed']=False
@@ -157,6 +180,12 @@ class ReceiptTests(unittest.TestCase):
 
 class WizardTests(unittest.TestCase):
     def test_three_references_two_sources_wizard_then_protected_selection_30(self):
+        self.run_wizard(False)
+
+    def test_noncanonical_official_sources_keep_family_unconfirmed_and_reserve_unknown_corpus(self):
+        self.run_wizard(True)
+
+    def run_wizard(self,noncanonical):
         fixture=fixtures.PilotBundleTests();fixture.setUp();self.addCleanup(fixture.doCleanups)
         passages=[PASSAGE, 'BB confirmou acontecimentos absolutamente artificiais desta segunda passagem escrita apenas para testes.',
                   'CC identificou circunstâncias inteiramente artificiais de outro exemplo preparado só para testes.']
@@ -164,7 +193,8 @@ class WizardTests(unittest.TestCase):
         bodies=[passages[0]+'\n'+passages[1],passages[2]]
         for i in range(2):
             copied[i].write_text('Processo:\n'+('901/23.ST8XYZ.P1.S1' if i==0 else '902/2S.0T8ABC.S1')+'\nTexto Integral:\n'+bodies[i],encoding='utf-8')
-            captures[i].write_text(html_capture('901/23.5T8XYZ.P1.S1' if i==0 else '902/25.0T8ABC.S1',bodies[i],URL if i==0 else URL2),encoding='utf-8')
+            identifier=('901/23.ST8XYZ.P1.S1' if i==0 else '902/2S.0T8ABC.S1') if noncanonical else ('901/23.5T8XYZ.P1.S1' if i==0 else '902/25.0T8ABC.S1')
+            captures[i].write_text(html_capture(identifier,bodies[i],URL if i==0 else URL2),encoding='utf-8')
         refs=[{'id':f'synthetic-gold-{i}','text':p,'entity':p[:2],'entity_start':0,'entity_end':2,'source_url':URL if i<2 else URL2}for i,p in enumerate(passages)]
         gold=fixture.root/'gold.jsonl';gold.write_text(''.join(json.dumps(r)+'\n'for r in refs),encoding='utf-8')
         binding=fixture.audit['validated_bundle'];binding['gold']={'path':str(gold),'sha256':preparation.file_hash(gold)}
@@ -193,7 +223,14 @@ class WizardTests(unittest.TestCase):
                               {'gold':refs,'human_pilot':load_lines(fixture.root/'human_pilot.jsonl')},decisions=updated)
         self.assertEqual(json.loads(stdout.getvalue())['unresolved_reference_count'],0)
         self.assertEqual(json.loads(stdout.getvalue())['external_sources'],2)
-        self.assertEqual(len(selected),30);self.assertTrue(audit['selection_complete'])
+        self.assertEqual(len(selected),0 if noncanonical else 30)
+        self.assertEqual(audit['selection_complete'],not noncanonical)
+        if noncanonical:
+            self.assertTrue(all(d['excluded_from_corpus'] is False for d in updated.values()))
+            self.assertTrue(all(len(d['document_ids'])==len(docs) for d in updated.values()))
+            self.assertEqual(json.loads(stdout.getvalue())['family_identity_unconfirmed_references'],3)
+        self.assertTrue((output/'source_review_PRIVATE.json').exists())
+        self.assertNotIn(copied[0].name,stdout.getvalue())
         self.assertTrue(all(p.read_bytes()==content for p,content in before.items()))
         self.assertNotIn(PASSAGE,stdout.getvalue());self.assertNotIn('901/',stdout.getvalue())
 

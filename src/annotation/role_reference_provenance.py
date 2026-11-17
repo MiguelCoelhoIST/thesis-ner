@@ -122,6 +122,45 @@ def validate_decision(decision, ref, documents, texts, match):
             if len(linked)!=1:raise ValueError('dgsi_receipt_source_binding_ambiguous')
             dgsi_identities[path]=verify_receipt(linked[0],path,entries[0][1],ref,artifacts)
         if not dgsi_identities:raise ValueError('dgsi_receipt_without_copied_source')
+    opaque={path:identity for path,identity in dgsi_identities.items()
+            if identity.get('official_identifier_status')!='canonical'}
+    if opaque:
+        # Document confirmation never licenses an external-family assertion.
+        if decision.get('excluded_from_corpus') is not False:
+            raise ValueError('dgsi_document_identity_does_not_prove_external_family')
+        from src.annotation.dgsi_source_evidence import family_guard
+        guards=[];required=set(match['methods']);index=reference_index(documents,texts)
+        for item,path in verified:
+            if item.get('kind')!='external_source':continue
+            extracted=read_documents(path)
+            entries=[entry for entry in extracted if entry[0]==item.get('source_document_id')]
+            if not entries and len(extracted)==1 and item.get('source_document_id') is None:entries=extracted
+            if len(entries)!=1:raise ValueError('external_source_document_ambiguous')
+            if path in opaque:
+                guard=family_guard(opaque[path],documents,texts,ref,entries[0][1],path)
+                guards.append(guard);required.update(guard['required_document_ids'])
+            else:
+                for root in identity_roots(dgsi_identities[path]):required.update(index['roots'].get(root,set()))
+        targets=decision.get('document_ids')
+        docs={d['document_id']:d for d in documents}
+        if (not isinstance(targets,list) or len(set(targets))!=len(targets) or
+                any(d not in docs for d in targets) or not required<=set(targets)):
+            raise ValueError('dgsi_uncertain_family_envelope_not_fully_reserved')
+        packets=[p for meta,p in verified if meta.get('kind')=='dgsi_family_reservation_packet']
+        if not packets:raise ValueError('dgsi_bound_family_reservation_packet_required')
+        guard_fingerprints=sorted(fingerprint(g) for g in guards)
+        for path in packets:
+            packet=json.loads(path.read_text(encoding='utf-8'))
+            if (packet.get('reference_sha256')!=fingerprint(ref) or
+                    packet.get('inventory_fingerprint')!=fingerprint(documents) or
+                    packet.get('guard_fingerprints')!=guard_fingerprints or
+                    sorted(packet.get('document_ids',[]))!=sorted(targets) or
+                    packet.get('document_source_hashes')!={d:docs[d]['source_text_sha256'] for d in targets}):
+                raise ValueError('dgsi_family_reservation_packet_not_bound')
+        return set(targets), {'kind':'official_document_with_conservative_family_reservations',
+                             'document_identity_status':'confirmed', 'family_identity_status':'unconfirmed',
+                             'protection_status':'conservative_exclusion_coverage_verified',
+                             'external_absence_claimed':False,'family_guards':guards,'evidence':evidence}
     if decision.get('excluded_from_corpus') is True:
         if match['methods'] or decision.get('document_ids'):
             raise ValueError('manual_exclusion_conflicts_with_detected_overlap')

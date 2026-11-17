@@ -90,7 +90,9 @@ def assess_protection(rows, documents, texts, protected_sets, decisions=None):
             if not resolved:
                 unresolved.append(key)
             blocked.update(groups[d][0] for d in matches if d in groups)
-            reference_log.append({'reference': key, 'resolved': resolved, 'matched_documents': sorted(matches),
+            scope=('protection_only_family_unconfirmed' if adjudication and
+                   adjudication.get('family_identity_status')=='unconfirmed' else 'existing_identity_protocol')
+            reference_log.append({'reference': key, 'resolved': resolved, 'resolution_scope':scope, 'matched_documents': sorted(matches),
                                   'matching_evidence':proof, 'adjudication':adjudication})
     if used != set(decisions):
         raise ValueError('unknown_protection_resolution_id')

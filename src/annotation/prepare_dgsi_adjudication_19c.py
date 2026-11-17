@@ -1,7 +1,8 @@
 """Private offline wizard: bind existing decisions to official DGSI captures.
 
 Never edits source texts, guesses a process number or bypasses validate_decision.
-Prompts contain no private identifiers. Only aggregate counts/codes go to stdout.
+Only the private interactive terminal/map identifies source paths. Redirected
+logs use ordinals; only aggregate counts/codes go to stdout.
 """
 
 import argparse
@@ -14,7 +15,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
-from src.annotation.dgsi_source_evidence import make_receipt, verify_receipt
+from src.annotation.dgsi_source_evidence import make_receipt, verify_receipt, family_guard
 from src.annotation.plan_inventory_batches import file_hash, load_bound_inventory, validate_document_sources
 from src.annotation.prepare_role_annotation_batch import private_new_output
 from src.annotation.prepare_stj_pilot_19c import GOLD_SHA, PILOT_SOURCES_SHA, assess_protection
@@ -46,6 +47,15 @@ def private_file(value):
 
 def write_private(path,value):
     with path.open('x',encoding='utf-8') as handle:json.dump(value,handle,ensure_ascii=False,indent=2)
+
+
+def identify_source_locally(source,number,total):
+    # Never place filenames into redirected/public logs. The private map remains
+    # available for non-TTY runs and the local reviewer can identify each source.
+    if sys.stderr.isatty():
+        print(f'FONTE PRIVADA {number}/{total}: {source.name}\nCaminho local: {source}',file=sys.stderr)
+    else:
+        print(json.dumps({'stage_code':'CONSULT_SOURCE_REVIEW_PRIVATE_MAP','source_ordinal':number}),file=sys.stderr)
 
 
 def main():
@@ -81,8 +91,9 @@ def main():
             if (decision.get('reference_sha256')!=fingerprint(refs[key]) or
                     decision.get('inventory_fingerprint')!=fingerprint(docs)):
                 raise ValueError('dgsi_original_adjudication_is_stale')
-            if decision.get('excluded_from_corpus') is not True or decision.get('document_ids'):
-                raise ValueError('dgsi_wizard_requires_external_source_decisions')
+            # An old "external" assertion is input to re-evaluate, never proof.
+            if type(decision.get('excluded_from_corpus')) is not bool:
+                raise ValueError('dgsi_adjudication_disposition_required')
             external=[i for i in decision['evidence'] if i.get('kind')=='external_source']
             if not external:raise ValueError('dgsi_copied_source_required')
             for item in external:
@@ -90,10 +101,14 @@ def main():
                 if file_hash(path)!=item['sha256']:raise ValueError('dgsi_copied_source_hash_mismatch')
                 bindings['copied_source_'+str(len(bindings))]={'path':str(path),'sha256':item['sha256']}
                 sources[(path,item.get('source_document_id'))].append(key)
+        output.mkdir(parents=True)
+        write_private(output/'source_review_PRIVATE.json',[
+            {'source_ordinal':i,'source_path':str(path),'source_filename':path.name,'source_document_id':doc_id,
+             'reference_count':len(keys)} for i,((path,doc_id),keys) in enumerate(sources.items(),1)])
         reviewer=ask('Revisor da conferência de proveniência (guardado só no ficheiro privado):')
         reason=ask('Fundamento da conferência na fonte oficial (privado):')
         if not reviewer or not reason:raise ValueError('dgsi_human_confirmation_required')
-        additions=defaultdict(list);receipts=[];positive_targets=defaultdict(set)
+        additions=defaultdict(list);receipts=[];positive_targets=defaultdict(set);guards=defaultdict(list)
         index=reference_index(docs,texts)
         for number,((source,source_id),keys) in enumerate(sources.items(),1):
             extracted=read_documents(source)
@@ -102,9 +117,10 @@ def main():
             if len(entries)!=1:raise ValueError('dgsi_copied_document_ambiguous')
             actual_id,text,_=entries[0]
             print(json.dumps({'stage_code':'DGSI_SOURCE_REVIEW','source_count':len(sources),'source_ordinal':number}),file=sys.stderr)
+            identify_source_locally(source,number,len(sources))
             capture=private_file(ask('Caminho da captura oficial local HTML/MHTML/TXT, sem editar o original:'))
             url=ask('URL oficial OpenDocument da decisão no DGSI:')
-            if ask('Após conferir a fonte oficial, o ID nela e a discrepância da cópia, escreva CONFIRMO:')!='CONFIRMO':
+            if ask('Após conferir documento/URL, conteúdo e o campo Processo literal (pode ser não canónico), escreva CONFIRMO:')!='CONFIRMO':
                 raise ValueError('dgsi_human_confirmation_required')
             receipt=make_receipt(source,text,capture,url,reviewer,reason,[refs[k] for k in keys],actual_id)
             artifact={'kind':'official_capture','path':str(capture),'sha256':file_hash(capture)}
@@ -112,12 +128,20 @@ def main():
             for key in keys:
                 identity=verify_receipt(receipt,source,text,refs[key],{(capture,'official_capture',artifact['sha256'])})
                 positive_targets[key].update(match_reference(refs[key],index)['methods'])
-                for root in identity_roots(identity):positive_targets[key].update(index['roots'].get(root,set()))
+                if identity['official_identifier_status']!='canonical':
+                    try:guard=family_guard(identity,docs,texts,refs[key],text,source)
+                    except ValueError as exc:
+                        write_private(output/f'family_pending_{number:02}_PRIVATE.json',
+                                      {'receipt':receipt,'reference':key,'document_identity_status':'confirmed',
+                                       'family_identity_status':'unconfirmed','required_evidence_code':str(exc)})
+                        raise
+                    guards[key].append(guard);positive_targets[key].update(guard['required_document_ids'])
+                else:
+                    for root in identity_roots(identity):positive_targets[key].update(index['roots'].get(root,set()))
             receipts.append((number,receipt))
             for key in keys:additions[key].append((number,artifact))
         if any(file_hash(Path(i['path']))!=i['sha256'] for i in bindings.values()):
             raise ValueError('dgsi_inputs_changed_during_review')
-        output.mkdir(parents=True)
         receipt_items={}
         for number,receipt in receipts:
             path=output/f'identity_{number:02}_PRIVATE.json';write_private(path,receipt)
@@ -130,7 +154,19 @@ def main():
             # set. Old decisions and all their artifacts remain untouched.
             updated[key]['evidence']=[i for i in updated[key]['evidence'] if i['kind'] not in ('dgsi_identity_receipt','official_capture')]
             for number,capture in items:updated[key]['evidence'] += [capture,receipt_items[number]]
-            if positive_targets[key]:
+            if guards[key]:
+                targets=sorted(positive_targets[key] | set(updated[key].get('document_ids',[])))
+                packet=output/f'family_reservation_{list(updated).index(key)+1:02}_PRIVATE.json'
+                write_private(packet,{'reference_sha256':updated[key]['reference_sha256'],
+                                     'inventory_fingerprint':fingerprint(docs),
+                                     'guard_fingerprints':sorted(fingerprint(g) for g in guards[key]),
+                                     'document_ids':targets,
+                                     'document_source_hashes':{d:doc_index[d]['source_text_sha256'] for d in targets},
+                                     'family_identity_status':'unconfirmed','external_absence_claimed':False})
+                updated[key].update(excluded_from_corpus=False,document_ids=targets)
+                updated[key]['evidence']=[i for i in updated[key]['evidence'] if i['kind']!='dgsi_family_reservation_packet']
+                updated[key]['evidence'].append({'kind':'dgsi_family_reservation_packet','path':str(packet.resolve()),'sha256':file_hash(packet)})
+            elif positive_targets[key]:
                 targets=sorted(positive_targets[key])
                 packet=output/f'reservation_{list(updated).index(key)+1:02}_PRIVATE.json'
                 write_private(packet,{'reference_sha256':updated[key]['reference_sha256'],'document_ids':targets,
@@ -142,6 +178,8 @@ def main():
         write_private(output/'validation_PRIVATE.json',{'validated_inputs':bindings,'protected_reference_checks':log,
                       'unresolved_references':pending,'blocked_groups':sorted(blocked)})
         print(json.dumps({'validated_references':len(updated),'external_sources':len(sources),
+                          'family_identity_unconfirmed_references':sum(bool(v) for v in guards.values()),
+                          'conservative_family_coverage_references':sum(bool(v) for v in guards.values()),
                           'reserved_references':sum(bool(d.get('document_ids')) for d in updated.values()),
                           'unresolved_reference_count':len(pending),'blocked_groups':len(blocked),'LLM_calls':0}))
         if pending:raise SystemExit(1)

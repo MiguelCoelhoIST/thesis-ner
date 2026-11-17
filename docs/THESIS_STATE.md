@@ -1,8 +1,12 @@
 # Estado persistente da tese
 
-Atualizado em **16-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
+Atualizado em **17-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
 ## Atualização mais recente: Experiência 19c — piloto Qwen autorizado
+
+**Revisão de 17-11-2026:** o utilizador confirmou que a própria página oficial da primeira fonte tem um campo Processo não canónico; a segunda ainda exige confirmação oficial independente. O recibo DGSI v2 separa identidade documental URL/UNID/captura/conteúdo de família processual. Conserva o valor literal, sem substituir caracteres nem criar uma raiz canónica. Para o piloto, `validate_decision` pode verificar uma reserva conservadora de números-base literais em quaisquer anos/tribunais, referências no texto, aliases e todas as identidades de fonte não corroboradas; propaga relações conhecidas. Mantém `family_identity_status=unconfirmed`, ausência externa não afirmada e elegibilidade de treino não estabelecida. A cobertura protetora não é prova de família identificada nem autoriza splits definitivos. Se faltar evidência ou diversidade suficiente, mantém o bloqueio. O assistente identifica a fonte apenas no terminal/mapa privado. [Procedimento atualizado e limitações](experiment_19c_dgsi_evidence.md).
+
+Testes locais desta revisão: **192**, sucesso, **1 integração opcional omitida**; nenhum acesso aos dois originais/capturas privados no INESC, nenhuma seleção real ou inferência Qwen nesta sessão. O estado de execução continua bloqueado até validar as provas locais e obter 30 casos elegíveis. Os parágrafos seguintes conservam o histórico; a exigência anterior de um ID oficial canónico é substituída pela distinção documental/processual acima.
 
 **Nova evidência comunicada pelo utilizador:** as três pendências são GOLD, de dois acórdãos cujos textos originais foram obtidos; os três contextos aparecem integralmente neles. O parser no g09 rejeitou a identidade externa. Confirmadas no código duas causas: posições numéricas não aceitam letras e o valor do cabeçalho não era reconhecido na linha seguinte. Não se confirmou qualquer substituição S/5 nem se leram os originais privados neste workspace.
 
