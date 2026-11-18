@@ -1,6 +1,14 @@
 # Estado persistente da tese
 
-Atualizado em **17-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
+Atualizado em **18-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
+
+## Atualização de 18-11-2026 — piloto executado e recuperação de evidência
+
+O patch fornecido pelo utilizador declara seleção completa de 30 menções, zero referências pendentes e 11.068 exclusões por grupos protegidos; preflight Slurm 15323 com `COMPLETED/0:0` e `status=preflight_passed`; piloto 15324 com 30 propostas em 156,216 segundos, `completed_with_invalid_outputs`, 8 válidas e 22 inválidas segundo o protocolo. [Agregado declarado e limites](../results/experiment_19c_pilot_15324_aggregate.md). Este é o estado comunicado mais recente, não uma execução ou verificação dos logs privados neste workspace. As previsões e o bundle privados completos continuam no INESC; os parágrafos abaixo conservam o histórico.
+
+Implementada e revista uma revalidação offline auditável em [revalidate_stj_silver_19c.py](../src/annotation/revalidate_stj_silver_19c.py). A comparação tolera apenas marcadores e whitespace para localizar uma correspondência única, recuperando depois os caracteres e offsets literais originais, com o limite de 240 caracteres. O parser original valida a resposta derivada e mantém erros de labels, âmbito e duplicação. Conservam-se raw, configuração, metadados completos da execução e metadados adicionais por proposta, com auditoria da entrada derivada e fingerprint da proposta histórica num diretório privado novo. Revalidam-se o bundle protegido e hashes de input, seleção, previsões, prompt, taxonomia, gerador e loader. JSON histórico com chaves duplicadas/valores não finitos é rejeitado. Não se carrega o modelo nem se altera o gerador histórico.
+
+Validação local da implementação: **212 testes**, sucesso, **1 integração opcional omitida**; **35 testes** no módulo do piloto, com dados inventados/mocks. A execução da recuperação sobre o job 15324 e a revisão semântica das propostas estão pendentes. A coorte mantém elegibilidade de treino `NOT_ESTABLISHED` e `human_validated=false`.
 
 ## Atualização mais recente: Experiência 19c — piloto Qwen autorizado
 

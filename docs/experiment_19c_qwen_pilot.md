@@ -127,6 +127,30 @@ Saídas privadas por job: `data/raw/experiment_19c_pilot_JOBID/silver_prediction
 
 ## Limitações e validação
 
+### Recuperação offline de evidência de gerações guardadas
+
+O patch fornecido pelo utilizador declara que o piloto 15324 produziu 30 propostas, com 8 estruturalmente válidas e 22 inválidas. [Agregado declarado e diagnóstico](../results/experiment_19c_pilot_15324_aggregate.md). Os logs privados não foram consultados neste workspace. A recuperação implementada é uma etapa explícita posterior à geração. Preserva o parser e prompt 19c-v1 e a configuração histórica para permitir comparação com a saída original.
+
+[revalidate_stj_silver_19c.py](../src/annotation/revalidate_stj_silver_19c.py) usa exclusivamente as respostas guardadas. Remove marcadores na comparação e permite variação de whitespace para localizar um único excerto. A evidência derivada contém os caracteres exatos do contexto, com offsets da correspondência e limite de 240 caracteres. Correspondências ambíguas, paráfrases e diferenças de pontuação, letras ou acentos mantêm a rejeição. Evidências já válidas são conservadas. Repetições, âmbito, UNKNOWN, labels e token-limit continuam sujeitos às regras originais.
+
+O comando revalida o bundle protegido, os 30 IDs/ordem/metadados, prompt/taxonomia/parser, loader e hashes dos artefactos históricos. Rejeita chaves JSON duplicadas e números não finitos nos ficheiros históricos. Escreve uma cópia privada com raw e configuração originais, run histórico completo (ambiente, job, duração e contagens de tokens quando existentes), metadados adicionais por proposta, fingerprint da proposta original, entrada derivada do parser, auditoria de recuperações, novo hash de previsões e resumos antes/depois. `LLM_calls=0`, revisão humana pendente e elegibilidade de treino `NOT_ESTABLISHED` obrigatória. A conclusão da revalidação tem exit 0 mesmo com propostas ainda inválidas, comunicadas por `revalidated_with_invalid_outputs` e pelas contagens. A geração GPU mantém o seu contrato histórico de exit 1 para outputs inválidos.
+
+Depois de aplicar a implementação no mesmo checkout do INESC, executar em CPU a partir da raiz com `venv-ner` ativo e um diretório de saída novo.
+
+```bash
+python -u src/annotation/revalidate_stj_silver_19c.py \
+  --input data/raw/experiment_19c_pilot03/pilot_input.jsonl \
+  --selection-manifest data/raw/experiment_19c_pilot03/selection_manifest.json \
+  --source-run-dir data/raw/experiment_19c_pilot_15324 \
+  --output-dir data/raw/experiment_19c_revalidated_15324_v1
+```
+
+A validade estrutural recuperada exige revisão semântica da atribuição à menção alvo. A contagem de evidências recuperáveis difere da contagem de registos recuperados, pois um registo pode ter vários excertos e outros erros. A execução real deste replay está pendente. Os testes sintéticos verificam recuperação literal, ambiguidade, preservação de erros e fontes, ausência de carregamento Qwen, hashes e bundle protegido.
+
+O caminho `pilot03` acima é o indicado no patch, não foi inspecionado remotamente. Usar o input/manifesto originais do job 15324: se forem outros, indicar esses caminhos. Não editar os hashes para aceitar um lote diferente. `historical_binding_mismatch` exige conferir os artefactos/código byte a byte originais (incluindo finais de linha), nunca contornar a verificação. A proposta derivada continua SILVER, sem revisão semântica automática, mesmo quando recupera conformidade estrutural.
+
+Validação local desta revisão: **212 testes**, sucesso, **1 integração opcional omitida**; **35 no módulo do piloto**. Os testes usam apenas dados inventados, cobrem correspondências únicas/sobrepostas, metadados/raw/offsets, loader e integridade do bundle, duplicação JSON/IDs, alterações durante o replay e saída CLI sem conteúdo privado. Não foi executada recuperação sobre dados reais nem nova chamada LLM.
+
 Os testes usam apenas corpus e respostas inventados, incluindo uma execução simulada preflight→30 previsões; não validam GPU/modelo/cache real. A amostra é exploratória e enviesada por critérios de variedade/proveniência, não representativa nem gold; não calcular accuracy/F1 sem referência independente. Literalidade da evidência não prova atribuição jurídica correta. NER pode omitir pessoas, confundir entidades e omitir autores citados. Similaridade e normalização de processos não certificam independência absoluta nem ausência de exposição no pré-treino. Anotações Qwen não são gold independente para avaliar o próprio Qwen.
 
 Suite local: **152 testes**, sucesso, **1 integração opcional omitida**; **18 específicos da 19c**. Loader e geração testados com mocks, não com pesos reais. Scripts usam `umask 077` para novos outputs privados no Linux e recusam sobrescrita; isto não anonimiza os dados nem substitui políticas institucionais de acesso/retenção.
