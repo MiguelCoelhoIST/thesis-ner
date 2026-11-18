@@ -2,6 +2,12 @@
 
 Atualizado em **18-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
+## Variante experimental target-first — preparação, não execução
+
+Analisada uma revisão assistida privada das 30 propostas, todas pendentes de confirmação. Destaca atribuição a outra pessoa e âmbito processual; as sugestões não foram importadas como labels. Preparado o prompt `19c-v2-target-first`, mais curto, com entidade explícita antes do mesmo contexto marcado e protocolo/schema/taxonomia preservados. O adaptador reutiliza o runner/parser v1 sem alterar os ficheiros históricos, vincula o mesmo lote/checkpoint ao run original 15324 e exige preflight próprio com sidecar de proveniência. [Análise agregada, controlos e comandos](experiment_19c_target_first.md).
+
+Validação local: **219 testes**, sucesso, **1 integração opcional omitida**; 7 novos com dados inventados/mocks. Não houve carregamento real, submissão Slurm ou resultado v2. Comparação futura raw-v1/raw-v2, sem gold independente nem alegação de melhoria; o piloto usado para orientar o prompt não é um teste de generalização. Gold50, revisões e dados privados não foram alterados.
+
 ## Atualização de 18-11-2026 — piloto executado e recuperação de evidência
 
 O patch fornecido pelo utilizador declara seleção completa de 30 menções, zero referências pendentes e 11.068 exclusões por grupos protegidos; preflight Slurm 15323 com `COMPLETED/0:0` e `status=preflight_passed`; piloto 15324 com 30 propostas em 156,216 segundos, `completed_with_invalid_outputs`, 8 válidas e 22 inválidas segundo o protocolo. [Agregado declarado e limites](../results/experiment_19c_pilot_15324_aggregate.md). Este é o estado comunicado mais recente, não uma execução ou verificação dos logs privados neste workspace. As previsões e o bundle privados completos continuam no INESC; os parágrafos abaixo conservam o histórico.
