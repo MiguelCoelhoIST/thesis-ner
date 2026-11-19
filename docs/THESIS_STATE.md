@@ -2,6 +2,20 @@
 
 Atualizado em **19-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
+## Teste sintético de ligação IAedu — comando preparado, não executado ao vivo
+
+O utilizador autorizou disponibilizar um comando Windows/PowerShell para **um exemplo fixo inteiramente inventado** e commit/push de código/testes/documentação. Implementado --synthetic-connection-test: não lê o pacote real, não aceita mensagem/ficheiro alternativo, gera uma thread nova e guarda estado HTTP, corpo/eventos e resumo de extração/metadados de modelo. Não preenche identidade de modelo com a etiqueta da UI. [Comando e leitura do resultado](experiment_19c_iaedu_api.md).
+
+Testes locais apenas com HTTP simulado: **241**, sucesso, **1 integração opcional omitida**; 13 do adaptador. Não houve chamada real pelo agente de código. O envio do lote real continua não autorizado; plano offline, percurso manual, prompts, parser e datasets mantêm-se preservados. A chave não entra no Git/logs e o comando lê-a mascarada para variável de ambiente, removida no fim.
+
+## IAedu API — implementação/testes offline, sem transmissão
+
+Nova indicação do utilizador: o agente disponível aparece como OpenAI GPT-5.5. Preparado [adaptador IAedu](experiment_19c_iaedu_api.md) baseado no exemplo fornecido e na documentação oficial. Etiqueta da UI e identidade efetivamente devolvida são conservadas separadamente; backend/checkpoint não verificado. O mesmo pacote v2 de 30 é reutilizado, sem propostas Qwen/revisões. A via manual permanece intacta.
+
+UUID4 novo por pedido, multipart com boundary automático, chave apenas em IAEDU_API_KEY, sem headers de pedido/exceções sensíveis em logs. Conserva corpo e eventos/metadados API, inclusive falhas, com salvaguarda contra eco de credencial. CLI apenas prepara plano privado, não lê chave nem chama HTTP. Autorização externa continua false; transportes apenas simulados, sem qualquer pedido autenticado. Esquema real/thread isolation ainda não testados ao vivo. Não foram instalados modelos/dependências nem alterados datasets ou resultados.
+
+Validação local: **236 testes**, sucesso, **1 integração opcional omitida**, incluindo 8 sintéticos novos. requests já estava instalado localmente e foi acrescentado como dependência explícita. Próximo passo autorizado continua a ser inspeção do plano offline; qualquer chamada real e integração de previsões permanece fora desta execução.
+
 ## Segundo LLM — preparação independente, modelo pendente
 
 Analisado o relatório privado exploratório v1/15324 versus v2/15344: declara 30 casos idênticos, 8/30 e 4/30 aceites pelo parser original. Não se verificaram aqui os artefactos de inferência remotos nem se trata a revisão como gold. Separar formato/citações, associação ao alvo, âmbito e cobertura/abstenção. Papel não demonstrado pelo contexto não equivale a papel falso; evidência de outra pessoa não exclui automaticamente estatutos multi-label do alvo.

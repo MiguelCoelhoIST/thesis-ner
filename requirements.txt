@@ -11,3 +11,4 @@ sentence-transformers
 numpy
 openai
 striprtf
+requests
