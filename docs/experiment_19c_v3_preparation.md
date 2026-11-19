@@ -2,6 +2,8 @@
 
 19-11-2026. Preparação offline, sem chamadas, inferência ou transmissão. O patch documental fornecido foi incorporado e atualizado para distinguir a implementação atual das intenções anteriores. Os materiais privados do ZIP estão exclusivamente em data/raw, ignorado pelo Git.
 
+Atualização posterior: auditoria comunicada pelo utilizador com 3.033 menções/64 grupos/zero pendências. A seleção e o percurso API v3 de tamanho efetivo foram preparados em ficheiros novos; consultar [lote de até 64](experiment_19c_v3_batch.md). As descrições abaixo conservam o estado da preparação inicial; os executáveis históricos de 30 continuam inalterados.
+
 ## Verificação realizada localmente
 
 O verificador `src/annotation/verify_assisted_review_19c.py` comparou a revisão assistida com os ficheiros originais IAedu e o input portátil disponíveis neste computador. Verificados hashes de previsões/run/parser, fingerprints canónicos dos registos, texto, metadata/proveniência do input, alvo/offsets, raw, outputs interpretados e citações/offsets propostos. A mudança esperada de annotation_tier de UNANNOTATED para SILVER é explícita; nenhum outro campo do input pode mudar. Todas as ocorrências literais de uma citação são registadas, sem escolher ou reparar uma correspondência.

@@ -2,6 +2,14 @@
 
 Atualizado em **19-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
+## Próximo lote v3 — até 64 grupos, não quota de 100
+
+O utilizador comunicou auditoria concluída no g09 em data/raw/experiment_19c_next100_capacity01/: **3.033 menções disponíveis, 64 grupos e zero referências pendentes**. Não se leu esse artefacto remoto nesta sessão. Este resultado substitui a quota pretendida de 100: preparar até 64 menções, uma por grupo, com seed 42 e proteção/contextos verificados, sem forçar o total.
+
+Implementados seleção/exportação v3 e runner IAedu de tamanho efetivo em ficheiros novos, reutilizando validadores, transporte, parser, lock e recuperação de checkpoints. Os executáveis anteriores de 30 e os prompts/resultados históricos permanecem intactos. O lote terá manifesto/cápsula/autorização próprios; nenhuma autorização de envio é herdada. [Comandos de preparação e check-only](experiment_19c_v3_batch.md). Nenhuma chamada real, seleção real local, treino ou alteração de dados foi executada nesta preparação; o número efetivamente selecionado continua pendente no g09.
+
+Validação local: **17 testes específicos passaram**; suite completa **288 testes, sucesso, 1 integração opcional omitida**. Inclui exportação/rebinding sintéticos, cardinalidade 64, controlo de semelhança e retoma com transporte HTTP simulado. Código preparado localmente, sem commit/push nesta etapa.
+
 ## Clarificação metodológica para o próximo lote
 
 Por pedido do utilizador de resolver ambiguidades e manter o foco em papéis jurídicos, ficam documentadas as [regras 19c-legal-role-policy-v1](experiment_19c_annotation_rules_next_batch.md). other_roles conserva funções/estatutos jurídicos fora das dez classes, não parentescos ou descrições narrativas. UNKNOWN é limitado ao contexto utilizável sem papel específico sustentado; insufficient exige um défice concreto. Papéis históricos com processo não estabelecido conservam scope uncertain. AUTOR inclui estatuto sustentado em ação laboral; REFERENCE admite atribuição doutrinária inequívoca sem título, com evidence inferred quando apropriado.

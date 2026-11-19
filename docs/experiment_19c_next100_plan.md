@@ -4,6 +4,8 @@ Plano documental de 19-11-2026. Nenhuma seleção de 100, chamada LLM, transfer�
 
 Atualização posterior no mesmo dia: [prompt v3 e auditoria source-bound de capacidade](experiment_19c_v3_preparation.md) implementados/testados offline. Usar o novo comando de auditoria com as reservas dos 30 antes de selecionar; o comando genérico abaixo continua apenas um planeador. O inventário completo não está disponível neste workspace e a contagem real de elegíveis continua pendente no g09.
 
+Atualização após execução comunicada pelo utilizador: auditoria com 3.033 menções, 64 grupos e zero pendências. A quota de 100 abaixo fica substituída por **até 64, uma por grupo**. Preparados [seletor/exportador e runner v3 de tamanho efetivo](experiment_19c_v3_batch.md); nenhuma nova anotação executada. O restante documento conserva o plano anterior, não o comando atual de preparação.
+
 ## Passos por ordem
 
 1. **Conservar e rever o piloto:** manter raw, eventos, previsões, pedidos, autorização e manifestos privados dos 30. Resolver/versionar as decisões UNKNOWN/insufficient, âmbito temporal/processual, REFERENCE sem título e alcance de other_roles com os responsáveis metodológicos. Enquanto pendentes, conservá-las como hipóteses e não corrigir silenciosamente labels/metrics. Não repetir chamadas só para corrigir espaços nas citações. Preparação de proveniência pode avançar em paralelo, sem antecipar decisões semânticas.
