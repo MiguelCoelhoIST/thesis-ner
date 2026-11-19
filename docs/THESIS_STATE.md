@@ -1,6 +1,18 @@
 # Estado persistente da tese
 
-Atualizado em **18-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
+Atualizado em **19-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
+
+## Segundo LLM — preparação independente, modelo pendente
+
+Analisado o relatório privado exploratório v1/15324 versus v2/15344: declara 30 casos idênticos, 8/30 e 4/30 aceites pelo parser original. Não se verificaram aqui os artefactos de inferência remotos nem se trata a revisão como gold. Separar formato/citações, associação ao alvo, âmbito e cobertura/abstenção. Papel não demonstrado pelo contexto não equivale a papel falso; evidência de outra pessoa não exclui automaticamente estatutos multi-label do alvo.
+
+Preparado [pacote privado para segundo LLM](experiment_19c_second_llm.md), reutilizando v2 sem novo ajuste e as mesmas 30 menções/offsets, com manifestos e formulário de comparação separados das mensagens. Não contém propostas Qwen ou pareceres no input. Preserva parser/datasets/resultados históricos e proteção do piloto. Modelo/ambiente por escolher; não se autorizou transmissão externa. O pacote real será gerado no INESC, não nesta sessão. Testes locais: **224**, sucesso, **1 integração opcional omitida**, incluindo 5 novos sintéticos. Sem inferência, treino, chamadas externas ou downloads.
+
+Clarificação posterior: preparar para **GPT ou Claude apenas ficheiros privados para inspeção**; não executar modelo/API nem transmitir textos. A escolha exata de modelo/versão e a revisão de privacidade permanecem pendentes. O gerador assinala esse uso no manifesto, sem modificar mensagens, contexto ou offsets. Os três inputs originais necessários não estão neste workspace; o pacote real continua por gerar no INESC.
+
+Decisão mais recente: **Claude em execução manual, preferencialmente IAedu**, versão a confirmar pelo utilizador. Preparados 30 pedidos individuais, versões texto/system-user, template de metadados de sessão, instruções de gravação e importador offline de respostas raw com o parser histórico. [Procedimento](experiment_19c_claude_manual.md). Nenhuma transmissão, chamada API ou execução real; ficheiros privados reais ainda por gerar no INESC. A importação conserva bytes e marca revisão semântica pendente; não identifica Claude como Qwen nem usa as propostas anteriores no pedido.
+
+Validação atualizada: **228 testes**, sucesso, **1 integração opcional omitida**; 9 do pacote/importação, apenas com dados inventados. Registar também o método de captura da resposta e eventuais transformações da UI, sem alegar acesso aos tokens brutos do backend ou a parâmetros não expostos.
 
 ## Variante experimental target-first — preparação, não execução
 
