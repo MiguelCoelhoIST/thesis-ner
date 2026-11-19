@@ -2,6 +2,16 @@
 
 Atualizado em **19-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
+## IAedu sequencial e transferência portátil — implementação, não execução real
+
+O utilizador comunicou teste sintético autenticado com HTTP 200, exit 0, extração JSON coerente com TESTEMUNHA e sem identidade de modelo devolvida. É um resultado reportado pelo utilizador, não inspeção dos artefactos privados nesta sessão. Preparados [exportador de cápsula e runner sequencial](experiment_19c_iaedu_sequential.md) para as mesmas 30 mensagens v2: validação completa no g09, transferência apenas dos contextos selecionados/pedidos/manifestos, verificação no Windows por digest obtido separadamente e hashes de código normalizados apenas para CRLF/LF.
+
+Cada menção usa uma thread nova e checkpoint persistido, raw/metadados e parser histórico sem reparação. Retoma não repete pedidos concluídos e recupera offline HTTP capturado antes da previsão; um envio de resultado incerto bloqueia para revisão, sem replay cego. Identidade backend continua desconhecida quando a API não a fornece, separada da etiqueta da UI. SILVER/human_validated=false/treino NOT_ESTABLISHED mantidos.
+
+Nenhuma exportação/transferência real, chamada de lote ou treino foi executado pelo agente. Autorização externa do pacote continua false. O runner exige autorização privada separada, explícita e limitada à cápsula/endpoint/canal, além do flag execute; o template permanece false. O próximo comando permitido é exportação/transferência privada e check-only, não envio real.
+
+Validação local: **253 testes**, sucesso, **1 integração opcional omitida**; 12 novos sintéticos, incluindo interrupções/retoma e lock no Windows. Não se atribui identidade backend à etiqueta da UI nem se declara exactly-once entre rede e disco. As restantes secções mantêm o histórico das etapas anteriores.
+
 ## Teste sintético de ligação IAedu — comando preparado, não executado ao vivo
 
 O utilizador autorizou disponibilizar um comando Windows/PowerShell para **um exemplo fixo inteiramente inventado** e commit/push de código/testes/documentação. Implementado --synthetic-connection-test: não lê o pacote real, não aceita mensagem/ficheiro alternativo, gera uma thread nova e guarda estado HTTP, corpo/eventos e resumo de extração/metadados de modelo. Não preenche identidade de modelo com a etiqueta da UI. [Comando e leitura do resultado](experiment_19c_iaedu_api.md).

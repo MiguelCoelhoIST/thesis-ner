@@ -23,7 +23,7 @@ from src.annotation.import_claude_manual_19c import validated_package
 from src.annotation.annotate_role_candidates_qwen import unique_keys, write_new_json
 from src.annotation.prepare_role_annotation_batch import private_new_output
 
-VERSION='19c-iaedu-agent-api-v2-synthetic-probe'
+VERSION='19c-iaedu-agent-api-v3-checkpoints'
 OFFICIAL_EXAMPLE='https://docs.iaedu.pt/books/funcionalidade-api/page/exemplo-python'
 SYNTHETIC_TEXT='AA, pessoa fictícia, foi ouvida como testemunha num processo inteiramente inventado.'
 
@@ -105,6 +105,11 @@ def stream_one(message,output_dir,*,network_authorized=False,session=None,agent_
         raise ValueError('iaedu_credential_in_input')
     output=private_new_output(output_dir);fields=form_fields(message,channel)
     output.mkdir(parents=True,mode=0o700)
+    write_new_json(output/'dispatch_intent.json',{
+        'status':'intent_persisted_before_http','thread_id':fields['thread_id'],
+        'endpoint':endpoint,'channel_id':channel,
+        'message_sha256':hashlib.sha256(message.encode('utf-8')).hexdigest()})
+    with (output/'dispatch_intent.json').open('r+b') as handle:os.fsync(handle.fileno())
     body=bytearray();status=None;headers={};transport_error=None;owned=False;response=None
     started=time.perf_counter()
     try:
@@ -118,6 +123,8 @@ def stream_one(message,output_dir,*,network_authorized=False,session=None,agent_
         status=response.status_code;headers=dict(response.headers)
         for chunk in response.iter_content(chunk_size=4096):
             if chunk:body.extend(chunk)
+    except KeyboardInterrupt:
+        transport_error='interrupted'
     except Exception:
         transport_error='transport_failure'  # Exception text can contain secrets.
     finally:
@@ -152,6 +159,9 @@ def stream_one(message,output_dir,*,network_authorized=False,session=None,agent_
             'elapsed_seconds':time.perf_counter()-started,
             'LLM_calls_attempted':1,'human_validated':False,'requires_review':True}
     write_new_json(output/'run.json',report)
+    for path in output.iterdir():
+        if path.is_file():
+            with path.open('r+b') as handle:os.fsync(handle.fileno())
     return report
 
 

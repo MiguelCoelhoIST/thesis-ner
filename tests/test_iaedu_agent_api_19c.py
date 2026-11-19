@@ -88,7 +88,7 @@ class TransportTests(unittest.TestCase):
         for n,raw in enumerate((key.encode(),('{"type":"token","content":"'+escaped+'"}\n').encode())):
             report,_=self.invoke(Response(raw),'echo'+str(n))
             self.assertEqual(report['error_code'],'credential_echo_detected')
-            self.assertEqual({p.name for p in (self.root/('echo'+str(n))).iterdir()},{'run.json'})
+            self.assertEqual({p.name for p in (self.root/('echo'+str(n))).iterdir()},{'run.json','dispatch_intent.json'})
             self.assertNotIn(key,json.dumps(report))
 
     def test_config_rejects_unofficial_hosts_or_embedded_credentials(self):
