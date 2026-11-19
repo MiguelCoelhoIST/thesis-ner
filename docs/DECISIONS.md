@@ -191,3 +191,15 @@ Após sucesso sintético reportado pelo utilizador, implementar/testar offline e
 Cada pedido tem UUID novo, intenção gravada antes do HTTP e conclusão por hashes. Lock por run e retoma explícita no mesmo diretório. Não repetir outputs já capturados, inclusive JSON inválido; reconstruir previsão offline se necessário. Intenção sem conclusão HTTP conhecida ou stream interrompido exige revisão, sem presunção de ausência nem garantia de exactly-once não suportada pela API. Agregados são derivados; checkpoints por menção são imutáveis e verificáveis.
 
 Preservar requests, raw/eventos/metadados e o parser histórico. UI label não é identidade backend; ausente continua desconhecida. Todas as propostas são SILVER com revisão pendente. Autorização de transmissão permanece false nos pacotes; execução futura exige declaração privada explícita, com revisão de privacidade e escopo vinculado ao digest/endpoint/canal. Preparação, commit, teste sintético e cópia privada não autorizam o envio real. [Comandos completos](experiment_19c_iaedu_sequential.md).
+
+## D34 — Registar conformidade reportada sem adjudicar labels ou identificar backend
+
+O utilizador pediu registar 26/30 IAedu, 4/30 Qwen v2 original e 8/30 Qwen v1 original. Conservar os agregados e distinguir conformidade do parser de accuracy: não são labels gold nem avaliação final independente. Backend continua desconhecido; OpenAI GPT-5.5 é etiqueta da plataforma, sem metadados de modelo nos registos segundo o relatório. As verificações nele descritas são atribuídas à fonte; não se afirma auditoria local dos ficheiros privados completos.
+
+Manter UNKNOWN/insufficient, âmbito temporal/processual, cobertura de AUTOR e REFERENCE e alcance de other_roles como decisões pendentes de adjudicação. A ausência de prova na janela não prova papel falso/ausente no processo inteiro; uma citação literal ou papel narrativo plausível não estabelece associação ao alvo. Não corrigir respostas, relaxar parser ou recalcular métricas retroativamente. Qualquer protocolo ou recuperação derivada deve ser novo e versionado. Revisão humana continua pendente.
+
+## D35 — Planear 100 menções novas reutilizando infraestrutura, sem executar o lote
+
+Reutilizar o inventário completo 19b e funções existentes de validação/agrupamento/proteção/seleção, excluindo os casos e famílias de Gold50, piloto humano e 30 de desenvolvimento já vistos. Pistas não são labels; UNKNOWN/REFERENCE não são fabricados. Auditar capacidade antes de fixar quota e controlar correlação por processo/documento. Não tratar lotes de 100 IDs do planeador como 100 exemplos elegíveis ou independentes.
+
+O CLI seletor, packager/cápsula/runner continuam limitados a 30. Documentar a adaptação futura mínima e versionada necessária para 100, sem a implementar nesta tarefa nem invalidar checkpoints antigos. Preparar primeiro um plano privado e contagens de reservas/exclusões/grupos com zero LLM; seleção, autorização e execução ficam para depois. A autorização do piloto não se generaliza a novos contextos, e elegibilidade de anotação não é elegibilidade de treino. [Plano e comando existente](experiment_19c_next100_plan.md).

@@ -2,6 +2,14 @@
 
 Atualizado em **19-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
+## Resultado comunicado do piloto IAedu e preparação futura de 100
+
+O relatório fornecido pelo utilizador regista **26/30 respostas conformes no IAedu (86,7%)**, contra **4/30 no Qwen v2 original (13,3%)** e **8/30 no Qwen v1 original (26,7%)**, nas mesmas menções segundo o relatório. **Conformidade não é accuracy.** A baseline usa respostas/flags originais, sem misturar recuperação de evidência só de v1. Entre os 26 conformes há uma resposta invalid_entity, não uma menção com papel pronta para treino. [Agregado versionado e limites](../results/experiment_19c_iaedu_vs_qwen_aggregate.md).
+
+**Backend desconhecido:** OpenAI GPT-5.5 é apenas a etiqueta apresentada pelo IAedu; o relatório indica metadados de modelo ausentes nos 30 casos. Não se verificaram aqui os ficheiros privados originais, corpos HTTP ou checkpoint. A revisão qualitativa é exploratória e todas as propostas mantêm human_validated=false/revisão pendente/treino NOT_ESTABLISHED. Permanecem decisões de UNKNOWN versus insuficiência, scope histórico/mesmo processo/processo citado e alcance/literalidade de other_roles, além do suporte de REFERENCE sem título. Nenhuma interpretação foi aplicada retroativamente.
+
+[Plano das próximas 100](experiment_19c_next100_plan.md): reutilizar o inventário 19b e os validadores/grupos existentes, revalidar reservas e excluir Gold50, piloto humano e os 30 de desenvolvimento com os respetivos grupos/duplicados. O planeador admite batch-size 100, mas não certifica elegibilidade; seleção/exportação/runner atuais continuam sob contrato de 30. Preparação documental não selecionou 100 nem autoriza envio/treino. Primeiro passo: plano privado de IDs e auditoria de capacidade/exclusões no g09, sem NER ou LLM. As secções seguintes conservam o histórico anterior ao resultado comunicado.
+
 ## IAedu sequencial e transferência portátil — implementação, não execução real
 
 O utilizador comunicou teste sintético autenticado com HTTP 200, exit 0, extração JSON coerente com TESTEMUNHA e sem identidade de modelo devolvida. É um resultado reportado pelo utilizador, não inspeção dos artefactos privados nesta sessão. Preparados [exportador de cápsula e runner sequencial](experiment_19c_iaedu_sequential.md) para as mesmas 30 mensagens v2: validação completa no g09, transferência apenas dos contextos selecionados/pedidos/manifestos, verificação no Windows por digest obtido separadamente e hashes de código normalizados apenas para CRLF/LF.
