@@ -2,6 +2,18 @@
 
 Atualizado em **19-11-2026**. Este ficheiro distingue resultados existentes, funcionalidades implementadas e trabalho pendente. Não contém excertos nem dados pessoais dos acórdãos.
 
+## Clarificação metodológica para o próximo lote
+
+Por pedido do utilizador de resolver ambiguidades e manter o foco em papéis jurídicos, ficam documentadas as [regras 19c-legal-role-policy-v1](experiment_19c_annotation_rules_next_batch.md). other_roles conserva funções/estatutos jurídicos fora das dez classes, não parentescos ou descrições narrativas. UNKNOWN é limitado ao contexto utilizável sem papel específico sustentado; insufficient exige um défice concreto. Papéis históricos com processo não estabelecido conservam scope uncertain. AUTOR inclui estatuto sustentado em ação laboral; REFERENCE admite atribuição doutrinária inequívoca sem título, com evidence inferred quando apropriado.
+
+A revisão assistida dos 30 outputs IAedu fica separada dos originais, sem validação humana automática ou alteração do agregado 26/30. O hash das previsões coincide com run.json, e o parser histórico reproduz as flags/erros dos 30. Identidade backend desconhecida em todos. Corpos/eventos HTTP não foram verificados nesta revisão. Não houve novas chamadas LLM, seleção de 100 ou treino.
+
+Implementado o prompt **19c-v3-legal-roles**, com builder target-first e configuração/hash próprios, sem modificar v1/v2, parser, taxonomia, cápsulas ou runners históricos. Não foi executado nem ligado automaticamente ao runner IAedu do piloto. A verificação local das 13 revisões privadas passou contra previsões/input originais (10 alteradas, 3 confirmadas pela revisão assistida); o parser reproduziu as flags dos 30 outputs e os hashes de previsões/run coincidiram. Isto não é confirmação humana nem auditoria dos eventos HTTP. [Implementação, limites e comandos](experiment_19c_v3_preparation.md).
+
+Preparada auditoria source-bound das próximas 100, reutilizando proteção, grupos/aliases e semelhança de conteúdo existentes. Exclui também os 30 de desenvolvimento e famílias; referências por resolver bloqueiam toda a capacidade elegível. O inventário integral/fontes/adjudicações estão no INESC e não neste workspace: **a auditoria integral e o número disponível ainda não foram obtidos**. Não houve seleção, NER ou LLM; autorizações externas inalteradas. As secções seguintes conservam estados anteriores.
+
+Validação local desta implementação: **271 testes**, sucesso, **1 integração opcional omitida**; 18 novos testes sintéticos de prompt/revisão/capacidade. Verificados privacidade dos ficheiros públicos alterados, links locais e preservação dos prompts/parser/taxonomia/Gold50. Nenhum commit ou push nesta etapa.
+
 ## Resultado comunicado do piloto IAedu e preparação futura de 100
 
 O relatório fornecido pelo utilizador regista **26/30 respostas conformes no IAedu (86,7%)**, contra **4/30 no Qwen v2 original (13,3%)** e **8/30 no Qwen v1 original (26,7%)**, nas mesmas menções segundo o relatório. **Conformidade não é accuracy.** A baseline usa respostas/flags originais, sem misturar recuperação de evidência só de v1. Entre os 26 conformes há uma resposta invalid_entity, não uma menção com papel pronta para treino. [Agregado versionado e limites](../results/experiment_19c_iaedu_vs_qwen_aggregate.md).
